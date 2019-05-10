@@ -7,14 +7,16 @@ volumes:
   mysql-data:
 
 services:
-  mysql-db:
-    container_name: mysql-db
+  mysql:
+    container_name: mysql
     image: mysql:5.6
     environment:
       MYSQL_ROOT_PASSWORD: "test"
       MYSQL_DATABASE: "openmrs"
       MYSQL_USER: "openmrs"
-      MYSQL_PASSWORD: "openmrs"
+      MYSQL_PASSWORD: "openmrsi"
+    ports:
+      - "3306:3306"
     command: --max_allowed_packet=32505856
     volumes:
       - mysql-data:/var/lib/mysql
