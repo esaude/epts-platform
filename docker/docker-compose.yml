@@ -14,7 +14,7 @@ services:
       MYSQL_ROOT_PASSWORD: "test"
       MYSQL_DATABASE: "openmrs"
       MYSQL_USER: "openmrs"
-      MYSQL_PASSWORD: "openmrsi"
+      MYSQL_PASSWORD: "openmrs"
     ports:
       - "3306:3306"
     command: --max_allowed_packet=32505856
@@ -28,7 +28,7 @@ services:
     build:
       context: ./openmrs
       args:
-        DB_HOST: "mysql-db"
+        DB_HOST: "mysql"
         DB_DATABASE: "openmrs"
         DB_USERNAME: "openmrs"
         DB_PASSWORD: "openmrs"
@@ -37,7 +37,7 @@ services:
     ports:
       - "8081:8080"
     depends_on:
-      - mysql-db
+      - mysql
     networks:
       - epts
 
