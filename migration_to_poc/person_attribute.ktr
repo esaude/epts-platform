@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>person_address</name>
+    <name>person_attribute</name>
     <description />
     <extended_description />
     <trans_version />
@@ -427,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/08/06 12:14:58.167</created_date>
+    <created_date>2019/08/06 18:41:38.013</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/08/06 12:14:58.167</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2019/08/06 18:41:38.013</modified_date>
+    <key_for_session_key />
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -568,176 +568,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>epts_person_address</from>
+      <from>epts_person_attribute</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Merge join</from>
-      <to>Insert / update</to>
+      <to>poc_person_attribute</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>person_address</table>
-      <key>
-        <name>person_id_1</name>
-        <field>person_id</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>person_address_id</name>
-        <rename>person_address_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>person_id</name>
-        <rename>person_id_1</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>preferred</name>
-        <rename>preferred</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>address2</name>
-        <rename>address2</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>city_village</name>
-        <rename>city_village</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>state_province</name>
-        <rename>state_province</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>postal_code</name>
-        <rename>postal_code</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>country</name>
-        <rename>country</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>latitude</name>
-        <rename>latitude</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>longitude</name>
-        <rename>longitude</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>creator</name>
-        <rename>creator</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_created</name>
-        <rename>date_created</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>voided</name>
-        <rename>voided</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>voided_by</name>
-        <rename>voided_by</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_voided</name>
-        <rename>date_voided</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>void_reason</name>
-        <rename>void_reason</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>address3</name>
-        <rename>address3</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>address1</name>
-        <rename>address5</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>address4</name>
-        <rename>address1</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>uuid</name>
-        <rename>uuid</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_changed</name>
-        <rename>date_changed</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>changed_by</name>
-        <rename>changed_by</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>start_date</name>
-        <rename>start_date</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>end_date</name>
-        <rename>end_date</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>480</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>epts_person_address</name>
+    <name>epts_person_attribute</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -749,34 +591,20 @@
     </partitioning>
     <connection>epts</connection>
     <sql>SELECT
-  person_address_id
+  person_attribute_id
 , person_id
-, preferred
-, address1
-, address2
-, city_village
-, state_province
-, postal_code
-, country
-, latitude
-, longitude
+, value
+, person_attribute_type_id
 , creator
 , date_created
+, changed_by
+, date_changed
 , voided
 , voided_by
 , date_voided
 , void_reason
-, county_district
-, address3
-, address6
-, address5
-, address4
 , uuid
-, date_changed
-, changed_by
-, start_date
-, end_date
-FROM person_address
+FROM person_attribute where person_attribute_type_id = '9'
 </sql>
     <limit>0</limit>
     <lookup />
@@ -792,8 +620,8 @@ FROM person_address
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>64</yloc>
+      <xloc>192</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -809,7 +637,7 @@ FROM person_address
       <schema_name />
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>epts_person_address</step1>
+    <step1>epts_person_attribute</step1>
     <step2>new_patient_id</step2>
     <keys_1>
       <key>person_id</key>
@@ -826,8 +654,8 @@ FROM person_address
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>160</yloc>
+      <xloc>320</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -873,8 +701,104 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
-      <yloc>304</yloc>
+      <xloc>160</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>poc_person_attribute</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <schema />
+    <table>person_attribute</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>person_attribute_id</column_name>
+        <stream_name>person_attribute_id</stream_name>
+      </field>
+      <field>
+        <column_name>person_id</column_name>
+        <stream_name>person_id_1</stream_name>
+      </field>
+      <field>
+        <column_name>value</column_name>
+        <stream_name>value</stream_name>
+      </field>
+      <field>
+        <column_name>person_attribute_type_id</column_name>
+        <stream_name>person_attribute_type_id</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>changed_by</column_name>
+        <stream_name>changed_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_changed</column_name>
+        <stream_name>date_changed</stream_name>
+      </field>
+      <field>
+        <column_name>voided</column_name>
+        <stream_name>voided</stream_name>
+      </field>
+      <field>
+        <column_name>voided_by</column_name>
+        <stream_name>voided_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_voided</column_name>
+        <stream_name>date_voided</stream_name>
+      </field>
+      <field>
+        <column_name>void_reason</column_name>
+        <stream_name>void_reason</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>uuid</stream_name>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
