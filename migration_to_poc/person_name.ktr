@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>patient_identifier_nid</name>
+    <name>person_name</name>
     <description />
     <extended_description />
     <trans_version />
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/07/31 09:41:08.418</created_date>
+    <created_date>2019/08/06 10:01:34.056</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/07/31 09:41:08.418</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2019/08/06 10:01:34.056</modified_date>
+    <key_for_session_key />
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -564,18 +563,86 @@
   </connection>
   <order>
     <hop>
-      <from>transform NID</from>
-      <to>Insert NID</to>
+      <from>Database lookup</from>
+      <to>update new_person_id</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>epts_person_name</from>
+      <to>insert into person_name_temp</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>epts_patient_identifier</from>
-      <to>transform NID</to>
+      <from>Execute SQL script</from>
+      <to>epts_person_name</to>
       <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>insert into person_name_temp</from>
+      <to>insert into person_name</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>insert into person_name</from>
+      <to>Database lookup</to>
+      <enabled>N</enabled>
     </hop>
   </order>
   <step>
-    <name>Insert NID</name>
+    <name>epts_person_name</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+preferred
+, person_id
+, prefix
+, given_name
+, middle_name
+, family_name_prefix
+, family_name
+, family_name2
+, family_name_suffix
+, degree
+, creator
+, date_created
+, voided
+, voided_by
+, date_voided
+, void_reason
+, changed_by
+, date_changed
+, uuid
+FROM person_name
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>insert into person_name_temp</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -587,28 +654,10 @@
     </partitioning>
     <connection>poc</connection>
     <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
+    <update_bypassed>N</update_bypassed>
     <lookup>
       <schema />
-      <table>patient_identifier</table>
-      <key>
-        <name>patient_id</name>
-        <field>patient_id</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>identifier</name>
-        <field>identifier</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>identifier_type</name>
-        <field>identifier_type</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
+      <table>person_name_temp</table>
       <key>
         <name>preferred</name>
         <field>preferred</field>
@@ -616,8 +665,56 @@
         <name2 />
       </key>
       <key>
-        <name>location_id</name>
-        <field>location_id</field>
+        <name>person_id</name>
+        <field>person_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>prefix</name>
+        <field>prefix</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>given_name</name>
+        <field>given_name</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>middle_name</name>
+        <field>middle_name</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name_prefix</name>
+        <field>family_name_prefix</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name</name>
+        <field>family_name</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name2</name>
+        <field>family_name2</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name_suffix</name>
+        <field>family_name_suffix</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>degree</name>
+        <field>degree</field>
         <condition>=</condition>
         <name2 />
       </key>
@@ -658,8 +755,8 @@
         <name2 />
       </key>
       <key>
-        <name>uuid</name>
-        <field>uuid</field>
+        <name>changed_by</name>
+        <field>changed_by</field>
         <condition>=</condition>
         <name2 />
       </key>
@@ -670,34 +767,59 @@
         <name2 />
       </key>
       <key>
-        <name>changed_by</name>
-        <field>changed_by</field>
+        <name>uuid</name>
+        <field>uuid</field>
         <condition>=</condition>
         <name2 />
       </key>
-      <value>
-        <name>patient_id</name>
-        <rename>patient_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>identifier</name>
-        <rename>identifier</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>identifier_type</name>
-        <rename>identifier_type</rename>
-        <update>Y</update>
-      </value>
       <value>
         <name>preferred</name>
         <rename>preferred</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>location_id</name>
-        <rename>location_id</rename>
+        <name>person_id</name>
+        <rename>person_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prefix</name>
+        <rename>prefix</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>given_name</name>
+        <rename>given_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>middle_name</name>
+        <rename>middle_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>family_name_prefix</name>
+        <rename>family_name_prefix</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>family_name</name>
+        <rename>family_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>family_name2</name>
+        <rename>family_name2</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>family_name_suffix</name>
+        <rename>family_name_suffix</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>degree</name>
+        <rename>degree</rename>
         <update>Y</update>
       </value>
       <value>
@@ -731,8 +853,8 @@
         <update>Y</update>
       </value>
       <value>
-        <name>uuid</name>
-        <rename>uuid</rename>
+        <name>changed_by</name>
+        <rename>changed_by</rename>
         <update>Y</update>
       </value>
       <value>
@@ -741,8 +863,8 @@
         <update>Y</update>
       </value>
       <value>
-        <name>changed_by</name>
-        <rename>changed_by</rename>
+        <name>uuid</name>
+        <rename>uuid</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -755,61 +877,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>64</yloc>
+      <xloc>352</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>epts_patient_identifier</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
-patient_id
-, identifier
-, identifier_type
-, preferred
-, location_id
-, creator
-, date_created
-, voided
-, voided_by
-, date_voided
-, void_reason
-, uuid
-, date_changed
-, changed_by
-FROM patient_identifier where identifier_type = '2'</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>transform NID</name>
-    <type>ValueMapper</type>
+    <name>update new_person_id</name>
+    <type>ExecSQL</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -818,15 +893,20 @@ FROM patient_identifier where identifier_type = '2'</sql>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <field_to_use>identifier_type</field_to_use>
-    <target_field />
-    <non_match_default />
-    <fields>
-      <field>
-        <source_value>2</source_value>
-        <target_value>3</target_value>
-      </field>
-    </fields>
+    <connection>poc</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>update person_name pt set person_id = (select new_person_id from person_temp per where per.person_id = pt.person_id)
+where pt.patient_id is not null;</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -836,8 +916,594 @@ FROM patient_identifier where identifier_type = '2'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>48</yloc>
+      <xloc>720</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Database lookup</name>
+    <type>DBLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema />
+      <table>person_name</table>
+      <orderby />
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>person_name_id</name>
+        <field>person_name_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>preferred</name>
+        <field>preferred</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>person_id</name>
+        <field>person_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>prefix</name>
+        <field>prefix</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>given_name</name>
+        <field>given_name</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>middle_name</name>
+        <field>middle_name</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name_prefix</name>
+        <field>family_name_prefix</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name</name>
+        <field>family_name</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name2</name>
+        <field>family_name2</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name_suffix</name>
+        <field>family_name_suffix</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>degree</name>
+        <field>degree</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>creator</name>
+        <field>creator</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_created</name>
+        <field>date_created</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>voided</name>
+        <field>voided</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>voided_by</name>
+        <field>voided_by</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_voided</name>
+        <field>date_voided</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>void_reason</name>
+        <field>void_reason</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>changed_by</name>
+        <field>changed_by</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_changed</name>
+        <field>date_changed</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>person_name_id</name>
+        <rename>person_name_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>preferred</name>
+        <rename>preferred</rename>
+        <default />
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>person_id</name>
+        <rename>person_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>prefix</name>
+        <rename>prefix</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>given_name</name>
+        <rename>given_name</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>middle_name</name>
+        <rename>middle_name</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>family_name_prefix</name>
+        <rename>family_name_prefix</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>family_name</name>
+        <rename>family_name</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>family_name2</name>
+        <rename>family_name2</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>family_name_suffix</name>
+        <rename>family_name_suffix</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>degree</name>
+        <rename>degree</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>creator</name>
+        <rename>creator</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>voided</name>
+        <rename>voided</rename>
+        <default />
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>voided_by</name>
+        <rename>voided_by</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_voided</name>
+        <rename>date_voided</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>void_reason</name>
+        <rename>void_reason</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>changed_by</name>
+        <rename>changed_by</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_changed</name>
+        <rename>date_changed</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <default />
+        <type>String</type>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE person_name_temp (
+`new_person_id` int(11),
+  `person_name_id` int(11) NOT NULL AUTO_INCREMENT,
+  `preferred` tinyint(1) NOT NULL DEFAULT '0',
+  `person_id` int(11) NOT NULL,
+  `prefix` varchar(50) DEFAULT NULL,
+  `given_name` varchar(50) DEFAULT NULL,
+  `middle_name` varchar(50) DEFAULT NULL,
+  `family_name_prefix` varchar(50) DEFAULT NULL,
+  `family_name` varchar(50) DEFAULT NULL,
+  `family_name2` varchar(50) DEFAULT NULL,
+  `family_name_suffix` varchar(50) DEFAULT NULL,
+  `degree` varchar(50) DEFAULT NULL,
+  `creator` int(11) NOT NULL DEFAULT '0',
+  `date_created` datetime NOT NULL,
+  `voided` tinyint(1) NOT NULL DEFAULT '0',
+  `voided_by` int(11) DEFAULT NULL,
+  `date_voided` datetime DEFAULT NULL,
+  `void_reason` varchar(255) DEFAULT NULL,
+  `changed_by` int(11) DEFAULT NULL,
+  `date_changed` datetime DEFAULT NULL,
+  `uuid` char(38) NOT NULL,
+  PRIMARY KEY (`person_name_id`),
+  UNIQUE KEY `person_name_uuid_index` (`uuid`),
+  KEY `first_name` (`given_name`),
+  KEY `last_name` (`family_name`),
+  KEY `middle_name` (`middle_name`),
+  KEY `family_name2` (`family_name2`),
+  KEY `user_who_made_name` (`creator`),
+  KEY `name_for_person` (`person_id`),
+  KEY `user_who_voided_name` (`voided_by`)
+) ENGINE=InnoDB AUTO_INCREMENT=1650 DEFAULT CHARSET=utf8;</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>insert into person_name</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>person_name</table>
+      <key>
+        <name>preferred</name>
+        <field>preferred</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>person_id</name>
+        <field>person_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>prefix</name>
+        <field>prefix</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>given_name</name>
+        <field>given_name</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>middle_name</name>
+        <field>middle_name</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name_prefix</name>
+        <field>family_name_prefix</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name</name>
+        <field>family_name</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name2</name>
+        <field>family_name2</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>family_name_suffix</name>
+        <field>family_name_suffix</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>degree</name>
+        <field>degree</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>creator</name>
+        <field>creator</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_created</name>
+        <field>date_created</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>voided</name>
+        <field>voided</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>voided_by</name>
+        <field>voided_by</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_voided</name>
+        <field>date_voided</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>void_reason</name>
+        <field>void_reason</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>changed_by</name>
+        <field>changed_by</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_changed</name>
+        <field>date_changed</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>preferred</name>
+        <rename>preferred</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>person_id</name>
+        <rename>person_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prefix</name>
+        <rename>prefix</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>given_name</name>
+        <rename>given_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>middle_name</name>
+        <rename>middle_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>family_name_prefix</name>
+        <rename>family_name_prefix</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>family_name</name>
+        <rename>family_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>family_name2</name>
+        <rename>family_name2</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>family_name_suffix</name>
+        <rename>family_name_suffix</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>degree</name>
+        <rename>degree</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>creator</name>
+        <rename>creator</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>voided</name>
+        <rename>voided</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>voided_by</name>
+        <rename>voided_by</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_voided</name>
+        <rename>date_voided</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>void_reason</name>
+        <rename>void_reason</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>changed_by</name>
+        <rename>changed_by</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_changed</name>
+        <rename>date_changed</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

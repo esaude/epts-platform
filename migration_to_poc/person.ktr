@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>patient_identifier_bi</name>
+    <name>person</name>
     <description />
     <extended_description />
     <trans_version />
@@ -428,9 +428,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/07/31 15:57:32.388</created_date>
+    <created_date>2019/08/01 14:57:03.347</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/07/31 15:57:32.388</modified_date>
+    <modified_date>2019/08/01 14:57:03.347</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -564,18 +564,267 @@
   </connection>
   <order>
     <hop>
-      <from>epts_patient_identifier 2</from>
-      <to>transform ID</to>
+      <from>create person_temp</from>
+      <to>epts_person</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>transform ID</from>
-      <to>Insert ID</to>
+      <from>insert person_temp</from>
+      <to>insert into person</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>epts_person</from>
+      <to>insert person_temp</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>insert into person</from>
+      <to>Database lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Database lookup</from>
+      <to>update new_person_id</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Insert ID</name>
+    <name>epts_person</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+  person_id
+, gender
+, birthdate
+, birthdate_estimated
+, dead
+, death_date
+, cause_of_death
+, creator
+, date_created
+, changed_by
+, date_changed
+, voided
+, voided_by
+, date_voided
+, void_reason
+, uuid
+, deathdate_estimated
+, birthtime
+FROM person
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>insert person_temp</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <schema />
+    <table>person_temp</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>person_id</column_name>
+        <stream_name>person_id</stream_name>
+      </field>
+      <field>
+        <column_name>gender</column_name>
+        <stream_name>gender</stream_name>
+      </field>
+      <field>
+        <column_name>birthdate</column_name>
+        <stream_name>birthdate</stream_name>
+      </field>
+      <field>
+        <column_name>birthdate_estimated</column_name>
+        <stream_name>birthdate_estimated</stream_name>
+      </field>
+      <field>
+        <column_name>dead</column_name>
+        <stream_name>dead</stream_name>
+      </field>
+      <field>
+        <column_name>death_date</column_name>
+        <stream_name>death_date</stream_name>
+      </field>
+      <field>
+        <column_name>cause_of_death</column_name>
+        <stream_name>cause_of_death</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>changed_by</column_name>
+        <stream_name>changed_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_changed</column_name>
+        <stream_name>date_changed</stream_name>
+      </field>
+      <field>
+        <column_name>voided</column_name>
+        <stream_name>voided</stream_name>
+      </field>
+      <field>
+        <column_name>voided_by</column_name>
+        <stream_name>voided_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_voided</column_name>
+        <stream_name>date_voided</stream_name>
+      </field>
+      <field>
+        <column_name>void_reason</column_name>
+        <stream_name>void_reason</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>uuid</stream_name>
+      </field>
+      <field>
+        <column_name>deathdate_estimated</column_name>
+        <stream_name>deathdate_estimated</stream_name>
+      </field>
+      <field>
+        <column_name>birthtime</column_name>
+        <stream_name>birthtime</stream_name>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>create person_temp</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE person_temp (
+`new_person_id` int(11) ,
+  `person_id` int(11) NOT NULL,
+  `gender` varchar(50) DEFAULT '',
+  `birthdate` date DEFAULT NULL,
+  `birthdate_estimated` tinyint(1) NOT NULL DEFAULT '0',
+  `dead` tinyint(1) NOT NULL DEFAULT '0',
+  `death_date` datetime DEFAULT NULL,
+  `cause_of_death` int(11) DEFAULT NULL,
+  `creator` int(11) DEFAULT NULL,
+  `date_created` datetime NOT NULL,
+  `changed_by` int(11) DEFAULT NULL,
+  `date_changed` datetime DEFAULT NULL,
+  `voided` tinyint(1) NOT NULL DEFAULT '0',
+  `voided_by` int(11) DEFAULT NULL,
+  `date_voided` datetime DEFAULT NULL,
+  `void_reason` varchar(255) DEFAULT NULL,
+  `uuid` char(38) NOT NULL,
+  `deathdate_estimated` tinyint(1) NOT NULL DEFAULT '0',
+  `birthtime` time DEFAULT NULL,
+  PRIMARY KEY (`person_id`),
+  UNIQUE KEY `person_uuid_index` (`uuid`),
+  KEY `person_birthdate` (`birthdate`),
+  KEY `person_death_date` (`death_date`),
+  KEY `person_died_because` (`cause_of_death`),
+  KEY `user_who_changed_person` (`changed_by`),
+  KEY `user_who_created_person` (`creator`),
+  KEY `user_who_voided_person` (`voided_by`)
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>insert into person</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -587,25 +836,43 @@
     </partitioning>
     <connection>poc</connection>
     <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
+    <update_bypassed>N</update_bypassed>
     <lookup>
       <schema />
-      <table>person_attribute</table>
+      <table>person</table>
       <key>
-        <name>patient_id</name>
-        <field>person_id</field>
+        <name>gender</name>
+        <field>gender</field>
         <condition>=</condition>
         <name2 />
       </key>
       <key>
-        <name>identifier</name>
-        <field>value</field>
+        <name>birthdate</name>
+        <field>birthdate</field>
         <condition>=</condition>
         <name2 />
       </key>
       <key>
-        <name>identifier_type</name>
-        <field>person_attribute_type_id</field>
+        <name>birthdate_estimated</name>
+        <field>birthdate_estimated</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>dead</name>
+        <field>dead</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>death_date</name>
+        <field>death_date</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>cause_of_death</name>
+        <field>cause_of_death</field>
         <condition>=</condition>
         <name2 />
       </key>
@@ -622,24 +889,87 @@
         <name2 />
       </key>
       <key>
+        <name>changed_by</name>
+        <field>changed_by</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_changed</name>
+        <field>date_changed</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>voided</name>
+        <field>voided</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>voided_by</name>
+        <field>voided_by</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_voided</name>
+        <field>date_voided</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>void_reason</name>
+        <field>void_reason</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
         <name>uuid</name>
         <field>uuid</field>
         <condition>=</condition>
         <name2 />
       </key>
+      <key>
+        <name>deathdate_estimated</name>
+        <field>deathdate_estimated</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>birthtime</name>
+        <field>birthtime</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
       <value>
-        <name>person_id</name>
-        <rename>patient_id</rename>
+        <name>gender</name>
+        <rename>gender</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>value</name>
-        <rename>identifier</rename>
+        <name>birthdate</name>
+        <rename>birthdate</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>person_attribute_type_id</name>
-        <rename>identifier_type</rename>
+        <name>birthdate_estimated</name>
+        <rename>birthdate_estimated</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>dead</name>
+        <rename>dead</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>death_date</name>
+        <rename>death_date</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cause_of_death</name>
+        <rename>cause_of_death</rename>
         <update>Y</update>
       </value>
       <value>
@@ -653,8 +983,48 @@
         <update>Y</update>
       </value>
       <value>
+        <name>changed_by</name>
+        <rename>changed_by</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_changed</name>
+        <rename>date_changed</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>voided</name>
+        <rename>voided</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>voided_by</name>
+        <rename>voided_by</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_voided</name>
+        <rename>date_voided</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>void_reason</name>
+        <rename>void_reason</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>uuid</name>
         <rename>uuid</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>deathdate_estimated</name>
+        <rename>deathdate_estimated</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>birthtime</name>
+        <rename>birthtime</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -667,14 +1037,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>48</yloc>
+      <xloc>464</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>epts_patient_identifier 2</name>
-    <type>TableInput</type>
+    <name>update new_person_id</name>
+    <type>ExecSQL</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -683,21 +1053,20 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
-patient_id
-, identifier
-, '56' as identifier_type
-, creator
-, date_created
-, uuid
-FROM patient_identifier where identifier_type = '3'
-</sql>
-    <limit>0</limit>
-    <lookup />
+    <connection>poc</connection>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>update person_temp pt set new_person_id = (select person_id from person per where per.uuid = pt.uuid)
+where pt.uuid is not null;</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -707,14 +1076,14 @@ FROM patient_identifier where identifier_type = '3'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>48</yloc>
+      <xloc>752</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>transform ID</name>
-    <type>ValueMapper</type>
+    <name>Database lookup</name>
+    <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -723,15 +1092,233 @@ FROM patient_identifier where identifier_type = '3'
       <method>none</method>
       <schema_name />
     </partitioning>
-    <field_to_use>identifier_type</field_to_use>
-    <target_field />
-    <non_match_default />
-    <fields>
-      <field>
-        <source_value>3</source_value>
-        <target_value>56</target_value>
-      </field>
-    </fields>
+    <connection>poc</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema />
+      <table>person</table>
+      <orderby />
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>person_id</name>
+        <field>person_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>gender</name>
+        <field>gender</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>birthdate</name>
+        <field>birthdate</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>birthdate_estimated</name>
+        <field>birthdate_estimated</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>dead</name>
+        <field>dead</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>death_date</name>
+        <field>death_date</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>cause_of_death</name>
+        <field>cause_of_death</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>creator</name>
+        <field>creator</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_created</name>
+        <field>date_created</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>changed_by</name>
+        <field>changed_by</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_changed</name>
+        <field>date_changed</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>voided</name>
+        <field>voided</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>voided_by</name>
+        <field>voided_by</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>date_voided</name>
+        <field>date_voided</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>void_reason</name>
+        <field>void_reason</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>deathdate_estimated</name>
+        <field>deathdate_estimated</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>birthtime</name>
+        <field>birthtime</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>person_id</name>
+        <rename>person_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>gender</name>
+        <rename>gender</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>birthdate</name>
+        <rename>birthdate</rename>
+        <default />
+        <type>Date</type>
+      </value>
+      <value>
+        <name>birthdate_estimated</name>
+        <rename>birthdate_estimated</rename>
+        <default />
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>dead</name>
+        <rename>dead</rename>
+        <default />
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>death_date</name>
+        <rename>death_date</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>cause_of_death</name>
+        <rename>cause_of_death</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>creator</name>
+        <rename>creator</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>changed_by</name>
+        <rename>changed_by</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_changed</name>
+        <rename>date_changed</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>voided</name>
+        <rename>voided</rename>
+        <default />
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>voided_by</name>
+        <rename>voided_by</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_voided</name>
+        <rename>date_voided</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>void_reason</name>
+        <rename>void_reason</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>deathdate_estimated</name>
+        <rename>deathdate_estimated</rename>
+        <default />
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>birthtime</name>
+        <rename>birthtime</rename>
+        <default />
+        <type>Date</type>
+      </value>
+    </lookup>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -741,8 +1328,8 @@ FROM patient_identifier where identifier_type = '3'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>96</yloc>
+      <xloc>592</xloc>
+      <yloc>16</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
