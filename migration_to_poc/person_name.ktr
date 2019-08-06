@@ -655,7 +655,7 @@ FROM person_name
         <name2 />
       </key>
       <key>
-        <name>person_id</name>
+        <name>person_id_1</name>
         <field>person_id</field>
         <condition>=</condition>
         <name2 />
@@ -769,7 +769,7 @@ FROM person_name
       </value>
       <value>
         <name>person_id</name>
-        <rename>person_id</rename>
+        <rename>person_id_1</rename>
         <update>Y</update>
       </value>
       <value>
