@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>encounter</name>
+    <name>obs_medicine</name>
     <description />
     <extended_description />
     <trans_version />
@@ -427,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/08/07 11:01:27.636</created_date>
+    <created_date>2019/08/07 15:41:59.100</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/08/07 11:01:27.636</modified_date>
+    <modified_date>2019/08/07 15:41:59.100</modified_date>
     <key_for_session_key />
     <is_key_private>N</is_key_private>
   </info>
@@ -563,7 +563,7 @@
   </connection>
   <order>
     <hop>
-      <from>epts_encounter</from>
+      <from>epts_obs</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
@@ -574,12 +574,12 @@
     </hop>
     <hop>
       <from>Merge join</from>
-      <to>poc_encounter</to>
+      <to>poc_order</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>epts_encounter</name>
+    <name>epts_obs</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -591,30 +591,24 @@
     </partitioning>
     <connection>epts</connection>
     <sql>SELECT
-  encounter_id
-, '1' as encounter_type
-, patient_id
-, location_id
-, form_id
-, encounter_datetime
-, creator
-, date_created
-, voided
-, voided_by
-, date_voided
-, void_reason
-, uuid
-, changed_by
-, date_changed
-, case
-when '3' then '10'
-when '5' then '10'
-when '8' then '7'
-when '10' then '9'
-when '12' then '12'
-end as visit_id
-FROM encounter where encounter_type in ('1','6','35','34','5','18') and encounter_id > 48;
-</sql>
+'2' AS order_type_id
+,value_coded as concept_id
+,'2' as orderer
+,encounter_id
+,obs_datetime as date_activated
+,'4' as creator
+,obs_datetime as date_created
+,voided
+,voided_by
+,date_voided
+,void_reason
+,person_id as patient_id
+,uuid
+,'ON_SCHEDULED_DATE' as urgency
+,'1' as care_setting
+,obs_datetime as scheduled_date
+FROM obs where concept_id = '1088' and encounter_id in 
+(select distinct encounter_id from encounter where encounter_type in ('18')) and value_coded is not null;</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -629,8 +623,8 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18') and encounte
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>64</yloc>
+      <xloc>336</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -646,10 +640,10 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18') and encounte
       <schema_name />
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>epts_encounter</step1>
+    <step1>epts_obs</step1>
     <step2>new_patient_id</step2>
     <keys_1>
-      <key>patient_id</key>
+      <key>person_id</key>
     </keys_1>
     <keys_2>
       <key>value</key>
@@ -663,8 +657,8 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18') and encounte
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>160</yloc>
+      <xloc>544</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -710,13 +704,13 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>304</yloc>
+      <xloc>336</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>poc_encounter</name>
+    <name>poc_order</name>
     <type>TableOutput</type>
     <description />
     <distribute>Y</distribute>
@@ -728,7 +722,7 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
     </partitioning>
     <connection>poc</connection>
     <schema />
-    <table>encounter</table>
+    <table>orders</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -745,28 +739,24 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
     <return_field />
     <fields>
       <field>
+        <column_name>order_type_id</column_name>
+        <stream_name>order_type_id</stream_name>
+      </field>
+      <field>
+        <column_name>concept_id</column_name>
+        <stream_name>value_coded</stream_name>
+      </field>
+      <field>
+        <column_name>orderer</column_name>
+        <stream_name>orderer</stream_name>
+      </field>
+      <field>
         <column_name>encounter_id</column_name>
         <stream_name>encounter_id</stream_name>
       </field>
       <field>
-        <column_name>encounter_type</column_name>
-        <stream_name>encounter_type</stream_name>
-      </field>
-      <field>
-        <column_name>patient_id</column_name>
-        <stream_name>person_id</stream_name>
-      </field>
-      <field>
-        <column_name>location_id</column_name>
-        <stream_name>location_id</stream_name>
-      </field>
-      <field>
-        <column_name>form_id</column_name>
-        <stream_name>form_id</stream_name>
-      </field>
-      <field>
-        <column_name>encounter_datetime</column_name>
-        <stream_name>encounter_datetime</stream_name>
+        <column_name>date_activated</column_name>
+        <stream_name>obs_datetime</stream_name>
       </field>
       <field>
         <column_name>creator</column_name>
@@ -774,7 +764,7 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </field>
       <field>
         <column_name>date_created</column_name>
-        <stream_name>date_created</stream_name>
+        <stream_name>obs_datetime_1</stream_name>
       </field>
       <field>
         <column_name>voided</column_name>
@@ -793,20 +783,24 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
         <stream_name>void_reason</stream_name>
       </field>
       <field>
+        <column_name>patient_id</column_name>
+        <stream_name>person_id_1</stream_name>
+      </field>
+      <field>
         <column_name>uuid</column_name>
         <stream_name>uuid</stream_name>
       </field>
       <field>
-        <column_name>changed_by</column_name>
-        <stream_name>changed_by</stream_name>
+        <column_name>urgency</column_name>
+        <stream_name>urgency</stream_name>
       </field>
       <field>
-        <column_name>date_changed</column_name>
-        <stream_name>date_changed</stream_name>
+        <column_name>care_setting</column_name>
+        <stream_name>care_setting</stream_name>
       </field>
       <field>
-        <column_name>visit_id</column_name>
-        <stream_name>visit_id</stream_name>
+        <column_name>scheduled_date</column_name>
+        <stream_name>obs_datetime_2</stream_name>
       </field>
     </fields>
     <attributes />
@@ -818,8 +812,8 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>160</yloc>
+      <xloc>720</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
