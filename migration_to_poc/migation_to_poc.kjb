@@ -320,7 +320,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
+      <xloc>128</xloc>
       <yloc>80</yloc>
       <attributes_kjc />
     </entry>
@@ -358,8 +358,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>160</yloc>
+      <xloc>128</xloc>
+      <yloc>208</yloc>
       <attributes_kjc />
     </entry>
     <entry>
@@ -396,8 +396,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
-      <yloc>80</yloc>
+      <xloc>240</xloc>
+      <yloc>112</yloc>
       <attributes_kjc />
     </entry>
     <entry>
@@ -688,6 +688,18 @@
       <yloc>32</yloc>
       <attributes_kjc />
     </entry>
+    <entry>
+      <name>Success</name>
+      <description />
+      <type>SUCCESS</type>
+      <attributes />
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1024</xloc>
+      <yloc>80</yloc>
+      <attributes_kjc />
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -763,6 +775,15 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
+      <from>name</from>
+      <to>phone number</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
       <from>Start</from>
       <to>person</to>
       <from_nr>0</from_nr>
@@ -772,8 +793,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>name</from>
-      <to>phone number</to>
+      <from>obs_medicine</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
