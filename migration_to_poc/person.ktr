@@ -595,7 +595,7 @@
     </hop>
     <hop>
       <from>Block this step until steps finish 2</from>
-      <to>update</to>
+      <to>update person attribute</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1061,7 +1061,7 @@ FROM person
     </GUI>
   </step>
   <step>
-    <name>update</name>
+    <name>update person attribute</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -1160,7 +1160,7 @@ FROM person
   </step>
   <step_error_handling>
     <error>
-      <source_step>update</source_step>
+      <source_step>update person attribute</source_step>
       <target_step />
       <is_enabled>N</is_enabled>
       <nr_valuename />

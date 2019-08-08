@@ -613,7 +613,7 @@ when '8' then '7'
 when '10' then '9'
 when '12' then '12'
 end as visit_id
-FROM encounter where encounter_type in ('1','6','35','34','5','18') and encounter_id > 48;
+FROM encounter where encounter_type in ('1','6','35','34','5','18');
 </sql>
     <limit>0</limit>
     <lookup />
