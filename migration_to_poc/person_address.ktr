@@ -737,67 +737,6 @@
     </GUI>
   </step>
   <step>
-    <name>epts_person_address</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
-  person_address_id
-, person_id
-, preferred
-, address1
-, address2
-, city_village
-, state_province
-, postal_code
-, country
-, latitude
-, longitude
-, creator
-, date_created
-, voided
-, voided_by
-, date_voided
-, void_reason
-, county_district
-, address3
-, address6
-, address5
-, address4
-, uuid
-, date_changed
-, changed_by
-, start_date
-, end_date
-FROM person_address
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Merge join</name>
     <type>MergeJoin</type>
     <description />
@@ -828,6 +767,69 @@ FROM person_address
     <GUI>
       <xloc>288</xloc>
       <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>epts_person_address</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+  person_address_id
+, person_id
+, preferred
+, address1
+, address2
+, city_village
+, state_province
+, postal_code
+, country
+, latitude
+, longitude
+, '4' as creator
+, date_created
+, voided
+, case 
+when voided_by is not null then '4' end as voided_by
+, date_voided
+, void_reason
+, county_district
+, address3
+, address6
+, address5
+, address4
+, uuid
+, date_changed
+, case 
+when changed_by is not null then '4' end as changed_by
+, start_date
+, end_date
+FROM person_address where person_id >= '79'
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

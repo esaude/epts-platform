@@ -430,7 +430,7 @@
     <created_date>2019/08/07 11:01:27.636</created_date>
     <modified_user>-</modified_user>
     <modified_date>2019/08/07 11:01:27.636</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -577,63 +577,27 @@
       <to>poc_encounter</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>poc_encounter</from>
+      <to>wait</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>wait</from>
+      <to>Database lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Database lookup</from>
+      <to>wait 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>wait 2</from>
+      <to>Insert / update</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>epts_encounter</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
-  encounter_id
-, '1' as encounter_type
-, patient_id
-, location_id
-, form_id
-, encounter_datetime
-, creator
-, date_created
-, voided
-, voided_by
-, date_voided
-, void_reason
-, uuid
-, changed_by
-, date_changed
-, case
-when '3' then '10'
-when '5' then '10'
-when '8' then '7'
-when '10' then '9'
-when '12' then '12'
-end as visit_id
-FROM encounter where encounter_type in ('1','6','35','34','5','18');
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Merge join</name>
     <type>MergeJoin</type>
@@ -663,8 +627,59 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>368</xloc>
       <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>epts_encounter</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+  encounter_id
+, '1' as encounter_type
+, patient_id
+,  '17' as location_id
+, form_id
+, encounter_datetime
+, '4' as creator
+, date_created
+, voided
+, case 
+when voided_by is not null then '4' end as voided_by
+, date_voided
+, void_reason
+, uuid
+, case 
+when changed_by is not null then '4' end as changed_by
+, date_changed
+, visit_id
+FROM encounter where encounter_type in ('1','6','35','34','5','18')</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -710,8 +725,8 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>304</yloc>
+      <xloc>192</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -804,10 +819,6 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
         <column_name>date_changed</column_name>
         <stream_name>date_changed</stream_name>
       </field>
-      <field>
-        <column_name>visit_id</column_name>
-        <stream_name>visit_id</stream_name>
-      </field>
     </fields>
     <attributes />
     <cluster_schema />
@@ -818,7 +829,250 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
+      <xloc>464</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>encounter</table>
+      <key>
+        <name>visit_id</name>
+        <field>visit_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>visit_id</name>
+        <rename>new_visit_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Database lookup</name>
+    <type>DBLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema />
+      <table>visit_temp</table>
+      <orderby />
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>visit_id</name>
+        <field>visit_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>new_visit_id</name>
+        <rename>new_visit_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>patient_id</name>
+        <rename>patient_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>visit_type_id</name>
+        <rename>visit_type_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_started</name>
+        <rename>date_started</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>date_stopped</name>
+        <rename>date_stopped</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>indication_concept_id</name>
+        <rename>indication_concept_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>location_id</name>
+        <rename>location_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>creator</name>
+        <rename>creator</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>changed_by</name>
+        <rename>changed_by</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_changed</name>
+        <rename>date_changed</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>voided</name>
+        <rename>voided</rename>
+        <default />
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>voided_by</name>
+        <rename>voided_by</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_voided</name>
+        <rename>date_voided</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>void_reason</name>
+        <rename>void_reason</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <default />
+        <type>String</type>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
       <xloc>688</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>wait 2</name>
+    <type>BlockUntilStepsFinish</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <steps>
+      <step>
+        <name>Database lookup</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>800</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>wait</name>
+    <type>BlockUntilStepsFinish</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <steps>
+      <step>
+        <name>poc_encounter</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
