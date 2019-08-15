@@ -791,23 +791,31 @@ CREATE TABLE visit_temp (
     </partitioning>
     <connection>epts</connection>
     <sql>SELECT
-  visit_id
+ visit_id
 , patient_id
-, visit_type_id
+,   case
+when '3' then '10'
+when '5' then '10'
+when '8' then '7'
+when '10' then '9'
+when '12' then '12'
+end as visit_type_id
 , date_started
 , date_stopped
 , indication_concept_id
-, location_id
-, creator
+, '17' as location_id
+, '4' as creator
 , date_created
-, changed_by
+, case 
+when changed_by is not null then '4' end as changed_by
 , date_changed
 , voided
-, voided_by
+, case 
+when voided_by is not null then '4' end as voided_by
 , date_voided
 , void_reason
 , uuid
-FROM visit
+FROM visit where visit_type_id in ('3','5','8','10','12')
 </sql>
     <limit>0</limit>
     <lookup />

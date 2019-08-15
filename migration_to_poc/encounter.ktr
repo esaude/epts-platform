@@ -979,7 +979,7 @@
       </value>
       <value>
         <name>patient_id</name>
-        <rename>patient_id</rename>
+        <rename>person_id</rename>
         <update>Y</update>
       </value>
       <value>
