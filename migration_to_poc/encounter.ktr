@@ -598,10 +598,25 @@
       <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>epts address hierarchy</from>
+      <to>Merge join 2</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>epts address hierarchy 2</from>
+      <to>Merge join 2</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Merge join 2</from>
+      <to>Microsoft Excel output</to>
+      <enabled>N</enabled>
+    </hop>
   </order>
   <step>
-    <name>Merge join</name>
-    <type>MergeJoin</type>
+    <name>Blocking step</name>
+    <type>BlockingStep</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -610,62 +625,11 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <join_type>INNER</join_type>
-    <step1>Blocking step</step1>
-    <step2>get new person id</step2>
-    <keys_1>
-      <key>patient_id</key>
-    </keys_1>
-    <keys_2>
-      <key>value</key>
-    </keys_2>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>480</xloc>
-      <yloc>320</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get new person id</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <sql>SELECT
-  person_attribute_id
-, person_id
-, value
-, person_attribute_type_id
-, creator
-, date_created
-, changed_by
-, date_changed
-, voided
-, voided_by
-, date_voided
-, void_reason
-, uuid
-FROM person_attribute WHERE person_attribute_type_id = '64'
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>30000</cache_size>
+    <compress>Y</compress>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -676,13 +640,13 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
     </remotesteps>
     <GUI>
       <xloc>384</xloc>
-      <yloc>448</yloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>select from encounter</name>
-    <type>TableInput</type>
+    <name>Blocking step 2</name>
+    <type>BlockingStep</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -691,32 +655,11 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
-  encounter_id
-, '1' as encounter_type
-, patient_id
-,  '17' as location_id
-, form_id
-, encounter_datetime
-, '4' as creator
-, date_created
-, voided
-, case 
-when voided_by is not null then '4' end as voided_by
-, date_voided
-, void_reason
-, uuid
-, case 
-when changed_by is not null then '4' end as changed_by
-, date_changed
-, visit_id
-FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>30000</cache_size>
+    <compress>Y</compress>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -726,8 +669,38 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>176</yloc>
+      <xloc>592</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 3</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>30000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -759,7 +732,7 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
         <name2 />
       </key>
       <key>
-        <name>person_id</name>
+        <name>patient_id</name>
         <field>patient_id</field>
         <condition>=</condition>
         <name2 />
@@ -1090,8 +1063,8 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
     </GUI>
   </step>
   <step>
-    <name>Blocking step</name>
-    <type>BlockingStep</type>
+    <name>Merge join</name>
+    <type>MergeJoin</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1100,11 +1073,62 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>30000</cache_size>
-    <compress>Y</compress>
+    <join_type>INNER</join_type>
+    <step1>Blocking step</step1>
+    <step2>get new person id</step2>
+    <keys_1>
+      <key>patient_id</key>
+    </keys_1>
+    <keys_2>
+      <key>value</key>
+    </keys_2>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get new person id</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <sql>SELECT
+  person_attribute_id
+, person_id
+, value
+, person_attribute_type_id
+, creator
+, date_created
+, changed_by
+, date_changed
+, voided
+, voided_by
+, date_voided
+, void_reason
+, uuid
+FROM person_attribute WHERE person_attribute_type_id = '64'
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -1115,13 +1139,13 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
     </remotesteps>
     <GUI>
       <xloc>384</xloc>
-      <yloc>240</yloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Blocking step 2</name>
-    <type>BlockingStep</type>
+    <name>select from encounter</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1130,11 +1154,32 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>30000</cache_size>
-    <compress>Y</compress>
+    <connection>epts</connection>
+    <sql>SELECT
+  encounter_id
+, '1' as encounter_type
+, patient_id
+,  '17' as location_id
+, form_id
+, encounter_datetime
+, '4' as creator
+, date_created
+, voided
+, case 
+when voided_by is not null then '4' end as voided_by
+, date_voided
+, void_reason
+, uuid
+, case 
+when changed_by is not null then '4' end as changed_by
+, date_changed
+, visit_id
+FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -1144,14 +1189,14 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>320</yloc>
+      <xloc>304</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Blocking step 3</name>
-    <type>BlockingStep</type>
+    <name>epts address hierarchy</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1160,11 +1205,24 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>30000</cache_size>
-    <compress>Y</compress>
+    <connection>epts</connection>
+    <sql>SELECT
+  address_hierarchy_entry_id
+, name
+, level_id
+, parent_id
+, user_generated_id
+, latitude
+, longitude
+, elevation
+, uuid
+FROM address_hierarchy_entry
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -1174,8 +1232,158 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>320</yloc>
+      <xloc>640</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Microsoft Excel output</name>
+    <type>ExcelOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <header>Y</header>
+    <footer>N</footer>
+    <encoding />
+    <append>N</append>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/file.xls</name>
+      <extention>xls</extention>
+      <do_not_open_newfile_init>N</do_not_open_newfile_init>
+      <create_parent_folder>N</create_parent_folder>
+      <split>N</split>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format />
+      <sheetname>Sheet1</sheetname>
+      <autosizecolums>N</autosizecolums>
+      <nullisblank>N</nullisblank>
+      <protect_sheet>N</protect_sheet>
+      <password>Encrypted </password>
+      <splitevery>0</splitevery>
+      <usetempfiles>N</usetempfiles>
+      <tempdirectory />
+    </file>
+    <template>
+      <enabled>N</enabled>
+      <append>N</append>
+      <filename>template.xls</filename>
+    </template>
+    <fields>
+    </fields>
+    <custom>
+      <header_font_name>arial</header_font_name>
+      <header_font_size>10</header_font_size>
+      <header_font_bold>N</header_font_bold>
+      <header_font_italic>N</header_font_italic>
+      <header_font_underline>no</header_font_underline>
+      <header_font_orientation>horizontal</header_font_orientation>
+      <header_font_color>black</header_font_color>
+      <header_background_color>none</header_background_color>
+      <header_row_height>255</header_row_height>
+      <header_alignment>left</header_alignment>
+      <header_image />
+      <row_font_name>arial</row_font_name>
+      <row_font_size>10</row_font_size>
+      <row_font_color>black</row_font_color>
+      <row_background_color>none</row_background_color>
+    </custom>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>928</xloc>
+      <yloc>656</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join 2</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>FULL OUTER</join_type>
+    <step1>epts address hierarchy</step1>
+    <step2>epts address hierarchy 2</step2>
+    <keys_1>
+      <key>name</key>
+    </keys_1>
+    <keys_2>
+      <key>name</key>
+    </keys_2>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>epts address hierarchy 2</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <sql>SELECT
+  address_hierarchy_entry_id
+, name
+, level_id
+, parent_id
+, user_generated_id
+, latitude
+, longitude
+, elevation
+, uuid
+FROM address_hierarchy_entry
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
