@@ -564,7 +564,7 @@
   <order>
     <hop>
       <from>Merge join</from>
-      <to>poc_visit</to>
+      <to>insert into poc_visit</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -593,7 +593,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>poc_visit</from>
+      <from>insert into poc_visit</from>
       <to>Block this step until steps finish</to>
       <enabled>Y</enabled>
     </hop>
@@ -605,6 +605,11 @@
     <hop>
       <from>insert visits into temp</from>
       <to>select visit from temp</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>create temp</from>
+      <to>epts_visit_input</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -748,7 +753,7 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
     </GUI>
   </step>
   <step>
-    <name>poc_visit</name>
+    <name>insert into poc_visit</name>
     <type>TableOutput</type>
     <description />
     <distribute>Y</distribute>
@@ -864,7 +869,7 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
     </partitioning>
     <steps>
       <step>
-        <name>poc_visit</name>
+        <name>insert into poc_visit</name>
         <CopyNr>0</CopyNr>
       </step>
     </steps>
@@ -1169,6 +1174,65 @@ FROM visit
     <GUI>
       <xloc>160</xloc>
       <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>create temp</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>drop table visit_temp;
+CREATE TABLE visit_temp (
+  `new_visit_id` int(11),
+  `visit_id` int(11) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(11) NOT NULL,
+  `visit_type_id` int(11) NOT NULL,
+  `date_started` datetime NOT NULL,
+  `date_stopped` datetime DEFAULT NULL,
+  `indication_concept_id` int(11) DEFAULT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `creator` int(11) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `changed_by` int(11) DEFAULT NULL,
+  `date_changed` datetime DEFAULT NULL,
+  `voided` tinyint(1) NOT NULL DEFAULT '0',
+  `voided_by` int(11) DEFAULT NULL,
+  `date_voided` datetime DEFAULT NULL,
+  `void_reason` varchar(255) DEFAULT NULL,
+  `uuid` char(38) NOT NULL,
+  PRIMARY KEY (`visit_id`),
+  UNIQUE KEY `uuid` (`uuid`)
+) ENGINE=InnoDB AUTO_INCREMENT=887 DEFAULT CHARSET=utf8;</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>48</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
