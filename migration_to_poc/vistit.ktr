@@ -1045,7 +1045,7 @@ FROM visit
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
+      <xloc>816</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1093,8 +1093,8 @@ FROM visit
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>368</yloc>
+      <xloc>736</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1514,8 +1514,8 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
-      <yloc>176</yloc>
+      <xloc>816</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -769,7 +769,7 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </field>
       <field>
         <column_name>encounter_id</column_name>
-        <stream_name>encounter_id_1</stream_name>
+        <stream_name>encounter_id</stream_name>
       </field>
       <field>
         <column_name>order_id</column_name>
@@ -900,8 +900,8 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>visit_id</name>
-        <field>visit_id</field>
+        <name>encounter_id</name>
+        <field>encounter_id</field>
         <condition>=</condition>
         <name2 />
       </key>
@@ -1023,7 +1023,7 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>592</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
