@@ -613,11 +613,6 @@
       <to>Microsoft Excel output</to>
       <enabled>N</enabled>
     </hop>
-    <hop>
-      <from>Insert / update</from>
-      <to>Insert / update 2</to>
-      <enabled>N</enabled>
-    </hop>
   </order>
   <step>
     <name>Blocking step</name>
@@ -644,8 +639,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>240</yloc>
+      <xloc>368</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -674,8 +669,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>320</yloc>
+      <xloc>576</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -704,8 +699,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>320</yloc>
+      <xloc>832</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -758,8 +753,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
-      <yloc>320</yloc>
+      <xloc>704</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -955,8 +950,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>960</xloc>
-      <yloc>320</yloc>
+      <xloc>944</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -989,8 +984,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>320</yloc>
+      <xloc>464</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1023,8 +1018,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>560</yloc>
+      <xloc>480</xloc>
+      <yloc>848</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1096,8 +1091,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
-      <yloc>656</yloc>
+      <xloc>624</xloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1139,8 +1134,8 @@ FROM address_hierarchy_entry
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>544</yloc>
+      <xloc>336</xloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1182,8 +1177,8 @@ FROM address_hierarchy_entry
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>448</yloc>
+      <xloc>464</xloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1229,8 +1224,8 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>448</yloc>
+      <xloc>368</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1279,8 +1274,8 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>176</yloc>
+      <xloc>288</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1400,8 +1395,8 @@ FROM encounter where encounter_type in ('1','6','35','34','5','18');</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
-      <yloc>320</yloc>
+      <xloc>736</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

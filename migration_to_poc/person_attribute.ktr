@@ -692,7 +692,7 @@ FROM person_attribute where person_attribute_type_id = '9'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
+      <xloc>160</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
