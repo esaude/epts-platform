@@ -500,23 +500,23 @@
   </connection>
   <order>
     <hop>
-      <from>wait for insert into poc encounter</from>
-      <to>new poc encounter id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>wait for new encounter id</from>
       <to>Update</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>new poc encounter id</from>
-      <to>wait for new encounter id</to>
+      <from>insert on database level</from>
+      <to>wait for insert into poc encounter</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>insert on database level</from>
-      <to>wait for insert into poc encounter</to>
+      <from>wait for insert into poc encounter</from>
+      <to>new poc encounter id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>new poc encounter id</from>
+      <to>wait for new encounter id</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -533,11 +533,7 @@
     </partitioning>
     <steps>
       <step>
-        <name>insert into encounter_temp</name>
-        <CopyNr>0</CopyNr>
-      </step>
-      <step>
-        <name>get new visit id</name>
+        <name>insert on database level</name>
         <CopyNr>0</CopyNr>
       </step>
     </steps>
@@ -597,7 +593,7 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection />
+    <connection>poc</connection>
     <skip_lookup>N</skip_lookup>
     <commit>100</commit>
     <use_batch>N</use_batch>
@@ -614,7 +610,7 @@
       </key>
       <value>
         <name>new_encounter_id</name>
-        <rename>new_encounter_id</rename>
+        <rename>encounter_id</rename>
       </value>
     </lookup>
     <attributes />
@@ -628,54 +624,6 @@
     <GUI>
       <xloc>800</xloc>
       <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>new poc encounter id</name>
-    <type>DBLookup</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>epts</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema />
-      <table>encounter</table>
-      <orderby />
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>uuid</name>
-        <field>uuid</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>encounter_id</name>
-        <rename>new_encounter_id</rename>
-        <default />
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -719,11 +667,11 @@ select encounter_type
 , voided_by
 , date_voided
 , void_reason
-, uuid
 , changed_by
 , date_changed
 , visit_id
-FROM encounter_temp where encounter_type in ('1','6','35','34','5','18')
+, uuid
+FROM encounter_temp where encounter_type in ('1','6','35','13','34','5','18');
 
 </sql>
     <set_params>N</set_params>
@@ -744,6 +692,56 @@ FROM encounter_temp where encounter_type in ('1','6','35','34','5','18')
     <GUI>
       <xloc>304</xloc>
       <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>new poc encounter id</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <sql>SELECT
+  encounter_id
+, encounter_type
+, patient_id
+, location_id
+, form_id
+, encounter_datetime
+, creator
+, date_created
+, voided
+, voided_by
+, date_voided
+, void_reason
+, changed_by
+, date_changed
+, visit_id
+, uuid
+FROM encounter
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

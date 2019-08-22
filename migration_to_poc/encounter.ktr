@@ -670,7 +670,10 @@
     <connection>epts</connection>
     <sql>SELECT
   encounter_id
-, '1' as encounter_type
+, CASE 
+when encounter_type in ('1','6','35','34','5','18') then '1' 
+when encounter_type ='13' then '8'
+end as encounter_type
 , patient_id
 ,  '17' as location_id
 , encounter_datetime
@@ -686,7 +689,7 @@ when voided_by is not null then '4' end as voided_by
 when changed_by is not null then '4' end as changed_by
 , date_changed
 , visit_id
-FROM encounter where encounter_type in ('1','6','35','34','5','18') and visit_id is not null
+FROM encounter where encounter_type in ('1','6','13','35','34','5','18') and visit_id is not null
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup />

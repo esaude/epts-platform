@@ -573,7 +573,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup</from>
+      <from>find new encounter id</from>
       <to>Blocking step 3</to>
       <enabled>Y</enabled>
     </hop>
@@ -584,7 +584,7 @@
     </hop>
     <hop>
       <from>Blocking step 3 2</from>
-      <to>Database lookup</to>
+      <to>find new encounter id</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -692,7 +692,7 @@ order by person_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
+      <xloc>176</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -883,7 +883,7 @@ order by person_id asc</sql>
     </GUI>
   </step>
   <step>
-    <name>Database lookup</name>
+    <name>find new encounter id</name>
     <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
@@ -902,7 +902,7 @@ order by person_id asc</sql>
       <table>encounter_temp</table>
       <orderby />
       <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
+      <eat_row_on_failure>Y</eat_row_on_failure>
       <key>
         <name>person_id</name>
         <field>patient_id</field>
@@ -1044,7 +1044,7 @@ order by person_id asc</sql>
       <schema_name />
     </partitioning>
     <connection>poc</connection>
-    <commit>100</commit>
+    <commit>1000</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema />
@@ -1150,7 +1150,7 @@ order by person_id asc</sql>
       </value>
       <value>
         <name>patient_id</name>
-        <rename>person_id</rename>
+        <rename>person_id_1</rename>
         <update>Y</update>
       </value>
     </lookup>
