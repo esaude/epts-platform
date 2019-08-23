@@ -569,33 +569,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>epts_encounter_input</from>
-      <to>insert into encounter_temp</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>new poc encounter id 2</from>
-      <to>get new visit id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step</from>
-      <to>new poc encounter id 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>new_patient_id</from>
       <to>Merge join 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>insert into encounter_temp</from>
+      <from>epts_encounter_input</from>
       <to>Merge join 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Merge join 3</from>
-      <to>Blocking step</to>
+      <to>insert into encounter_temp</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -749,7 +734,7 @@ order by patient_id asc</sql>
       </field>
       <field>
         <column_name>patient_id</column_name>
-        <stream_name>patient_id</stream_name>
+        <stream_name>person_id</stream_name>
       </field>
       <field>
         <column_name>location_id</column_name>
@@ -813,320 +798,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get new visit id</name>
-    <type>DBLookup</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema />
-      <table>visit_temp</table>
-      <orderby />
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>visit_id</name>
-        <field>visit_id</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>new_visit_id</name>
-        <rename>new_visit_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>visit_id</name>
-        <rename>visit_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>patient_id</name>
-        <rename>patient_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>visit_type_id</name>
-        <rename>visit_type_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_started</name>
-        <rename>date_started</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>date_stopped</name>
-        <rename>date_stopped</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>indication_concept_id</name>
-        <rename>indication_concept_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>location_id</name>
-        <rename>location_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>creator</name>
-        <rename>creator</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_created</name>
-        <rename>date_created</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>changed_by</name>
-        <rename>changed_by</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_changed</name>
-        <rename>date_changed</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>voided</name>
-        <rename>voided</rename>
-        <default />
-        <type>Boolean</type>
-      </value>
-      <value>
-        <name>voided_by</name>
-        <rename>voided_by</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_voided</name>
-        <rename>date_voided</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>void_reason</name>
-        <rename>void_reason</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>uuid</name>
-        <rename>uuid</rename>
-        <default />
-        <type>String</type>
-      </value>
-    </lookup>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>768</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>new poc encounter id 2</name>
-    <type>DBLookup</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema />
-      <table>encounter_temp</table>
-      <orderby />
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>uuid</name>
-        <field>uuid</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>encounter_id</name>
-        <rename>encounter_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>encounter_type</name>
-        <rename>encounter_type</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>patient_id</name>
-        <rename>patient_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>location_id</name>
-        <rename>location_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>form_id</name>
-        <rename>form_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>encounter_datetime</name>
-        <rename>encounter_datetime</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>creator</name>
-        <rename>creator</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_created</name>
-        <rename>date_created</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>voided</name>
-        <rename>voided</rename>
-        <default />
-        <type>Boolean</type>
-      </value>
-      <value>
-        <name>voided_by</name>
-        <rename>voided_by</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_voided</name>
-        <rename>date_voided</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>void_reason</name>
-        <rename>void_reason</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>changed_by</name>
-        <rename>changed_by</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_changed</name>
-        <rename>date_changed</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>visit_id</name>
-        <rename>visit_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>uuid</name>
-        <rename>uuid</rename>
-        <default />
-        <type>String</type>
-      </value>
-    </lookup>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>592</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step</name>
-    <type>BlockingStep</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>256</yloc>
+      <xloc>384</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1142,7 +815,7 @@ order by patient_id asc</sql>
       <schema_name />
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>insert into encounter_temp</step1>
+    <step1>epts_encounter_input</step1>
     <step2>new_patient_id</step2>
     <keys_1>
       <key>patient_id</key>
@@ -1159,8 +832,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>336</yloc>
+      <xloc>496</xloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1207,8 +880,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>464</yloc>
+      <xloc>384</xloc>
+      <yloc>592</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
