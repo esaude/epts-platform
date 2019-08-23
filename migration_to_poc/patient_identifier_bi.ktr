@@ -564,11 +564,6 @@
   </connection>
   <order>
     <hop>
-      <from>transform ID</from>
-      <to>Insert ID</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>epts_patient_identifier 2</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
@@ -580,7 +575,7 @@
     </hop>
     <hop>
       <from>Merge join</from>
-      <to>transform ID</to>
+      <to>Insert ID</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -677,8 +672,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>48</yloc>
+      <xloc>464</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -800,40 +795,6 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
     <GUI>
       <xloc>143</xloc>
       <yloc>269</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>transform ID</name>
-    <type>ValueMapper</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <field_to_use>identifier_type</field_to_use>
-    <target_field />
-    <non_match_default />
-    <fields>
-      <field>
-        <source_value>3</source_value>
-        <target_value>56</target_value>
-      </field>
-    </fields>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
