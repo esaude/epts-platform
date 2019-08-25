@@ -563,28 +563,48 @@
   </connection>
   <order>
     <hop>
-      <from>epts_obs</from>
-      <to>Merge join</to>
+      <from>get new encounter id</from>
+      <to>Blocking step 2 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>new_patient_id</from>
-      <to>Merge join</to>
+      <from>Blocking step 2 3</from>
+      <to>poc_obs</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Merge join</from>
-      <to>Database lookup</to>
+      <to>Blocking step 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup</from>
-      <to>poc_obs</to>
+      <from>Blocking step 2</from>
+      <to>get new encounter id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>new_patient_id</from>
+      <to>Blocking step 2 4</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>epts_obs</from>
+      <to>Blocking step 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 4</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 2</from>
+      <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Database lookup</name>
+    <name>get new encounter id</name>
     <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
@@ -616,6 +636,12 @@
         <condition>=</condition>
         <name2 />
       </key>
+      <value>
+        <name>new_encounter_id</name>
+        <rename>new_encounter_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
       <value>
         <name>encounter_id</name>
         <rename>encounter_id</rename>
@@ -722,7 +748,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
+      <xloc>576</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -739,8 +765,8 @@
       <schema_name />
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>epts_obs</step1>
-    <step2>new_patient_id</step2>
+    <step1>Blocking step 2 2</step1>
+    <step2>Blocking step 2 4</step2>
     <keys_1>
       <key>person_id</key>
     </keys_1>
@@ -756,8 +782,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>240</yloc>
+      <xloc>432</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -776,9 +802,29 @@
     <sql>SELECT
 person_id
 , case
-when '1441' then '8346'
-when '1442' then '8347'
-when '1611' then '8349'
+when concept_id='1441' then '8346'
+when concept_id='1442' then '8347'
+when concept_id='1611' then '8349'
+when concept_id='1271' then '7843'
+when concept_id='1255' then '7935'
+when concept_id='856' then '8142'
+when concept_id='5497' then '8143'
+when concept_id='21' then '8154'
+when concept_id='654' then '8135'
+when concept_id='653' then '8137'
+when concept_id='887' then '8152'
+when concept_id='1982' then '7962'
+when concept_id='6332' then '7967'
+when concept_id='6122' then '8025'
+when concept_id='6128' then '8029'
+when concept_id='6121' then '8026'
+when concept_id='6126' then '8037'
+when concept_id='6127' then '8040'
+when concept_id='5965' then '7975'
+when concept_id='1113' then '8006'
+when concept_id='6120' then '8011'
+when concept_id='5356' then '7715'
+else 'erro'
 end as concept_id
 , encounter_id
 , order_id
@@ -807,7 +853,9 @@ when voided_by is not null then '4' end as voided_by
 , uuid
 , previous_version
 , form_namespace_and_path
-FROM obs where concept_id in ('1441','1442','1611')</sql>
+FROM obs where concept_id in ('1441','1442','1611','1271','1255','856','5497'
+,'21','654','653','887','1982','6332','6122','6128','6121','6126','6127','5965','1113','6120','5356')
+order by person_id asc</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -822,8 +870,8 @@ FROM obs where concept_id in ('1441','1442','1611')</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>144</yloc>
+      <xloc>176</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -854,6 +902,7 @@ FROM obs where concept_id in ('1441','1442','1611')</sql>
 , void_reason
 , uuid
 FROM person_attribute WHERE person_attribute_type_id = '64'
+order by person_id asc
 </sql>
     <limit>0</limit>
     <lookup />
@@ -869,7 +918,7 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
+      <xloc>176</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -913,7 +962,7 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </field>
       <field>
         <column_name>encounter_id</column_name>
-        <stream_name>encounter_id</stream_name>
+        <stream_name>new_encounter_id</stream_name>
       </field>
       <field>
         <column_name>order_id</column_name>
@@ -1017,8 +1066,128 @@ FROM person_attribute WHERE person_attribute_type_id = '64'
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
+      <xloc>704</xloc>
       <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 3</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 2</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 4</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

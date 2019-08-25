@@ -836,6 +836,7 @@
 ,   case
 when '3' then '10'
 when '5' then '10'
+when '7' then '8'
 when '8' then '7'
 when '10' then '9'
 when '12' then '12'
@@ -855,7 +856,7 @@ when voided_by is not null then '4' end as voided_by
 , date_voided
 , void_reason
 , uuid
-FROM visit where visit_type_id in ('3','5','8','10','12')
+FROM visit where visit_type_id in ('3','5','7','8','10','12')
 order by patient_id asc
 </sql>
     <limit>0</limit>
