@@ -555,8 +555,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
-      <yloc>176</yloc>
+      <xloc>1072</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -585,8 +585,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>176</yloc>
+      <xloc>688</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -634,8 +634,8 @@
 , status
 , interpretation
 FROM obs
-and obs_group_id is not null
-order by person_id asc</sql>
+where obs_group_id is not null
+order by obs_group_id asc</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -650,8 +650,8 @@ order by person_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>176</yloc>
+      <xloc>368</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -684,8 +684,8 @@ order by person_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>176</yloc>
+      <xloc>544</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -701,9 +701,9 @@ order by person_id asc</sql>
       <schema_name />
     </partitioning>
     <connection>poc</connection>
-    <sql>select * from obs_temp 
-where obs_group_id is not null 
-order by person_id asc</sql>
+    <sql>select * 
+from obs_temp 
+order by obs_id asc</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -718,8 +718,8 @@ order by person_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>352</yloc>
+      <xloc>368</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -761,8 +761,8 @@ order by person_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>176</yloc>
+      <xloc>864</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -804,8 +804,8 @@ order by person_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1152</xloc>
-      <yloc>176</yloc>
+      <xloc>1280</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

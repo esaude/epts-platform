@@ -885,7 +885,7 @@ order by person_id asc</sql>
         <name2 />
       </key>
       <key>
-        <name>person_id</name>
+        <name>person_id_1</name>
         <field>patient_id</field>
         <condition>=</condition>
         <name2 />
