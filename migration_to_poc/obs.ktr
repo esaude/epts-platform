@@ -602,7 +602,261 @@
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Blocking step 2 3</from>
+      <to>insert obs into temp</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>create temp</from>
+      <to>epts_obs</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Blocking step 2</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>560</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 2</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 3</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 4</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>560</xloc>
+      <yloc>512</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>Blocking step 2 2</step1>
+    <step2>Blocking step 2 4</step2>
+    <keys_1>
+      <key>person_id</key>
+    </keys_1>
+    <keys_2>
+      <key>value</key>
+    </keys_2>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>656</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>epts_obs</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+obs_id,
+person_id
+, case
+when concept_id='1441' then '8346'
+when concept_id='1442' then '8347'
+when concept_id='1611' then '8349'
+when concept_id='1271' then '7843'
+when concept_id='1255' then '7935'
+when concept_id='856' then '8142'
+when concept_id='5497' then '8143'
+when concept_id='21' then '8154'
+when concept_id='654' then '8135'
+when concept_id='653' then '8137'
+when concept_id='887' then '8152'
+when concept_id='1982' then '7962'
+when concept_id='6332' then '7967'
+when concept_id='6122' then '8025'
+when concept_id='6128' then '8029'
+when concept_id='6121' then '8026'
+when concept_id='6126' then '8037'
+when concept_id='6127' then '8040'
+when concept_id='5965' then '7975'
+when concept_id='1113' then '8006'
+when concept_id='6120' then '8011'
+when concept_id='5356' then '7715'
+else concept_id
+end as concept_id
+, encounter_id
+, order_id
+, obs_datetime
+, '17' as location_id
+, obs_group_id
+, accession_number
+, value_group_id
+, value_boolean
+, value_coded
+, value_coded_name_id
+, value_drug
+, value_datetime
+, value_numeric
+, value_modifier
+, value_text
+, comments
+, '4' as creator
+, date_created
+, voided
+, case 
+when voided_by is not null then '4' end as voided_by
+, date_voided
+, void_reason
+, value_complex
+, uuid
+, previous_version
+, form_namespace_and_path
+FROM obs where concept_id in ('1441','1442','1611','1271','1255','856','5497'
+,'21','654','653','887','1982','6332','6122','6128','6121','6126','6127','5965','1113','6120','5356')
+or obs_id in (select obs_group_id from obs where obs_group_id is not null)
+order by person_id asc</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>get new encounter id</name>
     <type>DBLookup</type>
@@ -748,130 +1002,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>Blocking step 2 2</step1>
-    <step2>Blocking step 2 4</step2>
-    <keys_1>
-      <key>person_id</key>
-    </keys_1>
-    <keys_2>
-      <key>value</key>
-    </keys_2>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>epts_obs</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
-person_id
-, case
-when concept_id='1441' then '8346'
-when concept_id='1442' then '8347'
-when concept_id='1611' then '8349'
-when concept_id='1271' then '7843'
-when concept_id='1255' then '7935'
-when concept_id='856' then '8142'
-when concept_id='5497' then '8143'
-when concept_id='21' then '8154'
-when concept_id='654' then '8135'
-when concept_id='653' then '8137'
-when concept_id='887' then '8152'
-when concept_id='1982' then '7962'
-when concept_id='6332' then '7967'
-when concept_id='6122' then '8025'
-when concept_id='6128' then '8029'
-when concept_id='6121' then '8026'
-when concept_id='6126' then '8037'
-when concept_id='6127' then '8040'
-when concept_id='5965' then '7975'
-when concept_id='1113' then '8006'
-when concept_id='6120' then '8011'
-when concept_id='5356' then '7715'
-else 'erro'
-end as concept_id
-, encounter_id
-, order_id
-, obs_datetime
-, '17' as location_id
-, obs_group_id
-, accession_number
-, value_group_id
-, value_boolean
-, value_coded
-, value_coded_name_id
-, value_drug
-, value_datetime
-, value_numeric
-, value_modifier
-, value_text
-, comments
-, '4' as creator
-, date_created
-, voided
-, case 
-when voided_by is not null then '4' end as voided_by
-, date_voided
-, void_reason
-, value_complex
-, uuid
-, previous_version
-, form_namespace_and_path
-FROM obs where concept_id in ('1441','1442','1611','1271','1255','856','5497'
-,'21','654','653','887','1982','6332','6122','6128','6121','6126','6127','5965','1113','6120','5356')
-order by person_id asc</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>176</xloc>
-      <yloc>160</yloc>
+      <xloc>800</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -918,8 +1050,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>320</yloc>
+      <xloc>400</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1066,14 +1198,14 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>240</yloc>
+      <xloc>1024</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Blocking step 2</name>
-    <type>BlockingStep</type>
+    <name>create temp</name>
+    <type>ExecSQL</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1082,11 +1214,52 @@ order by person_id asc
       <method>none</method>
       <schema_name />
     </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
+    <connection>poc</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE obs_temp (
+`new_obs_id` int(11) ,
+`new_obs_group_id` int(11) DEFAULT NULL,
+  `obs_id` int(11) NOT NULL AUTO_INCREMENT,
+  `person_id` int(11) NOT NULL,
+  `concept_id` int(11) NOT NULL DEFAULT '0',
+  `encounter_id` int(11) DEFAULT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `obs_datetime` datetime NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `obs_group_id` int(11) DEFAULT NULL,
+  `accession_number` varchar(255) DEFAULT NULL,
+  `value_group_id` int(11) DEFAULT NULL,
+  `value_coded` int(11) DEFAULT NULL,
+  `value_coded_name_id` int(11) DEFAULT NULL,
+  `value_drug` int(11) DEFAULT NULL,
+  `value_datetime` datetime DEFAULT NULL,
+  `value_numeric` double DEFAULT NULL,
+  `value_modifier` varchar(2) DEFAULT NULL,
+  `value_text` text,
+  `value_complex` varchar(1000) DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  `creator` int(11) NOT NULL DEFAULT '0',
+  `date_created` datetime NOT NULL,
+  `voided` tinyint(1) NOT NULL DEFAULT '0',
+  `voided_by` int(11) DEFAULT NULL,
+  `date_voided` datetime DEFAULT NULL,
+  `void_reason` varchar(255) DEFAULT NULL,
+  `uuid` char(38) NOT NULL,
+  `previous_version` int(11) DEFAULT NULL,
+  `form_namespace_and_path` varchar(255) DEFAULT NULL,
+  `status` varchar(16) NOT NULL DEFAULT 'FINAL',
+  `interpretation` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`obs_id`));</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -1096,14 +1269,14 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>368</yloc>
+      <xloc>256</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Blocking step 2 3</name>
-    <type>BlockingStep</type>
+    <name>insert obs into temp</name>
+    <type>TableOutput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1112,11 +1285,133 @@ order by person_id asc
       <method>none</method>
       <schema_name />
     </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
+    <connection>poc</connection>
+    <schema />
+    <table>obs_temp</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>person_id</column_name>
+        <stream_name>person_id_1</stream_name>
+      </field>
+      <field>
+        <column_name>concept_id</column_name>
+        <stream_name>concept_id</stream_name>
+      </field>
+      <field>
+        <column_name>encounter_id</column_name>
+        <stream_name>new_encounter_id</stream_name>
+      </field>
+      <field>
+        <column_name>order_id</column_name>
+        <stream_name>order_id</stream_name>
+      </field>
+      <field>
+        <column_name>obs_datetime</column_name>
+        <stream_name>obs_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>location_id</column_name>
+        <stream_name>location_id</stream_name>
+      </field>
+      <field>
+        <column_name>obs_group_id</column_name>
+        <stream_name>obs_group_id</stream_name>
+      </field>
+      <field>
+        <column_name>accession_number</column_name>
+        <stream_name>accession_number</stream_name>
+      </field>
+      <field>
+        <column_name>value_group_id</column_name>
+        <stream_name>value_group_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded</column_name>
+        <stream_name>value_coded</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded_name_id</column_name>
+        <stream_name>value_coded_name_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_drug</column_name>
+        <stream_name>value_drug</stream_name>
+      </field>
+      <field>
+        <column_name>value_datetime</column_name>
+        <stream_name>value_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>value_numeric</column_name>
+        <stream_name>value_numeric</stream_name>
+      </field>
+      <field>
+        <column_name>value_modifier</column_name>
+        <stream_name>value_modifier</stream_name>
+      </field>
+      <field>
+        <column_name>value_text</column_name>
+        <stream_name>value_text</stream_name>
+      </field>
+      <field>
+        <column_name>comments</column_name>
+        <stream_name>comments</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>voided</column_name>
+        <stream_name>voided</stream_name>
+      </field>
+      <field>
+        <column_name>voided_by</column_name>
+        <stream_name>voided_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_voided</column_name>
+        <stream_name>date_voided</stream_name>
+      </field>
+      <field>
+        <column_name>void_reason</column_name>
+        <stream_name>void_reason</stream_name>
+      </field>
+      <field>
+        <column_name>value_complex</column_name>
+        <stream_name>value_complex</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>uuid</stream_name>
+      </field>
+      <field>
+        <column_name>previous_version</column_name>
+        <stream_name>previous_version</stream_name>
+      </field>
+      <field>
+        <column_name>obs_id</column_name>
+        <stream_name>obs_id</stream_name>
+      </field>
+    </fields>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -1126,68 +1421,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 2</name>
-    <type>BlockingStep</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 4</name>
-    <type>BlockingStep</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>320</yloc>
+      <xloc>1024</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
