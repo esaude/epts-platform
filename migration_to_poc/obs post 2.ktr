@@ -500,11 +500,6 @@
   </connection>
   <order>
     <hop>
-      <from>Blocking step 2 2 2</from>
-      <to>obs group id  2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Blocking step 2 2 2 2</from>
       <to>obs id in temp 2 2</to>
       <enabled>Y</enabled>
@@ -527,6 +522,11 @@
     <hop>
       <from>obs id in temp 2 2</from>
       <to>Blocking step 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 2 2</from>
+      <to>obs group id in obs</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -767,7 +767,7 @@ order by obs_id asc</sql>
     </GUI>
   </step>
   <step>
-    <name>obs group id  2</name>
+    <name>obs group id in obs</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -804,8 +804,8 @@ order by obs_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
-      <yloc>352</yloc>
+      <xloc>1232</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
