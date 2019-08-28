@@ -663,7 +663,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>960</xloc>
-      <yloc>352</yloc>
+      <yloc>448</yloc>
       <attributes_kjc />
     </entry>
     <entry>
@@ -925,6 +925,20 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>960</xloc>
+      <yloc>304</yloc>
+      <attributes_kjc />
+    </entry>
+    <entry>
+      <name>Wait for</name>
+      <description />
+      <type>DELAY</type>
+      <attributes />
+      <maximumTimeout>3</maximumTimeout>
+      <scaletime>1</scaletime>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>960</xloc>
       <yloc>192</yloc>
       <attributes_kjc />
     </entry>
@@ -1066,8 +1080,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>obs post</from>
-      <to>obs post 2</to>
+      <from>obs post 2</from>
+      <to>obs_medicine</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1075,8 +1089,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>obs post 2</from>
-      <to>obs_medicine</to>
+      <from>obs post</from>
+      <to>Wait for</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Wait for</from>
+      <to>obs post 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
