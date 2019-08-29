@@ -1115,6 +1115,9 @@ when concept_id='99' then '1593'
 when concept_id='991' then '428'
 when concept_id='996' then '890'
 when concept_id = '6129' then '8035'
+when concept_id ='1256' then '7933'
+when concept_id ='1257' then '7934'
+else concept_id
 end as concept_id
 , encounter_id
 , order_id
@@ -1457,6 +1460,9 @@ when value_coded='1113' then '8006'
 when value_coded='6120' then '8011'
 when value_coded='5356' then '7715'
 when value_coded = '6129' then '8035'
+when value_coded ='1256' then '7933'
+when value_coded ='1257' then '7934'
+else value_coded
 end as value_coded
 , value_coded_name_id
 , value_drug
@@ -1478,7 +1484,10 @@ when voided_by is not null then '4' end as voided_by
 , form_namespace_and_path
 FROM obs where concept_id in ('1441','1442','1611','1271','1255','856','5497'
 ,'21','654','653','887','1982','6332','6122','6128','6121','6126','6127','5965','1113','6120','5356')
-or obs_id in (select obs_group_id from obs where obs_group_id is not null)
+or obs_id in (select obs_group_id from obs where obs_group_id is not null and concept_id in ('1441','1442','1611','1271','1255','856','5497'
+,'21','654','653','887','1982','6332','6122','6128','6121','6126','6127','5965','1113','6120','5356'))
+ and concept_id not in (
+'1609','1625','1657','1659','1660','1661','1669','1688','1673','1674','1675','1677','1679','1681','1683','1632','1639','1648','1668','1723','1661')
 order by person_id asc</sql>
     <limit>0</limit>
     <lookup />
