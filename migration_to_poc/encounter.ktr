@@ -585,6 +585,40 @@
     </hop>
   </order>
   <step>
+    <name>Merge join 3</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>epts_encounter_input</step1>
+    <step2>new_patient_id</step2>
+    <keys_1>
+      <key>patient_id</key>
+    </keys_1>
+    <keys_2>
+      <key>value</key>
+    </keys_2>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>create temp</name>
     <type>ExecSQL</type>
     <description />
@@ -636,8 +670,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
-      <yloc>288</yloc>
+      <xloc>816</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -674,7 +708,7 @@ when voided_by is not null then '4' end as voided_by
 when changed_by is not null then '4' end as changed_by
 , date_changed
 , visit_id
-FROM encounter where encounter_type in ('1','6','13','35','34','5','18') and visit_id is not null
+FROM encounter where encounter_type in ('1','6','13','35','34','5','18')
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup />
@@ -690,8 +724,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
-      <yloc>416</yloc>
+      <xloc>688</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -798,42 +832,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join 3</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>epts_encounter_input</step1>
-    <step2>new_patient_id</step2>
-    <keys_1>
-      <key>patient_id</key>
-    </keys_1>
-    <keys_2>
-      <key>value</key>
-    </keys_2>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>288</yloc>
+      <xloc>432</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -880,8 +880,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>416</yloc>
+      <xloc>432</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
