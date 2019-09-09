@@ -958,7 +958,7 @@ order by patient_program_id asc
     </remotesteps>
     <GUI>
       <xloc>368</xloc>
-      <yloc>16</yloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
