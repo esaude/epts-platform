@@ -661,10 +661,9 @@
     </partitioning>
     <connection>epts</connection>
     <sql>SELECT
-
   person_id
 , value
-, '52' as person_attribute_type_id
+, '58' as person_attribute_type_id
 , '4' as creator
 , date_created
 , case 

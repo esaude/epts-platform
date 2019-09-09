@@ -768,6 +768,77 @@
     </GUI>
   </step>
   <step>
+    <name>create temp</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE obs_temp (
+`new_obs_id` int(11) ,
+`new_obs_group_id` int(11) DEFAULT NULL,
+  `obs_id` int(11) NOT NULL AUTO_INCREMENT,
+  `person_id` int(11) NOT NULL,
+  `concept_id` int(11) NOT NULL DEFAULT '0',
+  `encounter_id` int(11) DEFAULT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `obs_datetime` datetime NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `obs_group_id` int(11) DEFAULT NULL,
+  `accession_number` varchar(255) DEFAULT NULL,
+  `value_group_id` int(11) DEFAULT NULL,
+  `value_coded` int(11) DEFAULT NULL,
+  `value_coded_name_id` int(11) DEFAULT NULL,
+  `value_drug` int(11) DEFAULT NULL,
+  `value_datetime` datetime DEFAULT NULL,
+  `value_numeric` double DEFAULT NULL,
+  `value_modifier` varchar(2) DEFAULT NULL,
+  `value_text` text,
+  `value_complex` varchar(1000) DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  `creator` int(11) NOT NULL DEFAULT '0',
+  `date_created` datetime NOT NULL,
+  `voided` tinyint(1) NOT NULL DEFAULT '0',
+  `voided_by` int(11) DEFAULT NULL,
+  `date_voided` datetime DEFAULT NULL,
+  `void_reason` varchar(255) DEFAULT NULL,
+  `uuid` char(38) NOT NULL,
+  `previous_version` int(11) DEFAULT NULL,
+  `form_namespace_and_path` varchar(255) DEFAULT NULL,
+  `status` varchar(16) NOT NULL DEFAULT 'FINAL',
+  `interpretation` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`obs_id`));</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>epts_obs</name>
     <type>TableInput</type>
     <description />
@@ -783,340 +854,542 @@
 obs_id,
 person_id
 , case
-when concept_id='100' then '1598'
-when concept_id='1001' then '1483'
-when concept_id='1004' then '1495'
-when concept_id='1007' then '1245'
-when concept_id='101' then '302'
-when concept_id='1013' then '3549'
-when concept_id='1014' then '3231'
-when concept_id='1017' then '1218'
-when concept_id='1018' then '1217'
-when concept_id='1019' then '1461'
-when concept_id='1031' then '3543'
-when concept_id='1053' then '1719'
-when concept_id='1054' then '7888'
-when concept_id='1058' then '2183'
-when concept_id='1059' then '2184'
-when concept_id='1065' then '1'
-when concept_id='1066' then '2'
-when concept_id='1067' then '8341'
-when concept_id='1074' then '8432'
-when concept_id='110' then '2670'
-when concept_id='1101' then '2596'
-when concept_id='1107' then '1154'
-when concept_id='1113' then '8005'
-when concept_id='1114' then '7907'
-when concept_id='1115' then '8122'
-when concept_id='1132' then '1279'
-when concept_id='1133' then '1284'
-when concept_id='1134' then '1282'
-when concept_id='1135' then '3222'
-when concept_id='1139' then '7822'
-when concept_id='117' then '6235'
-when concept_id='1170' then '1925'
-when concept_id='1175' then '1975'
-when concept_id='1179' then '1902'
-when concept_id='1195' then '2589'
-when concept_id='124' then '5671'
-when concept_id ='1204' then '7711'
-when concept_id ='1205' then '7712'
-when concept_id ='1206' then '7713'
-when concept_id ='1207' then '7714'
-when concept_id='1240' then '362'
-when concept_id='1242' then '1580'
-when concept_id='1244' then '1648'
-when concept_id='126' then '7732'
-when concept_id='1267' then '2242'
-when concept_id='1297' then '3300'
-when concept_id='1298' then '1391'
-when concept_id='1299' then '8136'
-when concept_id='13' then '2451'
-when concept_id='1332' then '1215'
-when concept_id='1342' then '3149'
-when concept_id='1343' then '2086'
-when concept_id='1349' then '163'
-when concept_id='1359' then '8185'
-when concept_id='1362' then '2295'
-when concept_id='1363' then '2297'
-when concept_id='1383' then '8267'
-when concept_id='1384' then '2115'
-when concept_id='1385' then '8269'
-when concept_id='140' then '396'
-when concept_id='1414' then '7919'
-when concept_id='142' then '3161'
-when concept_id='1445' then '1154'
-when concept_id='1448' then '7910'
-when concept_id='1459' then '109'
-when concept_id='147' then '790'
-when concept_id='148' then '914'
-when concept_id='149' then '641'
-when concept_id='151' then '882'
-when concept_id='1544' then '3589'
-when concept_id='1546' then '1061'
-when concept_id='1547' then '1063'
-when concept_id='155' then '6188'
-when concept_id='158' then '7940'
-when concept_id='1598' then '8167'
-when concept_id='160' then '5683'
-when concept_id='1650' then '7983'
-when concept_id='1710' then '1103'
-when concept_id='173' then '897'
-when concept_id='174' then '8024'
-when concept_id='1780' then '1020'
-when concept_id='1784' then '1126'
-when concept_id='185' then '6499'
-when concept_id='1872' then '7929'
-when concept_id='1887' then '7917'
-when concept_id='190' then '2450'
-when concept_id='1900' then '7797'
-when concept_id='1901' then '2150'
-when concept_id='1903' then '7815'
-when concept_id='1905' then '7835'
-when concept_id='1906' then '7826'
-when concept_id='1908' then '7954'
-when concept_id='191' then '2452'
-when concept_id='1912' then '7763'
-when concept_id='198' then '835'
-when concept_id='1981' then '2328'
-when concept_id='1982' then '1871'
-when concept_id='199' then '1024'
-when concept_id='2001' then '7841'
-when concept_id='201' then '856'
-when concept_id='202' then '812'
-when concept_id='2034' then '8337'
-when concept_id='204' then '2283'
-when concept_id='205' then '1984'
-when concept_id='207' then '2808'
-when concept_id='2077' then '3447'
-when concept_id='208' then '6458'
-when concept_id='2107' then '3126'
-when concept_id='2113' then '2318'
-when concept_id='212' then '6457'
-when concept_id='2124' then '1272'
-when concept_id='215' then '1065'
-when concept_id='2152' then '8065'
-when concept_id='218' then '6275'
-when concept_id='220' then '1104'
-when concept_id='223' then '1744'
-when concept_id='235' then '1693'
-when concept_id='237' then '8395'
-when concept_id='238' then '1662'
-when concept_id='247' then '1570'
-when concept_id='250' then '1643'
-when concept_id='254' then '1673'
-when concept_id='256' then '1586'
-when concept_id='257' then '1590'
-when concept_id='263' then '1611'
-when concept_id='265' then '1516'
-when concept_id='269' then '1521'
-when concept_id='273' then '1663'
-when concept_id='29' then '1075'
-when concept_id='290' then '1606'
-when concept_id='300' then '1179'
-when concept_id='301' then '8154'
-when concept_id='311' then '8174'
-when concept_id='313' then '1607'
-when concept_id='323' then '1599'
-when concept_id='329' then '1703'
-when concept_id='351' then '1651'
-when concept_id='368' then '2083'
-when concept_id='410' then '825'
-when concept_id='412' then '8449'
-when concept_id='42' then '7741'
-when concept_id='43' then '7740'
-when concept_id='431' then '1608'
-when concept_id='436' then '1571'
-when concept_id='438' then '8406'
-when concept_id='44' then '2141'
-when concept_id='44' then '7962'
-when concept_id='45' then '1236'
-when concept_id='460' then '2656'
-when concept_id='467' then '6101'
-when concept_id='496' then '1546'
-when concept_id='5' then '6409'
-when concept_id='5006' then '3182'
-when concept_id='5016' then '802'
-when concept_id='5062' then '3349'
-when concept_id='507' then '5877'
-when concept_id='5087' then '7900'
-when concept_id='5092' then '139'
-when concept_id='5092' then '140'
-when concept_id='5112' then '3071'
-when concept_id='5170' then '2066'
-when concept_id='5172' then '7726'
-when concept_id='5200' then '451'
-when concept_id='5209' then '2652'
-when concept_id='5226' then '2625'
-when concept_id='5241' then '1072'
-when concept_id='5241' then '1140'
-when concept_id='5245' then '2082'
-when concept_id='5256' then '220'
-when concept_id='5271' then '7846'
-when concept_id='5276' then '2453'
-when concept_id='5293' then '169'
-when concept_id='530' then '497'
-when concept_id='5312' then '2675'
-when concept_id='5325' then '8345'
-when concept_id='5340' then '7743'
-when concept_id='54' then '1691'
-when concept_id='5490' then '2927'
-when concept_id='5497' then '8143'
-when concept_id='5541' then '1080'
-when concept_id='5555' then '2182'
-when concept_id='5577' then '1955'
-when concept_id='5599' then '7964'
-when concept_id='56' then '3574'
-when concept_id='5618' then '8338'
-when concept_id='5624' then '1718'
-when concept_id='5685' then '1107'
-when concept_id='5685' then '3133'
-when concept_id='57' then '5747'
-when concept_id='58' then '8012'
-when concept_id='581' then '6979'
-when concept_id='5829' then '1502'
-when concept_id='59' then '2923'
-when concept_id='5910' then '8357'
-when concept_id='5928' then '1884'
-when concept_id='593' then '2694'
-when concept_id='5932' then '8298'
-when concept_id='5945' then '7976'
-when concept_id='5949' then '2641'
-when concept_id='5960' then '2653'
-when concept_id='5964' then '8166'
-when concept_id='5980' then '943'
-when concept_id='1441' then '8346'
-when concept_id='1442' then '8347'
-when concept_id='1611' then '8349'
-when concept_id='1271' then '7843'
-when concept_id='1255' then '7935'
-when concept_id='856' then '8142'
-when concept_id='5497' then '8143'
-when concept_id='21' then '8154'
-when concept_id='654' then '8135'
-when concept_id='653' then '8137'
-when concept_id='887' then '8152'
-when concept_id='1982' then '7962'
-when concept_id='6332' then '7967'
-when concept_id='6122' then '8025'
-when concept_id='6128' then '8029'
-when concept_id='6121' then '8026'
-when concept_id='6126' then '8037'
-when concept_id='6127' then '8040'
-when concept_id='5965' then '7975'
-when concept_id='1113' then '8006'
-when concept_id='6120' then '8011'
-when concept_id='5356' then '7715'
-when concept_id='6001' then '919'
-when concept_id='6007' then '2631'
-when concept_id='6020' then '2683'
-when concept_id='6024' then '7735'
-when concept_id='6029' then '1012'
-when concept_id='6033' then '1050'
-when concept_id='6142' then '8247'
-when concept_id='6143' then '8020'
-when concept_id='6158' then '1916'
-when concept_id='620' then '905'
-when concept_id='6226' then '3052'
-when concept_id='6228' then '2060'
-when concept_id='6229' then '2061'
-when concept_id='6230' then '2062'
-when concept_id='6245' then '7928'
-when concept_id='6248' then '2364'
-when concept_id='6257' then '2331'
-when concept_id='6276' then '7934'
-when concept_id='63' then '5756'
-when concept_id='6304' then '7927'
-when concept_id='6305' then '97'
-when concept_id='645' then '3033'
-when concept_id='653' then '8137'
-when concept_id='654' then '8135'
-when concept_id='655' then '3305'
-when concept_id='664' then '8340'
-when concept_id='666' then '1223'
-when concept_id='689' then '2305'
-when concept_id='697' then '2306'
-when concept_id='702' then '8055'
-when concept_id='728' then '1322'
-when concept_id='729' then '1209'
-when concept_id='732' then '8390'
-when concept_id='733' then '1511'
-when concept_id='735' then '1529'
-when concept_id='735' then '8391'
-when concept_id='740' then '365'
-when concept_id='745' then '8407'
-when concept_id='747' then '1588'
-when concept_id='751' then '1632'
-when concept_id='753' then '1575'
-when concept_id='754' then '1526'
-when concept_id='755' then '8414'
-when concept_id='756' then '1670'
-when concept_id='763' then '1655'
-when concept_id='765' then '1667'
-when concept_id='766' then '1674'
-when concept_id='767' then '1100'
-when concept_id='77' then '467'
-when concept_id='779' then '1547'
-when concept_id='786' then '1534'
-when concept_id='790' then '8147'
-when concept_id='798' then '1682'
-when concept_id='80' then '1073'
-when concept_id='81' then '1973'
-when concept_id='814' then '985'
-when concept_id='826' then '7734'
-when concept_id='832' then '1008'
-when concept_id='834' then '7967'
-when concept_id='836' then '7718'
-when concept_id='838' then '6555'
-when concept_id='848' then '8134'
-when concept_id='851' then '1213'
-when concept_id='855' then '3238'
-when concept_id='856' then '8142'
-when concept_id='857' then '8165'
-when concept_id='859' then '2645'
-when concept_id='868' then '1151'
-when concept_id='868' then '884'
-when concept_id='871' then '2642'
-when concept_id='877' then '1081'
-when concept_id='879' then '6530'
-when concept_id='88' then '1525'
-when concept_id='880' then '834'
-when concept_id='881' then '6974'
-when concept_id='884' then '2560'
-when concept_id='89' then '370'
-when concept_id='892' then '5752'
-when concept_id='896' then '507'
-when concept_id='899' then '2'
-when concept_id='901' then '7007'
-when concept_id='905' then '1948'
-when concept_id='907' then '1629'
-when concept_id='912' then '1609'
-when concept_id='913' then '1551'
-when concept_id='914' then '1552'
-when concept_id='915' then '1698'
-when concept_id='922' then '1561'
-when concept_id='923' then '1678'
-when concept_id='926' then '1618'
-when concept_id='93' then '1563'
-when concept_id='937' then '5777'
-when concept_id='941' then '1509'
-when concept_id='944' then '1523'
-when concept_id='95' then '1579'
-when concept_id='955' then '8118'
-when concept_id='955' then '8417'
-when concept_id='959' then '1577'
-when concept_id='960' then '1557'
-when concept_id='963' then '1543'
-when concept_id='967' then '910'
-when concept_id='970' then '8317'
-when concept_id='971' then '8316'
-when concept_id='98' then '1550'
-when concept_id='99' then '1593'
-when concept_id='991' then '428'
-when concept_id='996' then '890'
-when concept_id = '6129' then '8035'
-when concept_id ='1256' then '7933'
-when concept_id ='1257' then '7934'
+when concept_id= '1113' then '8482'
+when concept_id= '955' then '8471'
+when concept_id= '745' then '8461'
+when concept_id= '237' then '8449'
+when concept_id= '356' then '8448'
+when concept_id= '95' then '8447'
+when concept_id= '735' then '8445'
+when concept_id= '732' then '8444'
+when concept_id= '6330' then '8443'
+when concept_id= '6329' then '8439'
+when concept_id= '6337' then '8429'
+when concept_id= '6324' then '8422'
+when concept_id= '6100' then '8420'
+when concept_id= '1703' then '8419'
+when concept_id= '1074' then '8412'
+when concept_id= '5910' then '8408'
+when concept_id= '5325' then '8395'
+when concept_id= '664' then '8390'
+when concept_id= '703' then '8389'
+when concept_id= '5618' then '8388'
+when concept_id= '1923' then '8387'
+when concept_id= '2034' then '8387'
+when concept_id= '973' then '8382'
+when concept_id= '972' then '8374'
+when concept_id= '970' then '8367'
+when concept_id= '971' then '8366'
+when concept_id= '2152' then '8358'
+when concept_id= '6143' then '8355'
+when concept_id= '703' then '8349'
+when concept_id= '702' then '8348'
+when concept_id= '1534' then '8347'
+when concept_id= '656' then '8344'
+when concept_id= '1365' then '8340'
+when concept_id= '1113' then '8332'
+when concept_id= '174' then '8327'
+when concept_id= '1350' then '8294'
+when concept_id= '1650' then '8287'
+when concept_id= '1761' then '8282'
+when concept_id= '5945' then '8280'
+when concept_id= '6313' then '8254'
+when concept_id= '1359' then '8236'
+when concept_id= '310' then '8224'
+when concept_id= '311' then '8224'
+when concept_id= '1595' then '8221'
+when concept_id= '1598' then '8217'
+when concept_id= '58' then '8216'
+when concept_id= '5964' then '8216'
+when concept_id= '857' then '8215'
+when concept_id= '21' then '8204'
+when concept_id= '301' then '8204'
+when concept_id= '1520' then '8203'
+when concept_id= '790' then '8197'
+when concept_id= '730' then '8193'
+when concept_id= '5497' then '8193'
+when concept_id= '856' then '8192'
+when concept_id= '653' then '8187'
+when concept_id= '1299' then '8186'
+when concept_id= '654' then '8185'
+when concept_id= '848' then '8184'
+when concept_id= '1115' then '8172'
+when concept_id= '5256' then '8154'
+when concept_id= '2039' then '8136'
+when concept_id= '1707' then '8124'
+when concept_id= '1385' then '8120'
+when concept_id= '1365' then '8117'
+when concept_id= '1066' then '8113'
+when concept_id= '1065' then '8105'
+when concept_id= '6142' then '8098'
+when concept_id= '1066' then '8084'
+when concept_id= '955' then '8074'
+when concept_id= '6105' then '8052'
+when concept_id= '6116' then '8051'
+when concept_id= '6104' then '8036'
+when concept_id= '6243' then '8035'
+when concept_id= '792' then '8033'
+when concept_id= '1651' then '8033'
+when concept_id= '1703' then '8031'
+when concept_id= '834' then '8016'
+when concept_id= '5599' then '8013'
+when concept_id= '44' then '8011'
+when concept_id= '5991' then '8011'
+when concept_id= '1725' then '8003'
+when concept_id= '1908' then '8001'
+when concept_id= '1174' then '7998'
+when concept_id= '158' then '7987'
+when concept_id= '6276' then '7981'
+when concept_id= '6275' then '7980'
+when concept_id= '1872' then '7976'
+when concept_id= '6245' then '7975'
+when concept_id= '6304' then '7974'
+when concept_id= '1468' then '7971'
+when concept_id= '1414' then '7966'
+when concept_id= '1887' then '7964'
+when concept_id= '1448' then '7957'
+when concept_id= '1446' then '7955'
+when concept_id= '1114' then '7954'
+when concept_id= '5087' then '7947'
+when concept_id= '1781' then '7936'
+when concept_id= '1797' then '7936'
+when concept_id= '1940' then '7935'
+when concept_id= '5271' then '7935'
+when concept_id= '190' then '7905'
+when concept_id= '1065' then '7903'
+when concept_id= '1054' then '7902'
+when concept_id= '2001' then '7895'
+when concept_id= '1914' then '7893'
+when concept_id= '1905' then '7889'
+when concept_id= '1906' then '7880'
+when concept_id= '1139' then '7876'
+when concept_id= '1903' then '7869'
+when concept_id= '1908' then '7868'
+when concept_id= '6155' then '7866'
+when concept_id= '1900' then '7851'
+when concept_id= '1912' then '7817'
+when concept_id= '412' then '7814'
+when concept_id= '413' then '7814'
+when concept_id= '5340' then '7794'
+when concept_id= '42' then '7792'
+when concept_id= '43' then '7791'
+when concept_id= '6024' then '7786'
+when concept_id= '826' then '7785'
+when concept_id= '126' then '7783'
+when concept_id= '5172' then '7777'
+when concept_id= '5334' then '7777'
+when concept_id= '836' then '7769'
+when concept_id= '2031' then '7757'
+when concept_id= '901' then '7057'
+when concept_id= '581' then '7029'
+when concept_id= '881' then '7024'
+when concept_id= '107' then '7017'
+when concept_id= '891' then '7017'
+when concept_id= '49' then '6844'
+when concept_id= '230' then '6844'
+when concept_id= '899' then '6830'
+when concept_id= '48' then '6794'
+when concept_id= '46' then '6791'
+when concept_id= '838' then '6605'
+when concept_id= '879' then '6580'
+when concept_id= '185' then '6549'
+when concept_id= '111' then '6512'
+when concept_id= '208' then '6508'
+when concept_id= '212' then '6507'
+when concept_id= '5' then '6459'
+when concept_id= '10' then '6441'
+when concept_id= '218' then '6325'
+when concept_id= '117' then '6285'
+when concept_id= '155' then '6238'
+when concept_id= '467' then '6151'
+when concept_id= '888' then '6101'
+when concept_id= '507' then '5927'
+when concept_id= '204' then '5829'
+when concept_id= '937' then '5827'
+when concept_id= '63' then '5806'
+when concept_id= '892' then '5802'
+when concept_id= '57' then '5797'
+when concept_id= '684' then '5766'
+when concept_id= '160' then '5733'
+when concept_id= '124' then '5721'
+when concept_id= '198' then '5715'
+when concept_id= '5969' then '3648'
+when concept_id= '1773' then '3612'
+when concept_id= '1772' then '3593'
+when concept_id= '1544' then '3589'
+when concept_id= '1019' then '3577'
+when concept_id= '56' then '3574'
+when concept_id= '1013' then '3549'
+when concept_id= '1031' then '3543'
+when concept_id= '2077' then '3447'
+when concept_id= '686' then '3384'
+when concept_id= '5062' then '3349'
+when concept_id= '655' then '3305'
+when concept_id= '1297' then '3300'
+when concept_id= '1006' then '3295'
+when concept_id= '1023' then '3264'
+when concept_id= '1021' then '3263'
+when concept_id= '1024' then '3262'
+when concept_id= '1025' then '3261'
+when concept_id= '855' then '3238'
+when concept_id= '1014' then '3231'
+when concept_id= '1011' then '3226'
+when concept_id= '1135' then '3222'
+when concept_id= '1593' then '3182'
+when concept_id= '5006' then '3182'
+when concept_id= '142' then '3161'
+when concept_id= '5695' then '3158'
+when concept_id= '5907' then '3158'
+when concept_id= '2107' then '3126'
+when concept_id= '5286' then '3125'
+when concept_id= '1185' then '3108'
+when concept_id= '441' then '3104'
+when concept_id= '5112' then '3071'
+when concept_id= '505' then '3069'
+when concept_id= '6226' then '3052'
+when concept_id= '12' then '3033'
+when concept_id= '645' then '3033'
+when concept_id= '5490' then '2927'
+when concept_id= '59' then '2923'
+when concept_id= '890' then '2923'
+when concept_id= '5242' then '2893'
+when concept_id= '5288' then '2875'
+when concept_id= '1603' then '2852'
+when concept_id= '207' then '2808'
+when concept_id= '6038' then '2808'
+when concept_id= '1008' then '2797'
+when concept_id= '593' then '2694'
+when concept_id= '6020' then '2683'
+when concept_id= '5312' then '2675'
+when concept_id= '6001' then '2673'
+when concept_id= '110' then '2670'
+when concept_id= '128' then '2670'
+when concept_id= '111' then '2662'
+when concept_id= '460' then '2656'
+when concept_id= '5143' then '2656'
+when concept_id= '6002' then '2656'
+when concept_id= '5960' then '2653'
+when concept_id= '5209' then '2652'
+when concept_id= '859' then '2645'
+when concept_id= '871' then '2642'
+when concept_id= '5946' then '2642'
+when concept_id= '5949' then '2641'
+when concept_id= '206' then '2631'
+when concept_id= '6007' then '2631'
+when concept_id= '5226' then '2625'
+when concept_id= '5543' then '2625'
+when concept_id= '5219' then '2613'
+when concept_id= '1101' then '2596'
+when concept_id= '1195' then '2589'
+when concept_id= '183' then '2562'
+when concept_id= '903' then '2562'
+when concept_id= '884' then '2560'
+when concept_id= '1169' then '2560'
+when concept_id= '1940' then '2512'
+when concept_id= '5271' then '2512'
+when concept_id= '5275' then '2486'
+when concept_id= '5275' then '2480'
+when concept_id= '5276' then '2453'
+when concept_id= '191' then '2452'
+when concept_id= '907' then '2452'
+when concept_id= '13' then '2451'
+when concept_id= '190' then '2450'
+when concept_id= '5270' then '2450'
+when concept_id= '5619' then '2421'
+when concept_id= '5253' then '2373'
+when concept_id= '1180' then '2369'
+when concept_id= '6248' then '2364'
+when concept_id= '5932' then '2344'
+when concept_id= '6257' then '2331'
+when concept_id= '1981' then '2328'
+when concept_id= '2113' then '2318'
+when concept_id= '697' then '2306'
+when concept_id= '689' then '2305'
+when concept_id= '5240' then '2302'
+when concept_id= '1363' then '2297'
+when concept_id= '1362' then '2295'
+when concept_id= '204' then '2283'
+when concept_id= '856' then '2254'
+when concept_id= '1267' then '2242'
+when concept_id= '1779' then '2233'
+when concept_id= '12' then '2231'
+when concept_id= '1088' then '2211'
+when concept_id= '1598' then '2194'
+when concept_id= '1059' then '2184'
+when concept_id= '1058' then '2183'
+when concept_id= '5555' then '2182'
+when concept_id= '5497' then '2172'
+when concept_id= '1901' then '2150'
+when concept_id= '5272' then '2149'
+when concept_id= '58' then '2140'
+when concept_id= '174' then '2139'
+when concept_id= '16' then '2120'
+when concept_id= '1384' then '2115'
+when concept_id= '1343' then '2086'
+when concept_id= '368' then '2083'
+when concept_id= '5245' then '2082'
+when concept_id= '5170' then '2066'
+when concept_id= '6230' then '2062'
+when concept_id= '6229' then '2061'
+when concept_id= '6228' then '2060'
+when concept_id= '1383' then '2030'
+when concept_id= '205' then '1984'
+when concept_id= '1175' then '1975'
+when concept_id= '81' then '1973'
+when concept_id= '5577' then '1955'
+when concept_id= '905' then '1948'
+when concept_id= '1172' then '1940'
+when concept_id= '1171' then '1927'
+when concept_id= '1170' then '1925'
+when concept_id= '6158' then '1916'
+when concept_id= '1179' then '1902'
+when concept_id= '1178' then '1901'
+when concept_id= '123' then '1889'
+when concept_id= '906' then '1889'
+when concept_id= '5928' then '1884'
+when concept_id= '1982' then '1871'
+when concept_id= '1243' then '1838'
+when concept_id= '1010' then '1811'
+when concept_id= '1010' then '1755'
+when concept_id= '223' then '1744'
+when concept_id= '1067' then '1739'
+when concept_id= '1053' then '1719'
+when concept_id= '5624' then '1718'
+when concept_id= '329' then '1703'
+when concept_id= '915' then '1698'
+when concept_id= '943' then '1697'
+when concept_id= '235' then '1693'
+when concept_id= '478' then '1693'
+when concept_id= '54' then '1691'
+when concept_id= '798' then '1682'
+when concept_id= '923' then '1678'
+when concept_id= '766' then '1674'
+when concept_id= '254' then '1673'
+when concept_id= '756' then '1670'
+when concept_id= '765' then '1667'
+when concept_id= '273' then '1663'
+when concept_id= '238' then '1662'
+when concept_id= '763' then '1655'
+when concept_id= '351' then '1651'
+when concept_id= '1244' then '1648'
+when concept_id= '250' then '1643'
+when concept_id= '751' then '1632'
+when concept_id= '907' then '1629'
+when concept_id= '755' then '1620'
+when concept_id= '926' then '1618'
+when concept_id= '263' then '1611'
+when concept_id= '912' then '1609'
+when concept_id= '431' then '1608'
+when concept_id= '313' then '1607'
+when concept_id= '290' then '1606'
+when concept_id= '1243' then '1605'
+when concept_id= '323' then '1599'
+when concept_id= '100' then '1598'
+when concept_id= '99' then '1593'
+when concept_id= '257' then '1590'
+when concept_id= '747' then '1588'
+when concept_id= '256' then '1586'
+when concept_id= '1242' then '1580'
+when concept_id= '95' then '1579'
+when concept_id= '959' then '1577'
+when concept_id= '753' then '1575'
+when concept_id= '436' then '1571'
+when concept_id= '247' then '1570'
+when concept_id= '93' then '1563'
+when concept_id= '916' then '1563'
+when concept_id= '922' then '1561'
+when concept_id= '960' then '1557'
+when concept_id= '914' then '1552'
+when concept_id= '913' then '1551'
+when concept_id= '98' then '1550'
+when concept_id= '779' then '1547'
+when concept_id= '496' then '1546'
+when concept_id= '963' then '1543'
+when concept_id= '786' then '1534'
+when concept_id= '735' then '1529'
+when concept_id= '754' then '1526'
+when concept_id= '88' then '1525'
+when concept_id= '944' then '1523'
+when concept_id= '269' then '1521'
+when concept_id= '265' then '1516'
+when concept_id= '733' then '1511'
+when concept_id= '941' then '1509'
+when concept_id= '732' then '1507'
+when concept_id= '5829' then '1502'
+when concept_id= '1004' then '1495'
+when concept_id= '1001' then '1483'
+when concept_id= '1019' then '1461'
+when concept_id= '1298' then '1391'
+when concept_id= '714' then '1322'
+when concept_id= '728' then '1322'
+when concept_id= '857' then '1315'
+when concept_id= '1299' then '1310'
+when concept_id= '857' then '1308'
+when concept_id= '1133' then '1284'
+when concept_id= '1134' then '1282'
+when concept_id= '790' then '1281'
+when concept_id= '1132' then '1279'
+when concept_id= '2124' then '1272'
+when concept_id= '1007' then '1245'
+when concept_id= '1006' then '1244'
+when concept_id= '1011' then '1240'
+when concept_id= '45' then '1236'
+when concept_id= '666' then '1223'
+when concept_id= '1017' then '1218'
+when concept_id= '1018' then '1217'
+when concept_id= '1332' then '1215'
+when concept_id= '851' then '1213'
+when concept_id= '729' then '1209'
+when concept_id= '1022' then '1198'
+when concept_id= '300' then '1179'
+when concept_id= '1107' then '1154'
+when concept_id= '1445' then '1154'
+when concept_id= '131' then '1128'
+when concept_id= '1784' then '1126'
+when concept_id= '1268' then '1108'
+when concept_id= '5685' then '1107'
+when concept_id= '5' then '1105'
+when concept_id= '137' then '1105'
+when concept_id= '220' then '1104'
+when concept_id= '1710' then '1103'
+when concept_id= '5688' then '1102'
+when concept_id= '745' then '1101'
+when concept_id= '767' then '1100'
+when concept_id= '656' then '1099'
+when concept_id= '438' then '1098'
+when concept_id= '174' then '1088'
+when concept_id= '877' then '1081'
+when concept_id= '5541' then '1080'
+when concept_id= '29' then '1075'
+when concept_id= '5019' then '1075'
+when concept_id= '80' then '1073'
+when concept_id= '6000' then '1073'
+when concept_id= '5241' then '1072'
+when concept_id= '5933' then '1072'
+when concept_id= '1267' then '1070'
+when concept_id= '215' then '1065'
+when concept_id= '1547' then '1063'
+when concept_id= '1546' then '1061'
+when concept_id= '6033' then '1050'
+when concept_id= '199' then '1024'
+when concept_id= '1780' then '1020'
+when concept_id= '664' then '1016'
+when concept_id= '6029' then '1012'
+when concept_id= '832' then '1008'
+when concept_id= '5225' then '1008'
+when concept_id= '5947' then '1008'
+when concept_id= '814' then '985'
+when concept_id= '5980' then '943'
+when concept_id= '5960' then '936'
+when concept_id= '6001' then '919'
+when concept_id= '148' then '914'
+when concept_id= '967' then '910'
+when concept_id= '111' then '907'
+when concept_id= '620' then '905'
+when concept_id= '6039' then '905'
+when concept_id= '5945' then '901'
+when concept_id= '173' then '897'
+when concept_id= '881' then '895'
+when concept_id= '131' then '894'
+when concept_id= '5173' then '894'
+when concept_id= '107' then '892'
+when concept_id= '5956' then '892'
+when concept_id= '206' then '891'
+when concept_id= '910' then '891'
+when concept_id= '996' then '890'
+when concept_id= '136' then '888'
+when concept_id= '5970' then '888'
+when concept_id= '868' then '884'
+when concept_id= '151' then '882'
+when concept_id= '201' then '856'
+when concept_id= '124' then '851'
+when concept_id= '215' then '850'
+when concept_id= '198' then '835'
+when concept_id= '880' then '834'
+when concept_id= '410' then '825'
+when concept_id= '202' then '812'
+when concept_id= '5016' then '802'
+when concept_id= '63' then '797'
+when concept_id= '937' then '793'
+when concept_id= '147' then '790'
+when concept_id= '227' then '744'
+when concept_id= '149' then '641'
+when concept_id= '111' then '607'
+when concept_id= '10' then '573'
+when concept_id= '896' then '507'
+when concept_id= '530' then '497'
+when concept_id= '5123' then '497'
+when concept_id= '77' then '467'
+when concept_id= '5200' then '451'
+when concept_id= '991' then '428'
+when concept_id= '75' then '407'
+when concept_id= '140' then '396'
+when concept_id= '89' then '370'
+when concept_id= '237' then '367'
+when concept_id= '740' then '365'
+when concept_id= '1240' then '362'
+when concept_id= '798' then '350'
+when concept_id= '1507' then '335'
+when concept_id= '101' then '302'
+when concept_id= '1350' then '169'
+when concept_id= '5293' then '169'
+when concept_id= '1349' then '163'
+when concept_id= '5291' then '163'
+when concept_id= '5092' then '140'
+when concept_id= '5242' then '136'
+when concept_id= '5086' then '130'
+when concept_id= '5085' then '127'
+when concept_id= '5087' then '124'
+when concept_id= '1342' then '120'
+when concept_id= '1907' then '114'
+when concept_id= '1900' then '111'
+when concept_id= '1459' then '109'
+when concept_id= '6305' then '97'
+when concept_id= '123' then '17'
+when concept_id= '899' then '2'
+when concept_id= '16' then '2120'
+when concept_id= '44' then '2141'
+when concept_id= '58' then '2140'
+when concept_id= '58' then '8216'
+when concept_id= '507' then '5927'
+when concept_id= '664' then '8390'
+when concept_id= '664' then '8390'
+when concept_id= '703' then '1738'
+when concept_id= '703' then '8389'
+when concept_id= '703' then '8349'
+when concept_id= '1059' then '2184'
+when concept_id= '1065' then '7925'
+when concept_id= '1065' then '1'
+when concept_id= '1066' then '8090'
+when concept_id= '1067' then '1739'
+when concept_id= '1115' then '8172'
+when concept_id= '1170' then '1925'
+when concept_id= '1383' then '2030'
+when concept_id= '1384' then '2115'
+when concept_id= '1385' then '8120'
+when concept_id= '1414' then '7966'
+when concept_id= '1445' then '1154'
+when concept_id= '1448' then '7957'
+when concept_id= '1546' then '1061'
+when concept_id= '1595' then '8221'
+when concept_id= '1598' then '8217'
+when concept_id= '1598' then '2194'
+when concept_id= '1651' then '8421'
+when concept_id= '1703' then '8031'
+when concept_id= '1703' then '8419'
+when concept_id= '1707' then '8124'
+when concept_id= '1872' then '7976'
+when concept_id= '5170' then '2066'
+when concept_id= '5555' then '2182'
+when concept_id= '5960' then '936'
+when concept_id= '5960' then '2653'
+when concept_id= '6100' then '8032'
+when concept_id= '6104' then '8036'
+when concept_id= '6105' then '8052'
+when concept_id= '6243' then '8035'
+when concept_id= '6245' then '7975'
+when concept_id= '6276' then '7981'
+when concept_id= '6324' then '8034'
 else concept_id
 end as concept_id
 , encounter_id
@@ -1127,341 +1400,543 @@ end as concept_id
 , accession_number
 , value_group_id
 , value_boolean
-, case
-when value_coded='100' then '1598'
-when value_coded='1001' then '1483'
-when value_coded='1004' then '1495'
-when value_coded='1007' then '1245'
-when value_coded='101' then '302'
-when value_coded='1013' then '3549'
-when value_coded='1014' then '3231'
-when value_coded='1017' then '1218'
-when value_coded='1018' then '1217'
-when value_coded='1019' then '1461'
-when value_coded='1031' then '3543'
-when value_coded='1053' then '1719'
-when value_coded='1054' then '7888'
-when value_coded='1058' then '2183'
-when value_coded='1059' then '2184'
-when value_coded='1065' then '1'
-when value_coded='1066' then '2'
-when value_coded='1067' then '8341'
-when value_coded='1074' then '8432'
-when value_coded='110' then '2670'
-when value_coded='1101' then '2596'
-when value_coded='1107' then '1154'
-when value_coded='1113' then '8005'
-when value_coded='1114' then '7907'
-when value_coded='1115' then '8122'
-when value_coded='1132' then '1279'
-when value_coded='1133' then '1284'
-when value_coded='1134' then '1282'
-when value_coded='1135' then '3222'
-when value_coded='1139' then '7822'
-when value_coded='117' then '6235'
-when value_coded='1170' then '1925'
-when value_coded='1175' then '1975'
-when value_coded='1179' then '1902'
-when value_coded='1195' then '2589'
-when value_coded='124' then '5671'
-when value_coded ='1204' then '7711'
-when value_coded ='1205' then '7712'
-when value_coded ='1206' then '7713'
-when value_coded ='1207' then '7714'
-when value_coded='1240' then '362'
-when value_coded='1242' then '1580'
-when value_coded='1244' then '1648'
-when value_coded='126' then '7732'
-when value_coded='1267' then '2242'
-when value_coded='1297' then '3300'
-when value_coded='1298' then '1391'
-when value_coded='1299' then '8136'
-when value_coded='13' then '2451'
-when value_coded='1332' then '1215'
-when value_coded='1342' then '3149'
-when value_coded='1343' then '2086'
-when value_coded='1349' then '163'
-when value_coded='1359' then '8185'
-when value_coded='1362' then '2295'
-when value_coded='1363' then '2297'
-when value_coded='1383' then '8267'
-when value_coded='1384' then '2115'
-when value_coded='1385' then '8269'
-when value_coded='140' then '396'
-when value_coded='1414' then '7919'
-when value_coded='142' then '3161'
-when value_coded='1445' then '1154'
-when value_coded='1448' then '7910'
-when value_coded='1459' then '109'
-when value_coded='147' then '790'
-when value_coded='148' then '914'
-when value_coded='149' then '641'
-when value_coded='151' then '882'
-when value_coded='1544' then '3589'
-when value_coded='1546' then '1061'
-when value_coded='1547' then '1063'
-when value_coded='155' then '6188'
-when value_coded='158' then '7940'
-when value_coded='1598' then '8167'
-when value_coded='160' then '5683'
-when value_coded='1650' then '7983'
-when value_coded='1710' then '1103'
-when value_coded='173' then '897'
-when value_coded='174' then '8024'
-when value_coded='1780' then '1020'
-when value_coded='1784' then '1126'
-when value_coded='185' then '6499'
-when value_coded='1872' then '7929'
-when value_coded='1887' then '7917'
-when value_coded='190' then '2450'
-when value_coded='1900' then '7797'
-when value_coded='1901' then '2150'
-when value_coded='1903' then '7815'
-when value_coded='1905' then '7835'
-when value_coded='1906' then '7826'
-when value_coded='1908' then '7954'
-when value_coded='191' then '2452'
-when value_coded='1912' then '7763'
-when value_coded='198' then '835'
-when value_coded='1981' then '2328'
-when value_coded='1982' then '1871'
-when value_coded='199' then '1024'
-when value_coded='2001' then '7841'
-when value_coded='201' then '856'
-when value_coded='202' then '812'
-when value_coded='2034' then '8337'
-when value_coded='204' then '2283'
-when value_coded='205' then '1984'
-when value_coded='207' then '2808'
-when value_coded='2077' then '3447'
-when value_coded='208' then '6458'
-when value_coded='2107' then '3126'
-when value_coded='2113' then '2318'
-when value_coded='212' then '6457'
-when value_coded='2124' then '1272'
-when value_coded='215' then '1065'
-when value_coded='2152' then '8065'
-when value_coded='218' then '6275'
-when value_coded='220' then '1104'
-when value_coded='223' then '1744'
-when value_coded='235' then '1693'
-when value_coded='237' then '8395'
-when value_coded='238' then '1662'
-when value_coded='247' then '1570'
-when value_coded='250' then '1643'
-when value_coded='254' then '1673'
-when value_coded='256' then '1586'
-when value_coded='257' then '1590'
-when value_coded='263' then '1611'
-when value_coded='265' then '1516'
-when value_coded='269' then '1521'
-when value_coded='273' then '1663'
-when value_coded='29' then '1075'
-when value_coded='290' then '1606'
-when value_coded='300' then '1179'
-when value_coded='301' then '8154'
-when value_coded='311' then '8174'
-when value_coded='313' then '1607'
-when value_coded='323' then '1599'
-when value_coded='329' then '1703'
-when value_coded='351' then '1651'
-when value_coded='368' then '2083'
-when value_coded='410' then '825'
-when value_coded='412' then '8449'
-when value_coded='42' then '7741'
-when value_coded='43' then '7740'
-when value_coded='431' then '1608'
-when value_coded='436' then '1571'
-when value_coded='438' then '8406'
-when value_coded='44' then '2141'
-when value_coded='44' then '7962'
-when value_coded='45' then '1236'
-when value_coded='460' then '2656'
-when value_coded='467' then '6101'
-when value_coded='496' then '1546'
-when value_coded='5' then '6409'
-when value_coded='5006' then '3182'
-when value_coded='5016' then '802'
-when value_coded='5062' then '3349'
-when value_coded='507' then '5877'
-when value_coded='5087' then '7900'
-when value_coded='5092' then '139'
-when value_coded='5092' then '140'
-when value_coded='5112' then '3071'
-when value_coded='5170' then '2066'
-when value_coded='5172' then '7726'
-when value_coded='5200' then '451'
-when value_coded='5209' then '2652'
-when value_coded='5226' then '2625'
-when value_coded='5241' then '1072'
-when value_coded='5241' then '1140'
-when value_coded='5245' then '2082'
-when value_coded='5256' then '220'
-when value_coded='5271' then '7846'
-when value_coded='5276' then '2453'
-when value_coded='5293' then '169'
-when value_coded='530' then '497'
-when value_coded='5312' then '2675'
-when value_coded='5325' then '8345'
-when value_coded='5340' then '7743'
-when value_coded='54' then '1691'
-when value_coded='5490' then '2927'
-when value_coded='5497' then '8143'
-when value_coded='5541' then '1080'
-when value_coded='5555' then '2182'
-when value_coded='5577' then '1955'
-when value_coded='5599' then '7964'
-when value_coded='56' then '3574'
-when value_coded='5618' then '8338'
-when value_coded='5624' then '1718'
-when value_coded='5685' then '1107'
-when value_coded='5685' then '3133'
-when value_coded='57' then '5747'
-when value_coded='58' then '8012'
-when value_coded='581' then '6979'
-when value_coded='5829' then '1502'
-when value_coded='59' then '2923'
-when value_coded='5910' then '8357'
-when value_coded='5928' then '1884'
-when value_coded='593' then '2694'
-when value_coded='5932' then '8298'
-when value_coded='5945' then '7976'
-when value_coded='5949' then '2641'
-when value_coded='5960' then '2653'
-when value_coded='5964' then '8166'
-when value_coded='5980' then '943'
-when value_coded='6001' then '919'
-when value_coded='6007' then '2631'
-when value_coded='6020' then '2683'
-when value_coded='6024' then '7735'
-when value_coded='6029' then '1012'
-when value_coded='6033' then '1050'
-when value_coded='6142' then '8247'
-when value_coded='6143' then '8020'
-when value_coded='6158' then '1916'
-when value_coded='620' then '905'
-when value_coded='6226' then '3052'
-when value_coded='6228' then '2060'
-when value_coded='6229' then '2061'
-when value_coded='6230' then '2062'
-when value_coded='6245' then '7928'
-when value_coded='6248' then '2364'
-when value_coded='6257' then '2331'
-when value_coded='6276' then '7934'
-when value_coded='63' then '5756'
-when value_coded='6304' then '7927'
-when value_coded='6305' then '97'
-when value_coded='645' then '3033'
-when value_coded='653' then '8137'
-when value_coded='654' then '8135'
-when value_coded='655' then '3305'
-when value_coded='664' then '8340'
-when value_coded='666' then '1223'
-when value_coded='689' then '2305'
-when value_coded='697' then '2306'
-when value_coded='702' then '8055'
-when value_coded='728' then '1322'
-when value_coded='729' then '1209'
-when value_coded='732' then '8390'
-when value_coded='733' then '1511'
-when value_coded='735' then '1529'
-when value_coded='735' then '8391'
-when value_coded='740' then '365'
-when value_coded='745' then '8407'
-when value_coded='747' then '1588'
-when value_coded='751' then '1632'
-when value_coded='753' then '1575'
-when value_coded='754' then '1526'
-when value_coded='755' then '8414'
-when value_coded='756' then '1670'
-when value_coded='763' then '1655'
-when value_coded='765' then '1667'
-when value_coded='766' then '1674'
-when value_coded='767' then '1100'
-when value_coded='77' then '467'
-when value_coded='779' then '1547'
-when value_coded='786' then '1534'
-when value_coded='790' then '8147'
-when value_coded='798' then '1682'
-when value_coded='80' then '1073'
-when value_coded='81' then '1973'
-when value_coded='814' then '985'
-when value_coded='826' then '7734'
-when value_coded='832' then '1008'
-when value_coded='834' then '7967'
-when value_coded='836' then '7718'
-when value_coded='838' then '6555'
-when value_coded='848' then '8134'
-when value_coded='851' then '1213'
-when value_coded='855' then '3238'
-when value_coded='856' then '8142'
-when value_coded='857' then '8165'
-when value_coded='859' then '2645'
-when value_coded='868' then '1151'
-when value_coded='868' then '884'
-when value_coded='871' then '2642'
-when value_coded='877' then '1081'
-when value_coded='879' then '6530'
-when value_coded='88' then '1525'
-when value_coded='880' then '834'
-when value_coded='881' then '6974'
-when value_coded='884' then '2560'
-when value_coded='89' then '370'
-when value_coded='892' then '5752'
-when value_coded='896' then '507'
-when value_coded='899' then '2'
-when value_coded='901' then '7007'
-when value_coded='905' then '1948'
-when value_coded='907' then '1629'
-when value_coded='912' then '1609'
-when value_coded='913' then '1551'
-when value_coded='914' then '1552'
-when value_coded='915' then '1698'
-when value_coded='922' then '1561'
-when value_coded='923' then '1678'
-when value_coded='926' then '1618'
-when value_coded='93' then '1563'
-when value_coded='937' then '5777'
-when value_coded='941' then '1509'
-when value_coded='944' then '1523'
-when value_coded='95' then '1579'
-when value_coded='955' then '8118'
-when value_coded='955' then '8417'
-when value_coded='959' then '1577'
-when value_coded='960' then '1557'
-when value_coded='963' then '1543'
-when value_coded='967' then '910'
-when value_coded='970' then '8317'
-when value_coded='971' then '8316'
-when value_coded='98' then '1550'
-when value_coded='99' then '1593'
-when value_coded='991' then '428'
-when value_coded='996' then '890'
-when value_coded='1441' then '8346'
-when value_coded='1442' then '8347'
-when value_coded='1611' then '8349'
-when value_coded='1271' then '7843'
-when value_coded='1255' then '7935'
-when value_coded='856' then '8142'
-when value_coded='5497' then '8143'
-when value_coded='21' then '8154'
-when value_coded='654' then '8135'
-when value_coded='653' then '8137'
-when value_coded='887' then '8152'
-when value_coded='1982' then '7962'
-when value_coded='6332' then '7967'
-when value_coded='6122' then '8025'
-when value_coded='6128' then '8029'
-when value_coded='6121' then '8026'
-when value_coded='6126' then '8037'
-when value_coded='6127' then '8040'
-when value_coded='5965' then '7975'
-when value_coded='1113' then '8006'
-when value_coded='6120' then '8011'
-when value_coded='5356' then '7715'
-when value_coded = '6129' then '8035'
-when value_coded ='1256' then '7933'
-when value_coded ='1257' then '7934'
+,case
+when value_coded= '1113' then '8482'
+when value_coded= '955' then '8471'
+when value_coded= '745' then '8461'
+when value_coded= '237' then '8449'
+when value_coded= '356' then '8448'
+when value_coded= '95' then '8447'
+when value_coded= '735' then '8445'
+when value_coded= '732' then '8444'
+when value_coded= '6330' then '8443'
+when value_coded= '6329' then '8439'
+when value_coded= '6337' then '8429'
+when value_coded= '6324' then '8422'
+when value_coded= '6100' then '8420'
+when value_coded= '1703' then '8419'
+when value_coded= '1074' then '8412'
+when value_coded= '5910' then '8408'
+when value_coded= '5325' then '8395'
+when value_coded= '664' then '8390'
+when value_coded= '703' then '8389'
+when value_coded= '5618' then '8388'
+when value_coded= '1923' then '8387'
+when value_coded= '2034' then '8387'
+when value_coded= '973' then '8382'
+when value_coded= '972' then '8374'
+when value_coded= '970' then '8367'
+when value_coded= '971' then '8366'
+when value_coded= '2152' then '8358'
+when value_coded= '6143' then '8355'
+when value_coded= '703' then '8349'
+when value_coded= '702' then '8348'
+when value_coded= '1534' then '8347'
+when value_coded= '656' then '8344'
+when value_coded= '1365' then '8340'
+when value_coded= '1113' then '8332'
+when value_coded= '174' then '8327'
+when value_coded= '1350' then '8294'
+when value_coded= '1650' then '8287'
+when value_coded= '1761' then '8282'
+when value_coded= '5945' then '8280'
+when value_coded= '6313' then '8254'
+when value_coded= '1359' then '8236'
+when value_coded= '310' then '8224'
+when value_coded= '311' then '8224'
+when value_coded= '1595' then '8221'
+when value_coded= '1598' then '8217'
+when value_coded= '58' then '8216'
+when value_coded= '5964' then '8216'
+when value_coded= '857' then '8215'
+when value_coded= '21' then '8204'
+when value_coded= '301' then '8204'
+when value_coded= '1520' then '8203'
+when value_coded= '790' then '8197'
+when value_coded= '730' then '8193'
+when value_coded= '5497' then '8193'
+when value_coded= '856' then '8192'
+when value_coded= '653' then '8187'
+when value_coded= '1299' then '8186'
+when value_coded= '654' then '8185'
+when value_coded= '848' then '8184'
+when value_coded= '1115' then '8172'
+when value_coded= '5256' then '8154'
+when value_coded= '2039' then '8136'
+when value_coded= '1707' then '8124'
+when value_coded= '1385' then '8120'
+when value_coded= '1365' then '8117'
+when value_coded= '1066' then '8113'
+when value_coded= '1065' then '8105'
+when value_coded= '6142' then '8098'
+when value_coded= '1066' then '8084'
+when value_coded= '955' then '8074'
+when value_coded= '6105' then '8052'
+when value_coded= '6116' then '8051'
+when value_coded= '6104' then '8036'
+when value_coded= '6243' then '8035'
+when value_coded= '792' then '8033'
+when value_coded= '1651' then '8033'
+when value_coded= '1703' then '8031'
+when value_coded= '834' then '8016'
+when value_coded= '5599' then '8013'
+when value_coded= '44' then '8011'
+when value_coded= '5991' then '8011'
+when value_coded= '1725' then '8003'
+when value_coded= '1908' then '8001'
+when value_coded= '1174' then '7998'
+when value_coded= '158' then '7987'
+when value_coded= '6276' then '7981'
+when value_coded= '6275' then '7980'
+when value_coded= '1872' then '7976'
+when value_coded= '6245' then '7975'
+when value_coded= '6304' then '7974'
+when value_coded= '1468' then '7971'
+when value_coded= '1414' then '7966'
+when value_coded= '1887' then '7964'
+when value_coded= '1448' then '7957'
+when value_coded= '1446' then '7955'
+when value_coded= '1114' then '7954'
+when value_coded= '5087' then '7947'
+when value_coded= '1781' then '7936'
+when value_coded= '1797' then '7936'
+when value_coded= '1940' then '7935'
+when value_coded= '5271' then '7935'
+when value_coded= '190' then '7905'
+when value_coded= '1065' then '7903'
+when value_coded= '1054' then '7902'
+when value_coded= '2001' then '7895'
+when value_coded= '1914' then '7893'
+when value_coded= '1905' then '7889'
+when value_coded= '1906' then '7880'
+when value_coded= '1139' then '7876'
+when value_coded= '1903' then '7869'
+when value_coded= '1908' then '7868'
+when value_coded= '6155' then '7866'
+when value_coded= '1900' then '7851'
+when value_coded= '1912' then '7817'
+when value_coded= '412' then '7814'
+when value_coded= '413' then '7814'
+when value_coded= '5340' then '7794'
+when value_coded= '42' then '7792'
+when value_coded= '43' then '7791'
+when value_coded= '6024' then '7786'
+when value_coded= '826' then '7785'
+when value_coded= '126' then '7783'
+when value_coded= '5172' then '7777'
+when value_coded= '5334' then '7777'
+when value_coded= '836' then '7769'
+when value_coded= '2031' then '7757'
+when value_coded= '901' then '7057'
+when value_coded= '581' then '7029'
+when value_coded= '881' then '7024'
+when value_coded= '107' then '7017'
+when value_coded= '891' then '7017'
+when value_coded= '49' then '6844'
+when value_coded= '230' then '6844'
+when value_coded= '899' then '6830'
+when value_coded= '48' then '6794'
+when value_coded= '46' then '6791'
+when value_coded= '838' then '6605'
+when value_coded= '879' then '6580'
+when value_coded= '185' then '6549'
+when value_coded= '111' then '6512'
+when value_coded= '208' then '6508'
+when value_coded= '212' then '6507'
+when value_coded= '5' then '6459'
+when value_coded= '10' then '6441'
+when value_coded= '218' then '6325'
+when value_coded= '117' then '6285'
+when value_coded= '155' then '6238'
+when value_coded= '467' then '6151'
+when value_coded= '888' then '6101'
+when value_coded= '507' then '5927'
+when value_coded= '204' then '5829'
+when value_coded= '937' then '5827'
+when value_coded= '63' then '5806'
+when value_coded= '892' then '5802'
+when value_coded= '57' then '5797'
+when value_coded= '684' then '5766'
+when value_coded= '160' then '5733'
+when value_coded= '124' then '5721'
+when value_coded= '198' then '5715'
+when value_coded= '5969' then '3648'
+when value_coded= '1773' then '3612'
+when value_coded= '1772' then '3593'
+when value_coded= '1544' then '3589'
+when value_coded= '1019' then '3577'
+when value_coded= '56' then '3574'
+when value_coded= '1013' then '3549'
+when value_coded= '1031' then '3543'
+when value_coded= '2077' then '3447'
+when value_coded= '686' then '3384'
+when value_coded= '5062' then '3349'
+when value_coded= '655' then '3305'
+when value_coded= '1297' then '3300'
+when value_coded= '1006' then '3295'
+when value_coded= '1023' then '3264'
+when value_coded= '1021' then '3263'
+when value_coded= '1024' then '3262'
+when value_coded= '1025' then '3261'
+when value_coded= '855' then '3238'
+when value_coded= '1014' then '3231'
+when value_coded= '1011' then '3226'
+when value_coded= '1135' then '3222'
+when value_coded= '1593' then '3182'
+when value_coded= '5006' then '3182'
+when value_coded= '142' then '3161'
+when value_coded= '5695' then '3158'
+when value_coded= '5907' then '3158'
+when value_coded= '2107' then '3126'
+when value_coded= '5286' then '3125'
+when value_coded= '1185' then '3108'
+when value_coded= '441' then '3104'
+when value_coded= '5112' then '3071'
+when value_coded= '505' then '3069'
+when value_coded= '6226' then '3052'
+when value_coded= '12' then '3033'
+when value_coded= '645' then '3033'
+when value_coded= '5490' then '2927'
+when value_coded= '59' then '2923'
+when value_coded= '890' then '2923'
+when value_coded= '5242' then '2893'
+when value_coded= '5288' then '2875'
+when value_coded= '1603' then '2852'
+when value_coded= '207' then '2808'
+when value_coded= '6038' then '2808'
+when value_coded= '1008' then '2797'
+when value_coded= '593' then '2694'
+when value_coded= '6020' then '2683'
+when value_coded= '5312' then '2675'
+when value_coded= '6001' then '2673'
+when value_coded= '110' then '2670'
+when value_coded= '128' then '2670'
+when value_coded= '111' then '2662'
+when value_coded= '460' then '2656'
+when value_coded= '5143' then '2656'
+when value_coded= '6002' then '2656'
+when value_coded= '5960' then '2653'
+when value_coded= '5209' then '2652'
+when value_coded= '859' then '2645'
+when value_coded= '871' then '2642'
+when value_coded= '5946' then '2642'
+when value_coded= '5949' then '2641'
+when value_coded= '206' then '2631'
+when value_coded= '6007' then '2631'
+when value_coded= '5226' then '2625'
+when value_coded= '5543' then '2625'
+when value_coded= '5219' then '2613'
+when value_coded= '1101' then '2596'
+when value_coded= '1195' then '2589'
+when value_coded= '183' then '2562'
+when value_coded= '903' then '2562'
+when value_coded= '884' then '2560'
+when value_coded= '1169' then '2560'
+when value_coded= '1940' then '2512'
+when value_coded= '5271' then '2512'
+when value_coded= '5275' then '2486'
+when value_coded= '5275' then '2480'
+when value_coded= '5276' then '2453'
+when value_coded= '191' then '2452'
+when value_coded= '907' then '2452'
+when value_coded= '13' then '2451'
+when value_coded= '190' then '2450'
+when value_coded= '5270' then '2450'
+when value_coded= '5619' then '2421'
+when value_coded= '5253' then '2373'
+when value_coded= '1180' then '2369'
+when value_coded= '6248' then '2364'
+when value_coded= '5932' then '2344'
+when value_coded= '6257' then '2331'
+when value_coded= '1981' then '2328'
+when value_coded= '2113' then '2318'
+when value_coded= '697' then '2306'
+when value_coded= '689' then '2305'
+when value_coded= '5240' then '2302'
+when value_coded= '1363' then '2297'
+when value_coded= '1362' then '2295'
+when value_coded= '204' then '2283'
+when value_coded= '856' then '2254'
+when value_coded= '1267' then '2242'
+when value_coded= '1779' then '2233'
+when value_coded= '12' then '2231'
+when value_coded= '1088' then '2211'
+when value_coded= '1598' then '2194'
+when value_coded= '1059' then '2184'
+when value_coded= '1058' then '2183'
+when value_coded= '5555' then '2182'
+when value_coded= '5497' then '2172'
+when value_coded= '1901' then '2150'
+when value_coded= '5272' then '2149'
+when value_coded= '58' then '2140'
+when value_coded= '174' then '2139'
+when value_coded= '16' then '2120'
+when value_coded= '1384' then '2115'
+when value_coded= '1343' then '2086'
+when value_coded= '368' then '2083'
+when value_coded= '5245' then '2082'
+when value_coded= '5170' then '2066'
+when value_coded= '6230' then '2062'
+when value_coded= '6229' then '2061'
+when value_coded= '6228' then '2060'
+when value_coded= '1383' then '2030'
+when value_coded= '205' then '1984'
+when value_coded= '1175' then '1975'
+when value_coded= '81' then '1973'
+when value_coded= '5577' then '1955'
+when value_coded= '905' then '1948'
+when value_coded= '1172' then '1940'
+when value_coded= '1171' then '1927'
+when value_coded= '1170' then '1925'
+when value_coded= '6158' then '1916'
+when value_coded= '1179' then '1902'
+when value_coded= '1178' then '1901'
+when value_coded= '123' then '1889'
+when value_coded= '906' then '1889'
+when value_coded= '5928' then '1884'
+when value_coded= '1982' then '1871'
+when value_coded= '1243' then '1838'
+when value_coded= '1010' then '1811'
+when value_coded= '1010' then '1755'
+when value_coded= '223' then '1744'
+when value_coded= '1067' then '1739'
+when value_coded= '1053' then '1719'
+when value_coded= '5624' then '1718'
+when value_coded= '329' then '1703'
+when value_coded= '915' then '1698'
+when value_coded= '943' then '1697'
+when value_coded= '235' then '1693'
+when value_coded= '478' then '1693'
+when value_coded= '54' then '1691'
+when value_coded= '798' then '1682'
+when value_coded= '923' then '1678'
+when value_coded= '766' then '1674'
+when value_coded= '254' then '1673'
+when value_coded= '756' then '1670'
+when value_coded= '765' then '1667'
+when value_coded= '273' then '1663'
+when value_coded= '238' then '1662'
+when value_coded= '763' then '1655'
+when value_coded= '351' then '1651'
+when value_coded= '1244' then '1648'
+when value_coded= '250' then '1643'
+when value_coded= '751' then '1632'
+when value_coded= '907' then '1629'
+when value_coded= '755' then '1620'
+when value_coded= '926' then '1618'
+when value_coded= '263' then '1611'
+when value_coded= '912' then '1609'
+when value_coded= '431' then '1608'
+when value_coded= '313' then '1607'
+when value_coded= '290' then '1606'
+when value_coded= '1243' then '1605'
+when value_coded= '323' then '1599'
+when value_coded= '100' then '1598'
+when value_coded= '99' then '1593'
+when value_coded= '257' then '1590'
+when value_coded= '747' then '1588'
+when value_coded= '256' then '1586'
+when value_coded= '1242' then '1580'
+when value_coded= '95' then '1579'
+when value_coded= '959' then '1577'
+when value_coded= '753' then '1575'
+when value_coded= '436' then '1571'
+when value_coded= '247' then '1570'
+when value_coded= '93' then '1563'
+when value_coded= '916' then '1563'
+when value_coded= '922' then '1561'
+when value_coded= '960' then '1557'
+when value_coded= '914' then '1552'
+when value_coded= '913' then '1551'
+when value_coded= '98' then '1550'
+when value_coded= '779' then '1547'
+when value_coded= '496' then '1546'
+when value_coded= '963' then '1543'
+when value_coded= '786' then '1534'
+when value_coded= '735' then '1529'
+when value_coded= '754' then '1526'
+when value_coded= '88' then '1525'
+when value_coded= '944' then '1523'
+when value_coded= '269' then '1521'
+when value_coded= '265' then '1516'
+when value_coded= '733' then '1511'
+when value_coded= '941' then '1509'
+when value_coded= '732' then '1507'
+when value_coded= '5829' then '1502'
+when value_coded= '1004' then '1495'
+when value_coded= '1001' then '1483'
+when value_coded= '1019' then '1461'
+when value_coded= '1298' then '1391'
+when value_coded= '714' then '1322'
+when value_coded= '728' then '1322'
+when value_coded= '857' then '1315'
+when value_coded= '1299' then '1310'
+when value_coded= '857' then '1308'
+when value_coded= '1133' then '1284'
+when value_coded= '1134' then '1282'
+when value_coded= '790' then '1281'
+when value_coded= '1132' then '1279'
+when value_coded= '2124' then '1272'
+when value_coded= '1007' then '1245'
+when value_coded= '1006' then '1244'
+when value_coded= '1011' then '1240'
+when value_coded= '45' then '1236'
+when value_coded= '666' then '1223'
+when value_coded= '1017' then '1218'
+when value_coded= '1018' then '1217'
+when value_coded= '1332' then '1215'
+when value_coded= '851' then '1213'
+when value_coded= '729' then '1209'
+when value_coded= '1022' then '1198'
+when value_coded= '300' then '1179'
+when value_coded= '1107' then '1154'
+when value_coded= '1445' then '1154'
+when value_coded= '131' then '1128'
+when value_coded= '1784' then '1126'
+when value_coded= '1268' then '1108'
+when value_coded= '5685' then '1107'
+when value_coded= '5' then '1105'
+when value_coded= '137' then '1105'
+when value_coded= '220' then '1104'
+when value_coded= '1710' then '1103'
+when value_coded= '5688' then '1102'
+when value_coded= '745' then '1101'
+when value_coded= '767' then '1100'
+when value_coded= '656' then '1099'
+when value_coded= '438' then '1098'
+when value_coded= '174' then '1088'
+when value_coded= '877' then '1081'
+when value_coded= '5541' then '1080'
+when value_coded= '29' then '1075'
+when value_coded= '5019' then '1075'
+when value_coded= '80' then '1073'
+when value_coded= '6000' then '1073'
+when value_coded= '5241' then '1072'
+when value_coded= '5933' then '1072'
+when value_coded= '1267' then '1070'
+when value_coded= '215' then '1065'
+when value_coded= '1547' then '1063'
+when value_coded= '1546' then '1061'
+when value_coded= '6033' then '1050'
+when value_coded= '199' then '1024'
+when value_coded= '1780' then '1020'
+when value_coded= '664' then '1016'
+when value_coded= '6029' then '1012'
+when value_coded= '832' then '1008'
+when value_coded= '5225' then '1008'
+when value_coded= '5947' then '1008'
+when value_coded= '814' then '985'
+when value_coded= '5980' then '943'
+when value_coded= '5960' then '936'
+when value_coded= '6001' then '919'
+when value_coded= '148' then '914'
+when value_coded= '967' then '910'
+when value_coded= '111' then '907'
+when value_coded= '620' then '905'
+when value_coded= '6039' then '905'
+when value_coded= '5945' then '901'
+when value_coded= '173' then '897'
+when value_coded= '881' then '895'
+when value_coded= '131' then '894'
+when value_coded= '5173' then '894'
+when value_coded= '107' then '892'
+when value_coded= '5956' then '892'
+when value_coded= '206' then '891'
+when value_coded= '910' then '891'
+when value_coded= '996' then '890'
+when value_coded= '136' then '888'
+when value_coded= '5970' then '888'
+when value_coded= '868' then '884'
+when value_coded= '151' then '882'
+when value_coded= '201' then '856'
+when value_coded= '124' then '851'
+when value_coded= '215' then '850'
+when value_coded= '198' then '835'
+when value_coded= '880' then '834'
+when value_coded= '410' then '825'
+when value_coded= '202' then '812'
+when value_coded= '5016' then '802'
+when value_coded= '63' then '797'
+when value_coded= '937' then '793'
+when value_coded= '147' then '790'
+when value_coded= '227' then '744'
+when value_coded= '149' then '641'
+when value_coded= '111' then '607'
+when value_coded= '10' then '573'
+when value_coded= '896' then '507'
+when value_coded= '530' then '497'
+when value_coded= '5123' then '497'
+when value_coded= '77' then '467'
+when value_coded= '5200' then '451'
+when value_coded= '991' then '428'
+when value_coded= '75' then '407'
+when value_coded= '140' then '396'
+when value_coded= '89' then '370'
+when value_coded= '237' then '367'
+when value_coded= '740' then '365'
+when value_coded= '1240' then '362'
+when value_coded= '798' then '350'
+when value_coded= '1507' then '335'
+when value_coded= '101' then '302'
+when value_coded= '1350' then '169'
+when value_coded= '5293' then '169'
+when value_coded= '1349' then '163'
+when value_coded= '5291' then '163'
+when value_coded= '5092' then '140'
+when value_coded= '5242' then '136'
+when value_coded= '5086' then '130'
+when value_coded= '5085' then '127'
+when value_coded= '5087' then '124'
+when value_coded= '1342' then '120'
+when value_coded= '1907' then '114'
+when value_coded= '1900' then '111'
+when value_coded= '1459' then '109'
+when value_coded= '6305' then '97'
+when value_coded= '123' then '17'
+when value_coded= '899' then '2'
+when value_coded= '16' then '2120'
+when value_coded= '44' then '2141'
+when value_coded= '58' then '2140'
+when value_coded= '58' then '8216'
+when value_coded= '507' then '5927'
+when value_coded= '664' then '8390'
+when value_coded= '664' then '8390'
+when value_coded= '703' then '1738'
+when value_coded= '703' then '8389'
+when value_coded= '703' then '8349'
+when value_coded= '1059' then '2184'
+when value_coded= '1065' then '7925'
+when value_coded= '1065' then '1'
+when value_coded= '1066' then '8090'
+when value_coded= '1067' then '1739'
+when value_coded= '1115' then '8172'
+when value_coded= '1170' then '1925'
+when value_coded= '1383' then '2030'
+when value_coded= '1384' then '2115'
+when value_coded= '1385' then '8120'
+when value_coded= '1414' then '7966'
+when value_coded= '1445' then '1154'
+when value_coded= '1448' then '7957'
+when value_coded= '1546' then '1061'
+when value_coded= '1595' then '8221'
+when value_coded= '1598' then '8217'
+when value_coded= '1598' then '2194'
+when value_coded= '1651' then '8421'
+when value_coded= '1703' then '8031'
+when value_coded= '1703' then '8419'
+when value_coded= '1707' then '8124'
+when value_coded= '1872' then '7976'
+when value_coded= '5170' then '2066'
+when value_coded= '5555' then '2182'
+when value_coded= '5960' then '936'
+when value_coded= '5960' then '2653'
+when value_coded= '6100' then '8032'
+when value_coded= '6104' then '8036'
+when value_coded= '6105' then '8052'
+when value_coded= '6243' then '8035'
+when value_coded= '6245' then '7975'
+when value_coded= '6276' then '7981'
+when value_coded= '6324' then '8034'
 else value_coded
 end as value_coded
 , value_coded_name_id
@@ -1659,6 +2134,158 @@ order by person_id asc</sql>
     </GUI>
   </step>
   <step>
+    <name>insert obs into temp</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <schema />
+    <table>obs_temp</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>person_id</column_name>
+        <stream_name>person_id_1</stream_name>
+      </field>
+      <field>
+        <column_name>concept_id</column_name>
+        <stream_name>concept_id</stream_name>
+      </field>
+      <field>
+        <column_name>encounter_id</column_name>
+        <stream_name>new_encounter_id</stream_name>
+      </field>
+      <field>
+        <column_name>order_id</column_name>
+        <stream_name>order_id</stream_name>
+      </field>
+      <field>
+        <column_name>obs_datetime</column_name>
+        <stream_name>obs_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>location_id</column_name>
+        <stream_name>location_id</stream_name>
+      </field>
+      <field>
+        <column_name>obs_group_id</column_name>
+        <stream_name>obs_group_id</stream_name>
+      </field>
+      <field>
+        <column_name>accession_number</column_name>
+        <stream_name>accession_number</stream_name>
+      </field>
+      <field>
+        <column_name>value_group_id</column_name>
+        <stream_name>value_group_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded</column_name>
+        <stream_name>value_coded</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded_name_id</column_name>
+        <stream_name>value_coded_name_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_drug</column_name>
+        <stream_name>value_drug</stream_name>
+      </field>
+      <field>
+        <column_name>value_datetime</column_name>
+        <stream_name>value_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>value_numeric</column_name>
+        <stream_name>value_numeric</stream_name>
+      </field>
+      <field>
+        <column_name>value_modifier</column_name>
+        <stream_name>value_modifier</stream_name>
+      </field>
+      <field>
+        <column_name>value_text</column_name>
+        <stream_name>value_text</stream_name>
+      </field>
+      <field>
+        <column_name>comments</column_name>
+        <stream_name>comments</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>voided</column_name>
+        <stream_name>voided</stream_name>
+      </field>
+      <field>
+        <column_name>voided_by</column_name>
+        <stream_name>voided_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_voided</column_name>
+        <stream_name>date_voided</stream_name>
+      </field>
+      <field>
+        <column_name>void_reason</column_name>
+        <stream_name>void_reason</stream_name>
+      </field>
+      <field>
+        <column_name>value_complex</column_name>
+        <stream_name>value_complex</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>uuid</stream_name>
+      </field>
+      <field>
+        <column_name>previous_version</column_name>
+        <stream_name>previous_version</stream_name>
+      </field>
+      <field>
+        <column_name>obs_id</column_name>
+        <stream_name>obs_id</stream_name>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>new_patient_id</name>
     <type>TableInput</type>
     <description />
@@ -1851,229 +2478,6 @@ order by person_id asc
     <GUI>
       <xloc>1024</xloc>
       <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>create temp</name>
-    <type>ExecSQL</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>Y</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>CREATE TABLE obs_temp (
-`new_obs_id` int(11) ,
-`new_obs_group_id` int(11) DEFAULT NULL,
-  `obs_id` int(11) NOT NULL AUTO_INCREMENT,
-  `person_id` int(11) NOT NULL,
-  `concept_id` int(11) NOT NULL DEFAULT '0',
-  `encounter_id` int(11) DEFAULT NULL,
-  `order_id` int(11) DEFAULT NULL,
-  `obs_datetime` datetime NOT NULL,
-  `location_id` int(11) DEFAULT NULL,
-  `obs_group_id` int(11) DEFAULT NULL,
-  `accession_number` varchar(255) DEFAULT NULL,
-  `value_group_id` int(11) DEFAULT NULL,
-  `value_coded` int(11) DEFAULT NULL,
-  `value_coded_name_id` int(11) DEFAULT NULL,
-  `value_drug` int(11) DEFAULT NULL,
-  `value_datetime` datetime DEFAULT NULL,
-  `value_numeric` double DEFAULT NULL,
-  `value_modifier` varchar(2) DEFAULT NULL,
-  `value_text` text,
-  `value_complex` varchar(1000) DEFAULT NULL,
-  `comments` varchar(255) DEFAULT NULL,
-  `creator` int(11) NOT NULL DEFAULT '0',
-  `date_created` datetime NOT NULL,
-  `voided` tinyint(1) NOT NULL DEFAULT '0',
-  `voided_by` int(11) DEFAULT NULL,
-  `date_voided` datetime DEFAULT NULL,
-  `void_reason` varchar(255) DEFAULT NULL,
-  `uuid` char(38) NOT NULL,
-  `previous_version` int(11) DEFAULT NULL,
-  `form_namespace_and_path` varchar(255) DEFAULT NULL,
-  `status` varchar(16) NOT NULL DEFAULT 'FINAL',
-  `interpretation` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`obs_id`));</sql>
-    <set_params>N</set_params>
-    <insert_field />
-    <update_field />
-    <delete_field />
-    <read_field />
-    <arguments>
-    </arguments>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>256</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>insert obs into temp</name>
-    <type>TableOutput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <schema />
-    <table>obs_temp</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
-    <fields>
-      <field>
-        <column_name>person_id</column_name>
-        <stream_name>person_id_1</stream_name>
-      </field>
-      <field>
-        <column_name>concept_id</column_name>
-        <stream_name>concept_id</stream_name>
-      </field>
-      <field>
-        <column_name>encounter_id</column_name>
-        <stream_name>new_encounter_id</stream_name>
-      </field>
-      <field>
-        <column_name>order_id</column_name>
-        <stream_name>order_id</stream_name>
-      </field>
-      <field>
-        <column_name>obs_datetime</column_name>
-        <stream_name>obs_datetime</stream_name>
-      </field>
-      <field>
-        <column_name>location_id</column_name>
-        <stream_name>location_id</stream_name>
-      </field>
-      <field>
-        <column_name>obs_group_id</column_name>
-        <stream_name>obs_group_id</stream_name>
-      </field>
-      <field>
-        <column_name>accession_number</column_name>
-        <stream_name>accession_number</stream_name>
-      </field>
-      <field>
-        <column_name>value_group_id</column_name>
-        <stream_name>value_group_id</stream_name>
-      </field>
-      <field>
-        <column_name>value_coded</column_name>
-        <stream_name>value_coded</stream_name>
-      </field>
-      <field>
-        <column_name>value_coded_name_id</column_name>
-        <stream_name>value_coded_name_id</stream_name>
-      </field>
-      <field>
-        <column_name>value_drug</column_name>
-        <stream_name>value_drug</stream_name>
-      </field>
-      <field>
-        <column_name>value_datetime</column_name>
-        <stream_name>value_datetime</stream_name>
-      </field>
-      <field>
-        <column_name>value_numeric</column_name>
-        <stream_name>value_numeric</stream_name>
-      </field>
-      <field>
-        <column_name>value_modifier</column_name>
-        <stream_name>value_modifier</stream_name>
-      </field>
-      <field>
-        <column_name>value_text</column_name>
-        <stream_name>value_text</stream_name>
-      </field>
-      <field>
-        <column_name>comments</column_name>
-        <stream_name>comments</stream_name>
-      </field>
-      <field>
-        <column_name>creator</column_name>
-        <stream_name>creator</stream_name>
-      </field>
-      <field>
-        <column_name>date_created</column_name>
-        <stream_name>date_created</stream_name>
-      </field>
-      <field>
-        <column_name>voided</column_name>
-        <stream_name>voided</stream_name>
-      </field>
-      <field>
-        <column_name>voided_by</column_name>
-        <stream_name>voided_by</stream_name>
-      </field>
-      <field>
-        <column_name>date_voided</column_name>
-        <stream_name>date_voided</stream_name>
-      </field>
-      <field>
-        <column_name>void_reason</column_name>
-        <stream_name>void_reason</stream_name>
-      </field>
-      <field>
-        <column_name>value_complex</column_name>
-        <stream_name>value_complex</stream_name>
-      </field>
-      <field>
-        <column_name>uuid</column_name>
-        <stream_name>uuid</stream_name>
-      </field>
-      <field>
-        <column_name>previous_version</column_name>
-        <stream_name>previous_version</stream_name>
-      </field>
-      <field>
-        <column_name>obs_id</column_name>
-        <stream_name>obs_id</stream_name>
-      </field>
-    </fields>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1024</xloc>
-      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

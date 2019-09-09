@@ -627,12 +627,14 @@
     <sql>SELECT
 '2' AS order_type_id
 ,case
-when value_coded = '6324' then '8078'
-when value_coded = '6105' then '8096'
-when value_coded = '6100' then '8076'
-when value_coded = '1703' then '8075'
-when value_coded = '1651' then '8077'
+when value_coded = '6324' then '8034'
+when value_coded = '6105' then '8052'
+when value_coded = '6100' then '8032'
+when value_coded = '1703' then '8031'
+when value_coded = '1651' then '8421'
+when value_coded = '6104' then '8036'
 when value_coded = '1311' then '8084'
+When value_coded = '6243' then '8035'
 else value_coded
 end as concept_id
 ,'2' as orderer
