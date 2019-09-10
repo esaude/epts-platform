@@ -505,11 +505,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>new poc encounter id</from>
-      <to>get new visit id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>get new visit id</from>
       <to>wait for new encounter id</to>
       <enabled>Y</enabled>
@@ -527,6 +522,16 @@
     <hop>
       <from>wait for insert into poc encounter</from>
       <to>new poc encounter id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>new poc encounter id</from>
+      <to>wait for insert into poc encounter 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>wait for insert into poc encounter 2</from>
+      <to>get new visit id</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -763,8 +768,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>320</yloc>
+      <xloc>576</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -945,6 +950,41 @@ FROM encounter
     <GUI>
       <xloc>928</xloc>
       <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>wait for insert into poc encounter 2</name>
+    <type>BlockUntilStepsFinish</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <steps>
+      <step>
+        <name>insert on database level</name>
+        <CopyNr>0</CopyNr>
+      </step>
+      <step>
+        <name>new poc encounter id</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
