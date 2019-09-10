@@ -583,13 +583,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge join</from>
-      <to>Merge join 2</to>
+      <from>Merge join 2</from>
+      <to>poc patient attribute</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge join 2</from>
-      <to>poc patient attribute</to>
+      <from>Merge join</from>
+      <to>Sort rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows</from>
+      <to>Merge join 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -632,7 +637,7 @@ void_reason,
 uuid
 from CCSDBMASKED.patient_program where program_id in ('1','2')
 and date_completed is null
-order by patient_id asc, patient_program_id asc
+order by patient_id asc
 
 
 </sql>
@@ -650,7 +655,7 @@ order by patient_id asc, patient_program_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
+      <xloc>96</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -742,7 +747,7 @@ order by patient_id asc, patient_program_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
+      <xloc>832</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -776,7 +781,7 @@ order by patient_id asc, patient_program_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
+      <xloc>256</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -794,19 +799,8 @@ order by patient_id asc, patient_program_id asc
     </partitioning>
     <connection>poc</connection>
     <sql>SELECT
-  person_attribute_id
-, person_id
+  person_id
 , value
-, person_attribute_type_id
-, creator
-, date_created
-, changed_by
-, date_changed
-, voided
-, voided_by
-, date_voided
-, void_reason
-, uuid
 FROM person_attribute WHERE person_attribute_type_id = '64'
 order by person_id asc
 </sql>
@@ -824,7 +818,7 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
+      <xloc>96</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -846,7 +840,7 @@ order by person_id asc
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
+    <use_batch>N</use_batch>
     <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field />
@@ -860,7 +854,11 @@ order by person_id asc
     <fields>
       <field>
         <column_name>patient_id</column_name>
-        <stream_name>patient_id</stream_name>
+        <stream_name>person_id</stream_name>
+      </field>
+      <field>
+        <column_name>patient_status</column_name>
+        <stream_name>patient_status</stream_name>
       </field>
       <field>
         <column_name>creator</column_name>
@@ -875,20 +873,8 @@ order by person_id asc
         <stream_name>uuid</stream_name>
       </field>
       <field>
-        <column_name>creator</column_name>
-        <stream_name>creator_1</stream_name>
-      </field>
-      <field>
-        <column_name>date_created</column_name>
-        <stream_name>date_created_1</stream_name>
-      </field>
-      <field>
         <column_name>patient_state</column_name>
         <stream_name>state</stream_name>
-      </field>
-      <field>
-        <column_name>patient_status</column_name>
-        <stream_name>patient_status</stream_name>
       </field>
     </fields>
     <attributes />
@@ -928,16 +914,6 @@ when state = '9' then 'ACTIVE'
 when state = '10' then 'INACTIVE_DEATH'
 end as state
 , start_date
-, end_date
-, creator
-, date_created
-, changed_by
-, date_changed
-, voided
-, voided_by
-, date_voided
-, void_reason
-, uuid
 FROM patient_state
 where patient_program_id in
 (select patient_program_id from patient_program where program_id = '2')
@@ -975,7 +951,7 @@ order by patient_program_id asc
     </partitioning>
     <join_type>INNER</join_type>
     <step1>patient_state</step1>
-    <step2>Merge join</step2>
+    <step2>Sort rows</step2>
     <keys_1>
       <key>patient_program_id</key>
     </keys_1>
@@ -992,6 +968,48 @@ order by patient_program_id asc
     </remotesteps>
     <GUI>
       <xloc>592</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>patient_program_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
