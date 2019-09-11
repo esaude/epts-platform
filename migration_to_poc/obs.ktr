@@ -578,27 +578,12 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocking step 2</from>
-      <to>get new encounter id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>new_patient_id</from>
       <to>Blocking step 2 4</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>epts_obs</from>
-      <to>Blocking step 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Blocking step 2 4</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step 2 2</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
@@ -610,6 +595,61 @@
     <hop>
       <from>create temp</from>
       <to>epts_obs</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>concept</from>
+      <to>Sort rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows</from>
+      <to>Merge join 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>epts_obs</from>
+      <to>Blocking step 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>value coded</from>
+      <to>Sort rows 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 3</from>
+      <to>Merge join 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 2</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2</from>
+      <to>Merge join 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join 2</from>
+      <to>Merge join 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join 3</from>
+      <to>get correct concept id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get correct concept id</from>
+      <to>get correct concept id 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get correct concept id 2</from>
+      <to>get new encounter id</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -638,8 +678,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>560</yloc>
+      <xloc>816</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -668,8 +708,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>352</yloc>
+      <xloc>432</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -698,8 +738,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>880</xloc>
-      <yloc>320</yloc>
+      <xloc>1664</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -728,8 +768,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>512</yloc>
+      <xloc>432</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -762,8 +802,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>416</yloc>
+      <xloc>640</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -833,13 +873,719 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>416</yloc>
+      <xloc>112</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
     <name>epts_obs</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+obs_id,
+person_id
+, concept_id
+, encounter_id
+, order_id
+, obs_datetime
+, '17' as location_id
+, obs_group_id
+, accession_number
+, value_group_id
+, value_boolean
+, value_coded
+, value_coded_name_id
+, value_drug
+, value_datetime
+, value_numeric
+, value_modifier
+, value_text
+, comments
+, '4' as creator
+, date_created
+, voided
+, case 
+when voided_by is not null then '4' end as voided_by
+, date_voided
+, void_reason
+, value_complex
+, uuid
+, previous_version
+, form_namespace_and_path
+FROM obs where concept_id in ('1441','1442','1611','1271','1255','856','5497'
+,'21','654','653','887','1982','6332','6122','6128','6121','6126','6127','5965','1113','6120','5356')
+or obs_id in (select obs_group_id from obs where obs_group_id is not null and concept_id in ('1441','1442','1611','1271','1255','856','5497'
+,'21','654','653','887','1982','6332','6122','6128','6121','6126','6127','5965','1113','6120','5356'))
+order by person_id asc</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get new encounter id</name>
+    <type>DBLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema />
+      <table>encounter_temp</table>
+      <orderby />
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>encounter_id</name>
+        <field>encounter_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>person_id_1</name>
+        <field>patient_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>new_encounter_id</name>
+        <rename>new_encounter_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>encounter_id</name>
+        <rename>encounter_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>encounter_type</name>
+        <rename>encounter_type</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>patient_id</name>
+        <rename>patient_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>location_id</name>
+        <rename>location_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>form_id</name>
+        <rename>form_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>encounter_datetime</name>
+        <rename>encounter_datetime</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>creator</name>
+        <rename>creator</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>voided</name>
+        <rename>voided</rename>
+        <default />
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>voided_by</name>
+        <rename>voided_by</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_voided</name>
+        <rename>date_voided</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>void_reason</name>
+        <rename>void_reason</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>changed_by</name>
+        <rename>changed_by</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_changed</name>
+        <rename>date_changed</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>visit_id</name>
+        <rename>visit_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <default />
+        <type>String</type>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1536</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>insert obs into temp</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <schema />
+    <table>obs_temp</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>person_id</column_name>
+        <stream_name>person_id_1</stream_name>
+      </field>
+      <field>
+        <column_name>concept_id</column_name>
+        <stream_name>actual_concept_id</stream_name>
+      </field>
+      <field>
+        <column_name>encounter_id</column_name>
+        <stream_name>new_encounter_id</stream_name>
+      </field>
+      <field>
+        <column_name>order_id</column_name>
+        <stream_name>order_id</stream_name>
+      </field>
+      <field>
+        <column_name>obs_datetime</column_name>
+        <stream_name>obs_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>location_id</column_name>
+        <stream_name>location_id</stream_name>
+      </field>
+      <field>
+        <column_name>obs_group_id</column_name>
+        <stream_name>obs_group_id</stream_name>
+      </field>
+      <field>
+        <column_name>accession_number</column_name>
+        <stream_name>accession_number</stream_name>
+      </field>
+      <field>
+        <column_name>value_group_id</column_name>
+        <stream_name>value_group_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded</column_name>
+        <stream_name>actual_value_coded</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded_name_id</column_name>
+        <stream_name>value_coded_name_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_drug</column_name>
+        <stream_name>value_drug</stream_name>
+      </field>
+      <field>
+        <column_name>value_datetime</column_name>
+        <stream_name>value_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>value_numeric</column_name>
+        <stream_name>value_numeric</stream_name>
+      </field>
+      <field>
+        <column_name>value_modifier</column_name>
+        <stream_name>value_modifier</stream_name>
+      </field>
+      <field>
+        <column_name>value_text</column_name>
+        <stream_name>value_text</stream_name>
+      </field>
+      <field>
+        <column_name>comments</column_name>
+        <stream_name>comments</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>voided</column_name>
+        <stream_name>voided</stream_name>
+      </field>
+      <field>
+        <column_name>voided_by</column_name>
+        <stream_name>voided_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_voided</column_name>
+        <stream_name>date_voided</stream_name>
+      </field>
+      <field>
+        <column_name>void_reason</column_name>
+        <stream_name>void_reason</stream_name>
+      </field>
+      <field>
+        <column_name>value_complex</column_name>
+        <stream_name>value_complex</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>uuid</stream_name>
+      </field>
+      <field>
+        <column_name>previous_version</column_name>
+        <stream_name>previous_version</stream_name>
+      </field>
+      <field>
+        <column_name>obs_id</column_name>
+        <stream_name>obs_id</stream_name>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1808</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>new_patient_id</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <sql>SELECT
+  person_attribute_id
+, person_id
+, value
+, person_attribute_type_id
+, creator
+, date_created
+, changed_by
+, date_changed
+, voided
+, voided_by
+, date_voided
+, void_reason
+, uuid
+FROM person_attribute WHERE person_attribute_type_id = '64'
+order by person_id asc
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>poc_obs</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <schema />
+    <table>obs</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>person_id</column_name>
+        <stream_name>person_id_1</stream_name>
+      </field>
+      <field>
+        <column_name>concept_id</column_name>
+        <stream_name>actual_concept_id</stream_name>
+      </field>
+      <field>
+        <column_name>encounter_id</column_name>
+        <stream_name>new_encounter_id</stream_name>
+      </field>
+      <field>
+        <column_name>order_id</column_name>
+        <stream_name>order_id</stream_name>
+      </field>
+      <field>
+        <column_name>obs_datetime</column_name>
+        <stream_name>obs_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>location_id</column_name>
+        <stream_name>location_id</stream_name>
+      </field>
+      <field>
+        <column_name>obs_group_id</column_name>
+        <stream_name>obs_group_id</stream_name>
+      </field>
+      <field>
+        <column_name>accession_number</column_name>
+        <stream_name>accession_number</stream_name>
+      </field>
+      <field>
+        <column_name>value_group_id</column_name>
+        <stream_name>value_group_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded</column_name>
+        <stream_name>actual_value_coded</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded_name_id</column_name>
+        <stream_name>value_coded_name_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_drug</column_name>
+        <stream_name>value_drug</stream_name>
+      </field>
+      <field>
+        <column_name>value_datetime</column_name>
+        <stream_name>value_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>value_numeric</column_name>
+        <stream_name>value_numeric</stream_name>
+      </field>
+      <field>
+        <column_name>value_modifier</column_name>
+        <stream_name>value_modifier</stream_name>
+      </field>
+      <field>
+        <column_name>value_text</column_name>
+        <stream_name>value_text</stream_name>
+      </field>
+      <field>
+        <column_name>comments</column_name>
+        <stream_name>comments</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>voided</column_name>
+        <stream_name>voided</stream_name>
+      </field>
+      <field>
+        <column_name>voided_by</column_name>
+        <stream_name>voided_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_voided</column_name>
+        <stream_name>date_voided</stream_name>
+      </field>
+      <field>
+        <column_name>void_reason</column_name>
+        <stream_name>void_reason</stream_name>
+      </field>
+      <field>
+        <column_name>value_complex</column_name>
+        <stream_name>value_complex</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>uuid</stream_name>
+      </field>
+      <field>
+        <column_name>previous_version</column_name>
+        <stream_name>previous_version</stream_name>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1808</xloc>
+      <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>concept</name>
+    <type>CsvInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/update concept map no null.csv</filename>
+    <filename_field />
+    <rownum_field />
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding />
+    <fields>
+      <field>
+        <name>EPTS_CONCEPT_NAME</name>
+        <type>String</type>
+        <format />
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>45</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EPTS_CONCEPT_id</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EPTS_CONCEPT_uuid</name>
+        <type>String</type>
+        <format />
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>37</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_NAME</name>
+        <type>String</type>
+        <format />
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>28</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_id</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_uuid</name>
+        <type>String</type>
+        <format />
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join 2</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>epts_obs</step1>
+    <step2>Blocking step 2</step2>
+    <keys_1>
+      <key>concept_id</key>
+    </keys_1>
+    <keys_2>
+      <key>EPTS_CONCEPT_id</key>
+    </keys_2>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>epts_obs bk</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -1987,13 +2733,55 @@ order by person_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>352</yloc>
+      <xloc>112</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>get new encounter id</name>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>EPTS_CONCEPT_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get correct concept id</name>
     <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
@@ -2009,123 +2797,21 @@ order by person_id asc</sql>
     <cache_size>0</cache_size>
     <lookup>
       <schema />
-      <table>encounter_temp</table>
+      <table>concept</table>
       <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>encounter_id</name>
-        <field>encounter_id</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>person_id_1</name>
-        <field>patient_id</field>
+        <name>POC_CONCEPT_uuid</name>
+        <field>uuid</field>
         <condition>=</condition>
         <name2 />
       </key>
       <value>
-        <name>new_encounter_id</name>
-        <rename>new_encounter_id</rename>
+        <name>concept_id</name>
+        <rename>actual_concept_id</rename>
         <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>encounter_id</name>
-        <rename>encounter_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>encounter_type</name>
-        <rename>encounter_type</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>patient_id</name>
-        <rename>patient_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>location_id</name>
-        <rename>location_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>form_id</name>
-        <rename>form_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>encounter_datetime</name>
-        <rename>encounter_datetime</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>creator</name>
-        <rename>creator</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_created</name>
-        <rename>date_created</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>voided</name>
-        <rename>voided</rename>
-        <default />
-        <type>Boolean</type>
-      </value>
-      <value>
-        <name>voided_by</name>
-        <rename>voided_by</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_voided</name>
-        <rename>date_voided</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>void_reason</name>
-        <rename>void_reason</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>changed_by</name>
-        <rename>changed_by</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_changed</name>
-        <rename>date_changed</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>visit_id</name>
-        <rename>visit_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>uuid</name>
-        <rename>uuid</rename>
-        <default />
-        <type>String</type>
+        <type>None</type>
       </value>
     </lookup>
     <attributes />
@@ -2137,14 +2823,14 @@ order by person_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
-      <yloc>432</yloc>
+      <xloc>1296</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>insert obs into temp</name>
-    <type>TableOutput</type>
+    <name>value coded</name>
+    <type>CsvInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -2153,131 +2839,86 @@ order by person_id asc</sql>
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>poc</connection>
-    <schema />
-    <table>obs_temp</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/update concept map no null.csv</filename>
+    <filename_field />
+    <rownum_field />
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding />
     <fields>
       <field>
-        <column_name>person_id</column_name>
-        <stream_name>person_id_1</stream_name>
+        <name>EPTS_CONCEPT_NAME</name>
+        <type>String</type>
+        <format />
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>45</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <column_name>concept_id</column_name>
-        <stream_name>concept_id</stream_name>
+        <name>EPTS_CONCEPT_id</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <column_name>encounter_id</column_name>
-        <stream_name>new_encounter_id</stream_name>
+        <name>EPTS_CONCEPT_uuid</name>
+        <type>String</type>
+        <format />
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>37</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <column_name>order_id</column_name>
-        <stream_name>order_id</stream_name>
+        <name>POC_CONCEPT_NAME</name>
+        <type>String</type>
+        <format />
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>28</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <column_name>obs_datetime</column_name>
-        <stream_name>obs_datetime</stream_name>
+        <name>POC_CONCEPT_id</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <column_name>location_id</column_name>
-        <stream_name>location_id</stream_name>
-      </field>
-      <field>
-        <column_name>obs_group_id</column_name>
-        <stream_name>obs_group_id</stream_name>
-      </field>
-      <field>
-        <column_name>accession_number</column_name>
-        <stream_name>accession_number</stream_name>
-      </field>
-      <field>
-        <column_name>value_group_id</column_name>
-        <stream_name>value_group_id</stream_name>
-      </field>
-      <field>
-        <column_name>value_coded</column_name>
-        <stream_name>value_coded</stream_name>
-      </field>
-      <field>
-        <column_name>value_coded_name_id</column_name>
-        <stream_name>value_coded_name_id</stream_name>
-      </field>
-      <field>
-        <column_name>value_drug</column_name>
-        <stream_name>value_drug</stream_name>
-      </field>
-      <field>
-        <column_name>value_datetime</column_name>
-        <stream_name>value_datetime</stream_name>
-      </field>
-      <field>
-        <column_name>value_numeric</column_name>
-        <stream_name>value_numeric</stream_name>
-      </field>
-      <field>
-        <column_name>value_modifier</column_name>
-        <stream_name>value_modifier</stream_name>
-      </field>
-      <field>
-        <column_name>value_text</column_name>
-        <stream_name>value_text</stream_name>
-      </field>
-      <field>
-        <column_name>comments</column_name>
-        <stream_name>comments</stream_name>
-      </field>
-      <field>
-        <column_name>creator</column_name>
-        <stream_name>creator</stream_name>
-      </field>
-      <field>
-        <column_name>date_created</column_name>
-        <stream_name>date_created</stream_name>
-      </field>
-      <field>
-        <column_name>voided</column_name>
-        <stream_name>voided</stream_name>
-      </field>
-      <field>
-        <column_name>voided_by</column_name>
-        <stream_name>voided_by</stream_name>
-      </field>
-      <field>
-        <column_name>date_voided</column_name>
-        <stream_name>date_voided</stream_name>
-      </field>
-      <field>
-        <column_name>void_reason</column_name>
-        <stream_name>void_reason</stream_name>
-      </field>
-      <field>
-        <column_name>value_complex</column_name>
-        <stream_name>value_complex</stream_name>
-      </field>
-      <field>
-        <column_name>uuid</column_name>
-        <stream_name>uuid</stream_name>
-      </field>
-      <field>
-        <column_name>previous_version</column_name>
-        <stream_name>previous_version</stream_name>
-      </field>
-      <field>
-        <column_name>obs_id</column_name>
-        <stream_name>obs_id</stream_name>
+        <name>POC_CONCEPT_uuid</name>
+        <type>String</type>
+        <format />
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
     </fields>
     <attributes />
@@ -2289,62 +2930,14 @@ order by person_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>new_patient_id</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <sql>SELECT
-  person_attribute_id
-, person_id
-, value
-, person_attribute_type_id
-, creator
-, date_created
-, changed_by
-, date_changed
-, voided
-, voided_by
-, date_voided
-, void_reason
-, uuid
-FROM person_attribute WHERE person_attribute_type_id = '64'
-order by person_id asc
-</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>400</xloc>
+      <xloc>1040</xloc>
       <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>poc_obs</name>
-    <type>TableOutput</type>
+    <name>Merge join 3</name>
+    <type>MergeJoin</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -2353,127 +2946,55 @@ order by person_id asc
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>poc</connection>
-    <schema />
-    <table>obs</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field />
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field />
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field />
+    <join_type>INNER</join_type>
+    <step1>Merge join 2</step1>
+    <step2>Sort rows 3</step2>
+    <keys_1>
+      <key>value_coded</key>
+    </keys_1>
+    <keys_2>
+      <key>EPTS_CONCEPT_id</key>
+    </keys_2>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1152</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 3</name>
+    <type>SortRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory />
+    <compress>N</compress>
+    <compress_variable />
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <column_name>person_id</column_name>
-        <stream_name>person_id_1</stream_name>
-      </field>
-      <field>
-        <column_name>concept_id</column_name>
-        <stream_name>concept_id</stream_name>
-      </field>
-      <field>
-        <column_name>encounter_id</column_name>
-        <stream_name>new_encounter_id</stream_name>
-      </field>
-      <field>
-        <column_name>order_id</column_name>
-        <stream_name>order_id</stream_name>
-      </field>
-      <field>
-        <column_name>obs_datetime</column_name>
-        <stream_name>obs_datetime</stream_name>
-      </field>
-      <field>
-        <column_name>location_id</column_name>
-        <stream_name>location_id</stream_name>
-      </field>
-      <field>
-        <column_name>obs_group_id</column_name>
-        <stream_name>obs_group_id</stream_name>
-      </field>
-      <field>
-        <column_name>accession_number</column_name>
-        <stream_name>accession_number</stream_name>
-      </field>
-      <field>
-        <column_name>value_group_id</column_name>
-        <stream_name>value_group_id</stream_name>
-      </field>
-      <field>
-        <column_name>value_coded</column_name>
-        <stream_name>value_coded</stream_name>
-      </field>
-      <field>
-        <column_name>value_coded_name_id</column_name>
-        <stream_name>value_coded_name_id</stream_name>
-      </field>
-      <field>
-        <column_name>value_drug</column_name>
-        <stream_name>value_drug</stream_name>
-      </field>
-      <field>
-        <column_name>value_datetime</column_name>
-        <stream_name>value_datetime</stream_name>
-      </field>
-      <field>
-        <column_name>value_numeric</column_name>
-        <stream_name>value_numeric</stream_name>
-      </field>
-      <field>
-        <column_name>value_modifier</column_name>
-        <stream_name>value_modifier</stream_name>
-      </field>
-      <field>
-        <column_name>value_text</column_name>
-        <stream_name>value_text</stream_name>
-      </field>
-      <field>
-        <column_name>comments</column_name>
-        <stream_name>comments</stream_name>
-      </field>
-      <field>
-        <column_name>creator</column_name>
-        <stream_name>creator</stream_name>
-      </field>
-      <field>
-        <column_name>date_created</column_name>
-        <stream_name>date_created</stream_name>
-      </field>
-      <field>
-        <column_name>voided</column_name>
-        <stream_name>voided</stream_name>
-      </field>
-      <field>
-        <column_name>voided_by</column_name>
-        <stream_name>voided_by</stream_name>
-      </field>
-      <field>
-        <column_name>date_voided</column_name>
-        <stream_name>date_voided</stream_name>
-      </field>
-      <field>
-        <column_name>void_reason</column_name>
-        <stream_name>void_reason</stream_name>
-      </field>
-      <field>
-        <column_name>value_complex</column_name>
-        <stream_name>value_complex</stream_name>
-      </field>
-      <field>
-        <column_name>uuid</column_name>
-        <stream_name>uuid</stream_name>
-      </field>
-      <field>
-        <column_name>previous_version</column_name>
-        <stream_name>previous_version</stream_name>
+        <name>EPTS_CONCEPT_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
       </field>
     </fields>
     <attributes />
@@ -2485,8 +3006,56 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
-      <yloc>480</yloc>
+      <xloc>1152</xloc>
+      <yloc>512</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get correct concept id 2</name>
+    <type>DBLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema />
+      <table>concept</table>
+      <orderby />
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>POC_CONCEPT_uuid_1</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>concept_id</name>
+        <rename>actual_value_coded</rename>
+        <default />
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1408</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
