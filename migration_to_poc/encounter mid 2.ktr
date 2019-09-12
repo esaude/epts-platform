@@ -430,7 +430,7 @@
     <created_date>2019/08/31 16:47:21.781</created_date>
     <modified_user>-</modified_user>
     <modified_date>2019/08/31 16:47:21.781</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -593,6 +593,60 @@
     </GUI>
   </step>
   <step>
+    <name>Merge join</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>get from visit</step1>
+    <step2>get the encounters without visit</step2>
+    <keys_1>
+      <key>patient_id</key>
+      <key>location_id</key>
+      <key>date_started</key>
+      <key>creator</key>
+      <key>date_created</key>
+      <key>voided</key>
+      <key>voided_by</key>
+      <key>date_voided</key>
+      <key>void_reason</key>
+      <key>changed_by</key>
+      <key>date_changed</key>
+    </keys_1>
+    <keys_2>
+      <key>patient_id</key>
+      <key>location_id</key>
+      <key>encounter_datetime</key>
+      <key>creator</key>
+      <key>date_created</key>
+      <key>voided</key>
+      <key>voided_by</key>
+      <key>date_voided</key>
+      <key>void_reason</key>
+      <key>changed_by</key>
+      <key>date_changed</key>
+    </keys_2>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Update visit id in encounter temp</name>
     <type>Update</type>
     <description />
@@ -668,8 +722,44 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>336</yloc>
+      <xloc>208</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get the encounters without visit</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <sql>select
+* 
+from encounter_temp
+where visit_id is null
+order by patient_id asc</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -782,96 +872,6 @@ order by patient_id asc</sql>
     <GUI>
       <xloc>816</xloc>
       <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>get from visit</step1>
-    <step2>get the encounters without visit</step2>
-    <keys_1>
-      <key>patient_id</key>
-      <key>location_id</key>
-      <key>date_started</key>
-      <key>creator</key>
-      <key>date_created</key>
-      <key>voided</key>
-      <key>voided_by</key>
-      <key>date_voided</key>
-      <key>void_reason</key>
-      <key>changed_by</key>
-      <key>date_changed</key>
-    </keys_1>
-    <keys_2>
-      <key>patient_id</key>
-      <key>location_id</key>
-      <key>encounter_datetime</key>
-      <key>creator</key>
-      <key>date_created</key>
-      <key>voided</key>
-      <key>voided_by</key>
-      <key>date_voided</key>
-      <key>void_reason</key>
-      <key>changed_by</key>
-      <key>date_changed</key>
-    </keys_2>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>592</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get the encounters without visit</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <sql>select
-* 
-from encounter_temp
-where visit_id is null
-order by patient_id asc</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
