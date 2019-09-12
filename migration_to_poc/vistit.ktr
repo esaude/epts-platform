@@ -1912,7 +1912,7 @@ order by person_id asc
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
     <sql>delete from visit where visit_id not in
-(select visit_id from encounter);</sql>
+(select visit_id from encounter where visit_id is not null);</sql>
     <set_params>N</set_params>
     <insert_field />
     <update_field />
