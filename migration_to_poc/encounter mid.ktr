@@ -516,21 +516,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>insert into visit</from>
-      <to>Blocking step</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step</from>
-      <to>get new visit id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get new visit id</from>
-      <to>Update visit id in encounter temp</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>get encounters with visit id</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
@@ -543,6 +528,26 @@
     <hop>
       <from>Merge join</from>
       <to>Update visit id in encounter temp 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get new visit id</from>
+      <to>Block this step until steps finish</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Block this step until steps finish</from>
+      <to>Update visit id in encounter temp</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>insert into visit</from>
+      <to>blocking step</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>blocking step</from>
+      <to>get new visit id</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -584,7 +589,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>672</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -621,7 +626,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>672</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -672,7 +677,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>432</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -781,7 +786,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
+      <xloc>880</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -813,38 +818,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
+      <xloc>1152</xloc>
       <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step</name>
-    <type>BlockingStep</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <pass_all_rows>N</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>672</xloc>
-      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -961,7 +936,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
+      <xloc>1264</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1006,8 +981,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>400</yloc>
+      <xloc>1328</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1042,7 +1017,7 @@ order by patient_id asc</sql>
 , uuid()
 from encounter_temp 
 where visit_id is not null
-order by patient_id asc</sql>
+order by visit_id asc</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -1057,7 +1032,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>432</xloc>
       <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1074,7 +1049,7 @@ order by patient_id asc</sql>
       <schema_name />
     </partitioning>
     <connection>poc</connection>
-    <sql>select * from visit_temp order by patient_id asc</sql>
+    <sql>select * from visit_temp order by visit_id asc</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -1089,7 +1064,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>432</xloc>
       <yloc>688</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1140,7 +1115,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
+      <xloc>832</xloc>
       <yloc>592</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1174,8 +1149,78 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>672</xloc>
       <yloc>592</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Block this step until steps finish</name>
+    <type>BlockUntilStepsFinish</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <steps>
+      <step>
+        <name>get new visit id</name>
+        <CopyNr>0</CopyNr>
+      </step>
+      <step>
+        <name>insert into visit</name>
+        <CopyNr>0</CopyNr>
+      </step>
+      <step>
+        <name>blocking step</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1296</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>blocking step</name>
+    <type>BlockUntilStepsFinish</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <steps>
+      <step>
+        <name>insert into visit</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

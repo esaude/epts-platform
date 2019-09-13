@@ -828,7 +828,8 @@ when voided_by is not null then'4' end as voided_by
 , date_changed
 , case 
 when changed_by is not null then'4' end as changed_by
-FROM patient_identifier where identifier_type = '2'</sql>
+FROM patient_identifier where identifier_type = '2'
+order by patient_id asc</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -874,7 +875,8 @@ FROM patient_identifier where identifier_type = '2'</sql>
 , date_voided
 , void_reason
 , uuid
-FROM person_attribute WHERE person_attribute_type_id = '64'
+FROM person_attribute WHERE person_attribute_type_id = '999'
+order by person_id desc
 </sql>
     <limit>0</limit>
     <lookup />

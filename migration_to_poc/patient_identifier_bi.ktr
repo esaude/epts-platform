@@ -731,6 +731,7 @@ patient_id
 , date_created
 , uuid
 FROM patient_identifier where identifier_type = '3'
+order by patient_id asc
 </sql>
     <limit>0</limit>
     <lookup />
@@ -777,7 +778,8 @@ FROM patient_identifier where identifier_type = '3'
 , date_voided
 , void_reason
 , uuid
-FROM person_attribute WHERE person_attribute_type_id = '64'
+FROM person_attribute WHERE person_attribute_type_id = '999'
+order by person_id asc
 </sql>
     <limit>0</limit>
     <lookup />

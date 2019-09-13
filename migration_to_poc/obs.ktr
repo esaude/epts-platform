@@ -1284,7 +1284,7 @@ order by person_id asc
 , date_voided
 , void_reason
 , uuid
-FROM person_attribute WHERE person_attribute_type_id = '64'
+FROM person_attribute WHERE person_attribute_type_id = '999'
 order by person_id asc
 </sql>
     <limit>0</limit>

@@ -647,6 +647,7 @@ when changed_by is not null then '4' end as changed_by
 , date_changed
 , uuid
 FROM person_name
+order by person_id asc
 </sql>
     <limit>0</limit>
     <lookup />
@@ -934,7 +935,8 @@ FROM person_name
 , date_voided
 , void_reason
 , uuid
-FROM person_attribute WHERE person_attribute_type_id = '64'
+FROM person_attribute WHERE person_attribute_type_id = '999'
+order by person_id asc
 </sql>
     <limit>0</limit>
     <lookup />

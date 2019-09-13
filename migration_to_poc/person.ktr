@@ -598,6 +598,11 @@
       <to>update person attribute</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Execute SQL script</from>
+      <to>epts_person</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Block this step until steps finish</name>
@@ -687,7 +692,7 @@
     </fields>
     <data>
       <line>
-        <item>64</item>
+        <item>999</item>
       </line>
     </data>
     <attributes />
@@ -1155,8 +1160,49 @@ FROM person
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
-      <yloc>176</yloc>
+      <xloc>848</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>INSERT INTO person_attribute_type 
+(`person_attribute_type_id`, `name`, `description`, `format`, `searchable`, `creator`, `date_created`, `retired`, `uuid`) 
+VALUES ('999', 'OLD PERSON ID', 'OLD PERSON ID', 'java.lang.String', '0', '2', '2019-09-13 11:25:00', '0', 'd3f6f41c-b094-1010-b99c-f4c10e25efac');
+</sql>
+    <set_params>N</set_params>
+    <insert_field />
+    <update_field />
+    <delete_field />
+    <read_field />
+    <arguments>
+    </arguments>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>48</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

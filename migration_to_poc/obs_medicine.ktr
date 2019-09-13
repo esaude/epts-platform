@@ -676,7 +676,7 @@ when voided_by is not null then '4' end as voided_by
 ,obs_datetime as scheduled_date
 FROM obs where value_coded !='5424' and concept_id = '1088' and encounter_id in 
 (select distinct encounter_id from encounter where encounter_type in ('18')) and value_coded is not null
-order by person_id asc;</sql>
+order by person_id asc</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
@@ -866,7 +866,7 @@ order by person_id asc;</sql>
 , date_voided
 , void_reason
 , uuid
-FROM person_attribute WHERE person_attribute_type_id = '64'
+FROM person_attribute WHERE person_attribute_type_id = '999'
 order by person_id asc
 </sql>
     <limit>0</limit>
