@@ -430,7 +430,7 @@
     <created_date>2019/08/27 11:09:00.545</created_date>
     <modified_user>-</modified_user>
     <modified_date>2019/08/27 11:09:00.545</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -501,11 +501,11 @@
   <order>
     <hop>
       <from>Blocking step 2 2 2 2</from>
-      <to>obs id in temp 2 2</to>
+      <to>update new obs id as obs group id</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input 2</from>
+      <from>all obs with group id</from>
       <to>Merge join 2</to>
       <enabled>Y</enabled>
     </hop>
@@ -515,18 +515,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>view 2</from>
+      <from>all obs from temp</from>
       <to>Merge join 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>obs id in temp 2 2</from>
+      <from>update new obs id as obs group id</from>
       <to>Blocking step 2 2 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Blocking step 2 2 2</from>
-      <to>obs group id in obs</to>
+      <to>update obs group id in obs</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -591,7 +591,41 @@
     </GUI>
   </step>
   <step>
-    <name>Table input 2</name>
+    <name>Merge join 2</name>
+    <type>MergeJoin</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>all obs with group id</step1>
+    <step2>all obs from temp</step2>
+    <keys_1>
+      <key>obs_group_id</key>
+    </keys_1>
+    <keys_2>
+      <key>obs_id</key>
+    </keys_2>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>all obs with group id</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
@@ -656,42 +690,8 @@ order by obs_group_id asc</sql>
     </GUI>
   </step>
   <step>
-    <name>Merge join 2</name>
-    <type>MergeJoin</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>Table input 2</step1>
-    <step2>view 2</step2>
-    <keys_1>
-      <key>obs_group_id</key>
-    </keys_1>
-    <keys_2>
-      <key>obs_id</key>
-    </keys_2>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>view 2</name>
-    <type>TableInput</type>
+    <name>update obs group id in obs</name>
+    <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -701,14 +701,23 @@ order by obs_group_id asc</sql>
       <schema_name />
     </partitioning>
     <connection>poc</connection>
-    <sql>select * 
-from obs_temp 
-order by obs_id asc</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <commit>2000</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>obs</table>
+      <key>
+        <name>uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>obs_group_id</name>
+        <rename>new_obs_group_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -718,13 +727,13 @@ order by obs_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>512</yloc>
+      <xloc>1232</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>obs id in temp 2 2</name>
+    <name>update new obs id as obs group id</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -767,8 +776,8 @@ order by obs_id asc</sql>
     </GUI>
   </step>
   <step>
-    <name>obs group id in obs</name>
-    <type>InsertUpdate</type>
+    <name>all obs from temp</name>
+    <type>TableInput</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -778,23 +787,14 @@ order by obs_id asc</sql>
       <schema_name />
     </partitioning>
     <connection>poc</connection>
-    <commit>2000</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>obs</table>
-      <key>
-        <name>uuid</name>
-        <field>uuid</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>obs_group_id</name>
-        <rename>new_obs_group_id</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <sql>select * 
+from obs_temp 
+order by obs_id asc</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -804,8 +804,8 @@ order by obs_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1232</xloc>
-      <yloc>208</yloc>
+      <xloc>368</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

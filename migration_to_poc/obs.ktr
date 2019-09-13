@@ -634,11 +634,11 @@
     </hop>
     <hop>
       <from>get correct concept id</from>
-      <to>get correct concept id 2</to>
+      <to>get correct value coded</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get correct concept id 2</from>
+      <from>get correct value coded</from>
       <to>get new encounter id</to>
       <enabled>Y</enabled>
     </hop>
@@ -1101,7 +1101,7 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1584</xloc>
+      <xloc>1568</xloc>
       <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1869,7 +1869,7 @@ order by person_id asc
     </GUI>
   </step>
   <step>
-    <name>get correct concept id 2</name>
+    <name>get correct value coded</name>
     <type>DBLookup</type>
     <description />
     <distribute>Y</distribute>
