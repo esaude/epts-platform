@@ -609,8 +609,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>128</yloc>
+      <xloc>544</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -643,8 +643,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>224</yloc>
+      <xloc>416</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -692,8 +692,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>160</xloc>
-      <yloc>128</yloc>
+      <xloc>256</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -740,8 +740,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>320</yloc>
+      <xloc>272</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -832,8 +832,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>224</yloc>
+      <xloc>736</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
