@@ -760,7 +760,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
+      <xloc>544</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -794,7 +794,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
+      <xloc>272</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -844,7 +844,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
+      <xloc>192</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
@@ -876,7 +876,7 @@ order by patient_id asc</sql>
 , void_reason
 , uuid
 FROM person_attribute WHERE person_attribute_type_id = '999'
-order by person_id desc
+order by person_id asc
 </sql>
     <limit>0</limit>
     <lookup />
@@ -892,7 +892,7 @@ order by person_id desc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
+      <xloc>192</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
