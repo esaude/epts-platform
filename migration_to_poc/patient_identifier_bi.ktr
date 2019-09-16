@@ -726,7 +726,7 @@
     <sql>SELECT
 patient_id
 , identifier
-, '56' as identifier_type
+, '64' as identifier_type
 , '4' as creator
 , date_created
 , uuid

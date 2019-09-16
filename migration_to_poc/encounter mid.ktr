@@ -542,113 +542,15 @@
     </hop>
     <hop>
       <from>get visit type</from>
-      <to>Insert visit</to>
+      <to>insert into visit</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>insert into visit</from>
+      <to>Insert into visit temp</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Insert visit</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <commit>100</commit>
-    <update_bypassed>Y</update_bypassed>
-    <lookup>
-      <schema />
-      <table>visit</table>
-      <key>
-        <name>patient_id</name>
-        <field>patient_id</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>patient_id</name>
-        <rename>patient_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>visit_type_id</name>
-        <rename>actual_visit_type</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_started</name>
-        <rename>encounter_datetime</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>location_id</name>
-        <rename>location_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>creator</name>
-        <rename>creator</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_created</name>
-        <rename>date_created</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>changed_by</name>
-        <rename>changed_by</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_changed</name>
-        <rename>date_changed</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>voided</name>
-        <rename>voided</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>voided_by</name>
-        <rename>voided_by</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>date_voided</name>
-        <rename>date_voided</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>void_reason</name>
-        <rename>void_reason</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>uuid</name>
-        <rename>uuid</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Merge join</name>
     <type>MergeJoin</type>
@@ -986,8 +888,7 @@
 , void_reason
 , changed_by
 , date_changed
-, visit_id
-, uuid
+, uuid()
 from encounter_temp 
 where visit_id is null
 </sql>
@@ -1138,6 +1039,211 @@ order by visit_id asc</sql>
     <GUI>
       <xloc>640</xloc>
       <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert into visit temp</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <commit>100</commit>
+    <update_bypassed>Y</update_bypassed>
+    <lookup>
+      <schema />
+      <table>visit_temp</table>
+      <key>
+        <name>patient_id</name>
+        <field>patient_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>patient_id</name>
+        <rename>patient_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>visit_type_id</name>
+        <rename>actual_visit_type</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_started</name>
+        <rename>encounter_datetime</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>location_id</name>
+        <rename>location_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>creator</name>
+        <rename>creator</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>changed_by</name>
+        <rename>changed_by</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_changed</name>
+        <rename>date_changed</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>voided</name>
+        <rename>voided</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>voided_by</name>
+        <rename>voided_by</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>date_voided</name>
+        <rename>date_voided</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>void_reason</name>
+        <rename>void_reason</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid()</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>new_visit_id</name>
+        <rename>visit_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>encounter_id</name>
+        <rename>encounter_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>insert into visit</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <schema />
+    <table>visit</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>Y</return_keys>
+    <return_field>visit_id</return_field>
+    <fields>
+      <field>
+        <column_name>patient_id</column_name>
+        <stream_name>patient_id</stream_name>
+      </field>
+      <field>
+        <column_name>visit_type_id</column_name>
+        <stream_name>actual_visit_type</stream_name>
+      </field>
+      <field>
+        <column_name>date_started</column_name>
+        <stream_name>encounter_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>location_id</column_name>
+        <stream_name>location_id</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>changed_by</column_name>
+        <stream_name>changed_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_changed</column_name>
+        <stream_name>date_changed</stream_name>
+      </field>
+      <field>
+        <column_name>voided</column_name>
+        <stream_name>voided</stream_name>
+      </field>
+      <field>
+        <column_name>voided_by</column_name>
+        <stream_name>voided_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_voided</column_name>
+        <stream_name>date_voided</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>uuid()</stream_name>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

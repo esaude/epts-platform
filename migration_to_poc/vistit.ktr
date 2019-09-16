@@ -1077,6 +1077,7 @@
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
     <sql>CREATE TABLE visit_temp (
+`encounter_id` int(11),
   `new_visit_id` int(11),
   `visit_id` int(11) NOT NULL,
   `patient_id` int(11) NOT NULL,

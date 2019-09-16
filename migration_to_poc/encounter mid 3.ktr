@@ -430,7 +430,7 @@
     <created_date>2019/09/13 17:57:12.332</created_date>
     <modified_user>-</modified_user>
     <modified_date>2019/09/13 17:57:12.332</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -511,49 +511,6 @@
     </hop>
   </order>
   <step>
-    <name>update visit on encounter temp</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <commit>1000</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>encounter_temp</table>
-      <key>
-        <name>encounter_id</name>
-        <field>encounter_id</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>visit_id</name>
-        <rename>visit_id</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>get new visit id</name>
     <type>DBLookup</type>
     <description />
@@ -570,16 +527,22 @@
     <cache_size>0</cache_size>
     <lookup>
       <schema />
-      <table>visit</table>
+      <table>visit_temp</table>
       <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>uuid</name>
-        <field>uuid</field>
+        <name>encounter_id</name>
+        <field>encounter_id</field>
         <condition>=</condition>
         <name2 />
       </key>
+      <value>
+        <name>new_visit_id</name>
+        <rename>new_visit_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
       <value>
         <name>visit_id</name>
         <rename>visit_id</rename>
@@ -720,6 +683,49 @@
     </remotesteps>
     <GUI>
       <xloc>176</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>update visit on encounter temp</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <commit>1000</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>encounter_temp</table>
+      <key>
+        <name>encounter_id</name>
+        <field>encounter_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>visit_id</name>
+        <rename>new_visit_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
