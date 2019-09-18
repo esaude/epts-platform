@@ -516,11 +516,11 @@
     </hop>
     <hop>
       <from>update on instance</from>
-      <to>Table input</to>
+      <to>input from obs</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input</from>
+      <from>input from obs</from>
       <to>Sort rows 2 2</to>
       <enabled>Y</enabled>
     </hop>
@@ -729,7 +729,7 @@
     </GUI>
   </step>
   <step>
-    <name>Table input</name>
+    <name>input from obs</name>
     <type>TableInput</type>
     <description />
     <distribute>Y</distribute>

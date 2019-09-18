@@ -645,7 +645,7 @@
     <hop>
       <from>Update</from>
       <to>Block this step </to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Block this step </from>

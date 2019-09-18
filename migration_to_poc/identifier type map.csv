@@ -1,10 +1,10 @@
 EPTS_ID,EPTS_NAME,EPTS_DESC,EPTS_UUID,POC_ID,POC_NAME,POC_DESC,POC_UUID
 1, OpenMRS Identification Number, Unique number used in OpenMRS, 8d793bee-c2cc-11de-8d13-0010c6dffd0f,,,,
-2, NID (SERVICO TARV), Numero de Identifica√ßao de Doente, e2b966d0-1d5f-11e0-b929-000c29ad1d07,3, Patient Identifier, New patient identifier type created for use by the Bahmni Registration System, 81433852-3f10-11e4-adec-0800271c1b75
-3, BILHETE DE IDENTIDADE (BI), O Bilhete de Identidade referido no artigo anterior √© v√°lido em todo o territ√≥rio nacional e √© documento bastante para prova de identidade do deu possuidor., e2b9682e-1d5f-11e0-b929-000c29ad1d07,,,,
-5, CODIGO ATS/UATS, Codigo do paciente no servi√ßo de ATS/UATS, e2b9698c-1d5f-11e0-b929-000c29ad1d07,,,,
+2, NID (SERVICO TARV), Numero de IdentificaÁao de Doente, e2b966d0-1d5f-11e0-b929-000c29ad1d07,3, Patient Identifier, New patient identifier type created for use by the Bahmni Registration System, 81433852-3f10-11e4-adec-0800271c1b75
+3, BILHETE DE IDENTIDADE (BI), O Bilhete de Identidade referido no artigo anterior È v·lido em todo o territÛrio nacional e È documento bastante para prova de identidade do deu possuidor., e2b9682e-1d5f-11e0-b929-000c29ad1d07,,,,
+5, CODIGO ATS/UATS, Codigo do paciente no serviÁo de ATS/UATS, e2b9698c-1d5f-11e0-b929-000c29ad1d07,,,,
 6, CODIGO PTV (PRE-NATAL), Number used to track PTV participants, e2b96ad6-1d5f-11e0-b929-000c29ad1d07,,,,
-7, CODIGO ITS, ITS Codigo Infec√ß√£o de Transmiss√£o Sexual\r\nSTI Codigo Sexually transmitted infection, e2b96c16-1d5f-11e0-b929-000c29ad1d07,,,,
+7, CODIGO ITS, ITS Codigo InfecÁ„o de Transmiss„o Sexual\r\nSTI Codigo Sexually transmitted infection, e2b96c16-1d5f-11e0-b929-000c29ad1d07,,,,
 8, CODIGO PTV (MATERNIDADE), Codigo PTV Maternidade, e2b96d56-1d5f-11e0-b929-000c29ad1d07,,,,
 9, NID (CCR), Child at risk NID, e2b97b70-1d5f-11e0-b929-000c29ad1d07,,,,
 10, PCR (NUMERO DE REGISTO), PCR Registration number, e2b97cec-1d5f-11e0-b929-000c29ad1d07,,,,

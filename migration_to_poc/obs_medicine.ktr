@@ -607,6 +607,11 @@
       <to>new encounter id</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>poc_obs</from>
+      <to>poc_order 2</to>
+      <enabled>N</enabled>
+    </hop>
   </order>
   <step>
     <name>Merge join</name>
@@ -788,11 +793,11 @@ when voided_by is not null then '4' end as voided_by
 ,person_id as patient_id
 ,uuid
 ,'ORD-EPTS' as order_number
-,'DISCONTINUE' as order_action
+,'CONTINUE' as order_action
 ,'ON_SCHEDULED_DATE' as urgency
 ,'1' as care_setting
 ,obs_datetime as scheduled_date
-FROM obs where value_coded !='5424' and concept_id = '1088' and encounter_id in 
+FROM obs where concept_id = '1088' or encounter_id in 
 (select distinct encounter_id from encounter where encounter_type in ('18')) and value_coded is not null
 order by person_id asc</sql>
     <limit>0</limit>
@@ -1274,6 +1279,173 @@ order by person_id asc
     <GUI>
       <xloc>656</xloc>
       <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>poc_order 2</name>
+    <type>TableOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <schema />
+    <table>orders</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>Y</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field />
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field />
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field />
+    <fields>
+      <field>
+        <column_name>order_type_id</column_name>
+        <stream_name>order_type_id</stream_name>
+      </field>
+      <field>
+        <column_name>concept_id</column_name>
+        <stream_name>actual_value_coded</stream_name>
+      </field>
+      <field>
+        <column_name>orderer</column_name>
+        <stream_name>orderer</stream_name>
+      </field>
+      <field>
+        <column_name>encounter_id</column_name>
+        <stream_name>new_encounter_id</stream_name>
+      </field>
+      <field>
+        <column_name>date_activated</column_name>
+        <stream_name>obs_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>obs_datetime_1</stream_name>
+      </field>
+      <field>
+        <column_name>voided</column_name>
+        <stream_name>voided</stream_name>
+      </field>
+      <field>
+        <column_name>voided_by</column_name>
+        <stream_name>voided_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_voided</column_name>
+        <stream_name>date_voided</stream_name>
+      </field>
+      <field>
+        <column_name>void_reason</column_name>
+        <stream_name>void_reason</stream_name>
+      </field>
+      <field>
+        <column_name>patient_id</column_name>
+        <stream_name>person_id_1</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>uuid</stream_name>
+      </field>
+      <field>
+        <column_name>urgency</column_name>
+        <stream_name>urgency</stream_name>
+      </field>
+      <field>
+        <column_name>care_setting</column_name>
+        <stream_name>care_setting</stream_name>
+      </field>
+      <field>
+        <column_name>scheduled_date</column_name>
+        <stream_name>obs_datetime_2</stream_name>
+      </field>
+      <field>
+        <column_name>order_number</column_name>
+        <stream_name>order_number</stream_name>
+      </field>
+      <field>
+        <column_name>order_action</column_name>
+        <stream_name>order_action</stream_name>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>poc_obs</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <sql>SELECT
+*
+FROM obs where concept_id in
+('8048',
+'8040',
+'8051',
+'8033',
+'8032',
+'8031',
+'8052',
+'8036',
+'8035',
+'8034')
+
+
+
+
+
+
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
