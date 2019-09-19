@@ -75,4 +75,25 @@ D4T+3TC+ABC+EFV (2Âª Linha),6327,,,,
 AZT+3TC+ABC+EFV (2Âª Linha),6328,,,,
 AZT+DDI+LPV/r (2Âª Linha),6109,,,,
 TDF+3TC+RAL+DRV/r (3Âª Linha),6329,,TDF+3TC+RAL+DRV/r,8048,84fb76fc-8c21-11e9-bc42-526af7764f64
-OUTRO,5424,,,,
+OUTRO,5424,,Other__Prophylaxis,8357,c992f904-7bbc-11e9-8f9e-2a86e4085a59
+OUTROS DIAGNOSTICOS,1406,,,,
+ANEMIA,3,e1cda114-1d5f-11e0-b929-000c29ad1d07,DC_Outras anemias,3996,5a8fe16c-f1c2-4056-8604-ccce0bf74043
+DIARREIA,16,e1cdb97e-1d5f-11e0-b929-000c29ad1d07,DC_Diarréia e gastroenterite de origem infecciosa presumível,3682,c54257ac-f7c8-4afc-8d45-bf3985535045
+MALNUTRIÇÃO MODERADA SEM RESPOSTA AO TRATAMENTO (P/A 70-79%),68,e1cf1422-1d5f-11e0-b929-000c29ad1d07,DC_Desnutrição protéico-calórica não especificada,4053,97199de6-75b5-459b-82c5-a81a9d59f4e5
+MALARIA,123,e1cf5270-1d5f-11e0-b929-000c29ad1d07,DC_Malária não especificada,3804,ccec63ae-265c-4317-9386-f685a622ae26
+LEUCEMIA,216,e1d00e18-1d5f-11e0-b929-000c29ad1d07,DC_Leucemia de tipo celular não especificado,3931,acd3b4a9-d209-40b7-bfc4-6ba403fe996c
+OTITE EXTERNA,218,e1d0103e-1d5f-11e0-b929-000c29ad1d07,DC_Otite externa,4283,19ebb299-1075-4119-bee2-9c6c9122abd4
+SARCOMA DE KAPOSI,507,e1d2984a-1d5f-11e0-b929-000c29ad1d07,DC_Sarcoma de Kaposi,3885,d1e0c78b-7782-47a2-acc1-e21bb5b8c764
+FISTULA RECTOVAGINAL,1218,e1d91a3a-1d5f-11e0-b929-000c29ad1d07,DC_Fissura e fístula das regiões anal e retal,4492,8ec0cafc-17d8-489e-9832-6c002c1c17a5
+FALTA TERAPUTICA CLINICA,1790,e1de866e-1d5f-11e0-b929-000c29ad1d07,,,
+PROLAPSO,2141,e1e117bc-1d5f-11e0-b929-000c29ad1d07,DC_Prolapso genital feminino,4732,4a236992-8cbb-44b2-806d-e9ca581e46bd
+POLIPÓ,2142,e1e118b6-1d5f-11e0-b929-000c29ad1d07,DC_Pólipo do trato genital feminino,4735,c02a84c5-cada-47ae-8346-ec12f1ffb54a
+ENCEFALOPATIA PROGRESSIVA,5046,e1e2b4be-1d5f-11e0-b929-000c29ad1d07,DC_Outros transtornos do encéfalo,4229,0a8bee87-522b-47dc-a7ac-88ab1e44ab55
+FEBRE,5945,e1eafbce-1d5f-11e0-b929-000c29ad1d07,DC_Febre de origem desconhecida,5018,9b4d8b61-b66d-4aff-8b17-c77ef8f1fb91
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
