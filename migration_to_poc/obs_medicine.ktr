@@ -605,42 +605,42 @@
     <hop>
       <from>Data grid</from>
       <to>Join rows (cartesian product)</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows</from>
       <to>Merge join 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 2</from>
       <to>Merge join 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>drug category and line</from>
       <to>Sort rows</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>drug concept id</from>
       <to>Merge join 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get cat id</from>
       <to>get line id</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc_drug_order</from>
       <to>drug_order_relationship</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 4</from>
       <to>Merge join 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>new encounter id</from>
@@ -653,64 +653,59 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>poc_order</from>
-      <to>wait3 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Join rows (cartesian product)</from>
       <to>wait3 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>wait3 2 2</from>
       <to>Sort rows 4</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge join 2</from>
       <to>wait3 2 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>wait3 2 2 2</from>
       <to>Sort rows 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge join 2 2</from>
       <to>wait3 2 2 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>wait3 2 2 2 2</from>
       <to>get cat id</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get line id</from>
       <to>wait3 2 2 2 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>wait3 2 2 2 2 2</from>
       <to>poc_drug_order</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>wait3 2 3</from>
       <to>Join rows (cartesian product)</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>wait3 2</from>
       <to>look</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>look</from>
       <to>wait3 2 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
   </order>
   <step>
@@ -1738,6 +1733,222 @@ order by person_id asc</sql>
     </GUI>
   </step>
   <step>
+    <name>look</name>
+    <type>DBLookup</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema />
+      <table>orders</table>
+      <orderby />
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>order_id</name>
+        <rename>order_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>order_type_id</name>
+        <rename>order_type_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>concept_id</name>
+        <rename>concept_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>orderer</name>
+        <rename>orderer</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>encounter_id</name>
+        <rename>encounter_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>instructions</name>
+        <rename>instructions</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>date_activated</name>
+        <rename>date_activated</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>auto_expire_date</name>
+        <rename>auto_expire_date</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>date_stopped</name>
+        <rename>date_stopped</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>order_reason</name>
+        <rename>order_reason</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>order_reason_non_coded</name>
+        <rename>order_reason_non_coded</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>creator</name>
+        <rename>creator</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>voided</name>
+        <rename>voided</rename>
+        <default />
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>voided_by</name>
+        <rename>voided_by</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>date_voided</name>
+        <rename>date_voided</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>void_reason</name>
+        <rename>void_reason</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>patient_id</name>
+        <rename>patient_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>accession_number</name>
+        <rename>accession_number</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>urgency</name>
+        <rename>urgency</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>order_number</name>
+        <rename>order_number</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>previous_order_id</name>
+        <rename>previous_order_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>order_action</name>
+        <rename>order_action</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>comment_to_fulfiller</name>
+        <rename>comment_to_fulfiller</rename>
+        <default />
+        <type>String</type>
+      </value>
+      <value>
+        <name>care_setting</name>
+        <rename>care_setting</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>scheduled_date</name>
+        <rename>scheduled_date</rename>
+        <default />
+        <type>Timestamp</type>
+      </value>
+      <value>
+        <name>order_group_id</name>
+        <rename>order_group_id</rename>
+        <default />
+        <type>Integer</type>
+      </value>
+      <value>
+        <name>sort_weight</name>
+        <rename>sort_weight</rename>
+        <default />
+        <type>BigNumber</type>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>new encounter id</name>
     <type>DBLookup</type>
     <description />
@@ -2455,228 +2666,6 @@ order by person_id asc
     <GUI>
       <xloc>880</xloc>
       <yloc>624</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>look</name>
-    <type>DBLookup</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema />
-      <table>orders</table>
-      <orderby />
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>uuid</name>
-        <field>uuid</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>encounter_id</name>
-        <field>encounter_id</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>order_id</name>
-        <rename>order_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>order_type_id</name>
-        <rename>order_type_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>concept_id</name>
-        <rename>concept_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>orderer</name>
-        <rename>orderer</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>encounter_id</name>
-        <rename>encounter_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>instructions</name>
-        <rename>instructions</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>date_activated</name>
-        <rename>date_activated</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>auto_expire_date</name>
-        <rename>auto_expire_date</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>date_stopped</name>
-        <rename>date_stopped</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>order_reason</name>
-        <rename>order_reason</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>order_reason_non_coded</name>
-        <rename>order_reason_non_coded</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>creator</name>
-        <rename>creator</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_created</name>
-        <rename>date_created</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>voided</name>
-        <rename>voided</rename>
-        <default />
-        <type>Boolean</type>
-      </value>
-      <value>
-        <name>voided_by</name>
-        <rename>voided_by</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>date_voided</name>
-        <rename>date_voided</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>void_reason</name>
-        <rename>void_reason</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>patient_id</name>
-        <rename>patient_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>accession_number</name>
-        <rename>accession_number</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>uuid</name>
-        <rename>uuid</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>urgency</name>
-        <rename>urgency</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>order_number</name>
-        <rename>order_number</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>previous_order_id</name>
-        <rename>previous_order_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>order_action</name>
-        <rename>order_action</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>comment_to_fulfiller</name>
-        <rename>comment_to_fulfiller</rename>
-        <default />
-        <type>String</type>
-      </value>
-      <value>
-        <name>care_setting</name>
-        <rename>care_setting</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>scheduled_date</name>
-        <rename>scheduled_date</rename>
-        <default />
-        <type>Timestamp</type>
-      </value>
-      <value>
-        <name>order_group_id</name>
-        <rename>order_group_id</rename>
-        <default />
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>sort_weight</name>
-        <rename>sort_weight</rename>
-        <default />
-        <type>BigNumber</type>
-      </value>
-    </lookup>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>960</xloc>
-      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

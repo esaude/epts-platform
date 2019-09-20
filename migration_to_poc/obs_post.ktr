@@ -729,38 +729,6 @@
     </GUI>
   </step>
   <step>
-    <name>input from obs</name>
-    <type>TableInput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <sql>select * from obs</sql>
-    <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>144</xloc>
-      <yloc>320</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>get correct value coded</name>
     <type>DBLookup</type>
     <description />
@@ -805,6 +773,38 @@
     <GUI>
       <xloc>656</xloc>
       <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>input from obs</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <sql>select * from obs</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -860,7 +860,7 @@ where obs_temp.uuid = obs.uuid;</sql>
       <schema_name />
     </partitioning>
     <connection>poc</connection>
-    <commit>100</commit>
+    <commit>1000</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema />
@@ -919,80 +919,6 @@ where obs_temp.uuid = obs.uuid;</sql>
     <GUI>
       <xloc>1136</xloc>
       <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>update value coded in obs temp</name>
-    <type>InsertUpdate</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <connection>poc</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema />
-      <table>obs_temp</table>
-      <key>
-        <name>uuid</name>
-        <field>uuid</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <key>
-        <name>person_id</name>
-        <field>person_id</field>
-        <condition>=</condition>
-        <name2 />
-      </key>
-      <value>
-        <name>value_coded</name>
-        <rename>actual_value_coded</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>person_id</name>
-        <rename>person_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>obs_datetime</name>
-        <rename>obs_datetime</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>date_created</name>
-        <rename>date_created</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>voided</name>
-        <rename>voided</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>uuid</name>
-        <rename>uuid</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1248</xloc>
-      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1100,6 +1026,80 @@ where obs_temp.uuid = obs.uuid;</sql>
     <GUI>
       <xloc>272</xloc>
       <yloc>464</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>update value coded in obs temp</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc</connection>
+    <commit>1000</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>obs_temp</table>
+      <key>
+        <name>uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <key>
+        <name>person_id</name>
+        <field>person_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>value_coded</name>
+        <rename>actual_value_coded</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>person_id</name>
+        <rename>person_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>obs_datetime</name>
+        <rename>obs_datetime</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>voided</name>
+        <rename>voided</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1200</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

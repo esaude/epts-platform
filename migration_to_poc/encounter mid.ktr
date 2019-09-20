@@ -562,7 +562,7 @@
     </hop>
     <hop>
       <from>Blocking step 2 2</from>
-      <to>Insert into new visit into visit temp</to>
+      <to>Insert new visits into visit temp</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -662,7 +662,7 @@
     </GUI>
   </step>
   <step>
-    <name>Insert into new visit into visit temp</name>
+    <name>Insert new visits into visit temp</name>
     <type>InsertUpdate</type>
     <description />
     <distribute>Y</distribute>
@@ -673,14 +673,14 @@
       <schema_name />
     </partitioning>
     <connection>poc</connection>
-    <commit>100</commit>
+    <commit>1000</commit>
     <update_bypassed>Y</update_bypassed>
     <lookup>
       <schema />
       <table>visit_temp</table>
       <key>
-        <name>patient_id</name>
-        <field>patient_id</field>
+        <name>encounter_id</name>
+        <field>encounter_id</field>
         <condition>=</condition>
         <name2 />
       </key>
