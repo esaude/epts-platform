@@ -1055,7 +1055,10 @@
 , patient_id
 , visit_type_id
 , date_started
-, date_stopped
+, case date_stopped
+when date_stopped is null then DATE_ADD(date_started, INTERVAL 1 DAY)
+else date_stopped
+end as date_stopped
 , indication_concept_id
 , '17' as location_id
 , '4' as creator
