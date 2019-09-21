@@ -5420,7 +5420,7 @@ end as address4
 when changed_by is not null then '4' end as changed_by
 , start_date
 , end_date
-FROM person_address where person_id >= '79'
+FROM person_address
 order by person_id asc
 </sql>
     <limit>0</limit>

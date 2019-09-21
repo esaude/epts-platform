@@ -436,69 +436,6 @@
   <notepads>
   </notepads>
   <connection>
-    <name>epts</name>
-    <server />
-    <type>GENERIC</type>
-    <access>Native</access>
-    <database />
-    <port>1521</port>
-    <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10cc9da0ce</password>
-    <servername />
-    <data_tablespace />
-    <index_tablespace />
-    <attributes>
-      <attribute>
-        <code>CUSTOM_DRIVER_CLASS</code>
-        <attribute>com.mysql.cj.jdbc.Driver</attribute>
-      </attribute>
-      <attribute>
-        <code>CUSTOM_URL</code>
-        <attribute>jdbc:mysql://localhost:3306/CCSDBMASKED</attribute>
-      </attribute>
-      <attribute>
-        <code>DATABASE_DIALECT_ID</code>
-        <attribute>Generic database</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>IS_CLUSTERED</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>PORT_NUMBER</code>
-        <attribute>1521</attribute>
-      </attribute>
-      <attribute>
-        <code>PRESERVE_RESERVED_WORD_CASE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
-        <attribute>Y</attribute>
-      </attribute>
-      <attribute>
-        <code>USE_POOLING</code>
-        <attribute>N</attribute>
-      </attribute>
-    </attributes>
-  </connection>
-  <connection>
     <name>poc</name>
     <server />
     <type>GENERIC</type>
@@ -568,33 +505,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Block this step until steps finish</from>
-      <to>new poc visit id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>new_patient_id</from>
       <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>new poc visit id</from>
-      <to>Block this step until steps finish 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>insert into poc_visit</from>
-      <to>Block this step until steps finish</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>create temp</from>
-      <to>epts_visit_input</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Block this step until steps finish 2</from>
-      <to>Update</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -642,69 +554,32 @@
       <to>Blocking step 2</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>create temp</from>
+      <to>epts_visit_input</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>insert into poc_visit</from>
+      <to>Blocking step 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 2</from>
+      <to>new poc visit id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>new poc visit id</from>
+      <to>Blocking step 2 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 3</from>
+      <to>Update</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
-  <step>
-    <name>Block this step until steps finish</name>
-    <type>BlockUntilStepsFinish</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <steps>
-      <step>
-        <name>insert into poc_visit</name>
-        <CopyNr>0</CopyNr>
-      </step>
-    </steps>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1088</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Block this step until steps finish 2</name>
-    <type>BlockUntilStepsFinish</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <steps>
-      <step>
-        <name>new poc visit id</name>
-        <CopyNr>0</CopyNr>
-      </step>
-    </steps>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1344</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Blocking step 2</name>
     <type>BlockingStep</type>
@@ -1033,7 +908,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>320</xloc>
       <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1049,7 +924,7 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>poc</connection>
     <sql>SELECT
  visit_id
 , patient_id
@@ -1072,7 +947,7 @@ when voided_by is not null then '4' end as voided_by
 , date_voided
 , void_reason
 , uuid
-FROM visit where visit_type_id in ('3','5','7','8','10','12')
+FROM visit_4 where visit_type_id in ('3','5','7','8','10','12') 
 </sql>
     <limit>0</limit>
     <lookup />
@@ -1088,7 +963,7 @@ FROM visit where visit_type_id in ('3','5','7','8','10','12')
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>416</xloc>
       <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1890,6 +1765,66 @@ order by person_id asc
     <GUI>
       <xloc>384</xloc>
       <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 2</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1136</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 3</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1408</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

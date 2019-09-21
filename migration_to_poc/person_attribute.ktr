@@ -663,7 +663,7 @@
     <sql>SELECT
   person_id
 , value
-, '58' as person_attribute_type_id
+, '59' as person_attribute_type_id
 , '4' as creator
 , date_created
 , case 

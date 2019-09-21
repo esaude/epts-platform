@@ -579,34 +579,34 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>insert into person</from>
-      <to>Block this step until steps finish</to>
+      <from>Execute SQL script</from>
+      <to>epts_person</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Block this step until steps finish</from>
+      <from>insert into person</from>
+      <to>Blocking step</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step</from>
       <to>new poc person id</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>new poc person id</from>
-      <to>Block this step until steps finish 2</to>
+      <to>Blocking step 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Block this step until steps finish 2</from>
+      <from>Blocking step 2</from>
       <to>update person attribute</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Execute SQL script</from>
-      <to>epts_person</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Block this step until steps finish</name>
-    <type>BlockUntilStepsFinish</type>
+    <name>Blocking step</name>
+    <type>BlockingStep</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -615,12 +615,11 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <steps>
-      <step>
-        <name>insert into person</name>
-        <CopyNr>0</CopyNr>
-      </step>
-    </steps>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -631,13 +630,13 @@
     </remotesteps>
     <GUI>
       <xloc>480</xloc>
-      <yloc>240</yloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Block this step until steps finish 2</name>
-    <type>BlockUntilStepsFinish</type>
+    <name>Blocking step 2</name>
+    <type>BlockingStep</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -646,12 +645,11 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <steps>
-      <step>
-        <name>new poc person id</name>
-        <CopyNr>0</CopyNr>
-      </step>
-    </steps>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
     <attributes />
     <cluster_schema />
     <remotesteps>
@@ -661,8 +659,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>240</yloc>
+      <xloc>704</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1201,8 +1199,8 @@ FROM person
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>160</yloc>
+      <xloc>928</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

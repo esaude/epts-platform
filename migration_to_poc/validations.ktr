@@ -645,13 +645,29 @@
     <sql>select 
 (select concat(count(*),' person_epts') from person)  as nr_person, 
 (select concat(count(*),' patient_epts') from patient) as nr_patients,
-(select concat(count(*),' visits_epts') FROM visit where visit_type_id in ('3','5','8','10','12')) as nr_visits,
 (select concat(count(*),' names_epts') from person_name) as nr_person_names,
 (select concat(count(*),' address_epts') from person_address) as nr_person_add,
-(select concat(count(*),' encounter_epts') from encounter where encounter_type in ('1','6','35','34','5','18')) as nr_encounters,
-(select concat(count(*),' obs_epts') from obs where concept_id in ('1441','1442','1611')) as nr_obs,
-(select concat(count(*),' meds_epts') from obs where concept_id = '1088' and encounter_id in 
-(select distinct encounter_id from encounter where encounter_type in ('18')) and value_coded is not null) as nr_meds
+
+(select concat(count(*),' patient_epts_tarv') from patient_program where program_id in ('1','2') and date_completed is null) as nr_patients_tarv,
+(select concat(count(*),' visits_epts') FROM visit where visit_type_id in ('3','5','7','8','10','12')) as nr_visits,
+(select concat(count(*),' encounter_epts')  encounter where encounter_type in ('1','6','13','35','34','5','18') ) as nr_encounters,
+
+(select concat(count(*),' obs_epts') FROM obs where value_coded in ('1984','1739','1441','1442','1611','6123','1271','1369','2060','1255','856','5497','21','654','653','887','1190'
+,'1088','1982','6332','6122','6128','6129','6121','6126','6127','5965','1113','6120','5356','1410','5096','1372','1371','1706','2059','1707','1065','1066','1457','1204','1205'
+,'1206','1207','1256','1257','1259','1260','1705','1708','6282','981','6324','6243','6104','6105','1703','6100','1651')
+or concept_id in ('1984','1739','1441','1442','1611','6123','1271','1369','2060','1255','856','5497','21','654','653','887','1190','1088','1982','6332','6122','6128','6129',
+'6121','6126','6127','5965','1113','6120','5356','1410','5096','1372','1371','1706','2059','1707','1065','1066','1457','1204','1205','1206','1207','1256','1257','1259','1260',
+'1705','1708','6282','981','6324','6243','6104','6105','1703','6100','1651')
+or obs_id in (select obs_group_id from obs where obs_group_id is not null and concept_id in ('1984','1739','1441','1442','1611','6123','1271','1369','2060','1255','856','5497',
+'21','654','653','887','1190','1088','1982','6332','6122','6128','6129','6121','6126','6127','5965','1113','6120','5356','1410','5096','1372','1371','1706','2059','1707','1065',
+'1066','1457','1204','1205','1206','1207','1256','1257','1259','1260','1705','1708','6282','981','6324','6243','6104','6105','1703','6100','1651'))) 
+and concept_id not in ('1088','1739','1190','981','6282','1708','1705','1260','1259','1257','1457','1707','2059','1706','1371','1372','5096','1410','2060','1369','6123','1984')) as nr_obs,
+
+(select concat(count(*),' meds_epts') FROM obs where concept_id in ('1088','1711','1715') or encounter_id in 
+(select distinct encounter_id from encounter where encounter_type in ('18')) and value_coded is not null) as nr_meds,
+
+(select concat(count(*),' lab_orders_epts') FROM obs where concept_id in ('856','5497','654','653','887')) as nr_laborders
+
  from dual;</sql>
     <limit>0</limit>
     <lookup />
@@ -687,12 +703,15 @@
     <sql>select 
 (select concat(count(*),' person_poc') from person)  as nr_person, 
 (select concat(count(*),' patient_poc') from patient) as nr_patients,
-(select concat(count(*),' visits_epts') FROM visit where visit_type_id in ('3','5','8','10','12')) as nr_visits,
 (select concat(count(*),' names_poc') from person_name) as nr_person_names,
 (select concat(count(*),' address_poc') from person_address) as nr_person_add,
-(select concat(count(*),' encounter_poc') from encounter where encounter_type = '1') as nr_encounters,
-(select concat(count(*),' obs_poc') from obs where concept_id in ('8346','8347','8349')) as nr_obs,
-(select concat(count(*),' meds_poc') from orders where order_number = 'ORD-EPTS') as nr_meds
+
+(select concat(count(*),' visits_epts') FROM visit where visit_type_id in ('3','5','8','10','12')) as nr_visits,
+
+(select concat(count(*),' encounter_poc') from encounter where encounter_type in ('1','8')) as nr_encounters,
+(select concat(count(*),' obs_poc') from obs) as nr_obs,
+(select concat(count(*),' meds_poc') from orders where order_type_id='2') as nr_meds,
+(select concat(count(*),' lab_order_poc') from orders where order_type_id='3') as nr_laborders,
  from dual;</sql>
     <limit>0</limit>
     <lookup />
