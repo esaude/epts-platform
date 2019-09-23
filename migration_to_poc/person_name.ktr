@@ -646,7 +646,7 @@ when voided_by is not null then '4' end as voided_by
 when changed_by is not null then '4' end as changed_by
 , date_changed
 , uuid
-FROM person_name
+FROM person_name where person_id >='25'
 order by person_id asc
 </sql>
     <limit>0</limit>

@@ -818,8 +818,7 @@ when voided_by is not null then '4' end as voided_by
 , uuid
 , deathdate_estimated
 , birthtime
-FROM person
-</sql>
+FROM person where person_id >='25'</sql>
     <limit>0</limit>
     <lookup />
     <execute_each_row>N</execute_each_row>
