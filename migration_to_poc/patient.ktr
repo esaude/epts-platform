@@ -982,7 +982,7 @@ when changed_by is not null then '4' end as changed_by
 when voided_by is not null then '4' end as voided_by
 , date_voided
 , void_reason
-FROM patient
+FROM patient where voided=0
 order by patient_id asc
 </sql>
     <limit>0</limit>
