@@ -598,11 +598,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocking step 2</from>
-      <to>Sort rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Sort rows 2</from>
       <to>Merge on concept</to>
       <enabled>Y</enabled>
@@ -732,7 +727,121 @@
       <to>get encounter id 2</to>
       <enabled>N</enabled>
     </hop>
+    <hop>
+      <from>Blocking step 2</from>
+      <to>get epts concept name</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get epts concept name</from>
+      <to>Sort rows 2</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name> last encounter concepts </name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>   SELECT p.patient_id, o.concept_id as last_concept,o.value_numeric,MAX(o.value_datetime) as value_datetime,MAX(e.encounter_datetime) last_concept_date 
+FROM patient p 
+            INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=212
+            INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=212
+  WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0 
+            AND e.encounter_type IN (6,9,18) 
+            and p.patient_id=332
+            AND o.concept_id = ?
+        GROUP BY p.patient_id,o.concept_id,o.value_numeric
+order by p.patient_id asc, o.concept_id asc</sql>
+    <limit>0</limit>
+    <lookup>get distinct concepts 2</lookup>
+    <execute_each_row>Y</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name> second last encounter concepts</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+	p.patient_id,o.concept_id as second_last_concept,o.value_numeric,max(o.value_datetime) as value_datetime
+	,MAX(e.encounter_datetime) second_last_concept_date
+FROM patient p 
+	INNER JOIN encounter e on e.patient_id=p.patient_id
+	INNER JOIN obs o on o.encounter_id=e.encounter_id
+	INNER JOIN (SELECT
+			p.patient_id,
+			o.concept_id,
+			MAX(e.encounter_datetime) last_date
+		FROM
+			patient p
+		INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id =212
+		INNER JOIN obs o ON o.encounter_id = e.encounter_id AND o.location_id =212
+		WHERE
+			p.voided = 0
+			AND e.voided = 0
+			AND o.voided = 0
+			AND e.encounter_type IN (6,9,18)
+and p.patient_id = 332
+			AND o.concept_id =?
+			AND e.location_id = 212
+		GROUP BY
+			p.patient_id, o.concept_id
+	) last_encounter ON last_encounter.patient_id= p.patient_id and last_encounter.concept_id = o.concept_id
+WHERE
+	e.encounter_datetime &lt; last_encounter.last_date
+	AND e.encounter_type IN (6,9,18)
+and p.patient_id = 332
+	AND o.concept_id =?
+    group by p.patient_id, o.concept_id,o.value_numeric
+order by p.patient_id asc, o.concept_id asc</sql>
+    <limit>0</limit>
+    <lookup>get distinct concepts</lookup>
+    <execute_each_row>Y</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Blocking step 2</name>
     <type>BlockingStep</type>
@@ -824,6 +933,36 @@
     </GUI>
   </step>
   <step>
+    <name>Blocking step 2 3 2</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1472</xloc>
+      <yloc>832</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Blocking step 2 4</name>
     <type>BlockingStep</type>
     <description/>
@@ -888,6 +1027,112 @@
     </GUI>
   </step>
   <step>
+    <name>Merge join 3</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>Sort rows 2 2</step1>
+    <step2>Sort rows 2 3</step2>
+    <keys_1>
+      <key>patient_id</key>
+    </keys_1>
+    <keys_2>
+      <key>patient_id</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join 3 2</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1> last encounter concepts </step1>
+    <step2> second last encounter concepts</step2>
+    <keys_1>
+      <key>patient_id</key>
+      <key>concept_id</key>
+    </keys_1>
+    <keys_2>
+      <key>patient_id</key>
+      <key>concept_id</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join 3 2 2</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>LEFT OUTER</join_type>
+    <step1>last value coded values</step1>
+    <step2>second last value coded values</step2>
+    <keys_1>
+      <key>patient_id</key>
+      <key>value_coded</key>
+    </keys_1>
+    <keys_2>
+      <key>patient_id</key>
+      <key>value_coded</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Merge on concept</name>
     <type>MergeJoin</type>
     <description/>
@@ -902,7 +1147,42 @@
     <step1>Sort rows 2</step1>
     <step2>Sort rows</step2>
     <keys_1>
-      <key>concept_id</key>
+      <key>epts_concept_name</key>
+    </keys_1>
+    <keys_2>
+      <key>EPTS_CONCEPT_NAME</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1328</xloc>
+      <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge on value coded</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>Sort rows 2</step1>
+    <step2>Sort rows</step2>
+    <keys_1>
+      <key>value_coded</key>
+      <key>value_coded_1</key>
     </keys_1>
     <keys_2>
       <key>EPTS_CONCEPT_id</key>
@@ -916,8 +1196,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1328</xloc>
-      <yloc>496</yloc>
+      <xloc>976</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -941,7 +1221,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>EPTS_CONCEPT_id</name>
+        <name>EPTS_CONCEPT_NAME</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -983,7 +1263,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>concept_id</name>
+        <name>epts_concept_name</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1002,6 +1282,216 @@
     <GUI>
       <xloc>1184</xloc>
       <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>patient_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2 3</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>patient_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2 4</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>patient_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2 5</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>value_coded</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>528</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 3</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>EPTS_CONCEPT_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1038,13 +1528,13 @@
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>45</length>
+        <length>60</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>EPTS_CONCEPT_id</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1060,7 +1550,7 @@
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>37</length>
+        <length>36</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1071,13 +1561,13 @@
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>28</length>
+        <length>60</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>POC_CONCEPT_id</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
@@ -1157,6 +1647,124 @@
     <GUI>
       <xloc>1504</xloc>
       <yloc>496</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get correct value_coded</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>concept</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>POC_CONCEPT_uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>concept_id</name>
+        <rename>actual_value_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>624</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get distinct concepts</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>select distinct concept_id, concept_id
+from CCSDBMASKED.obs
+where concept_id 
+in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371) </sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>176</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get distinct concepts 2</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>select distinct concept_id
+from CCSDBMASKED.obs
+where concept_id 
+in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371) </sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1299,1028 +1907,6 @@
     </GUI>
   </step>
   <step>
-    <name>get distinct concepts</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>select distinct concept_id, concept_id
-from CCSDBMASKED.obs
-where concept_id 
-in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371) </sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>176</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>new_patient_id</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <sql>SELECT
-  person_attribute_id
-, person_id
-, value
-, person_attribute_type_id
-, creator
-, date_created
-, changed_by
-, date_changed
-, voided
-, voided_by
-, date_voided
-, void_reason
-, uuid
-FROM person_attribute WHERE person_attribute_type_id = '999'
-order by person_id asc
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>last concept obs</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <schema/>
-    <table>obs</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>Y</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>person_id</column_name>
-        <stream_name>person_id</stream_name>
-      </field>
-      <field>
-        <column_name>concept_id</column_name>
-        <stream_name>actual_concept_id</stream_name>
-      </field>
-      <field>
-        <column_name>encounter_id</column_name>
-        <stream_name>encounter_id</stream_name>
-      </field>
-      <field>
-        <column_name>value_coded</column_name>
-        <stream_name>value_coded</stream_name>
-      </field>
-      <field>
-        <column_name>value_numeric</column_name>
-        <stream_name>value_numeric</stream_name>
-      </field>
-      <field>
-        <column_name>value_datetime</column_name>
-        <stream_name>value_datetime</stream_name>
-      </field>
-      <field>
-        <column_name>obs_datetime</column_name>
-        <stream_name>last_concept_date</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1824</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name> last encounter concepts </name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>   SELECT p.patient_id, o.concept_id as last_concept,o.value_numeric,o.value_datetime,MAX(e.encounter_datetime) last_concept_date 
-FROM patient p 
-            INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=212
-            INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=212
-  WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0 
-            AND e.encounter_type IN (6,9,18) 
-            and p.patient_id=332
-            AND o.concept_id = ?
-        GROUP BY p.patient_id,o.concept_id,o.value_numeric,o.value_datetime
-order by p.patient_id asc, o.concept_id asc</sql>
-    <limit>0</limit>
-    <lookup>get distinct concepts 2</lookup>
-    <execute_each_row>Y</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>last value coded values</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT p.patient_id, o.value_coded as last_value_coded,MAX(e.encounter_datetime) last_value_date
-FROM patient p 
-            INNER JOIN CCSDBMASKED.encounter e ON e.patient_id=p.patient_id and e.location_id=212
-            INNER JOIN CCSDBMASKED.obs o ON o.encounter_id=e.encounter_id  AND o.location_id=212  
-  WHERE p.voided=0 AND e.voided =0 AND o.voided=0 
-            AND e.encounter_type IN (6,9,18) 
-and p.patient_id = 332
-            AND ((o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
-            or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
-or (o.concept_id = 6121 and o.value_coded in (1066,1065))
-or (o.concept_id = 6122 and o.value_coded in (1066,1065))
-or (o.concept_id = 6332 and o.value_coded in (1066,1065))
-or (o.concept_id = 1255 and o.value_coded in (1257,1107,1256,1260,1259,981,1258,1705,1369,1708,6282)))
-AND e.location_id=o.location_id 
-        GROUP BY p.patient_id, o.value_coded
-order by p.patient_id asc, o.value_coded asc</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join 3</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>Sort rows 2 2</step1>
-    <step2>Sort rows 2 3</step2>
-    <keys_1>
-      <key>patient_id</key>
-    </keys_1>
-    <keys_2>
-      <key>patient_id</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>second last value coded values</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
-	p.patient_id,o.value_coded as second_last_value_coded,
-	MAX(e.encounter_datetime) second_last_value_date
-FROM patient p 
-	INNER JOIN encounter e on e.patient_id=p.patient_id
-	INNER JOIN obs o on o.encounter_id=e.encounter_id
-	INNER JOIN (SELECT
-			p.patient_id,
-			o.value_coded,
-			MAX(e.encounter_datetime) last_date
-		FROM
-			patient p
-		INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id =212
-		INNER JOIN obs o ON o.encounter_id = e.encounter_id AND o.location_id =212
-		WHERE
-			p.voided = 0
-			AND e.voided = 0
-			AND o.voided = 0
-			AND e.encounter_type IN (6,9,18)
-and p.patient_id = 332
-			AND (o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
-            or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
-or (o.concept_id = 6121 and o.value_coded in (1066,1065))
-or (o.concept_id = 6122 and o.value_coded in (1066,1065))
-or (o.concept_id = 6332 and o.value_coded in (1066,1065))
-or (o.concept_id = 1255 and o.value_coded in (1257,1107,1256,1260,1259,981,1258,1705,1369,1708,6282))
-			AND e.location_id = 212
-		GROUP BY
-			p.patient_id, o.value_coded
-	) last_encounter ON last_encounter.patient_id= p.patient_id and last_encounter.value_coded = o.value_coded
-WHERE
- p.patient_id = 332 and
-	e.encounter_datetime &lt; last_encounter.last_date
-	AND e.encounter_type IN (6,9,18)
-	AND ( (o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
-            or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
-or (o.concept_id = 6121 and o.value_coded in (1066,1065))
-or (o.concept_id = 6122 and o.value_coded in (1066,1065))
-or (o.concept_id = 6332 and o.value_coded in (1066,1065))
-or (o.concept_id = 1255 and o.value_coded in (1257,1107,1256,1260,1259,981,1258,1705,1369,1708,6282)))
-    group by p.patient_id, o.value_coded
-order by p.patient_id asc,o.value_coded asc</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name> second last encounter concepts</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
-	p.patient_id,o.concept_id as second_last_concept,o.value_numeric,o.value_datetime
-	,MAX(e.encounter_datetime) second_last_concept_date
-FROM patient p 
-	INNER JOIN encounter e on e.patient_id=p.patient_id
-	INNER JOIN obs o on o.encounter_id=e.encounter_id
-	INNER JOIN (SELECT
-			p.patient_id,
-			o.concept_id,
-			MAX(e.encounter_datetime) last_date
-		FROM
-			patient p
-		INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id =212
-		INNER JOIN obs o ON o.encounter_id = e.encounter_id AND o.location_id =212
-		WHERE
-			p.voided = 0
-			AND e.voided = 0
-			AND o.voided = 0
-			AND e.encounter_type IN (6,9,18)
-and p.patient_id = 332
-			AND o.concept_id =?
-			AND e.location_id = 212
-		GROUP BY
-			p.patient_id, o.concept_id
-	) last_encounter ON last_encounter.patient_id= p.patient_id and last_encounter.concept_id = o.concept_id
-WHERE
-	e.encounter_datetime &lt; last_encounter.last_date
-	AND e.encounter_type IN (6,9,18)
-and p.patient_id = 332
-	AND o.concept_id =?
-    group by p.patient_id, o.concept_id,o.value_numeric,o.value_datetime
-order by p.patient_id asc, o.concept_id asc</sql>
-    <limit>0</limit>
-    <lookup>get distinct concepts</lookup>
-    <execute_each_row>Y</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 2 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>patient_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>624</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 2 3</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>patient_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>608</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 2 4</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>patient_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join 3 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1> last encounter concepts </step1>
-    <step2> second last encounter concepts</step2>
-    <keys_1>
-      <key>patient_id</key>
-      <key>concept_id</key>
-    </keys_1>
-    <keys_2>
-      <key>patient_id</key>
-      <key>concept_id</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join 3 2 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>last value coded values</step1>
-    <step2>second last value coded values</step2>
-    <keys_1>
-      <key>patient_id</key>
-      <key>value_coded</key>
-    </keys_1>
-    <keys_2>
-      <key>patient_id</key>
-      <key>value_coded</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>512</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get distinct concepts 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>select distinct concept_id
-from CCSDBMASKED.obs
-where concept_id 
-in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371) </sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>208</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>second last concept obs</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <schema/>
-    <table>obs</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>Y</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>person_id</column_name>
-        <stream_name>person_id</stream_name>
-      </field>
-      <field>
-        <column_name>concept_id</column_name>
-        <stream_name>concept_id_1</stream_name>
-      </field>
-      <field>
-        <column_name>encounter_id</column_name>
-        <stream_name>encounter_id</stream_name>
-      </field>
-      <field>
-        <column_name>value_coded</column_name>
-        <stream_name>value_coded_1</stream_name>
-      </field>
-      <field>
-        <column_name>value_numeric</column_name>
-        <stream_name>value_numeric_1</stream_name>
-      </field>
-      <field>
-        <column_name>value_datetime</column_name>
-        <stream_name>value_datetime_1</stream_name>
-      </field>
-      <field>
-        <column_name>obs_datetime</column_name>
-        <stream_name>second_last_concept_date</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1888</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge on value coded</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>Sort rows 2</step1>
-    <step2>Sort rows</step2>
-    <keys_1>
-      <key>value_coded</key>
-      <key>value_coded_1</key>
-    </keys_1>
-    <keys_2>
-      <key>EPTS_CONCEPT_id</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>992</xloc>
-      <yloc>624</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get correct value_coded</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>concept</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>POC_CONCEPT_uuid</name>
-        <field>uuid</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>concept_id</name>
-        <rename>actual_value_id</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1200</xloc>
-      <yloc>624</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 3</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>EPTS_CONCEPT_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>624</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>value coded</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/update concept map no null.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>,</separator>
-    <enclosure>"</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <format>mixed</format>
-    <encoding/>
-    <fields>
-      <field>
-        <name>EPTS_CONCEPT_NAME</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>45</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>EPTS_CONCEPT_id</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>EPTS_CONCEPT_uuid</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>37</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>POC_CONCEPT_NAME</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>28</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>POC_CONCEPT_id</name>
-        <type>Integer</type>
-        <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>POC_CONCEPT_uuid</name>
-        <type>String</type>
-        <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>36</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>624</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 2 5</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>value_coded</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>976</xloc>
-      <yloc>528</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 3 2</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1472</xloc>
-      <yloc>832</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>get encounter id 2</name>
     <type>DBLookup</type>
     <description/>
@@ -2453,8 +2039,88 @@ in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,61
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1376</xloc>
+      <xloc>1360</xloc>
       <yloc>624</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>last concept obs</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <schema/>
+    <table>obs</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>person_id</column_name>
+        <stream_name>person_id</stream_name>
+      </field>
+      <field>
+        <column_name>concept_id</column_name>
+        <stream_name>actual_concept_id</stream_name>
+      </field>
+      <field>
+        <column_name>encounter_id</column_name>
+        <stream_name>encounter_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded</column_name>
+        <stream_name>value_coded</stream_name>
+      </field>
+      <field>
+        <column_name>value_numeric</column_name>
+        <stream_name>value_numeric</stream_name>
+      </field>
+      <field>
+        <column_name>value_datetime</column_name>
+        <stream_name>value_datetime</stream_name>
+      </field>
+      <field>
+        <column_name>obs_datetime</column_name>
+        <stream_name>last_concept_date</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>obs_uuid</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1824</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2531,6 +2197,166 @@ in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,61
     </GUI>
   </step>
   <step>
+    <name>last value coded values</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT p.patient_id, o.value_coded as last_value_coded,MAX(e.encounter_datetime) last_value_date
+FROM patient p 
+            INNER JOIN CCSDBMASKED.encounter e ON e.patient_id=p.patient_id and e.location_id=212
+            INNER JOIN CCSDBMASKED.obs o ON o.encounter_id=e.encounter_id  AND o.location_id=212  
+  WHERE p.voided=0 AND e.voided =0 AND o.voided=0 
+            AND e.encounter_type IN (6,9,18) 
+and p.patient_id = 332
+            AND ((o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
+            or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
+or (o.concept_id = 6121 and o.value_coded in (1066,1065))
+or (o.concept_id = 6122 and o.value_coded in (1066,1065))
+or (o.concept_id = 6332 and o.value_coded in (1066,1065))
+or (o.concept_id = 1255 and o.value_coded in (1257,1107,1256,1260,1259,981,1258,1705,1369,1708,6282)))
+AND e.location_id=o.location_id 
+        GROUP BY p.patient_id, o.value_coded
+order by p.patient_id asc, o.value_coded asc</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>new_patient_id</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <sql>SELECT
+  person_id
+, value
+, '4' as creator
+, '17' as location_id
+, curdate() as date_created
+, uuid() as obs_uuid
+FROM person_attribute WHERE person_attribute_type_id = '999'
+order by person_id asc
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>second last concept obs</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <schema/>
+    <table>obs</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>Y</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>person_id</column_name>
+        <stream_name>person_id</stream_name>
+      </field>
+      <field>
+        <column_name>concept_id</column_name>
+        <stream_name>concept_id_1</stream_name>
+      </field>
+      <field>
+        <column_name>encounter_id</column_name>
+        <stream_name>encounter_id</stream_name>
+      </field>
+      <field>
+        <column_name>value_coded</column_name>
+        <stream_name>value_coded_1</stream_name>
+      </field>
+      <field>
+        <column_name>value_numeric</column_name>
+        <stream_name>value_numeric_1</stream_name>
+      </field>
+      <field>
+        <column_name>value_datetime</column_name>
+        <stream_name>value_datetime_1</stream_name>
+      </field>
+      <field>
+        <column_name>obs_datetime</column_name>
+        <stream_name>second_last_concept_date</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1888</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>second last value coded obs</name>
     <type>TableOutput</type>
     <description/>
@@ -2599,6 +2425,240 @@ in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,61
     <GUI>
       <xloc>1504</xloc>
       <yloc>992</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>second last value coded values</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+	p.patient_id,o.value_coded as second_last_value_coded,
+	MAX(e.encounter_datetime) second_last_value_date
+FROM patient p 
+	INNER JOIN encounter e on e.patient_id=p.patient_id
+	INNER JOIN obs o on o.encounter_id=e.encounter_id
+	INNER JOIN (SELECT
+			p.patient_id,
+			o.value_coded,
+			MAX(e.encounter_datetime) last_date
+		FROM
+			patient p
+		INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id =212
+		INNER JOIN obs o ON o.encounter_id = e.encounter_id AND o.location_id =212
+		WHERE
+			p.voided = 0
+			AND e.voided = 0
+			AND o.voided = 0
+			AND e.encounter_type IN (6,9,18)
+and p.patient_id = 332
+			AND (o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
+            or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
+or (o.concept_id = 6121 and o.value_coded in (1066,1065))
+or (o.concept_id = 6122 and o.value_coded in (1066,1065))
+or (o.concept_id = 6332 and o.value_coded in (1066,1065))
+or (o.concept_id = 1255 and o.value_coded in (1257,1107,1256,1260,1259,981,1258,1705,1369,1708,6282))
+			AND e.location_id = 212
+		GROUP BY
+			p.patient_id, o.value_coded
+	) last_encounter ON last_encounter.patient_id= p.patient_id and last_encounter.value_coded = o.value_coded
+WHERE
+ p.patient_id = 332 and
+	e.encounter_datetime &lt; last_encounter.last_date
+	AND e.encounter_type IN (6,9,18)
+	AND ( (o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
+            or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
+or (o.concept_id = 6121 and o.value_coded in (1066,1065))
+or (o.concept_id = 6122 and o.value_coded in (1066,1065))
+or (o.concept_id = 6332 and o.value_coded in (1066,1065))
+or (o.concept_id = 1255 and o.value_coded in (1257,1107,1256,1260,1259,981,1258,1705,1369,1708,6282)))
+    group by p.patient_id, o.value_coded
+order by p.patient_id asc,o.value_coded asc</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>value coded</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/update concept map no null.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>EPTS_CONCEPT_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>45</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EPTS_CONCEPT_id</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EPTS_CONCEPT_uuid</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>37</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>28</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_id</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_uuid</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>624</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get epts concept name</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>concept_name</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>concept_id</name>
+        <field>concept_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>name</name>
+        <rename>epts_concept_name</rename>
+        <default/>
+        <type>None</type>
+      </value>
+      <value>
+        <name>concept_id</name>
+        <rename>epts_concept_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1088</xloc>
+      <yloc>464</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

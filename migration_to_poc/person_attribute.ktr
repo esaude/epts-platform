@@ -681,7 +681,7 @@
     </remotesteps>
     <GUI>
       <xloc>400</xloc>
-      <yloc>448</yloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1172,8 +1172,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
-      <yloc>368</yloc>
+      <xloc>1120</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

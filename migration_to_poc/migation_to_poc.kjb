@@ -325,7 +325,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>patient</name>
+      <name>patient and registration date</name>
       <description/>
       <type>TRANS</type>
       <attributes/>
@@ -1332,15 +1332,15 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>144</yloc>
+      <xloc>224</xloc>
+      <yloc>608</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
   <hops>
     <hop>
       <from>person</from>
-      <to>patient</to>
+      <to>patient and registration date</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -1402,7 +1402,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>patient</from>
+      <from>patient and registration date</from>
       <to>patient status</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
