@@ -778,18 +778,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>section obs id lookup</from>
-      <to>update group id for sections</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>last concept obs</from>
       <to>get correct concept id 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get correct concept id 3</from>
-      <to>Sort rows 2 4</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -808,7 +798,32 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>get correct concept id 3</from>
+      <to>Blocking step 2 5</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 5</from>
+      <to>Sort rows 2 4</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>section obs id lookup</from>
+      <to>Blocking step 2 5 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 5 2</from>
+      <to>update group id for sections</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>form obs id lookup</from>
+      <to>Blocking step 2 5 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 5 2 2</from>
       <to>update group id for form</to>
       <enabled>Y</enabled>
     </hop>
@@ -857,7 +872,7 @@ order by last_encounter.patient_id asc, o.concept_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
+      <xloc>336</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
@@ -931,7 +946,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
+      <xloc>336</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -961,7 +976,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>656</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1021,7 +1036,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>1168</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1081,7 +1096,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>496</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1148,8 +1163,8 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>368</yloc>
+      <xloc>160</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1185,8 +1200,8 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>80</yloc>
+      <xloc>160</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1219,7 +1234,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>656</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1291,7 +1306,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
+      <xloc>336</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1361,7 +1376,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>784</xloc>
       <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1437,7 +1452,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>784</xloc>
       <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1479,7 +1494,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>784</xloc>
       <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1563,7 +1578,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>496</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1754,7 +1769,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>672</xloc>
       <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1850,7 +1865,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
+      <xloc>992</xloc>
       <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1988,7 +2003,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
+      <xloc>992</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2174,7 +2189,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>656</xloc>
       <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2312,7 +2327,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>1168</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2480,7 +2495,7 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>496</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2669,7 +2684,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1200</xloc>
+      <xloc>1056</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2983,8 +2998,8 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1792</xloc>
-      <yloc>208</yloc>
+      <xloc>1648</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3017,7 +3032,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
+      <xloc>1504</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3059,7 +3074,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
+      <xloc>1504</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3199,7 +3214,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1520</xloc>
+      <xloc>1376</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3247,7 +3262,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1792</xloc>
+      <xloc>1648</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3289,7 +3304,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
+      <xloc>1504</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3338,7 +3353,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1792</xloc>
+      <xloc>1648</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3395,7 +3410,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1792</xloc>
+      <xloc>1648</xloc>
       <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3443,7 +3458,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
+      <xloc>1344</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3497,7 +3512,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1984</xloc>
+      <xloc>1840</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3545,8 +3560,8 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1888</xloc>
-      <yloc>0</yloc>
+      <xloc>1744</xloc>
+      <yloc>16</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3594,8 +3609,98 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1984</xloc>
-      <yloc>208</yloc>
+      <xloc>1840</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 5</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1344</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 5 2</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1648</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 5 2 2</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1840</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
