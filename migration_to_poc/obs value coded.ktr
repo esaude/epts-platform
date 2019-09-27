@@ -664,7 +664,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>value coded 2</from>
+      <from>concept id</from>
       <to>Sort rows 4 2</to>
       <enabled>Y</enabled>
     </hop>
@@ -1323,7 +1323,14 @@
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>SELECT last_value.patient_id, o.concept_id as last_concept_id, o.value_coded as last_value_coded,MAX(last_value.last_value_date) as last_value_date
+    <sql>SELECT last_value.patient_id, 
+case 
+when o.value_coded=1204 then 1204
+when o.value_coded=1205 then 1205
+when o.value_coded=1206 then 1206
+when o.value_coded=1207 then 1207
+else o.concept_id 
+end as last_concept_id, o.value_coded as last_value_coded,MAX(last_value.last_value_date) as last_value_date
 from 
 (SELECT p.patient_id,o.value_coded,o.encounter_id,MAX(e.encounter_datetime) last_value_date
 FROM patient p 
@@ -1601,7 +1608,13 @@ order by person_id asc
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>SELECT second_last.patient_id,o.concept_id as sec_last_concept,o.value_coded as sec_last_value_coded,MAX(second_last.sec_date) as sec_last_value_date
+    <sql>SELECT second_last.patient_id,case 
+when o.value_coded=1204 then 1204
+when o.value_coded=1205 then 1205
+when o.value_coded=1206 then 1206
+when o.value_coded=1207 then 1207
+else o.concept_id 
+end as sec_last_concept,o.value_coded as sec_last_value_coded,MAX(second_last.sec_date) as sec_last_value_date
     from 
 (SELECT
 	p.patient_id,o.value_coded,o.encounter_id,
@@ -1694,7 +1707,7 @@ order by second_last.patient_id asc,o.value_coded asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
+      <xloc>1536</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1778,7 +1791,7 @@ order by second_last.patient_id asc,o.value_coded asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
+      <xloc>1536</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1826,7 +1839,7 @@ order by second_last.patient_id asc,o.value_coded asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1696</xloc>
+      <xloc>1760</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1886,7 +1899,7 @@ order by second_last.patient_id asc,o.value_coded asc;</sql>
     </GUI>
   </step>
   <step>
-    <name>value coded 2</name>
+    <name>concept id</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
