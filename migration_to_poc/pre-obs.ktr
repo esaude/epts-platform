@@ -628,11 +628,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>create single visit</from>
-      <to>create  single encounter</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>all patients</from>
       <to>Blocking step 2 4 2</to>
       <enabled>Y</enabled>
@@ -653,7 +648,22 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>create single visit</from>
+      <to>Blocking step 2 4 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 4 2 2</from>
+      <to>create  single encounter</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>create  single encounter</from>
+      <to>Blocking step 2 4 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 4 2 2 2</from>
       <to>Join rows (cartesian product)</to>
       <enabled>Y</enabled>
     </hop>
@@ -770,6 +780,98 @@
     <GUI>
       <xloc>656</xloc>
       <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Data grid 2</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>provider_id</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>encounter_role_id</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item>2</item>
+        <item>1</item>
+      </line>
+    </data>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1104</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Join rows (cartesian product)</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <cache_size>500</cache_size>
+    <main/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue/>
+        <function>=</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1248</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1267,7 +1369,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>864</xloc>
+      <xloc>816</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1487,6 +1589,78 @@ order by patient_id asc
     </GUI>
   </step>
   <step>
+    <name>insert into encounter_provider</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <schema/>
+    <table>encounter_provider</table>
+    <commit>5000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>encounter_id</column_name>
+        <stream_name>encounter_id</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>provider_uuid</stream_name>
+      </field>
+      <field>
+        <column_name>provider_id</column_name>
+        <stream_name>provider_id</stream_name>
+      </field>
+      <field>
+        <column_name>encounter_role_id</column_name>
+        <stream_name>encounter_role_id</stream_name>
+      </field>
+    </fields>
+    <attributes>
+      <group>
+        <name>sparkTuningParameters</name>
+      </group>
+    </attributes>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1424</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>new_patient_id</name>
     <type>TableInput</type>
     <description/>
@@ -1653,8 +1827,8 @@ order by person_id asc
     </GUI>
   </step>
   <step>
-    <name>Data grid 2</name>
-    <type>DataGrid</type>
+    <name>Blocking step 2 4 2 2</name>
+    <type>BlockingStep</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1663,73 +1837,11 @@ order by person_id asc
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-      <field>
-        <name>provider_id</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>encounter_role_id</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line>
-        <item>2</item>
-        <item>1</item>
-      </line>
-    </data>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1104</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Join rows (cartesian product)</name>
-    <type>JoinRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
     <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <cache_size>500</cache_size>
-    <main/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue/>
-        <function>=</function>
-        <rightvalue/>
-      </condition>
-    </compare>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1739,70 +1851,28 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1232</xloc>
-      <yloc>256</yloc>
+      <xloc>944</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>insert into encounter_provider</name>
-    <type>TableOutput</type>
+    <name>Blocking step 2 4 2 2 2</name>
+    <type>BlockingStep</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>poc</connection>
-    <schema/>
-    <table>encounter_provider</table>
-    <commit>5000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>encounter_id</column_name>
-        <stream_name>encounter_id</stream_name>
-      </field>
-      <field>
-        <column_name>creator</column_name>
-        <stream_name>creator</stream_name>
-      </field>
-      <field>
-        <column_name>date_created</column_name>
-        <stream_name>date_created</stream_name>
-      </field>
-      <field>
-        <column_name>uuid</column_name>
-        <stream_name>provider_uuid</stream_name>
-      </field>
-      <field>
-        <column_name>provider_id</column_name>
-        <stream_name>provider_id</stream_name>
-      </field>
-      <field>
-        <column_name>encounter_role_id</column_name>
-        <stream_name>encounter_role_id</stream_name>
-      </field>
-    </fields>
-    <attributes>
-      <group>
-        <name>sparkTuningParameters</name>
-      </group>
-    </attributes>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -1811,8 +1881,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1408</xloc>
-      <yloc>384</yloc>
+      <xloc>1184</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

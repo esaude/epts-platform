@@ -593,11 +593,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>attribute type</from>
-      <to>Merge join 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Merge join</from>
       <to>Join rows (cartesian product)</to>
       <enabled>Y</enabled>
@@ -605,6 +600,16 @@
     <hop>
       <from>correct attribute id</from>
       <to>Block this step until steps finish</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>attribute type</from>
+      <to>Sort rows 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 2 2 2</from>
+      <to>Merge join 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -666,9 +671,6 @@
     <data>
       <line>
         <item>58</item>
-      </line>
-      <line>
-        <item/>
       </line>
     </data>
     <attributes/>
@@ -769,7 +771,7 @@
     </partitioning>
     <join_type>INNER</join_type>
     <step1>Join rows (cartesian product)</step1>
-    <step2>attribute type</step2>
+    <step2>Sort rows 2 2 2</step2>
     <keys_1>
       <key>attribute</key>
     </keys_1>
@@ -963,8 +965,8 @@
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>POC_name</name>
-        <field>name</field>
+        <name>POC_uuid</name>
+        <field>uuid</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -1174,6 +1176,48 @@ order by person_id asc
     <GUI>
       <xloc>1120</xloc>
       <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2 2 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>POC_person_attribute_type_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
