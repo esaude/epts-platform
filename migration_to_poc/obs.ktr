@@ -2654,12 +2654,6 @@ in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,61
         <name2/>
       </key>
       <value>
-        <name>name</name>
-        <rename>epts_concept_name</rename>
-        <default/>
-        <type>None</type>
-      </value>
-      <value>
         <name>concept_id</name>
         <rename>epts_concept_id</rename>
         <default/>
