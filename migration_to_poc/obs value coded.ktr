@@ -1680,7 +1680,7 @@ order by second_last.patient_id asc,o.value_coded asc;</sql>
     <step1>Sort rows 2 5 2</step1>
     <step2>Sort rows 4 2</step2>
     <keys_1>
-      <key>epts_value_coded_id</key>
+      <key>epts_concept_id</key>
     </keys_1>
     <keys_2>
       <key>EPTS_CONCEPT_id</key>
