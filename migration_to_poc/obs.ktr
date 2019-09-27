@@ -822,7 +822,7 @@ order by last_encounter.patient_id asc, o.concept_id asc</sql>
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>select last_encounter.patient_id, o.concept_id as last_concept, o.value_coded as last_value_coded,o.value_numeric as last_value_numeric,MAX(o.value_datetime) as last_value_datetime,  MAX(last_encounter.second_last_concept_date) last_concept_date
+    <sql>select last_encounter.patient_id, o.concept_id as sec_last_concept, o.value_coded as sec_last_value_coded,o.value_numeric as sec_last_value_numeric,MAX(o.value_datetime) as sec_last_value_datetime,  MAX(last_encounter.second_last_concept_date) sec_last_concept_date
 FROM 
 (SELECT
 	p.patient_id,o.concept_id,max(o.value_datetime) as value_datetime,e.encounter_id
@@ -1091,7 +1091,7 @@ order by last_encounter.patient_id asc, o.concept_id asc</sql>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>736</yloc>
+      <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1324,8 +1324,8 @@ order by last_encounter.patient_id asc, o.concept_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>704</yloc>
+      <xloc>464</xloc>
+      <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1841,7 +1841,7 @@ in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,61
       </field>
       <field>
         <column_name>value_datetime</column_name>
-        <stream_name>value_datetime</stream_name>
+        <stream_name>last_value_datetime</stream_name>
       </field>
       <field>
         <column_name>obs_datetime</column_name>
@@ -1912,8 +1912,8 @@ order by p.patient_id asc, o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>149</xloc>
-      <yloc>849</yloc>
+      <xloc>144</xloc>
+      <yloc>816</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1994,7 +1994,7 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
+      <xloc>432</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2067,8 +2067,8 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>149</xloc>
-      <yloc>721</yloc>
+      <xloc>144</xloc>
+      <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
