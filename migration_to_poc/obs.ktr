@@ -773,11 +773,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get correct concept id 2</from>
-      <to>section obs id lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>last concept obs</from>
       <to>get correct concept id 3</to>
       <enabled>Y</enabled>
@@ -790,11 +785,6 @@
     <hop>
       <from>update group id for sections</from>
       <to>get correct concept id 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get correct concept id 2 2</from>
-      <to>form obs id lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -818,13 +808,33 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Blocking step 2 5 2 2</from>
+      <to>update group id for form</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get correct concept id 2</from>
+      <to>update group id for sections 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>update group id for sections 2</from>
+      <to>section obs id lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>form obs id lookup</from>
       <to>Blocking step 2 5 2 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocking step 2 5 2 2</from>
-      <to>update group id for form</to>
+      <from>get correct concept id 2 2</from>
+      <to>update group id for sections 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>update group id for sections 2 2</from>
+      <to>form obs id lookup</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1036,7 +1046,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
+      <xloc>1136</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1865,7 +1875,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>960</xloc>
       <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2003,7 +2013,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>960</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2327,7 +2337,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1168</xloc>
+      <xloc>1136</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2477,6 +2487,7 @@ order by p.patient_id asc, o.value_coded asc</sql>
 , '4' as creator
 , '17' as location_id
 , curdate() as date_created
+, now() as obs_datetime
 , uuid() as obs_uuid
 FROM person_attribute WHERE person_attribute_type_id = '999'
 order by person_id asc
@@ -2684,7 +2695,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
+      <xloc>1024</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2998,8 +3009,8 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
-      <yloc>272</yloc>
+      <xloc>1616</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3032,7 +3043,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
+      <xloc>1472</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3074,7 +3085,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
+      <xloc>1472</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3214,7 +3225,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1376</xloc>
+      <xloc>1344</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3262,7 +3273,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
+      <xloc>1616</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3304,7 +3315,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
+      <xloc>1472</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3333,8 +3344,8 @@ order by p.patient_id asc,o.value_coded asc</sql>
         <name2/>
       </key>
       <key>
-        <name>actual_concept_id</name>
-        <field>concept_id</field>
+        <name>section_concept_id</name>
+        <field>obs_group_id</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -3342,6 +3353,26 @@ order by p.patient_id asc,o.value_coded asc</sql>
         <name>obs_group_id</name>
         <rename>section_obs_id</rename>
         <update>Y</update>
+      </value>
+      <value>
+        <name>person_id</name>
+        <rename>person_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>obs_datetime</name>
+        <rename>last_concept_date</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <update>N</update>
       </value>
     </lookup>
     <attributes/>
@@ -3353,7 +3384,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
+      <xloc>1600</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3410,7 +3441,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
+      <xloc>1616</xloc>
       <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3458,7 +3489,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1344</xloc>
+      <xloc>1312</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3512,7 +3543,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
+      <xloc>1968</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3560,8 +3591,8 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1744</xloc>
-      <yloc>16</yloc>
+      <xloc>1712</xloc>
+      <yloc>0</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3590,7 +3621,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </key>
       <key>
         <name>form_concept_id</name>
-        <field>concept_id</field>
+        <field>obs_group_id</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -3598,6 +3629,26 @@ order by p.patient_id asc,o.value_coded asc</sql>
         <name>obs_group_id</name>
         <rename>form_obs_id</rename>
         <update>Y</update>
+      </value>
+      <value>
+        <name>person_id</name>
+        <rename>person_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>obs_datetime</name>
+        <rename>obs_datetime_2</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>date_created</name>
+        <rename>date_created</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <update>N</update>
       </value>
     </lookup>
     <attributes/>
@@ -3609,8 +3660,8 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
-      <yloc>352</yloc>
+      <xloc>1808</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3639,7 +3690,7 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1344</xloc>
+      <xloc>1312</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3669,8 +3720,8 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
-      <yloc>176</yloc>
+      <xloc>1408</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3699,8 +3750,94 @@ order by p.patient_id asc,o.value_coded asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
-      <yloc>176</yloc>
+      <xloc>1808</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>update group id for sections 2</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <commit>1000</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>obs</table>
+      <key>
+        <name>person_id</name>
+        <field>person_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>obs_group_id</name>
+        <rename>section_concept_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1616</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>update group id for sections 2 2</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <commit>1000</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>obs</table>
+      <key>
+        <name>person_id</name>
+        <field>person_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>obs_group_id</name>
+        <rename>form_concept_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1808</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
