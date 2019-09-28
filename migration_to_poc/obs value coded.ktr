@@ -743,6 +743,16 @@
       <to>Merge join 3 2 2</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>patient</from>
+      <to>last value coded values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>patient 2</from>
+      <to>second last value coded values</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Blocking step 2 2</name>
@@ -861,6 +871,66 @@
     <GUI>
       <xloc>464</xloc>
       <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 4 2 2</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 4 2 2 2</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1724,7 +1794,7 @@
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>53</length>
+        <length>52</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2297,7 +2367,8 @@ FROM patient p
             INNER JOIN CCSDBMASKED.encounter e ON e.patient_id=p.patient_id and e.location_id=208
             INNER JOIN CCSDBMASKED.obs o ON o.encounter_id=e.encounter_id  AND o.location_id=208  
   WHERE p.voided=0 AND e.voided =0 AND o.voided=0 
-            AND e.encounter_type IN (6,9,18) 
+            AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+and p.patient_id = ? 
             AND ((o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
             or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
 or (o.concept_id = 6121 and o.value_coded in (1066,1065))
@@ -2308,11 +2379,11 @@ AND e.location_id=o.location_id
         GROUP BY p.patient_id, o.value_coded,o.concept_id,o.encounter_id) last_value
       inner join obs o on last_value.encounter_id = o.encounter_id
        GROUP BY last_value.patient_id, o.value_coded,o.concept_id
-order by last_value.patient_id asc, o.concept_id asc, o.value_coded asc;</sql>
+order by last_value.patient_id asc, o.concept_id asc, o.value_coded asc limit 2</sql>
     <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <lookup>patient</lookup>
+    <execute_each_row>Y</execute_each_row>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <attributes/>
     <cluster_schema/>
@@ -2344,7 +2415,7 @@ order by last_value.patient_id asc, o.concept_id asc, o.value_coded asc;</sql>
   person_id
 , value
 , 4 as creator
-, ${LOCATION} as location_id
+, 17 as location_id
 , curdate() as date_created
 , now() as obs_datetime
 , uuid() as obs_uuid
@@ -2367,6 +2438,76 @@ order by person_id asc
     <GUI>
       <xloc>464</xloc>
       <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>patient</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>select distinct patient_id
+from patient where voided=0
+and patient_id between 28000 and 28500
+order by patient_id asc</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>16</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>patient 2</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>select distinct patient_id
+from patient where voided=0
+and patient_id between 28000 and 28500
+order by patient_id asc</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>39</xloc>
+      <yloc>456</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2483,7 +2624,8 @@ FROM patient p
 			p.voided = 0
 			AND e.voided = 0
 			AND o.voided = 0
-			AND e.encounter_type IN (6,9,18)
+			AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+and p.patient_id = ?
 			AND e.location_id = 208
 		GROUP BY
 			p.patient_id,e.encounter_id
@@ -2492,7 +2634,7 @@ FROM patient p
      INNER JOIN encounter e on e.patient_id = last_encounter.patient_id
      INNER JOIN obs o on o.encounter_id=last_encounter.encounter_id
 WHERE 	 e.encounter_datetime &lt; last_encounter.last_date
-	AND e.encounter_type IN (6,9,18)
+	AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
     AND (o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
             or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
 or (o.concept_id = 6121 and o.value_coded in (1066,1065))
@@ -2515,11 +2657,11 @@ group by second_last_encounter.patient_id,o.concept_id
 
 inner join obs ob on second_last_values.patient_id = ob.person_id and second_last_values.concept_id = ob.concept_id and second_last_values.second_last_date = ob.obs_datetime
 
-order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded asc;</sql>
+order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded asc limit 2</sql>
     <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <lookup>patient 2</lookup>
+    <execute_each_row>Y</execute_each_row>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <attributes/>
     <cluster_schema/>
@@ -2774,66 +2916,6 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
     <GUI>
       <xloc>912</xloc>
       <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 4 2 2</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>208</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 4 2 2 2</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>208</xloc>
-      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

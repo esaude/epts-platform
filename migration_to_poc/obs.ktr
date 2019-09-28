@@ -750,7 +750,7 @@
     <hop>
       <from>get correct concept id 2</from>
       <to>Text file output</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>get correct concept id 3</from>
@@ -832,7 +832,7 @@ FROM
           INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
           INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
-          AND e.encounter_type IN (6,9,18)
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
           and p.patient_id= ?
           and o.concept_id 
 in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371) 
@@ -842,7 +842,9 @@ in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,61
   where o.concept_id 
 in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371) 
 GROUP BY last_encounter.patient_id,o.concept_id,o.value_numeric,o.value_coded
-order by last_encounter.patient_id asc, o.concept_id asc</sql>
+order by last_encounter.patient_id asc, o.concept_id asc 
+
+</sql>
     <limit>0</limit>
     <lookup>Blocking step 2 7 3</lookup>
     <execute_each_row>Y</execute_each_row>
@@ -893,7 +895,7 @@ FROM patient p
 			p.voided = 0
 			AND e.voided = 0
 			AND o.voided = 0
-			AND e.encounter_type IN (6,9,18)
+			AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
 			AND e.location_id = 208
 		GROUP BY
 			p.patient_id,e.encounter_id
@@ -903,7 +905,7 @@ FROM patient p
      INNER JOIN obs o on o.encounter_id=last_encounter.encounter_id
 WHERE p.patient_id = ? and
 	 e.encounter_datetime &lt; last_encounter.last_date
-	AND e.encounter_type IN (6,9,18)
+	AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
     and o.concept_id in 
 (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371)
     group by p.patient_id,e.encounter_id,o.concept_id
@@ -916,7 +918,7 @@ group by second_last_encounter.patient_id,o.concept_id
 inner join obs ob on second_last_values.patient_id = ob.person_id and second_last_values.concept_id = ob.concept_id and second_last_values.second_last_date = ob.obs_datetime 
 where ob.concept_id in 
 (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371)
-order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
+order by second_last_values.patient_id asc, ob.concept_id asc</sql>
     <limit>0</limit>
     <lookup>Blocking step 2 7 2</lookup>
     <execute_each_row>Y</execute_each_row>
@@ -1173,6 +1175,96 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
     <GUI>
       <xloc>1408</xloc>
       <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 7</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 7 2</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 7 3</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2019,7 +2111,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc;</sql>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>53</length>
+        <length>52</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2861,7 +2953,7 @@ order by p.patient_id asc, o.value_coded asc</sql>
   person_id
 , value
 , 4 as creator
-, ${LOCATION} as location_id
+, 17 as location_id
 , curdate() as date_created
 , now() as obs_datetime
 , uuid() as obs_uuid
@@ -2942,6 +3034,7 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
+and patient_id between 27000 and 28500
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
@@ -2976,6 +3069,7 @@ order by patient_id asc</sql>
     <connection>epts</connection>
     <sql>select distinct patient_id,patient_id
 from patient where voided=0
+and patient_id between 27000 and 28500
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
@@ -3468,96 +3562,6 @@ order by p.patient_id asc,o.value_coded asc</sql>
     <GUI>
       <xloc>928</xloc>
       <yloc>784</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 7</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 7 2</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>208</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 7 3</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

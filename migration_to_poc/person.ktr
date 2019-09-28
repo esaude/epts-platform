@@ -819,7 +819,10 @@ when voided_by is not null then 4 end as voided_by
 , deathdate_estimated
 , birthtime
 FROM person where person_id >'1'
-and voided = 0</sql>
+and voided = 0
+and person_id between 28000 and 28500
+order by person_id asc
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
