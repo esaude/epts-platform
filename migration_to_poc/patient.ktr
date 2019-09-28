@@ -1016,7 +1016,7 @@
     <connection>epts</connection>
     <sql>SELECT
   patient_id
-, '4' as creator
+, 4 as creator
 , date_created
 , now() as date_today
 , uuid()

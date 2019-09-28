@@ -46,7 +46,7 @@ Clinical_History_Obs_Form,,,HOF_LAB_SITUATION,,,HOF_LAB_SITUATION_CD4_Percent,,a
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION,,,HOF_LAB_SITUATION_CD4_Date,,c95ef393-7f42-4dd9-a495-364694434b40
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION,,,HOF_LAB_SITUATION_Carga_Viral,,b6ce3015-28b1-4a7a-a8fc-86182435a376
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION,,,HOF_LAB_SITUATION_Carga_Viral_Qualitativo,,3643ffc4-a8da-47eb-8f27-3fa7c6af1099
-Clinical_History_Obs_Form,,,HOF_LAB_SITUATION,,,HOF_LAB_SITUATION_Carga_Viral_Absolute,,64e38825-bb1b-4f6d-ae05-df05f84c88da
+Clinical_History_Obs_Form,,,HOF_LAB_SITUATION,,,HOF_LAB_SITUATION_Carga_Viral_Absolute_Retrospective,,70e5b056-af78-4918-8b3c-02b19f73088f
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION,,,HOF_LAB_SITUATION_Carga_Viral_Date,,d089539a-214d-4e4a-8ffa-0f55e58d9672
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION,,,HOF_LAB_SITUATION_HB,,af6ec6a1-5d6b-40e9-8c2a-50780a6963e4
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION,,,HOF_LAB_SITUATION_HB_Date,,5eab4ac2-a18f-491e-b8a3-345c11be7bb7
@@ -63,7 +63,7 @@ Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_CD4_Percent2,
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_CD4_Date2,,d92d961a-38da-4cd9-9303-a51f67f10573
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_Carga_Viral2,,9b7dc1b8-d763-417f-9010-89ed1e4c0d77
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_Carga_Viral_Qualitativo2,,593cbebb-29d3-44c7-aec9-6cdd72f51fc9
-Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_Carga_Viral_Absolute2,,f9d3a255-5efc-45ea-8684-be6ba834fa4a
+Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_Carga_Viral_Absolute_Retrospective2,,2d0b1667-5590-43a0-9b97-75d3124c50ad
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_Carga_Viral_Date2,,80b5f8af-05a2-473c-873b-58e5f6b8cc6a
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_HB2,,b687f14b-4440-417c-84c0-f24656e26b1c
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_HB_Date2,,5a3dfd3e-b997-4208-8ce4-f436e6680188
@@ -75,3 +75,4 @@ Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_Other2,,5af0e
 Clinical_History_Obs_Form,,,HOF_LAB_SITUATION2,,,HOF_LAB_SITUATION_Other_Date2,,8deca9c4-24d0-4a11-a9a4-b7b6f657ec05
 Clinical_History_Obs_Form,,,HOF_Other_Info,,,HOF_Other_Info_Provider,,c78e621a-31eb-4c6f-9580-2c12538c101c
 Clinical_History_Obs_Form,,,HOF_Other_Info,,,HOF_Other_Info_Contact,,a48ecbc9-2682-4347-85b7-e0f3c2d68316
+,,,,,,,,

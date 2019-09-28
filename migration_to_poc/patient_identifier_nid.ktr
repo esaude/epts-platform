@@ -816,18 +816,18 @@ patient_id
 , identifier
 , '3' as identifier_type
 , preferred
-, '17' AS location_id
-, '4' as creator
+, 17 AS location_id
+, 4 as creator
 , date_created
 , voided
 , case 
-when voided_by is not null then'4' end as voided_by
+when voided_by is not null then 4 end as voided_by
 , date_voided
 , void_reason
 , uuid
 , date_changed
 , case 
-when changed_by is not null then'4' end as changed_by
+when changed_by is not null then 4 end as changed_by
 FROM patient_identifier where identifier_type = '2'
 order by patient_id asc</sql>
     <limit>0</limit>

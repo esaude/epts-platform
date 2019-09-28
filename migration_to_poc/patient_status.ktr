@@ -1404,14 +1404,14 @@ order by person_id asc
 patient_program_id,
 patient_id,
 program_id,
-'4' as creator,
+4 as creator,
 date_created,
 case 
-when changed_by is not null then '4' end as changed_by,
+when changed_by is not null then 4 end as changed_by,
 date_changed,
 voided,
 case 
-when voided_by is not null then '4' end as voided_by,
+when voided_by is not null then 4 end as voided_by,
 date_voided,
 void_reason,
 uuid

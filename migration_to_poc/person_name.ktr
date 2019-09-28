@@ -635,18 +635,18 @@ preferred
 , family_name2
 , family_name_suffix
 , degree
-, '4' as creator
+, 4 as creator
 , date_created
 , voided
 , case 
-when voided_by is not null then '4' end as voided_by
+when voided_by is not null then 4 end as voided_by
 , date_voided
 , void_reason
 , case 
-when changed_by is not null then '4' end as changed_by
+when changed_by is not null then 4 end as changed_by
 , date_changed
 , uuid
-FROM person_name where person_id >='25'
+FROM person_name where person_id >='1'
 order by person_id asc
 </sql>
     <limit>0</limit>
@@ -925,16 +925,6 @@ order by person_id asc
   person_attribute_id
 , person_id
 , value
-, person_attribute_type_id
-, creator
-, date_created
-, changed_by
-, date_changed
-, voided
-, voided_by
-, date_voided
-, void_reason
-, uuid
 FROM person_attribute WHERE person_attribute_type_id = '999'
 order by person_id asc
 </sql>

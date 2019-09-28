@@ -805,20 +805,20 @@ VALUES ('999', 'OLD PERSON ID', 'OLD PERSON ID', 'java.lang.String', '0', '2', '
 , dead
 , death_date
 , cause_of_death
-, '4' as creator
+, 4 as creator
 , date_created
 , case 
-when changed_by is not null then '4' end as changed_by
+when changed_by is not null then 4 end as changed_by
 , date_changed
 , voided
 , case 
-when voided_by is not null then '4' end as voided_by
+when voided_by is not null then 4 end as voided_by
 , date_voided
 , void_reason
 , uuid
 , deathdate_estimated
 , birthtime
-FROM person where person_id >='25'
+FROM person where person_id >'1'
 and voided = 0</sql>
     <limit>0</limit>
     <lookup/>
@@ -1053,8 +1053,8 @@ and voided = 0</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>144</yloc>
+      <xloc>416</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
