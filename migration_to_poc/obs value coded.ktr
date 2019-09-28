@@ -721,12 +721,12 @@
     <hop>
       <from>get correct concept id 2 2</from>
       <to>form obs id lookup</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>update group id for sections</from>
       <to>get correct concept id 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>section obs id lookup</from>
@@ -741,26 +741,21 @@
     <hop>
       <from>Blocking step 2 3 2 2 2</from>
       <to>update group id for form</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get correct concept id 2</from>
-      <to>update group id for sections 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>update group id for sections 2</from>
-      <to>section obs id lookup</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>form obs id lookup</from>
       <to>update group id for sections 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>update group id for sections 2 2</from>
       <to>Blocking step 2 3 2 2 2</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>get correct concept id 2</from>
+      <to>section obs id lookup</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1817,7 +1812,7 @@
       </field>
       <field>
         <column_name>obs_datetime</column_name>
-        <stream_name>last_value_date</stream_name>
+        <stream_name>obs_datetime_2</stream_name>
       </field>
       <field>
         <column_name>date_created</column_name>
@@ -1830,6 +1825,10 @@
       <field>
         <column_name>location_id</column_name>
         <stream_name>location_id</stream_name>
+      </field>
+      <field>
+        <column_name>creator</column_name>
+        <stream_name>creator</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -2250,6 +2249,12 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>encounter_id</name>
+        <field>encounter_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>obs_id</name>
         <rename>section_obs_id</rename>
@@ -2358,7 +2363,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/form group concept map2.csv</filename>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/form group concept map3.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -2446,19 +2451,19 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>46</length>
+        <length>47</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>CONCEPT_ID</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>Boolean</type>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -2601,8 +2606,14 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
         <name2/>
       </key>
       <key>
-        <name>section_concept_id</name>
-        <field>obs_group_id</field>
+        <name>actual_concept_id</name>
+        <field>concept_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>encounter_id</name>
+        <field>encounter_id</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -2618,7 +2629,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
       </value>
       <value>
         <name>obs_datetime</name>
-        <rename>last_concept_id</rename>
+        <rename>obs_datetime_2</rename>
         <update>N</update>
       </value>
       <value>
@@ -2983,7 +2994,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
     </GUI>
   </step>
   <step>
-    <name>update group id for sections 2</name>
+    <name>update group id for sections 2 2</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -3005,46 +3016,9 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
         <condition>=</condition>
         <name2/>
       </key>
-      <value>
-        <name>obs_group_id</name>
-        <rename>section_concept_id</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1504</xloc>
-      <yloc>672</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>update group id for sections 2 2</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <commit>1000</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>obs</table>
       <key>
-        <name>person_id</name>
-        <field>person_id</field>
+        <name>actual_concept_id</name>
+        <field>concept_id</field>
         <condition>=</condition>
         <name2/>
       </key>

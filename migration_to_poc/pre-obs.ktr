@@ -1963,8 +1963,8 @@ order by person_id asc
     <tablename_in_field>N</tablename_in_field>
     <tablename_field/>
     <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <return_keys>Y</return_keys>
+    <return_field>obs_id</return_field>
     <fields>
       <field>
         <column_name>encounter_id</column_name>
@@ -2126,6 +2126,10 @@ order by person_id asc
         <column_name>obs_datetime</column_name>
         <stream_name>obs_date</stream_name>
       </field>
+      <field>
+        <column_name>obs_group_id</column_name>
+        <stream_name>obs_id</stream_name>
+      </field>
     </fields>
     <attributes>
       <group>
@@ -2205,6 +2209,10 @@ order by person_id asc
       <field>
         <column_name>obs_datetime</column_name>
         <stream_name>obs_date</stream_name>
+      </field>
+      <field>
+        <column_name>obs_group_id</column_name>
+        <stream_name>obs_id</stream_name>
       </field>
     </fields>
     <attributes>
@@ -2286,6 +2294,10 @@ order by person_id asc
         <column_name>obs_datetime</column_name>
         <stream_name>obs_date</stream_name>
       </field>
+      <field>
+        <column_name>obs_group_id</column_name>
+        <stream_name>obs_id</stream_name>
+      </field>
     </fields>
     <attributes>
       <group>
@@ -2365,6 +2377,10 @@ order by person_id asc
       <field>
         <column_name>obs_datetime</column_name>
         <stream_name>obs_date</stream_name>
+      </field>
+      <field>
+        <column_name>obs_group_id</column_name>
+        <stream_name>obs_id</stream_name>
       </field>
     </fields>
     <attributes>
