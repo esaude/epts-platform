@@ -1955,11 +1955,11 @@ order by patient_id asc
     <fields>
       <field>
         <column_name>value</column_name>
-        <stream_name>state_name</stream_name>
+        <stream_name>actual_state_concept</stream_name>
       </field>
       <field>
         <column_name>person_attribute_type_id</column_name>
-        <stream_name>actual_state_concept</stream_name>
+        <stream_name>state_change_actual_id</stream_name>
       </field>
       <field>
         <column_name>creator</column_name>

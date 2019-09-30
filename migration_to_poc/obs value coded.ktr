@@ -564,11 +564,6 @@
   </connection>
   <order>
     <hop>
-      <from>Merge join 3 2 2</from>
-      <to>Sort rows 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Blocking step 2 4 2</from>
       <to>Merge join 2</to>
       <enabled>Y</enabled>
@@ -724,163 +719,163 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocking step 2 4 2 2</from>
-      <to>Merge join 3 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>second last value coded values</from>
-      <to>Blocking step 2 4 2 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step 2 4 2 2 2</from>
-      <to>Merge join 3 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>patient</from>
       <to>last value coded values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>patient 2</from>
-      <to>second last value coded values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Blocking step 2 2 2</from>
       <to>get epts value_coded name 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Blocking step 2 3 2 3</from>
       <to>Text file output 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Blocking step 2 3 2 3</from>
       <to>last concept obs 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Blocking step 2 3 2 2 2</from>
       <to>update group id for sections 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge on concept 2 2</from>
       <to>get correct concept id 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge on value coded 3</from>
       <to>correct_value_coded 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge on value coded 2 2</from>
       <to>correct concept_id 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 2 4 2</from>
       <to>Merge on concept 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 2 5 3</from>
       <to>Merge on value coded 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 2 5 2 2</from>
       <to>Merge on value coded 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 3 2</from>
       <to>Merge on concept 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 4 3</from>
       <to>Merge on value coded 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 4 2 2</from>
       <to>Merge on value coded 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>concept id 2</from>
       <to>Sort rows 4 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>concept to form 2</from>
       <to>Sort rows 3 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>correct concept_id 2</from>
       <to>get encounter id 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>correct_value_coded 2</from>
       <to>get epts concept name 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get correct concept id 2 2</from>
       <to>Text file output 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get correct concept id 2 2</from>
       <to>section obs id lookup 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get correct concept id 3 2</from>
       <to>Sort rows 2 4 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get encounter id 2 2</from>
       <to>Blocking step 2 3 2 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get epts concept name 2</from>
       <to>Sort rows 2 5 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get epts value_coded name 2</from>
       <to>Sort rows 2 5 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>last concept obs 2 2</from>
       <to>get correct concept id 3 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>section obs id lookup 2</from>
       <to>Blocking step 2 3 2 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>value coded 2</from>
       <to>Sort rows 4 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge join 2</from>
       <to>Blocking step 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 4 2 2 2</from>
+      <to>Merge join 3 2 2</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>patient 2</from>
+      <to>second last value coded values</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>second last value coded values</from>
+      <to>Blocking step 2 4 2 2 2</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 4 2 2</from>
+      <to>Sort rows 2 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1150,7 +1145,7 @@
     </remotesteps>
     <GUI>
       <xloc>208</xloc>
-      <yloc>256</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1222,7 +1217,7 @@
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>208</yloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3171,13 +3166,13 @@
       </field>
       <field>
         <name>CONCEPT_ID</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>Boolean</type>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -3311,13 +3306,13 @@
       </field>
       <field>
         <name>CONCEPT_ID</name>
-        <type>Integer</type>
-        <format>#</format>
+        <type>Boolean</type>
+        <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -4245,7 +4240,7 @@
       </field>
       <field>
         <column_name>obs_datetime</column_name>
-        <stream_name>obs_datetime_2</stream_name>
+        <stream_name>obs_datetime</stream_name>
       </field>
       <field>
         <column_name>date_created</column_name>
@@ -4523,8 +4518,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>39</xloc>
-      <yloc>456</yloc>
+      <xloc>48</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -4611,7 +4606,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
     </remotesteps>
     <GUI>
       <xloc>96</xloc>
-      <yloc>288</yloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -4782,7 +4777,7 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
       </value>
       <value>
         <name>obs_datetime</name>
-        <rename>obs_datetime_2</rename>
+        <rename>obs_datetime</rename>
         <update>N</update>
       </value>
       <value>
