@@ -1370,7 +1370,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
+      <xloc>1008</xloc>
       <yloc>80</yloc>
       <attributes_kjc/>
     </entry>
@@ -1408,7 +1408,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1104</xloc>
+      <xloc>1216</xloc>
       <yloc>80</yloc>
       <attributes_kjc/>
     </entry>
