@@ -674,7 +674,7 @@
     </hop>
     <hop>
       <from>get correct concept id 2</from>
-      <to>patient attribute permanencia</to>
+      <to>patient attribute tipo de registo</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -1251,7 +1251,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>864</xloc>
       <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1897,7 +1897,8 @@ case
 when voided_by is not null then 4 end as voided_by,
 date_voided,
 void_reason,
-uuid
+uuid,
+uuid() as tiporeg_uuid
 from patient_program where program_id in ('1','2')
 and date_completed is null
 order by patient_id asc
@@ -1924,7 +1925,7 @@ order by patient_id asc
     </GUI>
   </step>
   <step>
-    <name>patient status state </name>
+    <name>patient attribute tipo de registo</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1936,10 +1937,10 @@ order by patient_id asc
     </partitioning>
     <connection>poc</connection>
     <schema/>
-    <table>patient_status_state</table>
+    <table>person_attribute</table>
     <commit>1000</commit>
     <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
+    <ignore_errors>Y</ignore_errors>
     <use_batch>N</use_batch>
     <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
@@ -1953,12 +1954,12 @@ order by patient_id asc
     <return_field/>
     <fields>
       <field>
-        <column_name>patient_id</column_name>
-        <stream_name>person_id</stream_name>
+        <column_name>value</column_name>
+        <stream_name>actual_state_concept</stream_name>
       </field>
       <field>
-        <column_name>patient_status</column_name>
-        <stream_name>POC_CONCEPT_NAME</stream_name>
+        <column_name>person_attribute_type_id</column_name>
+        <stream_name>state_change_actual_id</stream_name>
       </field>
       <field>
         <column_name>creator</column_name>
@@ -1969,12 +1970,36 @@ order by patient_id asc
         <stream_name>date_created</stream_name>
       </field>
       <field>
-        <column_name>uuid</column_name>
-        <stream_name>uuid</stream_name>
+        <column_name>changed_by</column_name>
+        <stream_name>changed_by</stream_name>
       </field>
       <field>
-        <column_name>patient_state</column_name>
-        <stream_name>state</stream_name>
+        <column_name>date_changed</column_name>
+        <stream_name>date_changed</stream_name>
+      </field>
+      <field>
+        <column_name>voided</column_name>
+        <stream_name>voided</stream_name>
+      </field>
+      <field>
+        <column_name>voided_by</column_name>
+        <stream_name>voided_by</stream_name>
+      </field>
+      <field>
+        <column_name>date_voided</column_name>
+        <stream_name>date_voided</stream_name>
+      </field>
+      <field>
+        <column_name>void_reason</column_name>
+        <stream_name>void_reason</stream_name>
+      </field>
+      <field>
+        <column_name>uuid</column_name>
+        <stream_name>tiporeg_uuid</stream_name>
+      </field>
+      <field>
+        <column_name>person_id</column_name>
+        <stream_name>person_id</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1986,99 +2011,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1520</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>patient_state</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
-  patient_state_id
-, patient_program_id
-, case
-when state = '6' then 'ACTIVE'
-when state = '7' then 'INACTIVE_TRANSFERRED_OUT'
-when state = '8' then 'INACTIVE_SUSPENDED'
-when state = '9' then 'ACTIVE'
-when state = '10' then 'INACTIVE_DEATH'
-end as state
-, start_date
-FROM patient_state
-where patient_program_id in
-(select patient_program_id from patient_program where program_id = '2')
-order by patient_program_id asc
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1360</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>patient_state 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT
- patient_state_id
-, patient_program_id
-, case
-when state = '7' then 'Patient_Transferred_Out'
-when state = '8' then 'Patient_Suspension'
-when state = '10' then 'Inactive_Death'
-end as state_name
-FROM patient_state
-where patient_program_id in
-(select patient_program_id from patient_program where program_id = '2')
-order by patient_program_id asc
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>896</xloc>
-      <yloc>624</yloc>
+      <xloc>1472</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2175,7 +2109,7 @@ order by patient_program_id asc
     </GUI>
   </step>
   <step>
-    <name>patient attribute permanencia</name>
+    <name>patient status state </name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2187,10 +2121,10 @@ order by patient_program_id asc
     </partitioning>
     <connection>poc</connection>
     <schema/>
-    <table>person_attribute</table>
+    <table>patient_status_state</table>
     <commit>1000</commit>
     <truncate>N</truncate>
-    <ignore_errors>Y</ignore_errors>
+    <ignore_errors>N</ignore_errors>
     <use_batch>N</use_batch>
     <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
@@ -2204,12 +2138,12 @@ order by patient_program_id asc
     <return_field/>
     <fields>
       <field>
-        <column_name>value</column_name>
-        <stream_name>actual_state_concept</stream_name>
+        <column_name>patient_id</column_name>
+        <stream_name>person_id</stream_name>
       </field>
       <field>
-        <column_name>person_attribute_type_id</column_name>
-        <stream_name>state_change_actual_id</stream_name>
+        <column_name>patient_status</column_name>
+        <stream_name>POC_CONCEPT_NAME</stream_name>
       </field>
       <field>
         <column_name>creator</column_name>
@@ -2220,36 +2154,12 @@ order by patient_program_id asc
         <stream_name>date_created</stream_name>
       </field>
       <field>
-        <column_name>changed_by</column_name>
-        <stream_name>changed_by</stream_name>
-      </field>
-      <field>
-        <column_name>date_changed</column_name>
-        <stream_name>date_changed</stream_name>
-      </field>
-      <field>
-        <column_name>voided</column_name>
-        <stream_name>voided</stream_name>
-      </field>
-      <field>
-        <column_name>voided_by</column_name>
-        <stream_name>voided_by</stream_name>
-      </field>
-      <field>
-        <column_name>date_voided</column_name>
-        <stream_name>date_voided</stream_name>
-      </field>
-      <field>
-        <column_name>void_reason</column_name>
-        <stream_name>void_reason</stream_name>
-      </field>
-      <field>
         <column_name>uuid</column_name>
         <stream_name>uuid</stream_name>
       </field>
       <field>
-        <column_name>person_id</column_name>
-        <stream_name>person_id</stream_name>
+        <column_name>patient_state</column_name>
+        <stream_name>state</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -2261,8 +2171,105 @@ order by patient_program_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1472</xloc>
-      <yloc>496</yloc>
+      <xloc>1520</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>patient_state</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+  patient_state_id
+, patient_program_id
+, case
+when state = 6 then 'ACTIVE'
+when state = 7 then 'INACTIVE_TRANSFERRED_OUT'
+when state = 8 then 'INACTIVE_SUSPENDED'
+when state = 9 then 'ACTIVE'
+when state = 10 then 'INACTIVE_DEATH'
+when state = 15 then 'INACTIVE_DEATH'
+when state = 29 then 'ACTIVE'
+end as state, state
+, start_date
+FROM patient_state
+where patient_program_id in
+(select max(patient_program_id) from patient p,patient_program pp where
+p.patient_id = pp.patient_id and pp.program_id =2 and p.voided=0 and pp.voided=0 group by p.patient_id)
+order by patient_program_id asc;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1360</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>patient_state 2</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT
+ patient_state_id
+, patient_program_id
+,state
+, case
+when state=6 then 'NEW_PATIENT'
+when state=7 then 'NEW_PATIENT'
+when state=8 then 'NEW_PATIENT'
+when state=9 then 'NEW_PATIENT'
+when state=10 then 'NEW_PATIENT'
+when state=29 then 'TRANSFERRED_PATIENT'
+end as state_name
+FROM patient_state
+where patient_program_id in
+(select min(patient_program_id) from patient p,patient_program pp where
+p.patient_id = pp.patient_id and pp.program_id =2 and p.voided=0 and pp.voided=0 group by p.patient_id)
+order by patient_program_id asc</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
