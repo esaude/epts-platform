@@ -2244,12 +2244,12 @@ order by second_last_values.patient_id asc, ob.concept_id asc</sql>
       </field>
       <field>
         <name>FORM_UUID</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>36</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2277,12 +2277,12 @@ order by second_last_values.patient_id asc, ob.concept_id asc</sql>
       </field>
       <field>
         <name>SECTION_UUID</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>36</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2299,13 +2299,13 @@ order by second_last_values.patient_id asc, ob.concept_id asc</sql>
       </field>
       <field>
         <name>CONCEPT_ID</name>
-        <type>Boolean</type>
-        <format/>
+        <type>Integer</type>
+        <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -2384,12 +2384,12 @@ order by second_last_values.patient_id asc, ob.concept_id asc</sql>
       </field>
       <field>
         <name>FORM_UUID</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>36</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2417,12 +2417,12 @@ order by second_last_values.patient_id asc, ob.concept_id asc</sql>
       </field>
       <field>
         <name>SECTION_UUID</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
+        <length>36</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2439,13 +2439,13 @@ order by second_last_values.patient_id asc, ob.concept_id asc</sql>
       </field>
       <field>
         <name>CONCEPT_ID</name>
-        <type>Boolean</type>
-        <format/>
+        <type>Integer</type>
+        <format>#</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
