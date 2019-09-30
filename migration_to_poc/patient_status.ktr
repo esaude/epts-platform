@@ -573,7 +573,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>poc patient attribute</from>
+      <from>patient attribute status</from>
       <to>patient status state </to>
       <enabled>Y</enabled>
     </hop>
@@ -664,7 +664,7 @@
     </hop>
     <hop>
       <from>Merge join 2</from>
-      <to>poc patient attribute</to>
+      <to>patient attribute status</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -674,7 +674,7 @@
     </hop>
     <hop>
       <from>get correct concept id 2</from>
-      <to>poc patient attribute 2</to>
+      <to>patient attribute permanencia</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -758,8 +758,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>368</yloc>
+      <xloc>304</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -829,8 +829,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>256</yloc>
+      <xloc>240</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -931,8 +931,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>400</yloc>
+      <xloc>736</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -965,8 +965,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>544</yloc>
+      <xloc>1040</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1209,8 +1209,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
-      <yloc>400</yloc>
+      <xloc>608</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1251,8 +1251,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
-      <yloc>544</yloc>
+      <xloc>896</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1293,8 +1293,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>672</yloc>
+      <xloc>1040</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1335,8 +1335,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>304</yloc>
+      <xloc>576</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1637,8 +1637,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>400</yloc>
+      <xloc>464</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1733,8 +1733,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>544</yloc>
+      <xloc>736</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1829,8 +1829,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1248</xloc>
-      <yloc>544</yloc>
+      <xloc>1232</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1866,8 +1866,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>352</yloc>
+      <xloc>80</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1918,8 +1918,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>144</yloc>
+      <xloc>80</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2077,13 +2077,13 @@ order by patient_program_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>768</yloc>
+      <xloc>896</xloc>
+      <yloc>624</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>poc patient attribute</name>
+    <name>patient attribute status</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2175,7 +2175,7 @@ order by patient_program_id asc
     </GUI>
   </step>
   <step>
-    <name>poc patient attribute 2</name>
+    <name>patient attribute permanencia</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2261,8 +2261,8 @@ order by patient_program_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
-      <yloc>544</yloc>
+      <xloc>1472</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
