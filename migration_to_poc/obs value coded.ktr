@@ -4372,7 +4372,7 @@ when o.value_coded=1205 then 1205
 when o.value_coded=1206 then 1206
 when o.value_coded=1207 then 1207
 else o.concept_id 
-end as last_concept_id, o.value_coded as last_value_coded,MAX(last_value.last_value_date) as last_value_date
+end as last_concept_id, o.value_coded as last_value_coded,MAX(last_value.last_value_date) as last_value_date, uuid() as obs_uuid
 from 
 (SELECT p.patient_id,o.value_coded,o.encounter_id,MAX(e.encounter_datetime) last_value_date
 FROM patient p 
@@ -4430,7 +4430,7 @@ order by last_value.patient_id asc, o.concept_id asc, o.value_coded asc limit 2<
 , 17 as location_id
 , curdate() as date_created
 , now() as obs_datetime
-, uuid() as obs_uuid
+
 FROM person_attribute WHERE person_attribute_type_id = '999'
 order by person_id asc
 </sql>

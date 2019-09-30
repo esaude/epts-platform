@@ -841,7 +841,7 @@
     </partitioning>
     <connection>epts</connection>
     <sql>select last_encounter.patient_id, o.obs_datetime, o.concept_id, o.value_coded,o.value_numeric
-,o.value_datetime,  last_encounter.last_datetime
+,o.value_datetime,  last_encounter.last_datetime, uuid() as obs_uuid
 FROM 
 (SELECT p.patient_id,o.concept_id,e.encounter_datetime as last_datetime-- ,MAX(e.encounter_datetime) as last_datetime
         FROM patient p
@@ -854,13 +854,13 @@ FROM
 -- in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371) 
           AND p.voided = 0
           -- GROUP BY p.patient_id,o.concept_id 
-          order by e.encounter_datetime desc limit 2) last_encounter          
+          order by e.encounter_datetime desc limit 1) last_encounter          
 inner join encounter e on last_encounter.last_datetime = e.encounter_datetime and last_encounter.patient_id = e.patient_id
 INNER JOIN obs o ON e.encounter_id = o.encounter_id and last_encounter.patient_id = o.person_id and 
   last_encounter.concept_id = o.concept_id
   where o.concept_id = ?
 -- in (1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371) 
-order by last_encounter.patient_id asc, o.concept_id asc ;</sql>
+order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
     <limit>0</limit>
     <lookup>Blocking step 2 7 3</lookup>
     <execute_each_row>Y</execute_each_row>
@@ -3316,7 +3316,7 @@ from concept where concept_id in
 , 17 as location_id
 , curdate() as date_created
 , now() as obs_datetime
-, uuid() as obs_uuid
+
 FROM person_attribute WHERE person_attribute_type_id = '999'
 order by person_id asc
 </sql>
