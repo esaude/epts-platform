@@ -1910,7 +1910,6 @@ when voided_by is not null then 4 end as voided_by,
 date_voided,
 void_reason,
 uuid,
-uuid() as status_uuid,
 uuid() as tiporeg_uuid
 from patient_program where program_id in ('1','2')
 and date_completed is null
@@ -2212,8 +2211,10 @@ when state = 9 then 'ACTIVE'
 when state = 10 then 'INACTIVE_DEATH'
 when state = 15 then 'INACTIVE_DEATH'
 when state = 29 then 'ACTIVE'
-end as state, state
-, start_date
+end as state, 
+state, 
+uuid() as status_uuid,
+start_date
 FROM patient_state
 where patient_program_id in
 (select max(patient_program_id) from patient p,patient_program pp where
