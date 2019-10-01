@@ -856,21 +856,6 @@
     <hop>
       <from>Merge join 2</from>
       <to>Blocking step 2 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step 2 4 2 2 2</from>
-      <to>Merge join 3 2 2</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>patient 2</from>
-      <to>second last value coded values</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>second last value coded values</from>
-      <to>Blocking step 2 4 2 2 2</to>
       <enabled>N</enabled>
     </hop>
     <hop>
@@ -1120,36 +1105,6 @@
     </GUI>
   </step>
   <step>
-    <name>Blocking step 2 4 2 2 2</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>208</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Merge join 2</name>
     <type>MergeJoin</type>
     <description/>
@@ -1180,44 +1135,6 @@
     <GUI>
       <xloc>656</xloc>
       <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join 3 2 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>Blocking step 2 4 2 2</step1>
-    <step2>Blocking step 2 4 2 2 2</step2>
-    <keys_1>
-      <key>patient_id</key>
-      <key>last_concept_id</key>
-      <key>value_coded</key>
-    </keys_1>
-    <keys_2>
-      <key>patient_id</key>
-      <key>concept_id</key>
-      <key>value_coded</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1338,7 +1255,7 @@
     <step1>Sort rows 2 5 2</step1>
     <step2>Sort rows 4 2</step2>
     <keys_1>
-      <key>epts_concept_id</key>
+      <key>epts_concept_id_1</key>
     </keys_1>
     <keys_2>
       <key>EPTS_CONCEPT_id</key>
@@ -4219,8 +4136,8 @@
     <tablename_in_field>N</tablename_in_field>
     <tablename_field/>
     <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <return_keys>Y</return_keys>
+    <return_field>obs_id</return_field>
     <fields>
       <field>
         <column_name>person_id</column_name>
@@ -4386,10 +4303,11 @@ and p.patient_id = ?
 or (o.concept_id = 6121 and o.value_coded in (1066,1065))
 or (o.concept_id = 6122 and o.value_coded in (1066,1065))
 or (o.concept_id = 6332 and o.value_coded in (1066,1065))
-or (o.concept_id = 1255 and o.value_coded in (1257,1107,1256,1260,1259,981,1258,1705,1369,1708,6282)))
+or (o.concept_id = 6257 and o.value_coded in (1066,1065)))
 AND e.location_id=o.location_id 
         GROUP BY p.patient_id, o.value_coded,o.concept_id,o.encounter_id) last_value
       inner join obs o on last_value.encounter_id = o.encounter_id
+where o.concept_id in (1088,5356,6121,6122,6332,6257,1255)
        GROUP BY last_value.patient_id, o.value_coded,o.concept_id
 order by last_value.patient_id asc, o.concept_id asc, o.value_coded asc limit 2</sql>
     <limit>0</limit>
@@ -4485,128 +4403,6 @@ order by patient_id asc</sql>
     <GUI>
       <xloc>16</xloc>
       <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>patient 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>select distinct patient_id
-from patient where voided=0
-and patient_id between 28000 and 28500
-order by patient_id asc</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>48</xloc>
-      <yloc>544</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>second last value coded values</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>
-select second_last_values.patient_id, ob.obs_datetime,ob.concept_id 
-,ob.value_coded,ob.obs_datetime
-
-from (
-select second_last_encounter.patient_id,o.concept_id, MAX(o.obs_datetime)  second_last_date
-
-FROM 
-(SELECT
-	p.patient_id,o.concept_id,e.encounter_id,MAX(e.encounter_datetime) second_last_concept_date 
-FROM patient p 
-	INNER JOIN (SELECT
-			p.patient_id,
-			MAX(e.encounter_datetime) last_date,e.encounter_id
-		FROM
-			patient p
-		INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id =208
-		INNER JOIN obs o ON o.encounter_id = e.encounter_id AND o.location_id =208
-		WHERE
-			p.voided = 0
-			AND e.voided = 0
-			AND o.voided = 0
-			AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id = ?
-			AND e.location_id = 208
-		GROUP BY
-			p.patient_id,e.encounter_id
-	) last_encounter ON last_encounter.patient_id= p.patient_id
-   
-     INNER JOIN encounter e on e.patient_id = last_encounter.patient_id
-     INNER JOIN obs o on o.encounter_id=last_encounter.encounter_id
-WHERE 	 e.encounter_datetime &lt; last_encounter.last_date
-	AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-    AND (o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
-            or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
-or (o.concept_id = 6121 and o.value_coded in (1066,1065))
-or (o.concept_id = 6122 and o.value_coded in (1066,1065))
-or (o.concept_id = 6332 and o.value_coded in (1066,1065))
-or (o.concept_id = 1255 and o.value_coded in (1257,1107,1256,1260,1259,981,1258,1705,1369,1708,6282))
-    group by p.patient_id,e.encounter_id,o.concept_id
-    ) second_last_encounter
-  INNER JOIN obs o ON second_last_encounter.encounter_id = o.encounter_id
-  where 
-   (o.concept_id = 1088 and o.value_coded in (6324,1703,5424,1651,1311,6100,6243,6105,1315,6108))
-            or (o.concept_id = 5356 and o.value_coded in (1204,1205,1206,1207))
-or (o.concept_id = 6121 and o.value_coded in (1066,1065))
-or (o.concept_id = 6122 and o.value_coded in (1066,1065))
-or (o.concept_id = 6332 and o.value_coded in (1066,1065))
-or (o.concept_id = 1255 and o.value_coded in (1257,1107,1256,1260,1259,981,1258,1705,1369,1708,6282))
-group by second_last_encounter.patient_id,o.concept_id
-) second_last_values
-
-
-inner join obs ob on second_last_values.patient_id = ob.person_id and second_last_values.concept_id = ob.concept_id and second_last_values.second_last_date = ob.obs_datetime
-
-order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded asc limit 2</sql>
-    <limit>0</limit>
-    <lookup>patient 2</lookup>
-    <execute_each_row>Y</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -4762,6 +4558,12 @@ order by second_last_values.patient_id asc, ob.concept_id asc, ob.value_coded as
       <key>
         <name>encounter_id</name>
         <field>encounter_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>obs_id</name>
+        <field>obs_id</field>
         <condition>=</condition>
         <name2/>
       </key>

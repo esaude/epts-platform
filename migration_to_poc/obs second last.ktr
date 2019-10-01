@@ -683,26 +683,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from> last encounter concepts </from>
-      <to>Blocking step 2 7</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step 2 7</from>
-      <to>Merge join 3 2</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step 2 7 3</from>
-      <to> last encounter concepts </to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>patient</from>
-      <to>Blocking step 2 7 3</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
       <from> second last encounter concepts</from>
       <to>Sort rows 2 3</to>
       <enabled>Y</enabled>
@@ -728,59 +708,6 @@
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name> last encounter concepts </name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>select last_encounter.patient_id, o.obs_datetime, o.concept_id, o.value_coded,o.value_numeric
-,MAX(o.value_datetime) as last_value_datetime,  MAX(last_encounter.last_datetime) last_concept_date
-FROM 
-(SELECT p.patient_id,o.concept_id,MAX(e.encounter_datetime) as last_datetime
-        FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
-        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
-          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-          and p.patient_id = ?
-          and o.concept_id 
-in (856,730,5497,21,654,653,887) 
-          AND p.voided = 0
-          GROUP BY p.patient_id,o.concept_id) last_encounter
-          
-inner join encounter e on last_encounter.last_datetime = e.encounter_datetime and last_encounter.patient_id = e.patient_id
-INNER JOIN obs o ON e.encounter_id = o.encounter_id and last_encounter.patient_id = o.person_id and 
-  last_encounter.concept_id = o.concept_id
-  where o.concept_id 
-in (856,730,5497,21,654,653,887)
-GROUP BY last_encounter.patient_id,o.concept_id, o.obs_datetime,o.value_numeric,o.value_coded
-order by last_encounter.patient_id asc, o.concept_id asc ;</sql>
-    <limit>0</limit>
-    <lookup>Blocking step 2 7 3</lookup>
-    <execute_each_row>Y</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>432</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name> second last encounter concepts</name>
     <type>TableInput</type>
@@ -985,66 +912,6 @@ order by e.encounter_datetime asc limit 1;
     </GUI>
   </step>
   <step>
-    <name>Blocking step 2 7</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 7 3</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>432</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Blocking step 2 7 3 2</name>
     <type>BlockingStep</type>
     <description/>
@@ -1142,44 +1009,6 @@ order by e.encounter_datetime asc limit 1;
     <GUI>
       <xloc>640</xloc>
       <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join 3 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>LEFT OUTER</join_type>
-    <step1>Blocking step 2 7</step1>
-    <step2> second last encounter concepts</step2>
-    <keys_1>
-      <key>patient_id</key>
-      <key>concept_id</key>
-      <key>value_coded</key>
-    </keys_1>
-    <keys_2>
-      <key>patient_id</key>
-      <key>concept_id</key>
-      <key>value_coded</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2172,41 +2001,6 @@ order by person_id asc
     </GUI>
   </step>
   <step>
-    <name>patient</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>select distinct patient_id
-from patient where voided=0
-and patient_id between 27000 and 28500
-order by patient_id asc</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>112</xloc>
-      <yloc>432</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>patient 2</name>
     <type>TableInput</type>
     <description/>
@@ -2220,7 +2014,7 @@ order by patient_id asc</sql>
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
-and patient_id between 27000 and 28500
+and patient_id between 28000 and 28500
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
