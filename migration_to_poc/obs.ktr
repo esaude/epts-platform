@@ -2203,6 +2203,28 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>CONCEPT_VALUE_CODED</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>13</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>VALUE_CODED_UUID</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>

@@ -709,11 +709,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get correct concept id 2</from>
-      <to>section obs id lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>last value coded values</from>
       <to>Blocking step 2 4 2 2</to>
       <enabled>Y</enabled>
@@ -863,6 +858,21 @@
       <to>Sort rows 2 2</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>get correct concept id 2</from>
+      <to>section obs id lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>update group id for sections</from>
+      <to>new value coded</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>new value coded</from>
+      <to>Update</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Blocking step 2 2</name>
@@ -979,7 +989,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1696</xloc>
+      <xloc>1712</xloc>
       <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3103,6 +3113,28 @@
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>CONCEPT_VALUE_CODED</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>13</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>VALUE_CODED_UUID</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -4461,7 +4493,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1584</xloc>
+      <xloc>1600</xloc>
       <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4602,7 +4634,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1824</xloc>
+      <xloc>1840</xloc>
       <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4893,6 +4925,117 @@ order by patient_id asc</sql>
     <GUI>
       <xloc>656</xloc>
       <yloc>656</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>new value coded</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>concept</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>Y</eat_row_on_failure>
+      <key>
+        <name>VALUE_CODED_UUID</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>concept_id</name>
+        <rename>new_value_coded_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1840</xloc>
+      <yloc>864</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>1000</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema/>
+      <table>obs</table>
+      <key>
+        <name>person_id</name>
+        <field>person_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>obs_id</name>
+        <field>obs_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>actual_concept_id</name>
+        <field>concept_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>obs_uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>value_coded</name>
+        <rename>new_value_coded_id</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1728</xloc>
+      <yloc>976</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
