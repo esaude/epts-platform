@@ -769,7 +769,7 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
+      <xloc>400</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2330,7 +2330,7 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
-and patient_id = 29379
+and patient_id between 27000 and 29000
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
