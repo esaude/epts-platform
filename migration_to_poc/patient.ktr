@@ -1021,6 +1021,7 @@
 , now() as date_today
 , uuid()
 FROM patient where voided=0
+and patient_id in (select distinct patient_id from patient_program where program_id in (1,2))
 order by patient_id asc
 </sql>
     <limit>0</limit>

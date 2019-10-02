@@ -1716,7 +1716,7 @@ from concept where concept_id in
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/update concept map no null.csv</filename>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/concept map second last.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1738,7 +1738,7 @@ from concept where concept_id in
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>60</length>
+        <length>12</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1771,7 +1771,7 @@ from concept where concept_id in
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>60</length>
+        <length>53</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2204,7 +2204,7 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
-and patient_id between 28000 and 28100
+and patient_id  = 29379
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>

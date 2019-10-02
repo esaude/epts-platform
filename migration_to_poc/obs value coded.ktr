@@ -2382,7 +2382,7 @@ AND e.location_id=o.location_id
       inner join obs o on last_value.encounter_id = o.encounter_id
 where o.concept_id in (1088,5356,6121,6122,6332,6257,1255)
        GROUP BY last_value.patient_id, o.value_coded,o.concept_id
-order by last_value.patient_id asc, o.concept_id asc, o.value_coded asc limit 2</sql>
+order by last_value.patient_id asc, o.concept_id asc, o.value_coded asc limit 1</sql>
     <limit>0</limit>
     <lookup>patient</lookup>
     <execute_each_row>Y</execute_each_row>
@@ -2506,7 +2506,7 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
-and patient_id between 28000 and 28100
+and patient_id = 29379
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
