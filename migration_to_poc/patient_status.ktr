@@ -578,11 +578,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>patient_state</from>
-      <to>Merge join 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Sort rows</from>
       <to>Merge join 2</to>
       <enabled>Y</enabled>
@@ -705,6 +700,16 @@
     <hop>
       <from>Join rows (cartesian product)</from>
       <to>Sort rows 2 2 3 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>patient_state</from>
+      <to>Sort rows 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 3</from>
+      <to>Merge join 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -858,7 +863,7 @@
       <schema_name/>
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>patient_state</step1>
+    <step1>Sort rows 3</step1>
     <step2>Sort rows</step2>
     <keys_1>
       <key>patient_program_id</key>
@@ -978,7 +983,7 @@
     </remotesteps>
     <GUI>
       <xloc>896</xloc>
-      <yloc>528</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1264,7 +1269,7 @@
     </remotesteps>
     <GUI>
       <xloc>736</xloc>
-      <yloc>528</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1306,7 +1311,7 @@
     </remotesteps>
     <GUI>
       <xloc>896</xloc>
-      <yloc>656</yloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1746,7 +1751,7 @@
     </remotesteps>
     <GUI>
       <xloc>592</xloc>
-      <yloc>528</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1842,7 +1847,7 @@
     </remotesteps>
     <GUI>
       <xloc>1088</xloc>
-      <yloc>528</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2116,7 +2121,7 @@ order by patient_id asc
     </remotesteps>
     <GUI>
       <xloc>1296</xloc>
-      <yloc>528</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2171,7 +2176,7 @@ order by patient_id asc
       </field>
       <field>
         <column_name>patient_state</column_name>
-        <stream_name>state</stream_name>
+        <stream_name>state_in_name</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -2200,26 +2205,33 @@ order by patient_id asc
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>SELECT
-  patient_state_id
-, patient_program_id
-, case
-when state = 6 then 'ACTIVE'
-when state = 7 then 'INACTIVE_TRANSFERRED_OUT'
-when state = 8 then 'INACTIVE_SUSPENDED'
-when state = 9 then 'ACTIVE'
-when state = 10 then 'INACTIVE_DEATH'
-when state = 15 then 'INACTIVE_DEATH'
-when state = 29 then 'ACTIVE'
-end as state, 
-state, 
-uuid() as status_uuid,
-start_date
-FROM patient_state
-where patient_program_id in
-(select max(patient_program_id) from patient p,patient_program pp where
-p.patient_id = pp.patient_id and pp.program_id =2 and p.voided=0 and pp.voided=0 group by p.patient_id)
-order by patient_program_id asc;</sql>
+    <sql>select p.patient_id, program.patient_program_id,program.state_id, the_state.state,
+case
+when the_state.state = 1 then 'ACTIVE'
+when the_state.state = 2 then 'TARV_ABANDONED'
+when the_state.state = 3 then 'INACTIVE_TRANSFERRED_OUT'
+when the_state.state = 4 then 'ACTIVE'
+when the_state.state = 5 then 'INACTIVE_DEATH'
+when the_state.state = 6 then 'ACTIVE'
+when the_state.state = 7 then 'INACTIVE_TRANSFERRED_OUT'
+when the_state.state = 8 then 'INACTIVE_SUSPENDED'
+when the_state.state = 9 then 'TARV_ABANDONED'
+when the_state.state = 10 then 'INACTIVE_DEATH'
+when the_state.state = 15 then 'INACTIVE_DEATH'
+when the_state.state = 28 then 'ACTIVE'
+when the_state.state = 29 then 'ACTIVE'
+end as state_in_name,
+uuid() as status_uuid
+from patient p
+inner join 
+(select pp.patient_id, pp.patient_program_id,state.state_id
+from patient_program pp 
+inner join 
+(select patient_program_id, max(patient_state_id) state_id from patient_state group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
+where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
+inner join (select state,patient_state_id from patient_state) the_state on the_state.patient_state_id = program.state_id
+where p.voided=0 
+;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2251,23 +2263,26 @@ order by patient_program_id asc;</sql>
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>SELECT
- patient_state_id
-, patient_program_id
-,state
-, case
+    <sql>select p.patient_id, program.patient_program_id,program.state_id, the_state.state,
+case
 when state=6 then 'NEW_PATIENT'
 when state=7 then 'NEW_PATIENT'
 when state=8 then 'NEW_PATIENT'
 when state=9 then 'NEW_PATIENT'
 when state=10 then 'NEW_PATIENT'
 when state=29 then 'TRANSFERRED_PATIENT'
-end as state_name
-FROM patient_state
-where patient_program_id in
-(select min(patient_program_id) from patient p,patient_program pp where
-p.patient_id = pp.patient_id and pp.program_id =2 and p.voided=0 and pp.voided=0 group by p.patient_id)
-order by patient_program_id asc</sql>
+end as state_name,
+uuid() as min_status_uuid
+from patient p
+inner join 
+(select pp.patient_id, pp.patient_program_id,state.state_id
+from patient_program pp 
+inner join 
+(select patient_program_id, min(patient_state_id) state_id from patient_state group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
+where pp.program_id =2 and pp.voided=0) program on program.patient_id = p.patient_id
+inner join (select state,patient_state_id from patient_state) the_state on the_state.patient_state_id = program.state_id
+where p.voided=0 
+;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2283,7 +2298,7 @@ order by patient_program_id asc</sql>
     </remotesteps>
     <GUI>
       <xloc>768</xloc>
-      <yloc>656</yloc>
+      <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2391,6 +2406,48 @@ order by patient_program_id asc</sql>
     <GUI>
       <xloc>976</xloc>
       <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 3</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>patient_program_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1360</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

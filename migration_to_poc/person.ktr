@@ -820,7 +820,7 @@ when voided_by is not null then 4 end as voided_by
 , birthtime
 FROM person where person_id >'1'
 and voided = 0
-and person_id between 28000 and 28500
+and person_id between 28000 and 28100
 order by person_id asc
 </sql>
     <limit>0</limit>

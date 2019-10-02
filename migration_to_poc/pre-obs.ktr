@@ -763,7 +763,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>880</xloc>
+      <xloc>800</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -793,7 +793,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
+      <xloc>1072</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -848,7 +848,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
+      <xloc>608</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -903,7 +903,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
+      <xloc>1072</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -940,7 +940,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
+      <xloc>1072</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -974,7 +974,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
+      <xloc>432</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1055,7 +1055,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
+      <xloc>608</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1131,7 +1131,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>960</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1203,7 +1203,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
+      <xloc>704</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1287,8 +1287,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1936</xloc>
-      <yloc>192</yloc>
+      <xloc>1728</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1371,8 +1371,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1984</xloc>
-      <yloc>400</yloc>
+      <xloc>1776</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1455,8 +1455,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1936</xloc>
-      <yloc>624</yloc>
+      <xloc>1728</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1539,8 +1539,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1696</xloc>
-      <yloc>624</yloc>
+      <xloc>1488</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1587,7 +1587,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1328</xloc>
+      <xloc>1280</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1667,8 +1667,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1696</xloc>
-      <yloc>400</yloc>
+      <xloc>1488</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1739,8 +1739,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1696</xloc>
-      <yloc>192</yloc>
+      <xloc>1488</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1836,8 +1836,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
-      <yloc>272</yloc>
+      <xloc>1632</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1884,8 +1884,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1856</xloc>
-      <yloc>400</yloc>
+      <xloc>1648</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1932,8 +1932,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1840</xloc>
-      <yloc>528</yloc>
+      <xloc>1632</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1980,8 +1980,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1696</xloc>
-      <yloc>512</yloc>
+      <xloc>1488</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
