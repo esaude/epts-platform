@@ -633,11 +633,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get correct concept id</from>
-      <to>insert into encounter_provider</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>insert form  concept into obs</from>
       <to>section concept 1</to>
       <enabled>Y</enabled>
@@ -675,6 +670,11 @@
     <hop>
       <from>section concept 4</from>
       <to>form  section 4</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get correct concept id</from>
+      <to>insert into encounter_provider</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1287,7 +1287,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1728</xloc>
+      <xloc>1696</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1371,7 +1371,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1776</xloc>
+      <xloc>1744</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1455,7 +1455,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1728</xloc>
+      <xloc>1696</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1539,7 +1539,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
+      <xloc>1456</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1548,7 +1548,7 @@ order by patient_id asc
     <name>get correct concept id</name>
     <type>DBLookup</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1587,8 +1587,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
-      <yloc>192</yloc>
+      <xloc>1184</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1667,7 +1667,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
+      <xloc>1456</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1739,7 +1739,7 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
+      <xloc>1456</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1762,6 +1762,8 @@ order by patient_id asc
 , value
 , uuid() as obs_uuid
 , now() as obs_date
+-- ,'HOF_TARV_PROPHILAXIS_Patient_Type' as patient_type
+-- , 'Is_Migrated' as patient_type_code
 , 'Clinical_History_Obs_Form' as form_type_concept
 , 'HOF_LAB_CLINICAL_SITUATION' as form_section1
 , 'HOF_LAB_SITUATION' as form_section2
@@ -1836,7 +1838,7 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1632</xloc>
+      <xloc>1600</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1884,7 +1886,7 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1648</xloc>
+      <xloc>1616</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1932,7 +1934,7 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1632</xloc>
+      <xloc>1600</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1980,7 +1982,7 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1488</xloc>
+      <xloc>1456</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>

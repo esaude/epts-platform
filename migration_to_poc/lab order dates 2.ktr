@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>obs second last</name>
+    <name>lab order dates 2</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/09/30 16:56:38.336</created_date>
+    <created_date>2019/10/03 13:04:08.250</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/09/30 16:56:38.336</modified_date>
+    <modified_date>2019/10/03 13:04:08.250</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -563,8 +563,18 @@
   </connection>
   <order>
     <hop>
-      <from>Blocking step 2 3 3</from>
-      <to>second last concept obs</to>
+      <from> second last obs dates</from>
+      <to>Blocking step 2 7</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2</from>
+      <to>Sort rows 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 3</from>
+      <to>last concept obs</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -573,133 +583,23 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocking step 2 5 2 2</from>
-      <to>update group id for sections 2</to>
+      <from>Blocking step 2 5</from>
+      <to>Sort rows 2 4</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocking step 2 5 3</from>
-      <to>Sort rows 2 4 2</to>
+      <from>Blocking step 2 5 2</from>
+      <to>update group id for sections</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge join</from>
-      <to>Blocking step 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge on concept 2 2</from>
-      <to>get correct concept id 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge on concept 3</from>
-      <to>get correct concept id 4</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 2 3</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 2 4 2</from>
-      <to>Merge on concept 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 2 6</from>
-      <to>Merge on concept 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 3 2</from>
-      <to>Merge on concept 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 5</from>
-      <to>Merge on concept 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>concept 2</from>
-      <to>Sort rows 5</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>concept to form 2</from>
-      <to>Sort rows 3 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get correct concept id 2 2</from>
-      <to>Text file output 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get correct concept id 2 2</from>
-      <to>section obs id lookup 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get correct concept id 3 2</from>
-      <to>Blocking step 2 5 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get correct concept id 4</from>
-      <to>get encounter id 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get encounter id 3</from>
-      <to>Blocking step 2 3 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>new_patient_id</from>
-      <to>Blocking step 2 4</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>second last concept obs</from>
-      <to>get correct concept id 3 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>section obs id lookup 2</from>
-      <to>Blocking step 2 5 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from> second last encounter concepts</from>
+      <from>Blocking step 2 7</from>
       <to>Sort rows 2 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>concepts</from>
-      <to>Join rows (cartesian product)</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>patient 2</from>
-      <to>Join rows (cartesian product)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step 2 7 3 2</from>
-      <to> second last encounter concepts</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>epts uuid 2</from>
-      <to>get epts concept name 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get epts concept name 3</from>
-      <to>Join rows (cartesian product)</to>
+      <from>Blocking step 2 7 3</from>
+      <to> second last obs dates</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -708,18 +608,118 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
-      <to>Blocking step 2 7 3 2</to>
+      <from>Merge join</from>
+      <to>Blocking step 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocking step 2</from>
-      <to>Sort rows 2 6</to>
+      <from>Merge on concept</from>
+      <to>get correct concept id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge on concept 2</from>
+      <to>get correct concept id 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Blocking step 2 7 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows</from>
+      <to>Merge on concept</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 2</from>
+      <to>Merge on concept</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 2 3</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 2 4</from>
+      <to>Merge on concept 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 3</from>
+      <to>Merge on concept 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>concept</from>
+      <to>Sort rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>concept to form</from>
+      <to>Sort rows 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>epts uuid 2</from>
+      <to>get epts concept name 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get correct concept id</from>
+      <to>get encounter id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get correct concept id 2</from>
+      <to>Text file output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get correct concept id 2</from>
+      <to>section obs id lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get correct concept id 3</from>
+      <to>Blocking step 2 5</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get encounter id</from>
+      <to>Blocking step 2 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>last concept obs</from>
+      <to>get correct concept id 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>new_patient_id</from>
+      <to>Blocking step 2 4</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>patient</from>
+      <to>Join rows (cartesian product)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>section obs id lookup</from>
+      <to>Blocking step 2 5 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get epts concept name 3</from>
+      <to>Join rows (cartesian product)</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name> second last encounter concepts</name>
+    <name> second last obs dates</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -730,7 +730,7 @@
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>select last_encounter.patient_id, o.obs_datetime, o.concept_id, o.value_coded,o.value_numeric,o.value_text
+    <sql>select last_encounter.patient_id, o.date_created, o.obs_datetime, o.concept_id, o.value_coded,o.value_numeric,o.value_text
 ,o.value_datetime,  last_encounter.last_datetime, uuid() as obs_uuid
 FROM 
 (SELECT p.patient_id,o.concept_id,e.encounter_datetime as last_datetime
@@ -752,7 +752,7 @@ and o.value_coded is null
 order by e.encounter_datetime asc limit 1;
 </sql>
     <limit>0</limit>
-    <lookup>Blocking step 2 7 3 2</lookup>
+    <lookup>Blocking step 2 7 3</lookup>
     <execute_each_row>Y</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
@@ -765,8 +765,8 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>32</yloc>
+      <xloc>400</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -795,13 +795,13 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>336</yloc>
+      <xloc>672</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Blocking step 2 3 3</name>
+    <name>Blocking step 2 3</name>
     <type>BlockingStep</type>
     <description/>
     <distribute>N</distribute>
@@ -825,8 +825,8 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1344</xloc>
-      <yloc>80</yloc>
+      <xloc>1264</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -855,13 +855,73 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
+      <xloc>512</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 5</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1440</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step 2 5 2</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1536</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Blocking step 2 5 2 2</name>
+    <name>Blocking step 2 7</name>
     <type>BlockingStep</type>
     <description/>
     <distribute>N</distribute>
@@ -885,13 +945,13 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1680</xloc>
-      <yloc>80</yloc>
+      <xloc>384</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Blocking step 2 5 3</name>
+    <name>Blocking step 2 7 3</name>
     <type>BlockingStep</type>
     <description/>
     <distribute>N</distribute>
@@ -915,38 +975,8 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1520</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 7 3 2</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>176</xloc>
-      <yloc>64</yloc>
+      <xloc>288</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -982,8 +1012,8 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>240</yloc>
+      <xloc>128</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1016,13 +1046,13 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>80</yloc>
+      <xloc>672</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Merge on concept 2 2</name>
+    <name>Merge on concept</name>
     <type>MergeJoin</type>
     <description/>
     <distribute>N</distribute>
@@ -1033,42 +1063,8 @@ order by e.encounter_datetime asc limit 1;
       <schema_name/>
     </partitioning>
     <join_type>INNER</join_type>
-    <step1>Sort rows 2 4 2</step1>
-    <step2>Sort rows 3 2</step2>
-    <keys_1>
-      <key>actual_concept_id_uuid</key>
-    </keys_1>
-    <keys_2>
-      <key>CONCEPT_UUID</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1680</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge on concept 3</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>Sort rows 2 6</step1>
-    <step2>Sort rows 5</step2>
+    <step1>Sort rows 2</step1>
+    <step2>Sort rows</step2>
     <keys_1>
       <key>concept_id</key>
     </keys_1>
@@ -1084,8 +1080,42 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
-      <yloc>208</yloc>
+      <xloc>928</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge on concept 2</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>Sort rows 2 4</step1>
+    <step2>Sort rows 3</step2>
+    <keys_1>
+      <key>actual_concept_id_uuid</key>
+    </keys_1>
+    <keys_2>
+      <key>CONCEPT_UUID</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1600</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1120,6 +1150,24 @@ order by e.encounter_datetime asc limit 1;
       <remove>
         <name>POC_CONCEPT_uuid</name>
       </remove>
+      <remove>
+        <name>POC_DATE_NAME</name>
+      </remove>
+      <remove>
+        <name>POC_DATE_UUID</name>
+      </remove>
+      <remove>
+        <name>POC_CONCEPT_NAME2</name>
+      </remove>
+      <remove>
+        <name>POC_CONCEPT_uuid2</name>
+      </remove>
+      <remove>
+        <name>POC_DATE_NAME2</name>
+      </remove>
+      <remove>
+        <name>POC_DATE_UUID2</name>
+      </remove>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1130,8 +1178,92 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>144</yloc>
+      <xloc>176</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>EPTS_CONCEPT_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>928</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>concept_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>928</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1172,13 +1304,13 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>80</yloc>
+      <xloc>512</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort rows 2 4 2</name>
+    <name>Sort rows 2 4</name>
     <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -1214,55 +1346,13 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1680</xloc>
-      <yloc>224</yloc>
+      <xloc>1600</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort rows 2 6</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>concept_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>912</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 3 2</name>
+    <name>Sort rows 3</name>
     <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -1298,55 +1388,13 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1680</xloc>
+      <xloc>1600</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort rows 5</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>EPTS_CONCEPT_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>912</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Text file output 2</name>
+    <name>Text file output</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1370,7 +1418,7 @@ order by e.encounter_datetime asc limit 1;
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>/home/amos/Documents/projects/concepts2</name>
+      <name>/home/amos/Documents/projects/concepts</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -1397,13 +1445,13 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1888</xloc>
+      <xloc>1744</xloc>
       <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>concept 2</name>
+    <name>concept</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1413,7 +1461,7 @@ order by e.encounter_datetime asc limit 1;
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/update concept map no null second last.csv</filename>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/concept map last date input.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1435,7 +1483,7 @@ order by e.encounter_datetime asc limit 1;
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>60</length>
+        <length>17</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1468,7 +1516,7 @@ order by e.encounter_datetime asc limit 1;
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>60</length>
+        <length>52</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1494,6 +1542,72 @@ order by e.encounter_datetime asc limit 1;
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>POC_DATE_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>35</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_DATE_UUID</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_NAME2</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>53</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_uuid2</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_DATE_NAME2</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>35</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_DATE_UUID2</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1504,13 +1618,13 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
-      <yloc>336</yloc>
+      <xloc>784</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>concept to form 2</name>
+    <name>concept to form</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1666,42 +1780,8 @@ order by e.encounter_datetime asc limit 1;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1520</xloc>
+      <xloc>1472</xloc>
       <yloc>480</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>concepts</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>SELECT distinct concept_id, concept_id
-from concept where concept_id in
-(1984,1441,1442,1611,6123,1271,1369,2060,856,5497,21,654,653,887,1190,6126,6127,1113,6120,1410,5096,1372,1371) </sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>48</xloc>
-      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1716,7 +1796,7 @@ from concept where concept_id in
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/concept map second last.csv</filename>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/concept map last date input.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1738,7 +1818,7 @@ from concept where concept_id in
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>12</length>
+        <length>17</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1771,7 +1851,7 @@ from concept where concept_id in
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>53</length>
+        <length>52</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1797,6 +1877,72 @@ from concept where concept_id in
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>POC_DATE_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>35</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_DATE_UUID</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_NAME2</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>53</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_CONCEPT_uuid2</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_DATE_NAME2</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>35</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POC_DATE_UUID2</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1807,13 +1953,61 @@ from concept where concept_id in
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>416</yloc>
+      <xloc>96</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>get correct concept id 2 2</name>
+    <name>get correct concept id</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>concept</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>POC_DATE_UUID2</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>concept_id</name>
+        <rename>actual_concept_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1072</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get correct concept id 2</name>
     <type>DBLookup</type>
     <description/>
     <distribute>N</distribute>
@@ -1855,13 +2049,13 @@ from concept where concept_id in
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1888</xloc>
-      <yloc>336</yloc>
+      <xloc>1744</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>get correct concept id 3 2</name>
+    <name>get correct concept id 3</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1903,61 +2097,13 @@ from concept where concept_id in
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1520</xloc>
-      <yloc>336</yloc>
+      <xloc>1440</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>get correct concept id 4</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>concept</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>POC_CONCEPT_uuid</name>
-        <field>uuid</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>concept_id</name>
-        <rename>actual_concept_id</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1072</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get encounter id 3</name>
+    <name>get encounter id</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -2090,7 +2236,7 @@ from concept where concept_id in
     </remotesteps>
     <GUI>
       <xloc>1072</xloc>
-      <yloc>80</yloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2114,7 +2260,7 @@ from concept where concept_id in
       <table>concept</table>
       <orderby/>
       <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
+      <eat_row_on_failure>Y</eat_row_on_failure>
       <key>
         <name>EPTS_CONCEPT_uuid</name>
         <field>uuid</field>
@@ -2143,90 +2289,13 @@ from concept where concept_id in
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>336</yloc>
+      <xloc>192</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>new_patient_id</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <sql>SELECT
-  person_id
-, value
-, 4 as creator
-, 17 as location_id
-, curdate() as date_created
-, now() as obs_datetime
-
-FROM person_attribute WHERE person_attribute_type_id = '999'
-order by person_id asc
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>272</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>patient 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>select distinct patient_id
-from patient where voided=0
-and patient_id between 27500 and 28500
-order by patient_id asc</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>32</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>second last concept obs</name>
+    <name>last concept obs</name>
     <type>TableOutput</type>
     <description/>
     <distribute>N</distribute>
@@ -2276,7 +2345,7 @@ order by patient_id asc</sql>
       </field>
       <field>
         <column_name>value_datetime</column_name>
-        <stream_name>value_datetime</stream_name>
+        <stream_name>date_created</stream_name>
       </field>
       <field>
         <column_name>obs_datetime</column_name>
@@ -2312,13 +2381,90 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1344</xloc>
-      <yloc>336</yloc>
+      <xloc>1264</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>section obs id lookup 2</name>
+    <name>new_patient_id</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <sql>SELECT
+  person_id
+, value
+, 4 as creator
+, 17 as location_id
+, curdate() as date_created
+, now() as obs_datetime
+
+FROM person_attribute WHERE person_attribute_type_id = '999'
+order by person_id asc
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>patient</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>select distinct patient_id
+from patient where voided=0
+and patient_id between 27500 and 28500
+order by patient_id asc</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>32</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>section obs id lookup</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -2372,13 +2518,13 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1888</xloc>
-      <yloc>224</yloc>
+      <xloc>1744</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>update group id for sections 2</name>
+    <name>update group id for sections</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -2438,6 +2584,11 @@ order by patient_id asc</sql>
         <rename>date_created</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>uuid</name>
+        <rename>uuid</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <attributes/>
     <cluster_schema/>
@@ -2448,8 +2599,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1888</xloc>
-      <yloc>80</yloc>
+      <xloc>1728</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
