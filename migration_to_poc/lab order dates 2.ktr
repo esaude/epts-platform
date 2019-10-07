@@ -1418,7 +1418,7 @@ order by e.encounter_datetime asc limit 1;
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>/home/amos/Documents/projects/concepts</name>
+      <name>/home/amos/Documents/projects/second_last_date</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
