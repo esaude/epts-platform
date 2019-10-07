@@ -733,7 +733,7 @@
     <sql>select last_encounter.patient_id, o.date_created, o.obs_datetime, o.concept_id, o.value_coded,o.value_numeric,o.value_text
 ,o.value_datetime,  last_encounter.last_datetime, uuid() as obs_uuid
 FROM 
-(SELECT p.patient_id,o.concept_id,e.encounter_datetime as last_datetime
+(SELECT p.patient_id,o.concept_id,e.encounter_id,e.encounter_datetime as last_datetime
         FROM patient p
           INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
           INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
@@ -743,10 +743,11 @@ FROM
           and o.concept_id = ?
 and o.value_coded is null
           AND p.voided = 0
-         
+         and concat(p.patient_id,o.concept_id,e.encounter_datetime) not in (select concat(patient_id,concept_id,last_datetime)from obs_temp
+where patient_id = p.patient_id and concept_id = o.concept_id)
           order by e.encounter_datetime desc limit 2) last_encounter          
 inner join encounter e on last_encounter.last_datetime = e.encounter_datetime and last_encounter.patient_id = e.patient_id
-INNER JOIN obs o ON last_encounter.patient_id = o.person_id and last_encounter.concept_id = o.concept_id
+INNER JOIN obs o ON o.person_id = last_encounter.patient_id and o.concept_id = last_encounter.concept_id  and o.encounter_id = last_encounter.encounter_id
   where o.concept_id = ?
 and o.value_coded is null
 order by e.encounter_datetime asc limit 1;
@@ -2345,7 +2346,7 @@ order by e.encounter_datetime asc limit 1;
       </field>
       <field>
         <column_name>value_datetime</column_name>
-        <stream_name>date_created</stream_name>
+        <stream_name>obs_datetime</stream_name>
       </field>
       <field>
         <column_name>obs_datetime</column_name>

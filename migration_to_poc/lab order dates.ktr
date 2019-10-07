@@ -2362,8 +2362,7 @@ and o.value_coded is null
           AND p.voided = 0  
           order by e.encounter_datetime desc limit 1) last_encounter          
 inner join encounter e on last_encounter.last_datetime = e.encounter_datetime and last_encounter.patient_id = e.patient_id
-INNER JOIN obs o ON e.encounter_id = o.encounter_id and last_encounter.patient_id = o.person_id and 
-  last_encounter.concept_id = o.concept_id
+INNER JOIN obs o ON o.encounter_id = e.encounter_id  and o.person_id = last_encounter.patient_id  and o.concept_id = last_encounter.concept_id
   where o.concept_id = ?
  and o.value_coded is null
 order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>

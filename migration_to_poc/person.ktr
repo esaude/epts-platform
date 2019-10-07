@@ -579,7 +579,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Execute SQL script</from>
+      <from>create old person id attribute type</from>
       <to>epts_person</to>
       <enabled>Y</enabled>
     </hop>
@@ -601,6 +601,11 @@
     <hop>
       <from>Blocking step 2</from>
       <to>update person attribute</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>destroy indexes</from>
+      <to>create old person id attribute type</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -708,7 +713,7 @@
     </GUI>
   </step>
   <step>
-    <name>Execute SQL script</name>
+    <name>create old person id attribute type</name>
     <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
@@ -1204,6 +1209,48 @@ order by person_id asc
     <GUI>
       <xloc>928</xloc>
       <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>destroy indexes</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>poc</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>alter table openmrs.person drop index person_uuid_index;
+alter table openmrs.person_name drop index person_name_uuid_index; 
+alter table openmrs.person_attribute drop index person_attribute_uuid_index;
+alter table openmrs.obs drop index obs_uuid_index;
+alter table openmrs.encounter_provider drop index uuid;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
