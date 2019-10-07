@@ -1503,7 +1503,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>epts_concept_id_1</name>
+        <name>concept_id</name>
         <type>None</type>
         <format/>
         <currency/>
@@ -1515,7 +1515,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>epts_value_coded_id</name>
+        <name>value_coded</name>
         <type>None</type>
         <format/>
         <currency/>
