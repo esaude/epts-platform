@@ -604,16 +604,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get epts value_coded name</from>
-      <to>Sort rows 2 5</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Blocking step 2 2</from>
-      <to>get epts value_coded name</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Blocking step 2 3 2</from>
       <to>last concept obs 2</to>
       <enabled>Y</enabled>
@@ -639,18 +629,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get epts concept name</from>
-      <to>Sort rows 2 5 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>concept id</from>
       <to>Sort rows 4 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>correct_value_coded</from>
-      <to>get epts concept name</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -756,6 +736,16 @@
     <hop>
       <from>get epts concept name 3</from>
       <to>Join rows (cartesian product)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step 2 2</from>
+      <to>Sort rows 2 5</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>correct_value_coded</from>
+      <to>Sort rows 2 5 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1029,7 +1019,7 @@
     <step1>Sort rows 2 5</step1>
     <step2>Sort rows 4</step2>
     <keys_1>
-      <key>epts_value_coded_id</key>
+      <key>value_coded</key>
     </keys_1>
     <keys_2>
       <key>EPTS_CONCEPT_id</key>
@@ -1063,7 +1053,7 @@
     <step1>Sort rows 2 5 2</step1>
     <step2>Sort rows 4 2</step2>
     <keys_1>
-      <key>epts_concept_id_1</key>
+      <key>concept_id</key>
     </keys_1>
     <keys_2>
       <key>EPTS_CONCEPT_id</key>
@@ -1232,7 +1222,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>epts_value_coded_id</name>
+        <name>value_coded</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1274,7 +1264,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>epts_concept_id_1</name>
+        <name>concept_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -2378,54 +2368,6 @@
     </GUI>
   </step>
   <step>
-    <name>get epts concept name</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>concept_name</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>concept_id</name>
-        <field>concept_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>concept_id</name>
-        <rename>epts_concept_id</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1280</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>get epts concept name 3</name>
     <type>DBLookup</type>
     <description/>
@@ -2476,54 +2418,6 @@
     <GUI>
       <xloc>224</xloc>
       <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>get epts value_coded name</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>concept_name</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>value_coded</name>
-        <field>concept_id</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>concept_id</name>
-        <rename>epts_value_coded_id</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>928</xloc>
-      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
