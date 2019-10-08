@@ -647,7 +647,7 @@ when changed_by is not null then 4 end as changed_by
 , date_changed
 , uuid
 FROM person_name where person_id >='1'
-and voided=0
+and voided=0 and preferred = 1
 order by person_id asc
 </sql>
     <limit>0</limit>
