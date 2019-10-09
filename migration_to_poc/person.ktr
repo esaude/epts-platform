@@ -713,6 +713,43 @@
     </GUI>
   </step>
   <step>
+    <name>Join rows (cartesian product)</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <cache_size>500</cache_size>
+    <main/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue/>
+        <function>=</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>create old person id attribute type</name>
     <type>ExecSQL</type>
     <description/>
@@ -754,8 +791,8 @@ VALUES ('999', 'OLD PERSON ID', 'OLD PERSON ID', 'java.lang.String', '0', '2', '
     </GUI>
   </step>
   <step>
-    <name>Join rows (cartesian product)</name>
-    <type>JoinRows</type>
+    <name>destroy indexes</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -764,18 +801,23 @@ VALUES ('999', 'OLD PERSON ID', 'OLD PERSON ID', 'java.lang.String', '0', '2', '
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <cache_size>500</cache_size>
-    <main/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue/>
-        <function>=</function>
-        <rightvalue/>
-      </condition>
-    </compare>
+    <connection>poc</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>alter table person drop index person_uuid_index;
+alter table person_name drop index person_name_uuid_index; 
+alter table person_attribute drop index person_attribute_uuid_index;
+alter table obs drop index obs_uuid_index;
+alter table encounter_provider drop index uuid;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -785,8 +827,8 @@ VALUES ('999', 'OLD PERSON ID', 'OLD PERSON ID', 'java.lang.String', '0', '2', '
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>208</yloc>
+      <xloc>64</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -824,8 +866,9 @@ when voided_by is not null then 4 end as voided_by
 , deathdate_estimated
 , birthtime
 FROM person where person_id >'1'
-and voided = 0 and person_id between 27500 and 28500
--- and person_id in (select distinct patient_id from patient_program where program_id in (1,2))
+and voided = 0 
+and person_id between 27500 and 28500
+and person_id in (select distinct patient_id from patient_program where program_id in (1,2))
 order by person_id asc
 </sql>
     <limit>0</limit>
@@ -1209,48 +1252,6 @@ order by person_id asc
     <GUI>
       <xloc>928</xloc>
       <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>destroy indexes</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>alter table openmrs.person drop index person_uuid_index;
-alter table openmrs.person_name drop index person_name_uuid_index; 
-alter table openmrs.person_attribute drop index person_attribute_uuid_index;
-alter table openmrs.obs drop index obs_uuid_index;
-alter table openmrs.encounter_provider drop index uuid;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

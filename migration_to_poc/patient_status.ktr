@@ -1358,6 +1358,48 @@
     </GUI>
   </step>
   <step>
+    <name>Sort rows 3</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>patient_program_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1360</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>attribute type</name>
     <type>CsvInput</type>
     <description/>
@@ -2205,7 +2247,7 @@ order by patient_id asc
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>select p.patient_id, program.patient_program_id,program.state_id, the_state.state,
+    <sql>select p.patient_id, program.patient_program_id,max(program.state_id), the_state.state,
 case
 when the_state.state = 1 then 'ACTIVE'
 when the_state.state = 2 then 'TARV_ABANDONED'
@@ -2231,6 +2273,7 @@ inner join
 where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
 inner join (select state,patient_state_id from patient_state) the_state on the_state.patient_state_id = program.state_id
 where p.voided=0 
+group by p.patient_id
 ;</sql>
     <limit>0</limit>
     <lookup/>
@@ -2406,48 +2449,6 @@ where p.voided=0
     <GUI>
       <xloc>976</xloc>
       <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 3</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>patient_program_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1360</xloc>
-      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

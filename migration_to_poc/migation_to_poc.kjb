@@ -582,7 +582,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1472</xloc>
+      <xloc>1536</xloc>
       <yloc>80</yloc>
       <attributes_kjc/>
     </entry>
@@ -696,8 +696,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1184</xloc>
-      <yloc>352</yloc>
+      <xloc>1408</xloc>
+      <yloc>80</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1020,6 +1020,15 @@
     </hop>
     <hop>
       <from>rebuild indexes for performance</from>
+      <to>validations</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>validations</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
