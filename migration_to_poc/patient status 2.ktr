@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>patient_status</name>
+    <name>patient status 2</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2019/09/09 09:47:57.149</created_date>
+    <created_date>2019/10/10 16:19:58.545</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2019/09/09 09:47:57.149</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2019/10/10 16:19:58.545</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -563,26 +563,6 @@
   </connection>
   <order>
     <hop>
-      <from>new_patient_id</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>obs tarv status</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>patient attribute status</from>
-      <to>patient status state </to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows</from>
-      <to>Merge join 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Data grid</from>
       <to>Join rows (cartesian product)</to>
       <enabled>Y</enabled>
@@ -593,8 +573,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Join rows (cartesian product)</from>
+      <to>Sort rows 2 2 3 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Merge join</from>
       <to>Join rows (cartesian product)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join 2</from>
+      <to>patient attribute status</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -603,8 +593,23 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Merge join 2 2 2</from>
+      <to>correct attribute id 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join 2 3</from>
+      <to>get correct concept id 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Merge on concept</from>
       <to>get correct concept id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows</from>
+      <to>Merge join 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -618,43 +623,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>program id to concept id</from>
-      <to>Sort rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>correct attribute id</from>
-      <to>Sort rows 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>attribute type</from>
-      <to>Sort rows 2 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Sort rows 2 2 2</from>
       <to>Merge join 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>get correct concept id</from>
-      <to>Sort rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join 2</from>
-      <to>patient attribute status</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join 2 2 2</from>
-      <to>correct attribute id 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join 2 3</from>
-      <to>get correct concept id 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -678,8 +648,23 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Sort rows 3</from>
+      <to>Merge join 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>attribute type</from>
+      <to>Sort rows 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>attribute type 2</from>
       <to>Sort rows 2 2 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>correct attribute id</from>
+      <to>Sort rows 2 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -688,18 +673,28 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>get correct concept id</from>
+      <to>Sort rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>get correct concept id 2</from>
       <to>patient attribute tipo de registo</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>patient_state 2</from>
-      <to>Sort rows 2 2 3 2</to>
+      <from>new_patient_id</from>
+      <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Join rows (cartesian product)</from>
-      <to>Sort rows 2 2 3 3</to>
+      <from>obs tarv status</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>patient attribute status</from>
+      <to>patient status state </to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -708,8 +703,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort rows 3</from>
-      <to>Merge join 2</to>
+      <from>patient_state 2</from>
+      <to>Sort rows 2 2 3 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>program id to concept id</from>
+      <to>Sort rows 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -775,8 +775,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>64</yloc>
+      <xloc>400</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -812,8 +812,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>192</yloc>
+      <xloc>528</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -846,8 +846,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
-      <yloc>192</yloc>
+      <xloc>336</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -880,8 +880,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1664</xloc>
-      <yloc>288</yloc>
+      <xloc>1456</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -914,8 +914,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
-      <yloc>192</yloc>
+      <xloc>720</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -948,8 +948,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>384</yloc>
+      <xloc>688</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -982,8 +982,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1200</xloc>
-      <yloc>480</yloc>
+      <xloc>992</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1016,8 +1016,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
-      <yloc>160</yloc>
+      <xloc>1072</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1058,8 +1058,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
-      <yloc>288</yloc>
+      <xloc>1296</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1100,8 +1100,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
-      <yloc>272</yloc>
+      <xloc>1072</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1142,8 +1142,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
-      <yloc>80</yloc>
+      <xloc>1072</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1184,8 +1184,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
-      <yloc>96</yloc>
+      <xloc>720</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1226,8 +1226,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>768</xloc>
-      <yloc>384</yloc>
+      <xloc>560</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1268,8 +1268,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
-      <yloc>480</yloc>
+      <xloc>832</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1310,8 +1310,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1200</xloc>
-      <yloc>608</yloc>
+      <xloc>992</xloc>
+      <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1352,8 +1352,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>304</yloc>
+      <xloc>528</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1394,8 +1394,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1664</xloc>
-      <yloc>160</yloc>
+      <xloc>1456</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1545,8 +1545,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
-      <yloc>16</yloc>
+      <xloc>720</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1696,8 +1696,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>384</yloc>
+      <xloc>416</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1744,8 +1744,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
-      <yloc>192</yloc>
+      <xloc>848</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1792,8 +1792,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>480</yloc>
+      <xloc>688</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1840,8 +1840,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
-      <yloc>160</yloc>
+      <xloc>1296</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1888,8 +1888,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1392</xloc>
-      <yloc>480</yloc>
+      <xloc>1184</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1934,8 +1934,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>288</yloc>
+      <xloc>176</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1953,9 +1953,14 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select pp.patient_id, pp.program_id,4 as creator,uuid()as attribute_uuid,uuid() as tiporeg_uuid ,max(pp.patient_program_id) as patient_program_id
 from patient_program pp
+where pp.program_id = 1 and pp.voided=0  and pp.patient_id between 27500 and 28500
+and pp.patient_id  not in (select pp.patient_id
+from patient_program pp
 where pp.program_id = 2 and pp.voided=0
 and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
-group by pp.patient_id</sql>
+group by pp.patient_id)
+and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+group by pp.patient_id;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1970,8 +1975,8 @@ group by pp.patient_id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>80</yloc>
+      <xloc>176</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2062,8 +2067,8 @@ group by pp.patient_id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1824</xloc>
-      <yloc>288</yloc>
+      <xloc>1616</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2154,8 +2159,8 @@ group by pp.patient_id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
-      <yloc>480</yloc>
+      <xloc>1392</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2222,8 +2227,8 @@ group by pp.patient_id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1824</xloc>
-      <yloc>144</yloc>
+      <xloc>1616</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2254,7 +2259,6 @@ when the_state.state = 9 then 'TARV_ABANDONED'
 when the_state.state = 10 then 'INACTIVE_DEATH'
 when the_state.state = 15 then 'INACTIVE_DEATH'
 when the_state.state = 29 then 'ACTIVE'
-else 'other'
 end as state_in_name,
 uuid() as status_uuid
 from 
@@ -2285,8 +2289,8 @@ group by state.patient_id
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1664</xloc>
-      <yloc>64</yloc>
+      <xloc>1456</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2336,8 +2340,8 @@ where p.voided=0
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1072</xloc>
-      <yloc>608</yloc>
+      <xloc>864</xloc>
+      <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2443,8 +2447,8 @@ where p.voided=0
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1280</xloc>
-      <yloc>352</yloc>
+      <xloc>1072</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
