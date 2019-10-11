@@ -2,9 +2,9 @@
 <transformation>
   <info>
     <name>lab order dates</name>
-    <description/>
-    <extended_description/>
-    <trans_version/>
+    <description />
+    <extended_description />
+    <trans_version />
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
     <directory>/</directory>
@@ -12,12 +12,12 @@
     </parameters>
     <log>
       <trans-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <size_limit_lines/>
-        <interval/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <size_limit_lines />
+        <interval />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -42,37 +42,37 @@
           <id>LINES_READ</id>
           <enabled>Y</enabled>
           <name>LINES_READ</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_WRITTEN</id>
           <enabled>Y</enabled>
           <name>LINES_WRITTEN</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_UPDATED</id>
           <enabled>Y</enabled>
           <name>LINES_UPDATED</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_INPUT</id>
           <enabled>Y</enabled>
           <name>LINES_INPUT</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_OUTPUT</id>
           <enabled>Y</enabled>
           <name>LINES_OUTPUT</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_REJECTED</id>
           <enabled>Y</enabled>
           <name>LINES_REJECTED</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>ERRORS</id>
@@ -126,11 +126,11 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <interval/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <interval />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -208,10 +208,10 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -274,10 +274,10 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -350,10 +350,10 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -402,9 +402,9 @@
       </metrics-log-table>
     </log>
     <maxdate>
-      <connection/>
-      <table/>
-      <field/>
+      <connection />
+      <table />
+      <field />
       <offset>0.0</offset>
       <maxdiff>0.0</maxdiff>
     </maxdate>
@@ -415,7 +415,7 @@
     <feedback_shown>Y</feedback_shown>
     <feedback_size>50000</feedback_size>
     <using_thread_priorities>Y</using_thread_priorities>
-    <shared_objects_file/>
+    <shared_objects_file />
     <capture_step_performance>N</capture_step_performance>
     <step_performance_capturing_delay>1000</step_performance_capturing_delay>
     <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
@@ -437,17 +437,17 @@
   <notepads>
   </notepads>
   <connection>
-    <name>epts</name>
-    <server/>
+    <name>ccs1maio</name>
+    <server />
     <type>GENERIC</type>
     <access>Native</access>
-    <database/>
+    <database />
     <port>1521</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10cc9da0ce</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce7adb9fadd3</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
     <attributes>
       <attribute>
         <code>CUSTOM_DRIVER_CLASS</code>
@@ -455,7 +455,7 @@
       </attribute>
       <attribute>
         <code>CUSTOM_URL</code>
-        <attribute>jdbc:mysql://localhost:3306/CCSDBMASKED</attribute>
+        <attribute>jdbc:mysql://localhost:3306/ccs1maio</attribute>
       </attribute>
       <attribute>
         <code>DATABASE_DIALECT_ID</code>
@@ -500,17 +500,17 @@
     </attributes>
   </connection>
   <connection>
-    <name>poc</name>
-    <server/>
+    <name>poc_master</name>
+    <server />
     <type>GENERIC</type>
     <access>Native</access>
-    <database/>
+    <database />
     <port>1521</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10cc9da0ce</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce7adb9fadd3</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
     <attributes>
       <attribute>
         <code>CUSTOM_DRIVER_CLASS</code>
@@ -518,7 +518,7 @@
       </attribute>
       <attribute>
         <code>CUSTOM_URL</code>
-        <attribute>jdbc:mysql://localhost:3306/openmrs</attribute>
+        <attribute>jdbc:mysql://localhost:3306/poc_master</attribute>
       </attribute>
       <attribute>
         <code>DATABASE_DIALECT_ID</code>
@@ -722,21 +722,21 @@
   <step>
     <name>Blocking step 2</name>
     <type>BlockingStep</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <pass_all_rows>Y</pass_all_rows>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>block</prefix>
     <cache_size>5000</cache_size>
     <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -752,21 +752,21 @@
   <step>
     <name>Blocking step 2 3</name>
     <type>BlockingStep</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <pass_all_rows>Y</pass_all_rows>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>block</prefix>
     <cache_size>5000</cache_size>
     <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -782,21 +782,21 @@
   <step>
     <name>Blocking step 2 4</name>
     <type>BlockingStep</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <pass_all_rows>Y</pass_all_rows>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>block</prefix>
     <cache_size>5000</cache_size>
     <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -812,21 +812,21 @@
   <step>
     <name>Blocking step 2 5</name>
     <type>BlockingStep</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <pass_all_rows>Y</pass_all_rows>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>block</prefix>
     <cache_size>5000</cache_size>
     <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -842,21 +842,21 @@
   <step>
     <name>Blocking step 2 5 2</name>
     <type>BlockingStep</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <pass_all_rows>Y</pass_all_rows>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>block</prefix>
     <cache_size>5000</cache_size>
     <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -872,21 +872,21 @@
   <step>
     <name>Blocking step 2 7</name>
     <type>BlockingStep</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <pass_all_rows>Y</pass_all_rows>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>block</prefix>
     <cache_size>5000</cache_size>
     <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -902,21 +902,21 @@
   <step>
     <name>Blocking step 2 7 3</name>
     <type>BlockingStep</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <pass_all_rows>Y</pass_all_rows>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>block</prefix>
     <cache_size>5000</cache_size>
     <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -932,28 +932,28 @@
   <step>
     <name>Join rows (cartesian product)</name>
     <type>JoinRows</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>out</prefix>
     <cache_size>500</cache_size>
-    <main/>
+    <main />
     <compare>
       <condition>
         <negated>N</negated>
-        <leftvalue/>
+        <leftvalue />
         <function>=</function>
-        <rightvalue/>
+        <rightvalue />
       </condition>
     </compare>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -969,13 +969,13 @@
   <step>
     <name>Merge join</name>
     <type>MergeJoin</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <join_type>INNER</join_type>
     <step1>Sort rows 2 3</step1>
@@ -986,8 +986,8 @@
     <keys_2>
       <key>value</key>
     </keys_2>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1003,13 +1003,13 @@
   <step>
     <name>Merge on concept</name>
     <type>MergeJoin</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <join_type>INNER</join_type>
     <step1>Sort rows 2</step1>
@@ -1020,8 +1020,8 @@
     <keys_2>
       <key>EPTS_CONCEPT_id</key>
     </keys_2>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1037,13 +1037,13 @@
   <step>
     <name>Merge on concept 2</name>
     <type>MergeJoin</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <join_type>INNER</join_type>
     <step1>Sort rows 2 4</step1>
@@ -1054,8 +1054,8 @@
     <keys_2>
       <key>CONCEPT_UUID</key>
     </keys_2>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1071,13 +1071,13 @@
   <step>
     <name>Select values</name>
     <type>SelectValues</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <fields>
       <select_unspecified>N</select_unspecified>
@@ -1118,8 +1118,8 @@
         <name>POC_DATE_UUID2</name>
       </remove>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1135,20 +1135,20 @@
   <step>
     <name>Sort rows</name>
     <type>SortRows</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>out</prefix>
     <sort_size>1000000</sort_size>
-    <free_memory/>
+    <free_memory />
     <compress>N</compress>
-    <compress_variable/>
+    <compress_variable />
     <unique_rows>N</unique_rows>
     <fields>
       <field>
@@ -1160,8 +1160,8 @@
         <presorted>N</presorted>
       </field>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1177,20 +1177,20 @@
   <step>
     <name>Sort rows 2</name>
     <type>SortRows</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>out</prefix>
     <sort_size>1000000</sort_size>
-    <free_memory/>
+    <free_memory />
     <compress>N</compress>
-    <compress_variable/>
+    <compress_variable />
     <unique_rows>N</unique_rows>
     <fields>
       <field>
@@ -1202,8 +1202,8 @@
         <presorted>N</presorted>
       </field>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1219,20 +1219,20 @@
   <step>
     <name>Sort rows 2 3</name>
     <type>SortRows</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>out</prefix>
     <sort_size>1000000</sort_size>
-    <free_memory/>
+    <free_memory />
     <compress>N</compress>
-    <compress_variable/>
+    <compress_variable />
     <unique_rows>N</unique_rows>
     <fields>
       <field>
@@ -1244,8 +1244,8 @@
         <presorted>N</presorted>
       </field>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1261,20 +1261,20 @@
   <step>
     <name>Sort rows 2 4</name>
     <type>SortRows</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>out</prefix>
     <sort_size>1000000</sort_size>
-    <free_memory/>
+    <free_memory />
     <compress>N</compress>
-    <compress_variable/>
+    <compress_variable />
     <unique_rows>N</unique_rows>
     <fields>
       <field>
@@ -1286,8 +1286,8 @@
         <presorted>N</presorted>
       </field>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1303,20 +1303,20 @@
   <step>
     <name>Sort rows 3</name>
     <type>SortRows</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>out</prefix>
     <sort_size>1000000</sort_size>
-    <free_memory/>
+    <free_memory />
     <compress>N</compress>
-    <compress_variable/>
+    <compress_variable />
     <unique_rows>N</unique_rows>
     <fields>
       <field>
@@ -1328,8 +1328,8 @@
         <presorted>N</presorted>
       </field>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1345,13 +1345,13 @@
   <step>
     <name>Text file output</name>
     <type>TextFileOutput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <separator>;</separator>
     <enclosure>"</enclosure>
@@ -1361,13 +1361,13 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
-    <endedLine/>
+    <encoding />
+    <endedLine />
     <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>/home/amos/Documents/projects/last_date</name>
+      <name>/home/joaomachiana/Dev/moasis/bahmni/last_date</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -1377,16 +1377,16 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
+      <date_time_format />
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery />
     </file>
     <fields>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1402,17 +1402,17 @@
   <step>
     <name>concept</name>
     <type>CsvInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/concept map last date input.csv</filename>
-    <filename_field/>
-    <rownum_field/>
+    <filename>/home/joaomachiana/Dev/moasis/bahmni/epts-platform/migration_to_poc/concept map last date input.csv</filename>
+    <filename_field />
+    <rownum_field />
     <include_filename>N</include_filename>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -1423,12 +1423,12 @@
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
     <format>mixed</format>
-    <encoding/>
+    <encoding />
     <fields>
       <field>
         <name>EPTS_CONCEPT_NAME</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1450,7 +1450,7 @@
       <field>
         <name>EPTS_CONCEPT_uuid</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1461,7 +1461,7 @@
       <field>
         <name>POC_CONCEPT_NAME</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1483,7 +1483,7 @@
       <field>
         <name>POC_CONCEPT_uuid</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1494,7 +1494,7 @@
       <field>
         <name>POC_DATE_NAME</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1505,7 +1505,7 @@
       <field>
         <name>POC_DATE_UUID</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1516,7 +1516,7 @@
       <field>
         <name>POC_CONCEPT_NAME2</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1527,7 +1527,7 @@
       <field>
         <name>POC_CONCEPT_uuid2</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1538,7 +1538,7 @@
       <field>
         <name>POC_DATE_NAME2</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1549,7 +1549,7 @@
       <field>
         <name>POC_DATE_UUID2</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1558,8 +1558,8 @@
         <trim_type>none</trim_type>
       </field>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1575,17 +1575,17 @@
   <step>
     <name>concept to form</name>
     <type>CsvInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/form group concept map3.csv</filename>
-    <filename_field/>
-    <rownum_field/>
+    <filename>/home/joaomachiana/Dev/moasis/bahmni/epts-platform/migration_to_poc/form group concept map3.csv</filename>
+    <filename_field />
+    <rownum_field />
     <include_filename>N</include_filename>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -1596,12 +1596,12 @@
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
     <format>mixed</format>
-    <encoding/>
+    <encoding />
     <fields>
       <field>
         <name>FORM_NAME</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1612,7 +1612,7 @@
       <field>
         <name>FORM_ID</name>
         <type>Boolean</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1623,7 +1623,7 @@
       <field>
         <name>FORM_UUID</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1634,7 +1634,7 @@
       <field>
         <name>SECTION_NAME</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1645,7 +1645,7 @@
       <field>
         <name>SECTION_ID</name>
         <type>Boolean</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1656,7 +1656,7 @@
       <field>
         <name>SECTION_UUID</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1667,7 +1667,7 @@
       <field>
         <name>CONCEPT_NAME</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1678,7 +1678,7 @@
       <field>
         <name>CONCEPT_ID</name>
         <type>Boolean</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1689,7 +1689,7 @@
       <field>
         <name>CONCEPT_UUID</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1700,7 +1700,7 @@
       <field>
         <name>CONCEPT_VALUE_CODED</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1711,7 +1711,7 @@
       <field>
         <name>VALUE_CODED_UUID</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1720,8 +1720,8 @@
         <trim_type>none</trim_type>
       </field>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1737,17 +1737,17 @@
   <step>
     <name>epts uuid 2</name>
     <type>CsvInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/concept map last date input.csv</filename>
-    <filename_field/>
-    <rownum_field/>
+    <filename>/home/joaomachiana/Dev/moasis/bahmni/epts-platform/migration_to_poc/concept map last date input.csv</filename>
+    <filename_field />
+    <rownum_field />
     <include_filename>N</include_filename>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -1758,12 +1758,12 @@
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
     <format>mixed</format>
-    <encoding/>
+    <encoding />
     <fields>
       <field>
         <name>EPTS_CONCEPT_NAME</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1785,7 +1785,7 @@
       <field>
         <name>EPTS_CONCEPT_uuid</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1796,7 +1796,7 @@
       <field>
         <name>POC_CONCEPT_NAME</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1818,7 +1818,7 @@
       <field>
         <name>POC_CONCEPT_uuid</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1829,7 +1829,7 @@
       <field>
         <name>POC_DATE_NAME</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1840,7 +1840,7 @@
       <field>
         <name>POC_DATE_UUID</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1851,7 +1851,7 @@
       <field>
         <name>POC_CONCEPT_NAME2</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1862,7 +1862,7 @@
       <field>
         <name>POC_CONCEPT_uuid2</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1873,7 +1873,7 @@
       <field>
         <name>POC_DATE_NAME2</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1884,7 +1884,7 @@
       <field>
         <name>POC_DATE_UUID2</name>
         <type>String</type>
-        <format/>
+        <format />
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1893,8 +1893,8 @@
         <trim_type>none</trim_type>
       </field>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1910,39 +1910,39 @@
   <step>
     <name>get correct concept id</name>
     <type>DBLookup</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
     <lookup>
-      <schema/>
+      <schema />
       <table>concept</table>
-      <orderby/>
+      <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
         <name>POC_DATE_UUID</name>
         <field>uuid</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <value>
         <name>concept_id</name>
         <rename>actual_concept_id</rename>
-        <default/>
+        <default />
         <type>None</type>
       </value>
     </lookup>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1958,39 +1958,39 @@
   <step>
     <name>get correct concept id 2</name>
     <type>DBLookup</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
     <lookup>
-      <schema/>
+      <schema />
       <table>concept_name</table>
-      <orderby/>
+      <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
         <name>SECTION_NAME</name>
         <field>name</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <value>
         <name>concept_id</name>
         <rename>section_concept_id</rename>
-        <default/>
+        <default />
         <type>None</type>
       </value>
     </lookup>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2006,39 +2006,39 @@
   <step>
     <name>get correct concept id 3</name>
     <type>DBLookup</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
     <lookup>
-      <schema/>
+      <schema />
       <table>concept</table>
-      <orderby/>
+      <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
         <name>actual_concept_id</name>
         <field>concept_id</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <value>
         <name>uuid</name>
         <rename>actual_concept_id_uuid</rename>
-        <default/>
+        <default />
         <type>None</type>
       </value>
     </lookup>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2054,129 +2054,129 @@
   <step>
     <name>get encounter id</name>
     <type>DBLookup</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
     <lookup>
-      <schema/>
+      <schema />
       <table>encounter</table>
-      <orderby/>
+      <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
         <name>person_id</name>
         <field>patient_id</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <value>
         <name>encounter_id</name>
         <rename>encounter_id</rename>
-        <default/>
+        <default />
         <type>Integer</type>
       </value>
       <value>
         <name>encounter_type</name>
         <rename>encounter_type</rename>
-        <default/>
+        <default />
         <type>Integer</type>
       </value>
       <value>
         <name>patient_id</name>
         <rename>patient_id</rename>
-        <default/>
+        <default />
         <type>Integer</type>
       </value>
       <value>
         <name>location_id</name>
         <rename>location_id</rename>
-        <default/>
+        <default />
         <type>Integer</type>
       </value>
       <value>
         <name>form_id</name>
         <rename>form_id</rename>
-        <default/>
+        <default />
         <type>Integer</type>
       </value>
       <value>
         <name>encounter_datetime</name>
         <rename>encounter_datetime</rename>
-        <default/>
+        <default />
         <type>Timestamp</type>
       </value>
       <value>
         <name>creator</name>
         <rename>creator</rename>
-        <default/>
+        <default />
         <type>Integer</type>
       </value>
       <value>
         <name>date_created</name>
         <rename>date_created</rename>
-        <default/>
+        <default />
         <type>Timestamp</type>
       </value>
       <value>
         <name>voided</name>
         <rename>voided</rename>
-        <default/>
+        <default />
         <type>Boolean</type>
       </value>
       <value>
         <name>voided_by</name>
         <rename>voided_by</rename>
-        <default/>
+        <default />
         <type>Integer</type>
       </value>
       <value>
         <name>date_voided</name>
         <rename>date_voided</rename>
-        <default/>
+        <default />
         <type>Timestamp</type>
       </value>
       <value>
         <name>void_reason</name>
         <rename>void_reason</rename>
-        <default/>
+        <default />
         <type>String</type>
       </value>
       <value>
         <name>changed_by</name>
         <rename>changed_by</rename>
-        <default/>
+        <default />
         <type>Integer</type>
       </value>
       <value>
         <name>date_changed</name>
         <rename>date_changed</rename>
-        <default/>
+        <default />
         <type>Timestamp</type>
       </value>
       <value>
         <name>visit_id</name>
         <rename>visit_id</rename>
-        <default/>
+        <default />
         <type>Integer</type>
       </value>
       <value>
         <name>uuid</name>
         <rename>uuid</rename>
-        <default/>
+        <default />
         <type>String</type>
       </value>
     </lookup>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2192,45 +2192,45 @@
   <step>
     <name>get epts concept name 3</name>
     <type>DBLookup</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
     <lookup>
-      <schema/>
+      <schema />
       <table>concept</table>
-      <orderby/>
+      <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>Y</eat_row_on_failure>
       <key>
         <name>EPTS_CONCEPT_uuid</name>
         <field>uuid</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <value>
         <name>concept_id</name>
         <rename>epts_concept_id</rename>
-        <default/>
+        <default />
         <type>None</type>
       </value>
       <value>
         <name>concept_id</name>
         <rename>epts_concept_id2</rename>
-        <default/>
+        <default />
         <type>None</type>
       </value>
     </lookup>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2246,16 +2246,16 @@
   <step>
     <name>last concept obs</name>
     <type>TableOutput</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
-    <schema/>
+    <connection>poc_master</connection>
+    <schema />
     <table>obs</table>
     <commit>1000</commit>
     <truncate>N</truncate>
@@ -2263,11 +2263,11 @@
     <use_batch>N</use_batch>
     <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
+    <partitioning_field />
     <partitioning_daily>N</partitioning_daily>
     <partitioning_monthly>Y</partitioning_monthly>
     <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
+    <tablename_field />
     <tablename_in_table>Y</tablename_in_table>
     <return_keys>Y</return_keys>
     <return_field>obs_id</return_field>
@@ -2321,8 +2321,8 @@
         <stream_name>value_text</stream_name>
       </field>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2338,15 +2338,15 @@
   <step>
     <name>last obs dates</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
     <sql>select last_encounter.patient_id, o.obs_datetime,o.concept_id, o.value_coded,o.value_numeric, o.value_text, o.date_created
 ,o.value_datetime,  last_encounter.last_datetime, uuid() as obs_uuid
 FROM 
@@ -2371,8 +2371,8 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
     <execute_each_row>Y</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2388,15 +2388,15 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
   <step>
     <name>new_patient_id</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <sql>SELECT
   person_id
 , value
@@ -2409,12 +2409,12 @@ FROM person_attribute WHERE person_attribute_type_id = '999'
 order by person_id asc
 </sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2430,26 +2430,26 @@ order by person_id asc
   <step>
     <name>patient</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>N</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
     <sql>select distinct patient_id
 from patient where voided=0
 and patient_id between 27500 and 28500
 order by patient_id asc</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2465,51 +2465,51 @@ order by patient_id asc</sql>
   <step>
     <name>section obs id lookup</name>
     <type>DBLookup</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
     <lookup>
-      <schema/>
+      <schema />
       <table>obs</table>
-      <orderby/>
+      <orderby />
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
         <name>person_id</name>
         <field>person_id</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <key>
         <name>section_concept_id</name>
         <field>concept_id</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <key>
         <name>encounter_id</name>
         <field>encounter_id</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <value>
         <name>obs_id</name>
         <rename>section_obs_id</rename>
-        <default/>
+        <default />
         <type>None</type>
       </value>
     </lookup>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2525,43 +2525,43 @@ order by patient_id asc</sql>
   <step>
     <name>update group id for sections</name>
     <type>InsertUpdate</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <commit>1000</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema/>
+      <schema />
       <table>obs</table>
       <key>
         <name>person_id</name>
         <field>person_id</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <key>
         <name>actual_concept_id</name>
         <field>concept_id</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <key>
         <name>encounter_id</name>
         <field>encounter_id</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <key>
         <name>obs_id</name>
         <field>obs_id</field>
         <condition>=</condition>
-        <name2/>
+        <name2 />
       </key>
       <value>
         <name>obs_group_id</name>
@@ -2589,8 +2589,8 @@ order by patient_id asc</sql>
         <update>N</update>
       </value>
     </lookup>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2608,5 +2608,5 @@ order by patient_id asc</sql>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
   <slave_transformation>N</slave_transformation>
-  <attributes/>
+  <attributes />
 </transformation>

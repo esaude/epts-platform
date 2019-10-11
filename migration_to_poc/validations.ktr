@@ -2,21 +2,21 @@
 <transformation>
   <info>
     <name>validations</name>
-    <description/>
-    <extended_description/>
-    <trans_version/>
+    <description />
+    <extended_description />
+    <trans_version />
     <trans_type>Normal</trans_type>
     <directory>/</directory>
     <parameters>
     </parameters>
     <log>
       <trans-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <size_limit_lines/>
-        <interval/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <size_limit_lines />
+        <interval />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -41,37 +41,37 @@
           <id>LINES_READ</id>
           <enabled>Y</enabled>
           <name>LINES_READ</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_WRITTEN</id>
           <enabled>Y</enabled>
           <name>LINES_WRITTEN</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_UPDATED</id>
           <enabled>Y</enabled>
           <name>LINES_UPDATED</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_INPUT</id>
           <enabled>Y</enabled>
           <name>LINES_INPUT</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_OUTPUT</id>
           <enabled>Y</enabled>
           <name>LINES_OUTPUT</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_REJECTED</id>
           <enabled>Y</enabled>
           <name>LINES_REJECTED</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>ERRORS</id>
@@ -125,11 +125,11 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <interval/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <interval />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -207,10 +207,10 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -273,10 +273,10 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -349,10 +349,10 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -401,9 +401,9 @@
       </metrics-log-table>
     </log>
     <maxdate>
-      <connection/>
-      <table/>
-      <field/>
+      <connection />
+      <table />
+      <field />
       <offset>0.0</offset>
       <maxdiff>0.0</maxdiff>
     </maxdate>
@@ -414,7 +414,7 @@
     <feedback_shown>Y</feedback_shown>
     <feedback_size>50000</feedback_size>
     <using_thread_priorities>Y</using_thread_priorities>
-    <shared_objects_file/>
+    <shared_objects_file />
     <capture_step_performance>N</capture_step_performance>
     <step_performance_capturing_delay>1000</step_performance_capturing_delay>
     <step_performance_capturing_size_limit>100</step_performance_capturing_size_limit>
@@ -436,17 +436,17 @@
   <notepads>
   </notepads>
   <connection>
-    <name>epts</name>
-    <server/>
+    <name>ccs1maio</name>
+    <server />
     <type>GENERIC</type>
     <access>Native</access>
-    <database/>
+    <database />
     <port>1521</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10cc9da0ce</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce7adb9fadd3</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
     <attributes>
       <attribute>
         <code>CUSTOM_DRIVER_CLASS</code>
@@ -454,7 +454,7 @@
       </attribute>
       <attribute>
         <code>CUSTOM_URL</code>
-        <attribute>jdbc:mysql://localhost:3306/CCSDBMASKED</attribute>
+        <attribute>jdbc:mysql://localhost:3306/ccs1maio</attribute>
       </attribute>
       <attribute>
         <code>DATABASE_DIALECT_ID</code>
@@ -499,17 +499,17 @@
     </attributes>
   </connection>
   <connection>
-    <name>poc</name>
-    <server/>
+    <name>poc_master</name>
+    <server />
     <type>GENERIC</type>
     <access>Native</access>
-    <database/>
+    <database />
     <port>1521</port>
     <username>root</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10cc9da0ce</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce7adb9fadd3</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
     <attributes>
       <attribute>
         <code>CUSTOM_DRIVER_CLASS</code>
@@ -517,7 +517,7 @@
       </attribute>
       <attribute>
         <code>CUSTOM_URL</code>
-        <attribute>jdbc:mysql://localhost:3306/openmrs</attribute>
+        <attribute>jdbc:mysql://localhost:3306/poc_master</attribute>
       </attribute>
       <attribute>
         <code>DATABASE_DIALECT_ID</code>
@@ -656,13 +656,13 @@
   <step>
     <name>Text file output</name>
     <type>TextFileOutput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <separator>;</separator>
     <enclosure>"</enclosure>
@@ -672,10 +672,10 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
-    <endedLine/>
+    <encoding />
+    <endedLine />
     <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>/home/amos/Documents/projects/validation1</name>
@@ -688,16 +688,16 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
+      <date_time_format />
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery />
     </file>
     <fields>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -713,13 +713,13 @@
   <step>
     <name>Text file output 2</name>
     <type>TextFileOutput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -729,10 +729,10 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
-    <endedLine/>
+    <encoding />
+    <endedLine />
     <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>/home/amos/Documents/projects/validation2</name>
@@ -745,16 +745,16 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
+      <date_time_format />
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery />
     </file>
     <fields>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -770,13 +770,13 @@
   <step>
     <name>Text file output 2 2</name>
     <type>TextFileOutput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -786,10 +786,10 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
-    <endedLine/>
+    <encoding />
+    <endedLine />
     <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>/home/amos/Documents/projects/validation3</name>
@@ -802,16 +802,16 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
+      <date_time_format />
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery />
     </file>
     <fields>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -827,13 +827,13 @@
   <step>
     <name>Text file output 2 2 2</name>
     <type>TextFileOutput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -843,10 +843,10 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
-    <endedLine/>
+    <encoding />
+    <endedLine />
     <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>/home/amos/Documents/projects/validation3</name>
@@ -859,16 +859,16 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
+      <date_time_format />
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery />
     </file>
     <fields>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -884,13 +884,13 @@
   <step>
     <name>Text file output 2 3</name>
     <type>TextFileOutput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -900,10 +900,10 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
-    <endedLine/>
+    <encoding />
+    <endedLine />
     <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>/home/amos/Documents/projects/validation2</name>
@@ -916,16 +916,16 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
+      <date_time_format />
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery />
     </file>
     <fields>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -941,13 +941,13 @@
   <step>
     <name>Text file output 3</name>
     <type>TextFileOutput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -957,10 +957,10 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
-    <endedLine/>
+    <encoding />
+    <endedLine />
     <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>/home/amos/Documents/projects/validation4</name>
@@ -973,16 +973,16 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
+      <date_time_format />
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery />
     </file>
     <fields>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -998,13 +998,13 @@
   <step>
     <name>Text file output 3 2</name>
     <type>TextFileOutput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <separator>,</separator>
     <enclosure>"</enclosure>
@@ -1014,10 +1014,10 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
-    <endedLine/>
+    <encoding />
+    <endedLine />
     <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>/home/amos/Documents/projects/validation4</name>
@@ -1030,16 +1030,16 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
+      <date_time_format />
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery />
     </file>
     <fields>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1055,13 +1055,13 @@
   <step>
     <name>Text file output 4</name>
     <type>TextFileOutput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
     <separator>;</separator>
     <enclosure>"</enclosure>
@@ -1071,10 +1071,10 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
-    <endedLine/>
+    <encoding />
+    <endedLine />
     <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>/home/amos/Documents/projects/validation1</name>
@@ -1087,16 +1087,16 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
+      <date_time_format />
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery/>
+      <splitevery />
     </file>
     <fields>
     </fields>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1110,17 +1110,74 @@
     </GUI>
   </step>
   <step>
-    <name>epts tarv status</name>
-    <type>TableInput</type>
-    <description/>
+    <name>Text file output 5</name>
+    <type>TextFileOutput</type>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding />
+    <endedLine />
+    <fileNameInField>N</fileNameInField>
+    <fileNameField />
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>/home/amos/Documents/projects/validation1</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format />
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery />
+    </file>
+    <fields>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>epts tarv status</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>ccs1maio</connection>
     <sql>select 
 (
 select concat(count(*),' EPTS') from
@@ -1145,12 +1202,12 @@ group by pp.patient_id) pre_tarv
 
 from dual</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1166,15 +1223,15 @@ from dual</sql>
   <step>
     <name>epts tarv status 2</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
     <sql>select 
 (
 select concat(count(*),' EPTS') from
@@ -1199,12 +1256,12 @@ group by pp.patient_id) pre_tarv
 
 from dual</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1220,15 +1277,15 @@ from dual</sql>
   <step>
     <name>epts_confident</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
     <sql>select 
 (select
 concat(count(*),' EPTS') from (
@@ -1259,12 +1316,12 @@ from dual
 
 </sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1280,15 +1337,15 @@ from dual
   <step>
     <name>epts_confident 2</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
     <sql>select 
 (select
 concat(count(*),' EPTS') from (
@@ -1319,12 +1376,12 @@ from dual
 
 </sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1340,15 +1397,15 @@ from dual
   <step>
     <name>epts_counts</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
     <sql>select 
 
 (select concat(count(*),' EPTS') from person p where p.voided=0 and p.voided = 0
@@ -1514,12 +1571,12 @@ group by   p.patient_id) as mud_regime) as pat_regime
 
  from dual</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1535,15 +1592,15 @@ group by   p.patient_id) as mud_regime) as pat_regime
   <step>
     <name>epts_counts 2</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
     <sql>select 
 
 (select concat(count(*),' EPTS') from person p where p.voided=0 and p.voided = 0
@@ -1717,12 +1774,12 @@ group by   p.patient_id) as mud_regime) as pat_regime
 
  from dual</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1736,17 +1793,220 @@ group by   p.patient_id) as mud_regime) as pat_regime
     </GUI>
   </step>
   <step>
-    <name>epts_estadio</name>
+    <name>epts_counts 3</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
+    <sql>select 
+
+(select concat(count(*),' EPTS') from person p where p.voided=0 and p.voided = 0
+and p.person_id between 27500 and 28500 
+and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2)))  as reg_pat, 
+
+(select concat(count(*),' EPTS')  from person p
+where p.voided=0 and p.gender = 'M'
+and p.person_id between 27500 and 28500
+and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_male,
+
+(select concat(count(*),' EPTS')  from person p 
+where p.voided=0 and p.gender = 'F'
+and p.person_id between 27500 and 28500
+and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_female,
+
+(select concat(count(*),' EPTS')  from person p
+where p.voided=0
+and p.birthdate is null and p.person_id between 27500 and 28500
+and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_no_bday,
+
+(select concat(count(*),' EPTS')  from person p
+where p.voided = 0
+and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt; 5)
+and p.birthdate is not null
+and p.person_id between 27500 and 28500
+and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_under_five,
+
+(select concat(count(*),' EPTS')  from  person p
+where p.voided = 0
+and (timestampdiff(YEAR, date(p.birthdate), date(now())) >= 5)
+and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 15)
+and p.birthdate is not null
+and p.person_id between 27500 and 28500
+and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_five_fifteen,
+
+(select concat(count(*),' EPTS')  from person p
+where p.voided = 0
+and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 15)
+and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 45)
+and p.birthdate is not null
+and p.person_id between 27500 and 28500
+and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_sixteen_fourtysix,
+
+(select concat(count(*),' EPTS')  from person p
+where p.voided = 0
+and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 45)
+and p.birthdate is not null
+and p.person_id between 27500 and 28500
+and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_over_fourtysix,
+
+(select concat(count(*),' EPTS') from patient_identifier pa
+where pa.identifier_type = 3 
+and pa.patient_id between 27500 and 28500
+) as pat_bi,
+
+
+(select concat(count(*),' EPTS')  from
+(SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+and p.patient_id between 27500 and 28500
+          and o.concept_id = 6257 and o.value_coded = 1065
+          AND p.voided = 0
+group by   p.patient_id) as tb) as pat_tb ,
+
+(select concat(count(*),' EPTS')  from (
+SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+and p.patient_id between 27500 and 28500
+          and o.concept_id = 1410
+          AND p.voided = 0
+group by   p.patient_id) as next_cons) as pat_next_cons, 
+
+ 
+
+(select concat(count(*),' EPTS')  from (
+SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+and p.patient_id between 27500 and 28500
+          and o.concept_id = 5096
+          AND p.voided = 0
+group by   p.patient_id) as next_tarv) as pat_next_arv,
+
+
+(select concat(count(*),' EPTS')  from (
+select
+distinct p.patient_id, program.program_id,max(program.state_id)
+from patient p
+inner join 
+(select pp.patient_id, pp.patient_program_id,state.state_id, program_id
+from patient_program pp 
+inner join 
+(select patient_program_id, max(patient_state_id) state_id 
+from patient_state 
+where state in (5,10) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
+where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
+where p.voided=0 and p.patient_id between 27500 and 28500
+group by p.patient_id,program.program_id) states) as pat_dead,
+
+
+(select concat(count(*),' EPTS')  from (
+select
+distinct p.patient_id, program.program_id,max(program.state_id)
+from patient p
+inner join 
+(select pp.patient_id, pp.patient_program_id,state.state_id, program_id
+from patient_program pp 
+inner join 
+(select patient_program_id, max(patient_state_id) state_id 
+from patient_state 
+where state in (3,7) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
+where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
+where p.voided=0 and p.patient_id between 27500 and 28500
+group by p.patient_id,program.program_id) states) as pat_transfer_out,
+
+
+(select concat(count(*),' EPTS') from (
+select
+distinct p.patient_id, program.program_id,max(program.state_id)
+from patient p
+inner join 
+(select pp.patient_id, pp.patient_program_id,state.state_id, program_id
+from patient_program pp 
+inner join 
+(select patient_program_id, max(patient_state_id) state_id 
+from patient_state 
+where state in (2,9) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
+where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
+where p.voided=0 and p.patient_id between 27500 and 28500
+group by p.patient_id,program.program_id) states) as pat_abandoned,
+
+(select concat(count(*),' EPTS')  from (
+select
+distinct p.patient_id, program.program_id,max(program.state_id)
+from patient p
+inner join 
+(select pp.patient_id, pp.patient_program_id,state.state_id, program_id
+from patient_program pp 
+inner join 
+(select patient_program_id, max(patient_state_id) state_id 
+from patient_state 
+where state = 8 group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
+where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
+where p.voided=0 and p.patient_id between 27500 and 28500
+group by p.patient_id,program.program_id) states) as pat_suspended,
+
+(select concat(count(*),' EPTS') from (
+SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+and p.patient_id between 27500 and 28500
+          and o.concept_id = 1087
+          AND p.voided = 0
+group by   p.patient_id) as mud_regime) as pat_regime
+
+
+ from dual</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>epts_estadio</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>ccs1maio</connection>
     <sql> select  case
 when last_encounter.value_coded=1204 then 'estadio 1'
 when last_encounter.value_coded=1205 then 'estadio 2'
@@ -1770,12 +2030,12 @@ WHERE (o.value_coded IN (1204,1205,1206,1207))
 GROUP BY o.person_id) as last_encounter
 group by value_coded;</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1791,15 +2051,15 @@ group by value_coded;</sql>
   <step>
     <name>epts_estadio 2</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>epts</connection>
+    <connection>ccs1maio</connection>
     <sql>select 
 
 (select concat(count(*),' EPTS') 
@@ -1865,12 +2125,12 @@ group by obs.value_coded) as estadio_4
 
 from dual</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1886,15 +2146,15 @@ from dual</sql>
   <step>
     <name>poc tarv status</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <sql>select 
 
 (select concat(count(*),' POC')  
@@ -1914,12 +2174,12 @@ group by  patient_status) as pre_tarv_count
 from dual
 </sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1935,15 +2195,15 @@ from dual
   <step>
     <name>poc tarv status 2</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <sql>select 
 
 (select concat(count(*),' POC')  
@@ -1963,12 +2223,12 @@ group by  patient_status) as pre_tarv_count
 from dual
 </sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -1982,17 +2242,63 @@ from dual
     </GUI>
   </step>
   <step>
-    <name>poc_confident</name>
+    <name>poc tarv status 3</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
+    <sql>select 
+
+(select concat(count(*),' POC')  
+from openmrs.person_attribute
+where value ='8109'
+group by  value) as tarv_count,
+
+(select concat(count(*),' POC')  
+from openmrs.person_attribute
+where value ='8108'
+group by  value) as pre_tarv_count
+
+from dual
+
+</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>poc_confident</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc_master</connection>
     <sql>select 
 
 (select concat(count(*),' POC')
@@ -2008,12 +2314,12 @@ and person_id in (select person_id from person_attribute where person_attribute_
 from dual
 </sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2029,15 +2335,15 @@ from dual
   <step>
     <name>poc_confident 2</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <sql>select 
 
 (select concat(count(*),' POC')
@@ -2051,12 +2357,12 @@ where concept_id = 8672) as confident_name
 from dual
 </sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2072,15 +2378,15 @@ from dual
   <step>
     <name>poc_counts</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <sql>select 
 
 (select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id 
@@ -2163,12 +2469,12 @@ and person_id in (select distinct pa.person_id from person_attribute pa where pa
 
  from dual</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2184,15 +2490,15 @@ and person_id in (select distinct pa.person_id from person_attribute pa where pa
   <step>
     <name>poc_counts 2</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <sql>select 
 
 
@@ -2289,12 +2595,12 @@ and person_id in (select distinct pa.person_id from person_attribute pa where pa
 
  from dual</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2308,17 +2614,143 @@ and person_id in (select distinct pa.person_id from person_attribute pa where pa
     </GUI>
   </step>
   <step>
-    <name>poc_estadio</name>
+    <name>poc_counts 3</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
+    <sql>select 
+
+
+(select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id 
+where p.voided=0 and pt.voided = 0
+and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500))  as reg_pat, 
+
+(select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id where p.voided=0 and pt.voided = 0 and p.gender = 'M'
+and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_male,
+
+(select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id where p.voided=0 and pt.voided = 0 and p.gender = 'F'
+and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_female,
+
+(select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id where p.voided=0 and pt.voided = 0 
+and p.birthdate is  null
+and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_no_bday,
+
+(select concat(count(*), ' POC') from person p
+   where p.voided = 0
+   and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt; 5)
+    and p.birthdate is not null
+   and p.person_id in (select distinct pa.person_id from person_attribute pa
+where pa.person_attribute_type_id = 999)) as pat_under_five,
+
+(select concat(count(*), ' POC')from person p where p.voided = 0
+   and (timestampdiff(YEAR, date(p.birthdate), date(now())) >= 5)
+   and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 15)
+    and p.birthdate is not null
+   and p.person_id in (select distinct pa.person_id from person_attribute pa
+where pa.person_attribute_type_id = 999)) as pat_five_fifteen,
+
+(select concat(count(*), ' POC')from person p
+   where p.voided = 0
+   and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 15)
+   and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 45)
+    and p.birthdate is not null
+   and p.person_id in (select distinct pa.person_id from person_attribute pa
+where pa.person_attribute_type_id = 999)) as pat_sixteen_fourtysix,
+
+(select concat(count(*), ' POC')from person p
+   where p.voided = 0
+   and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 45)
+    and p.birthdate is not null
+   and p.person_id in (select distinct pa.person_id from person_attribute pa
+where pa.person_attribute_type_id = 999)) as pat_over_fourtysix,
+
+(select concat(count(*), ' POC')from openmrs.person_attribute where person_attribute_type_id = '39'
+and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_bi,
+
+(select concat(count(*), ' POC') from openmrs.obs
+where concept_id = 8314 and value_coded =1 
+and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_tb,
+
+(select concat(count(*), ' POC') from openmrs.obs
+where concept_id = 8332
+and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_next_cons, 
+
+ 
+(select concat(count(*), ' POC') from openmrs.obs
+where concept_id = 8333
+and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_next_arv,
+
+
+(select concat(count(*), ' POC')from openmrs.patient_status_state
+where patient_state = 'INACTIVE_DEATH' and id in 
+(select max(id) from openmrs.patient_status_state group by patient_id)
+and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_dead,
+
+
+(select concat(count(*), ' POC')from openmrs.patient_status_state
+where patient_state = 'INACTIVE_TRANSFERRED_OUT' and id in 
+(select max(id) from openmrs.patient_status_state group by patient_id)
+and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_transfer_out,
+
+
+(select concat(count(*), ' POC')from openmrs.patient_status_state
+where patient_state = 'TARV_ABANDONED' and id in 
+(select max(id) from openmrs.patient_status_state group by patient_id)
+and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_abandoned,
+
+(select concat(count(*), ' POC')from openmrs.patient_status_state
+where patient_state = 'INACTIVE_SUSPENDED' and id in 
+(select max(id) from openmrs.patient_status_state group by patient_id)
+and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_suspended,
+
+(select concat(count(*), ' POC')from openmrs.obs
+where concept_id = 8247
+and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_regime
+
+
+ from dual</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>poc_estadio</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>poc_master</connection>
     <sql>select case
 when estadio.concept_id=8308 then 'estadio 1'
 when estadio.concept_id=8309 then 'estadio 2'
@@ -2336,12 +2768,12 @@ where ob.concept_id in (8308,8309,8310,8311)
 group by p.person_id) as estadio
 group by estadio.concept_id;</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2357,15 +2789,15 @@ group by estadio.concept_id;</sql>
   <step>
     <name>poc_estadio 2</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>poc</connection>
+    <connection>poc_master</connection>
     <sql>select 
 
 (select concat(count(*),' POC')
@@ -2394,12 +2826,12 @@ group by concept_id) as estadio_4
 from dual
 </sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
+    <attributes />
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -2412,442 +2844,10 @@ from dual
       <draw>Y</draw>
     </GUI>
   </step>
-  <step>
-    <name>poc tarv status 3</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <sql>select 
-
-(select concat(count(*),' POC')  
-from openmrs.person_attribute
-where value ='8109'
-group by  value) as tarv_count,
-
-(select concat(count(*),' POC')  
-from openmrs.person_attribute
-where value ='8108'
-group by  value) as pre_tarv_count
-
-from dual
-
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>448</xloc>
-      <yloc>544</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>poc_counts 3</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>poc</connection>
-    <sql>select 
-
-
-(select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id 
-where p.voided=0 and pt.voided = 0
-and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500))  as reg_pat, 
-
-(select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id where p.voided=0 and pt.voided = 0 and p.gender = 'M'
-and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_male,
-
-(select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id where p.voided=0 and pt.voided = 0 and p.gender = 'F'
-and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_female,
-
-(select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id where p.voided=0 and pt.voided = 0 
-and p.birthdate is  null
-and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_no_bday,
-
-(select concat(count(*), ' POC') from person p
-   where p.voided = 0
-   and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt; 5)
-    and p.birthdate is not null
-   and p.person_id in (select distinct pa.person_id from person_attribute pa
-where pa.person_attribute_type_id = 999)) as pat_under_five,
-
-(select concat(count(*), ' POC')from person p where p.voided = 0
-   and (timestampdiff(YEAR, date(p.birthdate), date(now())) >= 5)
-   and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 15)
-    and p.birthdate is not null
-   and p.person_id in (select distinct pa.person_id from person_attribute pa
-where pa.person_attribute_type_id = 999)) as pat_five_fifteen,
-
-(select concat(count(*), ' POC')from person p
-   where p.voided = 0
-   and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 15)
-   and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 45)
-    and p.birthdate is not null
-   and p.person_id in (select distinct pa.person_id from person_attribute pa
-where pa.person_attribute_type_id = 999)) as pat_sixteen_fourtysix,
-
-(select concat(count(*), ' POC')from person p
-   where p.voided = 0
-   and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 45)
-    and p.birthdate is not null
-   and p.person_id in (select distinct pa.person_id from person_attribute pa
-where pa.person_attribute_type_id = 999)) as pat_over_fourtysix,
-
-(select concat(count(*), ' POC')from openmrs.person_attribute where person_attribute_type_id = '39'
-and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_bi,
-
-(select concat(count(*), ' POC') from openmrs.obs
-where concept_id = 8314 and value_coded =1 
-and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
-) as pat_tb,
-
-(select concat(count(*), ' POC') from openmrs.obs
-where concept_id = 8332
-and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
-) as pat_next_cons, 
-
- 
-(select concat(count(*), ' POC') from openmrs.obs
-where concept_id = 8333
-and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
-) as pat_next_arv,
-
-
-(select concat(count(*), ' POC')from openmrs.patient_status_state
-where patient_state = 'INACTIVE_DEATH' and id in 
-(select max(id) from openmrs.patient_status_state group by patient_id)
-and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_dead,
-
-
-(select concat(count(*), ' POC')from openmrs.patient_status_state
-where patient_state = 'INACTIVE_TRANSFERRED_OUT' and id in 
-(select max(id) from openmrs.patient_status_state group by patient_id)
-and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_transfer_out,
-
-
-(select concat(count(*), ' POC')from openmrs.patient_status_state
-where patient_state = 'TARV_ABANDONED' and id in 
-(select max(id) from openmrs.patient_status_state group by patient_id)
-and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_abandoned,
-
-(select concat(count(*), ' POC')from openmrs.patient_status_state
-where patient_state = 'INACTIVE_SUSPENDED' and id in 
-(select max(id) from openmrs.patient_status_state group by patient_id)
-and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_suspended,
-
-(select concat(count(*), ' POC')from openmrs.obs
-where concept_id = 8247
-and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
-) as pat_regime
-
-
- from dual</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>epts_counts 3</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>epts</connection>
-    <sql>select 
-
-(select concat(count(*),' EPTS') from person p where p.voided=0 and p.voided = 0
-and p.person_id between 27500 and 28500 
-and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2)))  as reg_pat, 
-
-(select concat(count(*),' EPTS')  from person p
-where p.voided=0 and p.gender = 'M'
-and p.person_id between 27500 and 28500
-and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_male,
-
-(select concat(count(*),' EPTS')  from person p 
-where p.voided=0 and p.gender = 'F'
-and p.person_id between 27500 and 28500
-and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_female,
-
-(select concat(count(*),' EPTS')  from person p
-where p.voided=0
-and p.birthdate is null and p.person_id between 27500 and 28500
-and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_no_bday,
-
-(select concat(count(*),' EPTS')  from person p
-where p.voided = 0
-and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt; 5)
-and p.birthdate is not null
-and p.person_id between 27500 and 28500
-and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_under_five,
-
-(select concat(count(*),' EPTS')  from  person p
-where p.voided = 0
-and (timestampdiff(YEAR, date(p.birthdate), date(now())) >= 5)
-and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 15)
-and p.birthdate is not null
-and p.person_id between 27500 and 28500
-and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_five_fifteen,
-
-(select concat(count(*),' EPTS')  from person p
-where p.voided = 0
-and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 15)
-and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 45)
-and p.birthdate is not null
-and p.person_id between 27500 and 28500
-and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_sixteen_fourtysix,
-
-(select concat(count(*),' EPTS')  from person p
-where p.voided = 0
-and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 45)
-and p.birthdate is not null
-and p.person_id between 27500 and 28500
-and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_over_fourtysix,
-
-(select concat(count(*),' EPTS') from patient_identifier pa
-where pa.identifier_type = 3 
-and pa.patient_id between 27500 and 28500
-) as pat_bi,
-
-
-(select concat(count(*),' EPTS')  from
-(SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
-        FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
-        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
-          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id between 27500 and 28500
-          and o.concept_id = 6257 and o.value_coded = 1065
-          AND p.voided = 0
-group by   p.patient_id) as tb) as pat_tb ,
-
-(select concat(count(*),' EPTS')  from (
-SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
-        FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
-        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
-          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id between 27500 and 28500
-          and o.concept_id = 1410
-          AND p.voided = 0
-group by   p.patient_id) as next_cons) as pat_next_cons, 
-
- 
-
-(select concat(count(*),' EPTS')  from (
-SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
-        FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
-        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
-          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id between 27500 and 28500
-          and o.concept_id = 5096
-          AND p.voided = 0
-group by   p.patient_id) as next_tarv) as pat_next_arv,
-
-
-(select concat(count(*),' EPTS')  from (
-select
-distinct p.patient_id, program.program_id,max(program.state_id)
-from patient p
-inner join 
-(select pp.patient_id, pp.patient_program_id,state.state_id, program_id
-from patient_program pp 
-inner join 
-(select patient_program_id, max(patient_state_id) state_id 
-from patient_state 
-where state in (5,10) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
-where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
-where p.voided=0 and p.patient_id between 27500 and 28500
-group by p.patient_id,program.program_id) states) as pat_dead,
-
-
-(select concat(count(*),' EPTS')  from (
-select
-distinct p.patient_id, program.program_id,max(program.state_id)
-from patient p
-inner join 
-(select pp.patient_id, pp.patient_program_id,state.state_id, program_id
-from patient_program pp 
-inner join 
-(select patient_program_id, max(patient_state_id) state_id 
-from patient_state 
-where state in (3,7) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
-where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
-where p.voided=0 and p.patient_id between 27500 and 28500
-group by p.patient_id,program.program_id) states) as pat_transfer_out,
-
-
-(select concat(count(*),' EPTS') from (
-select
-distinct p.patient_id, program.program_id,max(program.state_id)
-from patient p
-inner join 
-(select pp.patient_id, pp.patient_program_id,state.state_id, program_id
-from patient_program pp 
-inner join 
-(select patient_program_id, max(patient_state_id) state_id 
-from patient_state 
-where state in (2,9) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
-where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
-where p.voided=0 and p.patient_id between 27500 and 28500
-group by p.patient_id,program.program_id) states) as pat_abandoned,
-
-(select concat(count(*),' EPTS')  from (
-select
-distinct p.patient_id, program.program_id,max(program.state_id)
-from patient p
-inner join 
-(select pp.patient_id, pp.patient_program_id,state.state_id, program_id
-from patient_program pp 
-inner join 
-(select patient_program_id, max(patient_state_id) state_id 
-from patient_state 
-where state = 8 group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
-where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
-where p.voided=0 and p.patient_id between 27500 and 28500
-group by p.patient_id,program.program_id) states) as pat_suspended,
-
-(select concat(count(*),' EPTS') from (
-SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
-        FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
-        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
-          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id between 27500 and 28500
-          and o.concept_id = 1087
-          AND p.voided = 0
-group by   p.patient_id) as mud_regime) as pat_regime
-
-
- from dual</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Text file output 5</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>/home/amos/Documents/projects/validation1</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
-    <fields>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>192</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step_error_handling>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
   <slave_transformation>N</slave_transformation>
-  <attributes/>
+  <attributes />
 </transformation>
