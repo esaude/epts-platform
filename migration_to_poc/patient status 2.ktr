@@ -2259,6 +2259,7 @@ when the_state.state = 9 then 'TARV_ABANDONED'
 when the_state.state = 10 then 'INACTIVE_DEATH'
 when the_state.state = 15 then 'INACTIVE_DEATH'
 when the_state.state = 29 then 'ACTIVE'
+else 'other'
 end as state_in_name,
 uuid() as status_uuid
 from 
@@ -2269,7 +2270,16 @@ inner join
 from patient_program pp 
 inner join 
 (select patient_program_id, max(patient_state_id) state_id from patient_state group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
-where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
+where pp.program_id = 1 and pp.voided=0) program on program.patient_id = p.patient_id
+and p.patient_id not in 
+(
+(select pp.patient_id
+from patient_program pp
+where pp.program_id = 2 and pp.voided=0  and pp.patient_id between 27500 and 28500
+and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+group by pp.patient_id)
+)
+and p.patient_id between 27500 and 28500
 where p.voided=0
 group by p.patient_id) as state
 inner join (select state,patient_state_id from patient_state) the_state on the_state.patient_state_id = state.last_state_id
