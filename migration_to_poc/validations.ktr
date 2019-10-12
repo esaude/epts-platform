@@ -595,12 +595,12 @@
     <hop>
       <from>epts_estadio</from>
       <to>Text file output 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc_estadio</from>
       <to>Text file output 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts_counts 2</from>
@@ -1134,7 +1134,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>/home/amos/Documents/projects/validation1</name>
+      <name>/home/amos/Documents/projects/validation0</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
