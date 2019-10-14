@@ -1766,24 +1766,32 @@ from dual</sql>
 concat(count(*),' EPTS') from (
 SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
           WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
           and p.patient_id between 27500 and 28500
-          and o.concept_id in (1611)
+          and o.concept_id = 1611
           AND p.voided = 0
           group by   p.patient_id) as confident_number) as confident_number,
 
 (select concat(count(*),' EPTS') from
 (SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
           WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
           and p.patient_id between 27500 and 28500
-          and o.concept_id in (1740)
+          and o.concept_id =1740
           AND p.voided = 0
           group by   p.patient_id) as confident_name) as confident_name
 
@@ -2349,9 +2357,9 @@ INNER JOIN patient p ON o.person_id = p.patient_id
 WHERE (o.value_coded IN (1204,1205,1206,1207))
     AND (o.voided = 0)
    AND (o.person_id between 27500 and 28500)
-   AND (o.location_id = 208)
+  -- AND (o.location_id = 208)
    AND (e.encounter_type IN (1,6,13,35,34,5,18,3,7,9))
-   AND (e.location_id = 208)
+ --  AND (e.location_id = 208)
    AND (e.voided = 0)
    AND (p.voided = 0)
    AND (p.patient_id IN (SELECT DISTINCT pp.patient_id from patient_program pp where pp.program_id IN (1,2)))
@@ -2402,9 +2410,9 @@ INNER JOIN patient p ON o.person_id = p.patient_id
 WHERE (o.value_coded IN (1204,1205,1206,1207))
     AND (o.voided = 0)
    AND (o.person_id between 27500 and 28500)
-   AND (o.location_id = 208)
+  -- AND (o.location_id = 208)
    AND (e.encounter_type IN (1,6,13,35,34,5,18,3,7,9))
-   AND (e.location_id = 208)
+ --  AND (e.location_id = 208)
    AND (e.voided = 0)
    AND (p.voided = 0)
    AND (p.patient_id IN (SELECT DISTINCT pp.patient_id from patient_program pp where pp.program_id IN (1,2)))
@@ -2448,8 +2456,12 @@ concat(count(pat_regime.patient_id),' EPTS')
 from (
 SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
 and p.patient_id between 27500 and 28500
