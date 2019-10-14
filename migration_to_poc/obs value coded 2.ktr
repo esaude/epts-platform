@@ -2017,7 +2017,7 @@
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>select last_encounter.patient_id, last_encounter.obs_datetime,
+    <sql>select distinct last_encounter.patient_id, -- last_encounter.obs_datetime,
 case 
 when last_encounter.value_coded=1204 then 1204
 when last_encounter.value_coded=1205 then 1205
@@ -2034,17 +2034,19 @@ else last_encounter.concept_id end as concept_id
 , uuid() as obs_uuid
 FROM 
 
-(SELECT p.patient_id,o.concept_id,o.value_coded,o.obs_datetime,e.encounter_datetime as last_datetime
+(SELECT p.patient_id,o.concept_id,o.value_coded,
+-- o.obs_datetime,
+max(e.encounter_datetime) as last_datetime
         FROM patient p
           INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
           INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
           and p.patient_id = ?
-          and o.concept_id = 1087
+ and o.concept_id = 1087
 and o.value_coded is not null
           AND p.voided = 0  
-          order by e.encounter_datetime desc limit 1) last_encounter  
+group by p.patient_id,o.concept_id,o.value_coded) last_encounter  
   </sql>
     <limit>0</limit>
     <lookup>patient</lookup>
@@ -2132,7 +2134,6 @@ and o.value_coded is not null
 , 17 as location_id
 , curdate() as date_created
 , now() as obs_datetime
-
 FROM person_attribute WHERE person_attribute_type_id = '999'
 order by person_id asc
 </sql>

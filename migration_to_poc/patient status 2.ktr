@@ -430,7 +430,7 @@
     <created_date>2019/10/10 16:19:58.545</created_date>
     <modified_user>-</modified_user>
     <modified_date>2019/10/10 16:19:58.545</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -1953,14 +1953,15 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select pp.patient_id, pp.program_id,4 as creator,uuid()as attribute_uuid,uuid() as tiporeg_uuid ,max(pp.patient_program_id) as patient_program_id
 from patient_program pp
-where pp.program_id = 1 and pp.voided=0  and pp.patient_id between 27500 and 28500
+where pp.program_id = 1 and pp.voided=0  -- and pp.patient_id between 27500 and 28500
 and pp.patient_id  not in (select pp.patient_id
 from patient_program pp
 where pp.program_id = 2 and pp.voided=0
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id)
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
-group by pp.patient_id;</sql>
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+group by pp.patient_id
+order by pp.patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2259,6 +2260,8 @@ when the_state.state = 9 then 'TARV_ABANDONED'
 when the_state.state = 10 then 'INACTIVE_DEATH'
 when the_state.state = 15 then 'INACTIVE_DEATH'
 when the_state.state = 29 then 'ACTIVE'
+
+when the_state.state = 28 then 'ACTIVE'
 else 'other'
 end as state_in_name,
 uuid() as status_uuid
@@ -2275,11 +2278,11 @@ and p.patient_id not in
 (
 (select pp.patient_id
 from patient_program pp
-where pp.program_id = 2 and pp.voided=0  and pp.patient_id between 27500 and 28500
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+where pp.program_id = 2 and pp.voided=0  -- and pp.patient_id between 27500 and 28500
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id)
 )
-and p.patient_id between 27500 and 28500
+-- and p.patient_id between 27500 and 28500
 where p.voided=0
 group by p.patient_id) as state
 inner join (select state,patient_state_id from patient_state) the_state on the_state.patient_state_id = state.last_state_id

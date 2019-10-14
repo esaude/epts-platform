@@ -1807,7 +1807,7 @@ when last_encounter.value_coded=1206 then 'estadio 3'
 when last_encounter.value_coded=1207 then 'estadio 4'
 end as value_coded, count(*) 
 from (
-  SELECT o.person_id, max(e.encounter_datetime), o.value_coded
+  SELECT o.person_id, o.value_coded, max(e.encounter_datetime)
 FROM obs o
 INNER JOIN encounter e ON o.encounter_id = e.encounter_id
 INNER JOIN patient p ON o.person_id = p.patient_id
