@@ -1737,20 +1737,49 @@ where p.voided=0 and p.patient_id between 27500 and 28500
 group by p.patient_id,program.program_id) states) as pat_transfer_out,
 
 
-(select concat(count(*),' EPTS') from (
-select
-distinct p.patient_id, program.program_id,max(program.state_id)
-from patient p
-inner join 
-(select pp.patient_id, pp.patient_program_id,state.state_id, program_id
-from patient_program pp 
-inner join 
-(select patient_program_id, max(patient_state_id) state_id 
-from patient_state 
-where state in (2,9) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
-where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
-where p.voided=0 and p.patient_id between 27500 and 28500
-group by p.patient_id,program.program_id) states) as pat_abandoned,
+concat(((select count(*) from 
+(-- TARV patient voided = 0
+select p.patient_id, pp3.max_patient_state_id, pp3.state
+from
+(select pp2.patient_id, pp2.max_patient_state_id, ps2.state
+from (
+select pp.patient_id, max(ps.patient_state_id) as max_patient_state_id
+from
+(select patient_program_id, patient_id, program_id
+from patient_program
+where program_id = 2
+and patient_id between 27500 and 28500
+and voided = 0) as pp, patient_state as ps
+where ps.patient_program_id = pp.patient_program_id
+group by pp.patient_id) as pp2, patient_state as ps2
+where pp2.max_patient_state_id = ps2.patient_state_id
+and ps2.state = 9) as pp3, patient as p
+where pp3.patient_id = p.patient_id
+and p.voided = 0) as tarv)+
+(select count(*) from 
+(-- Pre TARV patient voided = 0 Abandono
+select p.patient_id, pp3.max_patient_state_id, pp3.state
+from
+(select pp2.patient_id, pp2.max_patient_state_id, ps2.state
+from (
+select pp.patient_id, max(ps.patient_state_id) as max_patient_state_id
+from
+(select patient_program_id, patient_id, program_id
+from patient_program
+where program_id = 1
+and patient_id between 27500 and 28500
+and patient_id not in (select pp.patient_id
+from patient_program pp
+where pp.program_id = 2 and pp.voided=0
+and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+group by pp.patient_id)
+and voided = 0) as pp, patient_state as ps
+where ps.patient_program_id = pp.patient_program_id
+group by pp.patient_id) as pp2, patient_state as ps2
+where pp2.max_patient_state_id = ps2.patient_state_id) as pp3, patient as p
+where pp3.patient_id = p.patient_id and pp3.state = 2
+and p.voided = 0) as pre_tarv)
+), ' EPTS') as pat_abandoned,
 
 (select concat(count(*),' EPTS')  from (
 select
@@ -2388,8 +2417,7 @@ and patient_id in (select distinct pa.person_id from person_attribute pa where p
 
 
 (select concat(count(*), ' POC')from openmrs.patient_status_state
-where patient_state = 'TARV_ABANDONED' and id in 
-(select max(id) from openmrs.patient_status_state group by patient_id)
+where patient_state = 'TARV_ABANDONED'
 and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_abandoned,
 
 (select concat(count(*), ' POC')from openmrs.patient_status_state

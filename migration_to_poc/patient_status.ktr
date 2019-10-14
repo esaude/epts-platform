@@ -866,7 +866,7 @@
     <step1>Sort rows 3</step1>
     <step2>Sort rows</step2>
     <keys_1>
-      <key>max(state.last_program_id)</key>
+      <key>patient_program_id</key>
     </keys_1>
     <keys_2>
       <key>patient_program_id</key>
@@ -1377,7 +1377,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>max(state.last_program_id)</name>
+        <name>patient_program_id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1951,10 +1951,11 @@ order by person_id asc
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>select pp.patient_id, pp.program_id,4 as creator,uuid()as attribute_uuid,uuid() as tiporeg_uuid ,max(pp.patient_program_id) as patient_program_id
+    <sql>select pp.patient_id, pp.program_id
+,4 as creator,uuid()as attribute_uuid,uuid() as tiporeg_uuid ,max(pp.patient_program_id) as patient_program_id
 from patient_program pp
 where pp.program_id = 2 and pp.voided=0
--- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id
 order by pp.patient_id asc</sql>
     <limit>0</limit>
@@ -2240,37 +2241,34 @@ order by pp.patient_id asc</sql>
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>select state.patient_id, max(state.last_program_id), max(state.last_state_id),the_state.state,
-case
-when the_state.state = 1 then 'ACTIVE'
-when the_state.state = 2 then 'TARV_ABANDONED'
-when the_state.state = 3 then 'INACTIVE_TRANSFERRED_OUT'
-when the_state.state = 4 then 'ACTIVE'
-when the_state.state = 5 then 'INACTIVE_DEATH'
-
-when the_state.state = 6 then 'ACTIVE'
-when the_state.state = 7 then 'INACTIVE_TRANSFERRED_OUT'
-when the_state.state = 8 then 'INACTIVE_SUSPENDED'
-when the_state.state = 9 then 'TARV_ABANDONED'
-when the_state.state = 10 then 'INACTIVE_DEATH'
-when the_state.state = 15 then 'INACTIVE_DEATH'
-when the_state.state = 29 then 'ACTIVE'
+    <sql>select distinct pp2.patient_id, pp2.max_patient_state_id,pp2.patient_program_id, ps2.state,case
+when ps2.state = 1 then 'ACTIVE'
+when ps2.state = 2 then 'TARV_ABANDONED'
+when ps2.state = 3 then 'INACTIVE_TRANSFERRED_OUT'
+when ps2.state = 4 then 'ACTIVE'
+when ps2.state = 5 then 'INACTIVE_DEATH'
+when ps2.state = 6 then 'ACTIVE'
+when ps2.state = 7 then 'INACTIVE_TRANSFERRED_OUT'
+when ps2.state = 8 then 'INACTIVE_SUSPENDED'
+when ps2.state = 9 then 'TARV_ABANDONED'
+when ps2.state = 10 then 'INACTIVE_DEATH'
+when ps2.state = 15 then 'INACTIVE_DEATH'
+when ps2.state = 29 then 'ACTIVE'
+when ps2.state = 28 then 'ACTIVE'
 else 'other'
 end as state_in_name,
 uuid() as status_uuid
 from 
-(select p.patient_id, max(program.patient_program_id) as last_program_id,max(program.state_id) as last_state_id
-from patient p
-inner join 
-(select pp.patient_id, pp.patient_program_id,state.state_id
-from patient_program pp 
-inner join 
-(select patient_program_id, max(patient_state_id) state_id from patient_state group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
-where pp.program_id = 2 and pp.voided=0) program on program.patient_id = p.patient_id
-where p.voided=0
-group by p.patient_id) as state
-inner join (select state,patient_state_id from patient_state) the_state on the_state.patient_state_id = state.last_state_id
-group by state.patient_id
+(select distinct pp.patient_id, pp.patient_program_id,max(ps.patient_state_id) as max_patient_state_id
+from
+(select distinct patient_program_id, patient_id, program_id
+from patient_program
+where program_id = 2
+and patient_id between 27500 and 28500
+and voided = 0) as pp, patient_state as ps
+where ps.patient_program_id = pp.patient_program_id
+group by pp.patient_id,pp.patient_program_id) as pp2, patient_state as ps2
+where pp2.max_patient_state_id = ps2.patient_state_id
 ;</sql>
     <limit>0</limit>
     <lookup/>
