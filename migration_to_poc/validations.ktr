@@ -1306,7 +1306,7 @@
         <precision>0</precision>
       </field>
       <field>
-        <name>pat_dead</name>
+        <name>pat_dead_tarv</name>
         <type>Binary</type>
         <format/>
         <currency/>
@@ -1318,7 +1318,31 @@
         <precision>0</precision>
       </field>
       <field>
-        <name>pat_transfer_out</name>
+        <name>pat_dead_pretarv</name>
+        <type>Binary</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>pat_transfer_out_tarv</name>
+        <type>Binary</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>0</precision>
+      </field>
+      <field>
+        <name>pat_transfer_out_pretarv</name>
         <type>Binary</type>
         <format/>
         <currency/>
