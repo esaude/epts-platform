@@ -566,155 +566,165 @@
     <hop>
       <from>Blocking step 2 4 2</from>
       <to>Merge join 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>new_patient_id 2</from>
       <to>Blocking step 2 4 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 2 2</from>
       <to>Merge join 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge on value coded</from>
       <to>correct_value_coded</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 4</from>
       <to>Merge on value coded</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>value coded</from>
       <to>Sort rows 4</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Blocking step 2 3 2</from>
       <to>last concept obs 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get encounter id 2</from>
       <to>Blocking step 2 3 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge on value coded 2</from>
       <to>correct concept_id</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 2 5 2</from>
       <to>Merge on value coded 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 4 2</from>
       <to>Merge on value coded 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>concept id</from>
       <to>Sort rows 4 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>correct concept_id</from>
       <to>get encounter id 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge on concept 2</from>
       <to>get correct concept id 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 3</from>
       <to>Merge on concept 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>concept to form</from>
       <to>Sort rows 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows 2 4</from>
       <to>Merge on concept 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get correct concept id 3</from>
       <to>Sort rows 2 4</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>last concept obs 2</from>
       <to>get correct concept id 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>section obs id lookup</from>
       <to>Blocking step 2 3 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Blocking step 2 3 2 2</from>
       <to>update group id for sections</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>last value coded values</from>
       <to>Blocking step 2 4 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Blocking step 2 4 2 2</from>
       <to>Sort rows 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get correct concept id 2</from>
       <to>section obs id lookup</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>update group id for sections</from>
       <to>new value coded</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>new value coded</from>
       <to>Update</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>correct_value_coded</from>
       <to>Sort rows 2 5 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge join 2</from>
       <to>Sort rows</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Sort rows</from>
       <to>Merge on value coded</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Merge join 2</from>
       <to>Microsoft Excel output 3 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>patient</from>
+      <to>Join rows (cartesian product)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input</from>
+      <to>Join rows (cartesian product)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Join rows (cartesian product)</from>
       <to>last value coded values</to>
       <enabled>Y</enabled>
     </hop>
@@ -2126,16 +2136,13 @@ AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
           and p.patient_id = ?
- and o.concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
-6332,6128,6129,6126,6127,6257,1113,6120,5356,1410,5096,1372,1706,2059,1707,1065,1066,1457,1204,1205,1206,1207,1256,1257,1259,1260,1705,1708,6282,981,6324,6243,
-6104,6105,1703,6100,1651,6110,6103,792,1827,6102,6116,6106,1314,1311,1312,1313,6325,6326,6327,6328,6109,6329,5424,3,16,68,123,216,218,507,1218,1790,2141,2142,
-5046,5945,1260,1087,1792,1406,9999,23784,23786,23791,23792,23793,23796)
-and o.value_coded is not null
+ and o.concept_id = ?
           AND p.voided = 0  
-group by p.patient_id,o.concept_id,o.value_coded) last_encounter  
+group by p.patient_id,o.concept_id,o.value_coded
+order by last_datetime desc limit 1) last_encounter  
   </sql>
     <limit>0</limit>
-    <lookup>patient</lookup>
+    <lookup>Join rows (cartesian product)</lookup>
     <execute_each_row>Y</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
@@ -2523,6 +2530,83 @@ order by patient_id asc</sql>
     <GUI>
       <xloc>1088</xloc>
       <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT distinct concept_id 
+FROM obs 
+WHERE 
+person_id between 27500 and 28500 and
+concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
+6332,6128,6129,6126,6127,6257,1113,6120,5356,1410,5096,1372,1706,2059,1707,1065,1066,1457,1204,1205,1206,1207,1256,1257,1259,1260,1705,1708,6282,981,6324,6243,
+6104,6105,1703,6100,1651,6110,6103,792,1827,6102,6116,6106,1314,1311,1312,1313,6325,6326,6327,6328,6109,6329,5424,3,16,68,123,216,218,507,1218,1790,2141,2142,
+5046,5945,1260,1087,1792,1406,9999,23784,23786,23791,23792,23793,23796)
+and value_coded is not null</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Join rows (cartesian product)</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <cache_size>500</cache_size>
+    <main/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue/>
+        <function>=</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>224</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
