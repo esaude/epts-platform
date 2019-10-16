@@ -2264,7 +2264,7 @@ from
 (select distinct patient_program_id, patient_id, program_id
 from patient_program
 where program_id = 2
-and patient_id between 27500 and 28500
+-- and patient_id between 27500 and 28500
 and voided = 0) as pp, patient_state as ps
 where ps.patient_program_id = pp.patient_program_id
 group by pp.patient_id,pp.patient_program_id) as pp2, patient_state as ps2

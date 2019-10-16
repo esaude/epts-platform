@@ -744,7 +744,8 @@ FROM
 -- AND e.location_id=208 
 AND e.voided = 0
           INNER JOIN obs o ON o.encounter_id = e.encounter_id  
--- AND o.location_id=208 AND o.voided = 0
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 
 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
@@ -2334,7 +2335,7 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
- and patient_id between 27500 and 28500
+ -- and patient_id between 27500 and 28500
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
