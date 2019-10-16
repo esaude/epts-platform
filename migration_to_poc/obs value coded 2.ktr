@@ -2046,7 +2046,9 @@ max(e.encounter_datetime) as last_datetime
  and o.concept_id = 1087
 and o.value_coded is not null
           AND p.voided = 0  
-group by p.patient_id,o.concept_id,o.value_coded) last_encounter  
+group by p.patient_id
+ ,o.concept_id,o.value_coded,e.encounter_id
+) last_encounter  
   </sql>
     <limit>0</limit>
     <lookup>patient</lookup>

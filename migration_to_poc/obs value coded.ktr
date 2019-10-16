@@ -886,8 +886,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
-      <yloc>384</yloc>
+      <xloc>208</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1437,6 +1437,43 @@
     <GUI>
       <xloc>1440</xloc>
       <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <sql>SELECT distinct concept_id 
+FROM obs 
+WHERE 
+-- person_id between 27500 and 28500 and
+concept_id in (3,507,1087,1406,1792,1982,5356,5945,6257,6332)
+and value_coded is not null</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2381,7 +2418,8 @@ max(e.encounter_datetime) as last_datetime
 5046,5945,1260,1087,1792,1406,9999,23784,23786,23791,23792,23793,23796)
 and o.value_coded is not null
           AND p.voided = 0  
-group by p.patient_id,o.concept_id,o.value_coded) last_encounter  
+group by p.patient_id,o.concept_id,o.value_coded,e.encounter_id
+) last_encounter  
   </sql>
     <limit>0</limit>
     <lookup>patient</lookup>

@@ -1955,7 +1955,7 @@ order by person_id asc
 ,4 as creator,uuid()as attribute_uuid,uuid() as tiporeg_uuid ,max(pp.patient_program_id) as patient_program_id
 from patient_program pp
 where pp.program_id = 2 and pp.voided=0
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id
 order by pp.patient_id asc</sql>
     <limit>0</limit>

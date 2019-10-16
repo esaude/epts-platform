@@ -867,7 +867,7 @@ when voided_by is not null then 4 end as voided_by
 , birthtime
 FROM person where person_id >'1'
 and voided = 0 
-and person_id between 27500 and 28500
+-- and person_id between 27500 and 28500
 and person_id in (select distinct patient_id from patient_program where program_id in (1,2))
 order by person_id asc
 </sql>
