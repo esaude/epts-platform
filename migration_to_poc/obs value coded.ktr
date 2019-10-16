@@ -716,17 +716,17 @@
     <hop>
       <from>Join rows (cartesian product)</from>
       <to>Select values</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts uuid 2</from>
       <to>get epts concept name 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>get epts concept name 3</from>
       <to>Join rows (cartesian product)</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>patient</from>
@@ -1141,8 +1141,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
-      <yloc>256</yloc>
+      <xloc>80</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1472,8 +1472,8 @@ and value_coded is not null</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>336</yloc>
+      <xloc>304</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2396,16 +2396,17 @@ when last_encounter.concept_id =1087 then
 (select 9998 
 end 
 from obs ob inner join encounter ep on ob.person_id = ob.person_id and ob.encounter_id = ep.encounter_id
-where ob.person_id = last_encounter.patient_id and ob.concept_id = 1255 and ob.value_coded=1256  order by ep.encounter_datetime desc limit 1)
+where ob.person_id = last_encounter.patient_id and ep.encounter_id = last_encounter.encounter_id and ob.concept_id = 1255 and ob.value_coded=1256  order by ep.encounter_datetime desc limit 1)
 
 else last_encounter.concept_id end as concept_id
 , last_encounter.value_coded
 , uuid() as obs_uuid
 FROM 
 
-(SELECT p.patient_id,o.concept_id,o.value_coded,
+(SELECT p.patient_id,o.concept_id,o.value_coded,e.encounter_id,
 -- o.obs_datetime,
 max(e.encounter_datetime) as last_datetime
+
         FROM patient p
           INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
           INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
@@ -2418,7 +2419,7 @@ max(e.encounter_datetime) as last_datetime
 5046,5945,1260,1087,1792,1406,9999,23784,23786,23791,23792,23793,23796)
 and o.value_coded is not null
           AND p.voided = 0  
-group by p.patient_id,o.concept_id,o.value_coded,e.encounter_id
+group by p.patient_id ,o.concept_id,o.value_coded,e.encounter_id
 ) last_encounter  
   </sql>
     <limit>0</limit>
@@ -2560,8 +2561,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>32</xloc>
-      <yloc>192</yloc>
+      <xloc>128</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
