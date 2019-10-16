@@ -2528,12 +2528,10 @@ AND o.voided = 0
  and o.concept_id = ?
 and o.value_coded is not null
           AND p.voided = 0  
-group by p.patient_id 
--- ,o.concept_id,o.value_coded
-order by last_datetime desc limit 1
-) last_encounter  
+group by p.patient_id,o.concept_id,o.value_coded
+) last_encounter
 
-  order by last_encounter.last_datetime desc limit 1</sql>
+-- order by last_encounter.last_datetime desc limit 1</sql>
     <limit>0</limit>
     <lookup>Join rows (cartesian product) 2</lookup>
     <execute_each_row>Y</execute_each_row>
