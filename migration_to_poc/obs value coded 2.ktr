@@ -2032,22 +2032,29 @@ where ob.person_id = last_encounter.patient_id and ep.encounter_id = last_encoun
 else last_encounter.concept_id end as concept_id
 , last_encounter.value_coded
 , uuid() as obs_uuid
+, max(last_encounter.last_datetime)
 FROM 
 
 (SELECT p.patient_id,o.concept_id,o.value_coded,e.encounter_id,
 -- o.obs_datetime,
 max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
           and p.patient_id = ?
  and o.concept_id = 1087
 and o.value_coded is not null
           AND p.voided = 0  
-group by p.patient_id,o.concept_id,o.value_coded,e.encounter_id
+group by p.patient_id
+-- ,o.concept_id,o.value_coded,e.encounter_id
 ) last_encounter  
+group by last_encounter.patient_id
   </sql>
     <limit>0</limit>
     <lookup>patient</lookup>

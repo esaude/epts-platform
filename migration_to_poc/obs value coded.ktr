@@ -486,6 +486,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';</attribute>
+      </attribute>
+      <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
         <attribute>Y</attribute>
       </attribute>
@@ -711,7 +715,7 @@
     <hop>
       <from>Merge join 2</from>
       <to>Microsoft Excel output 3 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Join rows (cartesian product)</from>
@@ -886,8 +890,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>224</yloc>
+      <xloc>96</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1141,8 +1145,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>272</yloc>
+      <xloc>240</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1472,8 +1476,8 @@ and value_coded is not null</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>368</yloc>
+      <xloc>128</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2401,6 +2405,7 @@ where ob.person_id = last_encounter.patient_id and ep.encounter_id = last_encoun
 else last_encounter.concept_id end as concept_id
 , last_encounter.value_coded
 , uuid() as obs_uuid
+, max(last_encounter.last_datetime)
 FROM 
 
 (SELECT p.patient_id,o.concept_id,o.value_coded,e.encounter_id,
@@ -2408,8 +2413,12 @@ FROM
 max(e.encounter_datetime) as last_datetime
 
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
           and p.patient_id = ?
@@ -2419,8 +2428,10 @@ max(e.encounter_datetime) as last_datetime
 5046,5945,1260,1087,1792,1406,9999,23784,23786,23791,23792,23793,23796)
 and o.value_coded is not null
           AND p.voided = 0  
-group by p.patient_id ,o.concept_id,o.value_coded,e.encounter_id
+group by p.patient_id 
+-- ,o.concept_id,o.value_coded,e.encounter_id
 ) last_encounter  
+group by last_encounter.patient_id
   </sql>
     <limit>0</limit>
     <lookup>patient</lookup>
