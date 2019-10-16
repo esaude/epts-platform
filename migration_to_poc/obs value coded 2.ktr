@@ -2026,15 +2026,15 @@ when last_encounter.value_coded=1207 then 1207
 when last_encounter.concept_id =1087 then 
 (select 9999 
 end 
-from obs ob inner join encounter ep on ob.person_id = ob.person_id and ob.encounter_id = ep.encounter_id
-where ob.person_id = last_encounter.patient_id and ob.concept_id = 1255 and ob.value_coded=1259  order by ep.encounter_datetime desc limit 1)
+from obs ob inner join encounter ep on ob.person_id = ep.patient_id and ob.encounter_id = ep.encounter_id
+where ob.person_id = last_encounter.patient_id and ep.encounter_id = last_encounter.encounter_id and ob.concept_id = 1255 and ob.value_coded=1259  order by ep.encounter_datetime desc limit 1)
 
 else last_encounter.concept_id end as concept_id
 , last_encounter.value_coded
 , uuid() as obs_uuid
 FROM 
 
-(SELECT p.patient_id,o.concept_id,o.value_coded,
+(SELECT p.patient_id,o.concept_id,o.value_coded,e.encounter_id,
 -- o.obs_datetime,
 max(e.encounter_datetime) as last_datetime
         FROM patient p
@@ -2050,7 +2050,7 @@ AND o.voided = 0
  and o.concept_id = 1087
 and o.value_coded is not null
           AND p.voided = 0  
-group by p.patient_id,o.concept_id,o.value_coded) last_encounter  
+group by p.patient_id,o.concept_id,o.value_coded,e.encounter_id) last_encounter  
   </sql>
     <limit>0</limit>
     <lookup>patient</lookup>
