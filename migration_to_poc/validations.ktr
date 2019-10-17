@@ -454,7 +454,7 @@
       </attribute>
       <attribute>
         <code>CUSTOM_URL</code>
-        <attribute>jdbc:mysql://localhost:3306/CCSDBMASKED</attribute>
+        <attribute>jdbc:mysql://localhost:3306/ARIEL</attribute>
       </attribute>
       <attribute>
         <code>DATABASE_DIALECT_ID</code>
@@ -1952,8 +1952,12 @@ and pa.patient_id between 27500 and 28500
 (select concat(count(*),' EPTS')  from
 (SELECT p.patient_id,o.concept_id,o.value_coded,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
 and p.patient_id between 27500 and 28500 
@@ -1965,8 +1969,12 @@ group by   p.patient_id) as tb) as pat_tb ,
 (select concat(count(*),' EPTS')  from (
 SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
 and p.patient_id between 27500 and 28500
@@ -1979,8 +1987,12 @@ group by   p.patient_id) as next_cons) as pat_next_cons,
 (select concat(count(*),' EPTS')  from (
 SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
 and p.patient_id between 27500 and 28500
@@ -2002,7 +2014,7 @@ from patient_state
 where state in (5,10) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
 where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
 where p.voided=0 and p.patient_id between 27500 and 28500
-group by p.patient_id,program.program_id) states) as pat_dead,
+group by p.patient_id) states) as pat_dead,
 
 
 (select concat(count(*),' EPTS')  from (
@@ -2018,7 +2030,7 @@ from patient_state
 where state in (3,7) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
 where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
 where p.voided=0 and p.patient_id between 27500 and 28500
-group by p.patient_id,program.program_id) states) as pat_transfer_out,
+group by p.patient_id) states) as pat_transfer_out,
 
 
 ((select concat(count(*),' EPTS') from 

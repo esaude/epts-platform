@@ -454,7 +454,7 @@
       </attribute>
       <attribute>
         <code>CUSTOM_URL</code>
-        <attribute>jdbc:mysql://localhost:3306/CCSDBMASKED</attribute>
+        <attribute>jdbc:mysql://localhost:3306/ARIEL</attribute>
       </attribute>
       <attribute>
         <code>DATABASE_DIALECT_ID</code>
