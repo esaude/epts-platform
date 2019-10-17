@@ -454,7 +454,7 @@
       </attribute>
       <attribute>
         <code>CUSTOM_URL</code>
-        <attribute>jdbc:mysql://localhost:3306/ARIEL</attribute>
+        <attribute>jdbc:mysql://localhost:3306/CCSDBMASKED</attribute>
       </attribute>
       <attribute>
         <code>DATABASE_DIALECT_ID</code>
@@ -2857,8 +2857,8 @@ end as last_concept_id, o.value_coded as last_value_coded,MAX(last_value.last_va
 from 
 (SELECT p.patient_id,o.value_coded,o.encounter_id,MAX(e.encounter_datetime) last_value_date
 FROM patient p 
-            INNER JOIN ARIEL.encounter e ON e.patient_id=p.patient_id and e.location_id=208
-            INNER JOIN ARIEL.obs o ON o.encounter_id=e.encounter_id  AND o.location_id=208  
+            INNER JOIN CCSDBMASKED.encounter e ON e.patient_id=p.patient_id and e.location_id=208
+            INNER JOIN CCSDBMASKED.obs o ON o.encounter_id=e.encounter_id  AND o.location_id=208  
   WHERE p.voided=0 AND e.voided =0 AND o.voided=0 
             AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
 and p.patient_id = ? 

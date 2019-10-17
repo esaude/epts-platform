@@ -454,7 +454,7 @@
       </attribute>
       <attribute>
         <code>CUSTOM_URL</code>
-        <attribute>jdbc:mysql://localhost:3306/ARIEL</attribute>
+        <attribute>jdbc:mysql://localhost:3306/CCSDBMASKED</attribute>
       </attribute>
       <attribute>
         <code>DATABASE_DIALECT_ID</code>
@@ -1955,7 +1955,7 @@ order by person_id asc
 ,4 as creator,uuid()as attribute_uuid,uuid() as tiporeg_uuid ,max(pp.patient_program_id) as patient_program_id
 from patient_program pp
 where pp.program_id = 2 and pp.voided=0
- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id
 order by pp.patient_id asc</sql>
     <limit>0</limit>
@@ -2264,7 +2264,7 @@ from
 (select distinct patient_program_id, patient_id, program_id
 from patient_program
 where program_id = 2
- and patient_id between 27500 and 28500
+-- and patient_id between 27500 and 28500
 and voided = 0) as pp, patient_state as ps
 where ps.patient_program_id = pp.patient_program_id
 group by pp.patient_id,pp.patient_program_id) as pp2, patient_state as ps2
