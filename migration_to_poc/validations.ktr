@@ -583,62 +583,62 @@
     <hop>
       <from>epts_confident</from>
       <to>Text file output 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>poc_confident</from>
       <to>Text file output 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>epts tarv status</from>
       <to>Text file output 2 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>poc tarv status</from>
       <to>Text file output 2 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>epts_estadio</from>
       <to>Text file output 3</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>poc_estadio</from>
       <to>Text file output 3</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>poc_counts 3</from>
       <to>Text file output 5</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>epts_counts 3</from>
       <to>Text file output 5</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>epts tarv status 2</from>
       <to>Text file output 2 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts_confident 2</from>
       <to>Text file output 2 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts_counts 3 2</from>
       <to>Text file output 5 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts_estadio 2</from>
       <to>Text file output 3 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts_regime 2</from>
@@ -648,22 +648,22 @@
     <hop>
       <from>poc tarv status 2</from>
       <to>Text file output 2 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc_confident 2</from>
       <to>Text file output 2 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc_counts 3 2</from>
       <to>Text file output 5 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc_estadio 2</from>
       <to>Text file output 3 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc_regime 2</from>
@@ -895,7 +895,7 @@
     </remotesteps>
     <GUI>
       <xloc>896</xloc>
-      <yloc>368</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -952,7 +952,7 @@
     </remotesteps>
     <GUI>
       <xloc>704</xloc>
-      <yloc>368</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1066,7 +1066,7 @@
     </remotesteps>
     <GUI>
       <xloc>1168</xloc>
-      <yloc>384</yloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1123,7 +1123,7 @@
     </remotesteps>
     <GUI>
       <xloc>576</xloc>
-      <yloc>368</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1645,7 +1645,7 @@
     </remotesteps>
     <GUI>
       <xloc>352</xloc>
-      <yloc>368</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1756,7 +1756,7 @@ from dual</sql>
     </remotesteps>
     <GUI>
       <xloc>768</xloc>
-      <yloc>288</yloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1876,7 +1876,7 @@ from dual
     </remotesteps>
     <GUI>
       <xloc>576</xloc>
-      <yloc>288</yloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1950,13 +1950,14 @@ and pa.patient_id between 27500 and 28500
 
 
 (select concat(count(*),' EPTS')  from
-(SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+(SELECT p.patient_id,o.concept_id,o.value_coded,max(e.encounter_datetime) as last_datetime
         FROM patient p
           INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
           INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id between 27500 and 28500
+and p.patient_id between 27500 and 28500 
+and p.patient_id in (select distinct patient_id from patient_program where program_id in (1,2))
           and o.concept_id = 6257 and o.value_coded = 1065
           AND p.voided = 0
 group by   p.patient_id) as tb) as pat_tb ,
@@ -2172,7 +2173,7 @@ where pa.identifier_type = 3
 
 
 (select concat(count(*),' EPTS')  from
-(SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+(SELECT p.patient_id,o.concept_id,o.value_coded,max(e.encounter_datetime) as last_datetime
         FROM patient p
           INNER JOIN encounter e ON e.patient_id = p.patient_id 
 -- AND e.location_id=208 
@@ -2334,7 +2335,7 @@ group by p.patient_id,program.program_id) states) as pat_suspended
     </remotesteps>
     <GUI>
       <xloc>224</xloc>
-      <yloc>288</yloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2355,6 +2356,7 @@ when last_encounter.value_coded=1204 then 'estadio 1 epts'
 when last_encounter.value_coded=1205 then 'estadio 2 epts'
 when last_encounter.value_coded=1206 then 'estadio 3 epts'
 when last_encounter.value_coded=1207 then 'estadio 4 epts'
+else 'estadio xx'
 end as value_coded, count(*) 
 from (
   SELECT o.person_id, o.value_coded, max(e.encounter_datetime)
@@ -2364,9 +2366,9 @@ INNER JOIN patient p ON o.person_id = p.patient_id
 WHERE (o.value_coded IN (1204,1205,1206,1207))
     AND (o.voided = 0)
    AND (o.person_id between 27500 and 28500)
-   AND (o.location_id = 208)
+   -- AND (o.location_id = 208)
    AND (e.encounter_type IN (1,6,13,35,34,5,18,3,7,9))
-   AND (e.location_id = 208)
+   -- AND (e.location_id = 208)
    AND (e.voided = 0)
    AND (p.voided = 0)
    AND (p.patient_id IN (SELECT DISTINCT pp.patient_id from patient_program pp where pp.program_id IN (1,2)))
@@ -2418,9 +2420,9 @@ INNER JOIN patient p ON o.person_id = p.patient_id
 WHERE (o.value_coded IN (1204,1205,1206,1207))
     AND (o.voided = 0)
    -- AND (o.person_id between 27500 and 28500)
-   AND (o.location_id = 208)
+   -- AND (o.location_id = 208)
    AND (e.encounter_type IN (1,6,13,35,34,5,18,3,7,9))
-   AND (e.location_id = 208)
+   -- AND (e.location_id = 208)
    AND (e.voided = 0)
    AND (p.voided = 0)
    AND (p.patient_id IN (SELECT DISTINCT pp.patient_id from patient_program pp where pp.program_id IN (1,2)))
@@ -2441,7 +2443,7 @@ group by last_encounter.value_coded;</sql>
     </remotesteps>
     <GUI>
       <xloc>992</xloc>
-      <yloc>304</yloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2508,13 +2510,17 @@ group by   p.patient_id) as pat_regime
     <connection>epts</connection>
     <sql>select 
 
-concat(count(pat_regime.patient_id),' EPTS') 
+concat(count(distinct pat_regime.patient_id),' EPTS') 
 
 from (
 SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
 -- and p.patient_id between 27500 and 28500
@@ -2539,7 +2545,7 @@ group by   p.patient_id) as pat_regime
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>288</yloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2637,7 +2643,7 @@ from dual
     </remotesteps>
     <GUI>
       <xloc>768</xloc>
-      <yloc>448</yloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2729,7 +2735,7 @@ from dual
     </remotesteps>
     <GUI>
       <xloc>576</xloc>
-      <yloc>448</yloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2978,7 +2984,7 @@ where patient_state = 'INACTIVE_SUSPENDED'
     </remotesteps>
     <GUI>
       <xloc>224</xloc>
-      <yloc>448</yloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2999,6 +3005,7 @@ when estadio.concept_id=8308 then 'estadio 1'
 when estadio.concept_id=8309 then 'estadio 2'
 when estadio.concept_id=8310 then 'estadio 3'
 when estadio.concept_id=8311 then 'estadio 4'
+else 'estadio xx'
 end as concept_id, count(*)
 from (
 select p.person_id,ob.concept_id,max(ob.obs_datetime)
@@ -3073,7 +3080,7 @@ group by estadio.concept_id;</sql>
     </remotesteps>
     <GUI>
       <xloc>992</xloc>
-      <yloc>448</yloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3130,16 +3137,9 @@ from dual</sql>
       <schema_name/>
     </partitioning>
     <connection>poc</connection>
-    <sql>select 
-
-concat((select count(distinct person_id)
+    <sql>select concat(count(distinct person_id),' EPTS')
 from obs
-where concept_id = 8247) +  
-(select count(distinct person_id)
-from obs
-where concept_id = 8246), ' POC')
-
-from dual</sql>
+where concept_id = 8247;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3155,7 +3155,7 @@ from dual</sql>
     </remotesteps>
     <GUI>
       <xloc>400</xloc>
-      <yloc>448</yloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

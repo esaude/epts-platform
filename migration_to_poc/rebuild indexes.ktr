@@ -512,7 +512,7 @@
       <schema_name/>
     </partitioning>
     <connection>poc</connection>
-    <execute_each_row>N</execute_each_row>
+    <execute_each_row>Y</execute_each_row>
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
