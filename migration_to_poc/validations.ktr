@@ -485,6 +485,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';</attribute>
+      </attribute>
+      <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
         <attribute>Y</attribute>
       </attribute>
@@ -548,6 +552,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>SQL_CONNECT</code>
+        <attribute>SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';</attribute>
+      </attribute>
+      <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
         <attribute>Y</attribute>
       </attribute>
@@ -575,62 +583,62 @@
     <hop>
       <from>epts_confident</from>
       <to>Text file output 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc_confident</from>
       <to>Text file output 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts tarv status</from>
       <to>Text file output 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc tarv status</from>
       <to>Text file output 2 2</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts_estadio</from>
       <to>Text file output 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc_estadio</from>
       <to>Text file output 3</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>poc_counts 3</from>
       <to>Text file output 5</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts_counts 3</from>
       <to>Text file output 5</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>epts tarv status 2</from>
       <to>Text file output 2 2 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>epts_confident 2</from>
       <to>Text file output 2 3</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>epts_counts 3 2</from>
       <to>Text file output 5 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>epts_estadio 2</from>
       <to>Text file output 3 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>epts_regime 2</from>
@@ -640,22 +648,22 @@
     <hop>
       <from>poc tarv status 2</from>
       <to>Text file output 2 2 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>poc_confident 2</from>
       <to>Text file output 2 3</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>poc_counts 3 2</from>
       <to>Text file output 5 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>poc_estadio 2</from>
       <to>Text file output 3 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>poc_regime 2</from>
@@ -886,7 +894,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>896</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -943,7 +951,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
+      <xloc>704</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1057,7 +1065,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1200</xloc>
+      <xloc>1168</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1114,7 +1122,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>576</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1636,7 +1644,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>352</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1712,20 +1720,23 @@ from dual</sql>
 select concat(count(*),' EPTS') from
 (select pp.patient_id, pp.program_id,max(pp.patient_program_id) 
 from patient_program pp
-where pp.program_id = 2 and pp.voided=0  and pp.patient_id between 27500 and 28500
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+where pp.program_id = 2 and pp.voided=0  
+-- and pp.patient_id between 27500 and 28500
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id) tarv ) as tarv_count,
 
 (select concat(count(*),' EPTS') from
 (select pp.patient_id, pp.program_id,max(pp.patient_program_id)
 from patient_program pp
-where pp.program_id = 1 and pp.voided=0  and pp.patient_id between 27500 and 28500
+where pp.program_id = 1 and pp.voided=0  
+-- and pp.patient_id between 27500 and 28500
 and pp.patient_id  not in (select pp.patient_id
 from patient_program pp 
-where pp.program_id = 2 and pp.voided=0  and pp.patient_id between 27500 and 28500
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+where pp.program_id = 2 and pp.voided=0  
+-- and pp.patient_id between 27500 and 28500
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id)
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id) pre_tarv
 ) as pre_tarv_count
 
@@ -1744,7 +1755,7 @@ from dual</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
+      <xloc>768</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1830,7 +1841,7 @@ SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
           INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
           WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-          and p.patient_id between 27500 and 28500
+          -- and p.patient_id between 27500 and 28500
           and o.concept_id in (1611)
           AND p.voided = 0
           group by   p.patient_id) as confident_number) as confident_number,
@@ -1842,7 +1853,7 @@ SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
           INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
           WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-          and p.patient_id between 27500 and 28500
+          -- and p.patient_id between 27500 and 28500
           and o.concept_id in (1740)
           AND p.voided = 0
           group by   p.patient_id) as confident_name) as confident_name
@@ -1864,7 +1875,7 @@ from dual
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>576</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2105,29 +2116,30 @@ group by p.patient_id,program.program_id) states) as pat_suspended
     <sql>select 
 
 (select concat(count(*),' EPTS') from person p where p.voided=0 and p.voided = 0
-and p.person_id between 27500 and 28500 
+-- and p.person_id between 27500 and 28500 
 and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2)))  as reg_pat, 
 
 (select concat(count(*),' EPTS')  from person p
 where p.voided=0 and p.gender = 'M'
-and p.person_id between 27500 and 28500
+-- and p.person_id between 27500 and 28500
 and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_male,
 
 (select concat(count(*),' EPTS')  from person p 
 where p.voided=0 and p.gender = 'F'
-and p.person_id between 27500 and 28500
+-- and p.person_id between 27500 and 28500
 and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_female,
 
 (select concat(count(*),' EPTS')  from person p
 where p.voided=0
-and p.birthdate is null and p.person_id between 27500 and 28500
+and p.birthdate is null 
+-- and p.person_id between 27500 and 28500
 and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_no_bday,
 
 (select concat(count(*),' EPTS')  from person p
 where p.voided = 0
 and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt; 5)
 and p.birthdate is not null
-and p.person_id between 27500 and 28500
+-- and p.person_id between 27500 and 28500
 and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_under_five,
 
 (select concat(count(*),' EPTS')  from  person p
@@ -2135,7 +2147,7 @@ where p.voided = 0
 and (timestampdiff(YEAR, date(p.birthdate), date(now())) >= 5)
 and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 15)
 and p.birthdate is not null
-and p.person_id between 27500 and 28500
+-- and p.person_id between 27500 and 28500
 and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_five_fifteen,
 
 (select concat(count(*),' EPTS')  from person p
@@ -2143,30 +2155,34 @@ where p.voided = 0
 and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 15)
 and (timestampdiff(YEAR, date(p.birthdate), date(now())) &lt;= 45)
 and p.birthdate is not null
-and p.person_id between 27500 and 28500
+-- and p.person_id between 27500 and 28500
 and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_sixteen_fourtysix,
 
 (select concat(count(*),' EPTS')  from person p
 where p.voided = 0
 and (timestampdiff(YEAR, date(p.birthdate), date(now())) > 45)
 and p.birthdate is not null
-and p.person_id between 27500 and 28500
+-- and p.person_id between 27500 and 28500
 and p.person_id in (select distinct pp.patient_id from patient_program pp where pp.program_id in (1,2))) as pat_over_fourtysix,
 
 (select concat(count(*),' EPTS') from patient_identifier pa
 where pa.identifier_type = 3 
-and pa.patient_id between 27500 and 28500
+-- and pa.patient_id between 27500 and 28500
 ) as pat_bi,
 
 
 (select concat(count(*),' EPTS')  from
 (SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id between 27500 and 28500
+-- and p.patient_id between 27500 and 28500
           and o.concept_id = 6257 and o.value_coded = 1065
           AND p.voided = 0
 group by   p.patient_id) as tb) as pat_tb ,
@@ -2174,11 +2190,15 @@ group by   p.patient_id) as tb) as pat_tb ,
 (select concat(count(*),' EPTS')  from (
 SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id between 27500 and 28500
+-- and p.patient_id between 27500 and 28500
           and o.concept_id = 1410
           AND p.voided = 0
 group by   p.patient_id) as next_cons) as pat_next_cons, 
@@ -2188,11 +2208,15 @@ group by   p.patient_id) as next_cons) as pat_next_cons,
 (select concat(count(*),' EPTS')  from (
 SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id between 27500 and 28500
+-- and p.patient_id between 27500 and 28500
           and o.concept_id = 5096
           AND p.voided = 0
 group by   p.patient_id) as next_tarv) as pat_next_arv,
@@ -2210,7 +2234,8 @@ inner join
 from patient_state 
 where state in (5,10) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
 where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
-where p.voided=0 and p.patient_id between 27500 and 28500
+where p.voided=0 
+-- and p.patient_id between 27500 and 28500
 group by p.patient_id,program.program_id) states) as pat_dead,
 
 
@@ -2226,7 +2251,8 @@ inner join
 from patient_state 
 where state in (3,7) group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
 where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
-where p.voided=0 and p.patient_id between 27500 and 28500
+where p.voided=0 
+-- and p.patient_id between 27500 and 28500
 group by p.patient_id,program.program_id) states) as pat_transfer_out,
 
 
@@ -2241,7 +2267,7 @@ from
 (select patient_program_id, patient_id, program_id
 from patient_program
 where program_id = 2
-and patient_id between 27500 and 28500
+-- and patient_id between 27500 and 28500
 and voided = 0) as pp, patient_state as ps
 where ps.patient_program_id = pp.patient_program_id
 group by pp.patient_id) as pp2, patient_state as ps2
@@ -2261,11 +2287,11 @@ from
 (select patient_program_id, patient_id, program_id
 from patient_program
 where program_id = 1
-and patient_id between 27500 and 28500
+-- and patient_id between 27500 and 28500
 and patient_id not in (select pp.patient_id
 from patient_program pp
 where pp.program_id = 2 and pp.voided=0
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id)
 and voided = 0) as pp, patient_state as ps
 where ps.patient_program_id = pp.patient_program_id
@@ -2287,7 +2313,8 @@ inner join
 from patient_state 
 where state = 8 group by patient_program_id) state on state.patient_program_id = pp.patient_program_id 
 where pp.program_id in (1,2) and pp.voided=0) program on program.patient_id = p.patient_id
-where p.voided=0 and p.patient_id between 27500 and 28500
+where p.voided=0 
+-- and p.patient_id between 27500 and 28500
 group by p.patient_id,program.program_id) states) as pat_suspended
 
 
@@ -2306,7 +2333,7 @@ group by p.patient_id,program.program_id) states) as pat_suspended
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
+      <xloc>224</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2377,10 +2404,11 @@ group by value_coded;</sql>
     </partitioning>
     <connection>epts</connection>
     <sql> select  case
-when last_encounter.value_coded=1204 then 'estadio 1'
-when last_encounter.value_coded=1205 then 'estadio 2'
-when last_encounter.value_coded=1206 then 'estadio 3'
-when last_encounter.value_coded=1207 then 'estadio 4'
+when last_encounter.value_coded=1204 then 'estadio 1 epts'
+when last_encounter.value_coded=1205 then 'estadio 2 epts'
+when last_encounter.value_coded=1206 then 'estadio 3 epts'
+when last_encounter.value_coded=1207 then 'estadio 4 epts'
+else 'estadio xxx'
 end as value_coded, count(*) 
 from (
   SELECT o.person_id, o.value_coded, max(e.encounter_datetime)
@@ -2389,7 +2417,7 @@ INNER JOIN encounter e ON o.encounter_id = e.encounter_id
 INNER JOIN patient p ON o.person_id = p.patient_id
 WHERE (o.value_coded IN (1204,1205,1206,1207))
     AND (o.voided = 0)
-   AND (o.person_id between 27500 and 28500)
+   -- AND (o.person_id between 27500 and 28500)
    AND (o.location_id = 208)
    AND (e.encounter_type IN (1,6,13,35,34,5,18,3,7,9))
    AND (e.location_id = 208)
@@ -2397,7 +2425,7 @@ WHERE (o.value_coded IN (1204,1205,1206,1207))
    AND (p.voided = 0)
    AND (p.patient_id IN (SELECT DISTINCT pp.patient_id from patient_program pp where pp.program_id IN (1,2)))
 GROUP BY o.person_id) as last_encounter
-group by value_coded;</sql>
+group by last_encounter.value_coded;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2412,7 +2440,7 @@ group by value_coded;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
+      <xloc>992</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2489,7 +2517,7 @@ SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
           INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-and p.patient_id between 27500 and 28500
+-- and p.patient_id between 27500 and 28500
           and o.concept_id = 1255 and o.value_coded=1259
 and e.encounter_id in (select distinct encounter_id from obs where person_id = o.person_id 
 and concept_id = 1087 and value_coded is not null)
@@ -2510,7 +2538,7 @@ group by   p.patient_id) as pat_regime
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>416</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2608,7 +2636,7 @@ from dual
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
+      <xloc>768</xloc>
       <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2675,12 +2703,14 @@ from dual
 (select concat(count(*),' POC')
 from openmrs.obs 
 where concept_id = 8673
-and person_id in (select person_id from person_attribute where person_attribute_type_id = 999 and value between 27500 and 28500)) as confident_number,
+-- and person_id in (select person_id from person_attribute where person_attribute_type_id = 999 and value between 27500 and 28500)
+) as confident_number,
 
 (select concat(count(*),' POC')
 from openmrs.obs 
 where concept_id = 8672
-and person_id in (select person_id from person_attribute where person_attribute_type_id = 999 and value between 27500 and 28500)) as confident_name
+-- and person_id in (select person_id from person_attribute where person_attribute_type_id = 999 and value between 27500 and 28500)
+) as confident_name
 
 from dual
 </sql>
@@ -2698,7 +2728,7 @@ from dual
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>576</xloc>
       <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2841,17 +2871,21 @@ and patient_id in (select distinct pa.person_id from person_attribute pa where p
 
 (select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id 
 where p.voided=0 and pt.voided = 0
-and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500))  as reg_pat, 
+-- and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+)  as reg_pat, 
 
 (select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id where p.voided=0 and pt.voided = 0 and p.gender = 'M'
-and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_male,
+-- and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_male,
 
 (select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id where p.voided=0 and pt.voided = 0 and p.gender = 'F'
-and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_female,
+-- and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_female,
 
 (select concat(count(*), ' POC')from person p inner join patient pt on p.person_id = pt.patient_id where p.voided=0 and pt.voided = 0 
 and p.birthdate is  null
-and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_no_bday,
+-- and p.person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_no_bday,
 
 (select concat(count(*), ' POC') from person p
    where p.voided = 0
@@ -2883,47 +2917,50 @@ where pa.person_attribute_type_id = 999)) as pat_sixteen_fourtysix,
 where pa.person_attribute_type_id = 999)) as pat_over_fourtysix,
 
 (select concat(count(*), ' POC')from openmrs.person_attribute where person_attribute_type_id = '39'
-and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_bi,
+-- and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_bi,
 
 (select concat(count(*), ' POC') from openmrs.obs
 where concept_id = 8314 and value_coded =1 
-and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+-- and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
 ) as pat_tb,
 
 (select concat(count(*), ' POC') from openmrs.obs
 where concept_id = 8332
-and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+-- and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
 ) as pat_next_cons, 
 
  
 (select concat(count(*), ' POC') from openmrs.obs
 where concept_id = 8333
-and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+-- and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
 ) as pat_next_arv,
 
 
 (select concat(count(*), ' POC')from openmrs.patient_status_state
-where patient_state = 'INACTIVE_DEATH' and id in 
-(select max(id) from openmrs.patient_status_state group by patient_id)
-and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_dead,
+where patient_state = 'INACTIVE_DEATH'
+-- and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_dead,
 
 (select concat(count(*), ' POC')from openmrs.patient_status_state
-where patient_state = 'INACTIVE_TRANSFERRED_OUT' and id in 
-(select max(id) from openmrs.patient_status_state group by patient_id)
-and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_transfer_out,
+where patient_state = 'INACTIVE_TRANSFERRED_OUT' 
+-- and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_transfer_out,
 
 (select concat(count(*), ' POC')from openmrs.patient_status_state
 where patient_state = 'TARV_ABANDONED' and patient_status = 'TARV'
-and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_abandoned_tarv,
+-- and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_abandoned_tarv,
 
 (select concat(count(*), ' POC')from openmrs.patient_status_state
 where patient_state = 'TARV_ABANDONED' and patient_status = 'Pre TARV'
-and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_abandoned_pretarv,
+-- and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_abandoned_pretarv,
 
 (select concat(count(*), ' POC')from openmrs.patient_status_state
-where patient_state = 'INACTIVE_SUSPENDED' and id in 
-(select max(id) from openmrs.patient_status_state group by patient_id)
-and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)) as pat_suspended
+where patient_state = 'INACTIVE_SUSPENDED'
+-- and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
+) as pat_suspended
 
  from dual</sql>
     <limit>0</limit>
@@ -2940,7 +2977,7 @@ and patient_id in (select distinct pa.person_id from person_attribute pa where p
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
+      <xloc>224</xloc>
       <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3005,10 +3042,11 @@ group by estadio.concept_id;</sql>
     </partitioning>
     <connection>poc</connection>
     <sql>select case
-when estadio.concept_id=8308 then 'estadio 1'
-when estadio.concept_id=8309 then 'estadio 2'
-when estadio.concept_id=8310 then 'estadio 3'
-when estadio.concept_id=8311 then 'estadio 4'
+when estadio.concept_id=8308 then 'estadio 1 poc'
+when estadio.concept_id=8309 then 'estadio 2 poc'
+when estadio.concept_id=8310 then 'estadio 3 poc'
+when estadio.concept_id=8311 then 'estadio 4 poc'
+else 'estadio xx'
 end as concept_id, count(*)
 from (
 select p.person_id,ob.concept_id,max(ob.obs_datetime)
@@ -3034,7 +3072,7 @@ group by estadio.concept_id;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1024</xloc>
+      <xloc>992</xloc>
       <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3092,9 +3130,16 @@ from dual</sql>
       <schema_name/>
     </partitioning>
     <connection>poc</connection>
-    <sql>select concat(count(distinct person_id), ' POC')
+    <sql>select 
+
+concat((select count(distinct person_id)
 from obs
-where concept_id = 8247</sql>
+where concept_id = 8247) +  
+(select count(distinct person_id)
+from obs
+where concept_id = 8246), ' POC')
+
+from dual</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3109,7 +3154,7 @@ where concept_id = 8247</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>400</xloc>
       <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
