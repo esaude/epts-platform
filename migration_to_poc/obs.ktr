@@ -568,11 +568,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocking step 2 4</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Merge join</from>
       <to>Blocking step 2</to>
       <enabled>Y</enabled>
@@ -610,11 +605,6 @@
     <hop>
       <from>get encounter id</from>
       <to>Blocking step 2 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>new_patient_id</from>
-      <to>Blocking step 2 4</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -722,6 +712,16 @@
       <to>patient</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>new_patient_id</from>
+      <to>Blocking step</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step</from>
+      <to>Merge join</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name> last encounter concepts </name>
@@ -775,6 +775,36 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
     <GUI>
       <xloc>496</xloc>
       <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>N</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -835,36 +865,6 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
     <GUI>
       <xloc>1296</xloc>
       <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 4</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1086,7 +1086,7 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
     </partitioning>
     <join_type>INNER</join_type>
     <step1>Sort rows 2 3</step1>
-    <step2>Blocking step 2 4</step2>
+    <step2>Blocking step</step2>
     <keys_1>
       <key>patient_id</key>
     </keys_1>

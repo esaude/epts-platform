@@ -579,11 +579,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Blocking step 2 4</from>
-      <to>Merge join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Blocking step 2 5</from>
       <to>Sort rows 2 4</to>
       <enabled>Y</enabled>
@@ -694,11 +689,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>new_patient_id</from>
-      <to>Blocking step 2 4</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>patient</from>
       <to>Join rows (cartesian product)</to>
       <enabled>Y</enabled>
@@ -716,6 +706,16 @@
     <hop>
       <from>get epts concept name 3</from>
       <to>Join rows (cartesian product)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>new_patient_id</from>
+      <to>Blocking step</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Blocking step</from>
+      <to>Merge join</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -776,36 +776,6 @@
     <GUI>
       <xloc>1344</xloc>
       <yloc>160</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step 2 4</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>592</xloc>
-      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -979,7 +949,7 @@
     </partitioning>
     <join_type>INNER</join_type>
     <step1>Sort rows 2 3</step1>
-    <step2>Blocking step 2 4</step2>
+    <step2>Blocking step</step2>
     <keys_1>
       <key>patient_id</key>
     </keys_1>
@@ -2604,6 +2574,36 @@ order by patient_id asc</sql>
     <GUI>
       <xloc>1808</xloc>
       <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Blocking step</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>N</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

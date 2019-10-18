@@ -3140,7 +3140,7 @@ where concept_id = 8247;</sql>
       <schema_name/>
     </partitioning>
     <connection>poc</connection>
-    <sql>select concat(count(distinct person_id),' EPTS')
+    <sql>select concat(count(distinct person_id),' POC')
 from obs
 where concept_id = 8247;</sql>
     <limit>0</limit>

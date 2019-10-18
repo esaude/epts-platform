@@ -998,7 +998,7 @@
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>block</prefix>
     <cache_size>5000</cache_size>
-    <compress>Y</compress>
+    <compress>N</compress>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1088,7 +1088,7 @@
     <directory>%%java.io.tmpdir%%</directory>
     <prefix>block</prefix>
     <cache_size>5000</cache_size>
-    <compress>Y</compress>
+    <compress>N</compress>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
