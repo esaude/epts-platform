@@ -2307,7 +2307,7 @@ where program_id = 1
 and patient_id not in (select pp.patient_id
 from patient_program pp
 where pp.program_id = 2 and pp.voided=0
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+-- and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id)
 and voided = 0) as pp, patient_state as ps
 where ps.patient_program_id = pp.patient_program_id
