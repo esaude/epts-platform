@@ -2144,7 +2144,7 @@ group by p.patient_id,o.concept_id,o.value_coded
 
 ) last_encounter
 
-
+order by last_encounter.last_datetime desc limit 1
 
 -- and p.patient_id in (select distinct patient_id from patient_program where program_id in (1,2))
  </sql>
