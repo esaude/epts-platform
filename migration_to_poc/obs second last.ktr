@@ -770,6 +770,36 @@ order by e.encounter_datetime asc limit 1;</sql>
     </GUI>
   </step>
   <step>
+    <name>Blocking step</name>
+    <type>BlockingStep</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <pass_all_rows>Y</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Blocking step 2</name>
     <type>BlockingStep</type>
     <description/>
@@ -2385,36 +2415,6 @@ order by patient_id asc</sql>
     <GUI>
       <xloc>1888</xloc>
       <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Blocking step</name>
-    <type>BlockingStep</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <pass_all_rows>Y</pass_all_rows>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>block</prefix>
-    <cache_size>5000</cache_size>
-    <compress>Y</compress>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>480</xloc>
-      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

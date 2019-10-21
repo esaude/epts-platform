@@ -3823,7 +3823,6 @@ order by patient_id asc</sql>
     <sql>select distinct patient_id
 from patient where voided=0
 -- and patient_id between 27500 and 28500
- -- and patient_id &lt; 27500 or patient_id &lt; 28500
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
