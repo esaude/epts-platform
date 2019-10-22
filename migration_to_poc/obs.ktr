@@ -705,7 +705,7 @@
     <hop>
       <from> last encounter concepts </from>
       <to>avoid second last dup temp table</to>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
     </hop>
     <hop>
       <from>Execute SQL script</from>
@@ -1471,7 +1471,7 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
     </remotesteps>
     <GUI>
       <xloc>672</xloc>
-      <yloc>32</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1486,7 +1486,7 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/update concept map no null.csv</filename>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/updated concept map 2.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1755,7 +1755,7 @@ order by last_encounter.patient_id asc, o.concept_id asc limit 1;</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/update concept map no null.csv</filename>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/updated concept map 2.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>

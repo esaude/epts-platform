@@ -1,0 +1,101 @@
+       ##################################################
+       ##                                              ##
+       ##                                              ##
+       ##        ETPS-POC MIGRATION JOB README         ##
+       ##                                              ##
+       ##                                              ##
+       ##################################################
+
+# This readme file outlines some of the functionality for the migration job.
+
+ Pre-Requesites
+################
+ MySQL
+ Java
+ PDI
+
+
+ Preparation
+#############
+ After cloning the repo do open the migration_to_poc.kjb file. Here youll find all the transformations for the migration.
+
+
+ Config
+#########
+ Please do ensure all the transformations are pointing to the correct file on the repo migration_to_poc folder, confirm by right-clicking and checking the Transformation path.
+
+
+ 1. Person
+#############
+This initial transformation imports the person table data, creates the old person id attribute type and inserts the person id from origin database so the person/patient can be traced.
+
+
+ 2. Patient and registration date
+##################################
+This transformation migrates patient table data for patients in Tarv and Pre Tarv program and inserts health facility registration date into person attribute table.
+
+
+ 3. Patient status - TARV -> Patient status - Pre Tarv
+######################################################
+These transformations transform and migrates the patients last program status for the Tarv and Pre Tarv programs into the patient status state table as well as inserting the corresponding values on the patient attribute table.
+
+
+ 4. BI -> NID -> NAME -> Phone Number
+######################################
+These steps transform and migrate the patients patient and person attributes for his ID number, NID, name and phone number and insert on the corresponding tables, BI and phone number into person attribute table, NID into patient identifier, name into person_name.
+
+
+ 5. Pre Obs
+#############
+This transformation creates the visit, encounter and initial obs for the historical concepts form and sections per each patient.
+
+
+ 6. Obs
+#########
+This transformation gets the last value (numeric, datetime or text) for the historical concepts which are mapped for migration. It also updates the obs group id so that the information is correctly displayed on the historical concepts form in bahmni.
+
+
+ 7. Obs value coded
+#####################
+This transformation gets the last value for the historical concepts mapped for migration that are value coded. It also updates the obs group id so that the information is correctly displayed on the historical concepts form in bahmni.
+
+
+ 8. Obs value coded 2
+#####################
+This step gets the first and last value for the perscription concepts mapped for migration that are value coded. It also updates the obs group id so that the information is correctly displayed on the historical concepts form in bahmni.
+
+
+ 9. Obs 2
+#####################
+This transformation gets the second last value (numeric, datetime or text) for the historical concepts which are mapped for migration. It also updates the obs group id so that the information is correctly displayed on the historical concepts form in bahmni.
+
+
+
+ 10. last lab obs dates
+#####################
+This transformation gets the last input date for the last lab order concept value (numeric, datetime or text) for the historical concepts which are mapped for migration. It also updates the obs group id so that the information is correctly displayed on the historical concepts form in bahmni.
+
+
+ 11. lat lab obs dates 2
+##########################
+This transformation gets the second last input date for the last lab order concept value (numeric, datetime or text) for the historical concepts which are mapped for migration. It also updates the obs group id so that the information is correctly displayed on the historical concepts form in bahmni.
+
+
+ 12. rebuild indexes for performance
+######################################
+This transformation simply rebuilds the uuid column indexes for the main tables which were updated during the migration.
+
+
+ 13. validations
+#################
+This transformation runs after the migration is complete to do comparison queries between the information that exists in the epts origin database and the actual migrated data to the destiny database.
+
+
+ NOTE:
+#######
+ - Please be mindful of the connections to the the epts origin database and poc destiny database on each of the transformations.
+ - To run tests for a small pool of patients update the patient id interval on transformatons 1 and 6 to 11, on the input patient step.
+ - If any error is to occur during these process the log on the execution results pane from PDI is helpful enough to identify and solve the issue.
+
+
+

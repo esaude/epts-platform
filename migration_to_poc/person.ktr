@@ -634,8 +634,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>224</yloc>
+      <xloc>608</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -664,8 +664,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>256</yloc>
+      <xloc>800</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -707,8 +707,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
-      <yloc>288</yloc>
+      <xloc>400</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -744,8 +744,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>208</yloc>
+      <xloc>400</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -785,8 +785,8 @@ VALUES ('999', 'OLD PERSON ID', 'OLD PERSON ID', 'java.lang.String', '0', '2', '
       </output>
     </remotesteps>
     <GUI>
-      <xloc>48</xloc>
-      <yloc>208</yloc>
+      <xloc>144</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -827,7 +827,7 @@ alter table encounter_provider drop index uuid;</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
+      <xloc>144</xloc>
       <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
@@ -885,8 +885,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
-      <yloc>128</yloc>
+      <xloc>256</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1104,8 +1104,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
-      <yloc>96</yloc>
+      <xloc>512</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1152,8 +1152,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
-      <yloc>336</yloc>
+      <xloc>608</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1250,8 +1250,8 @@ order by person_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
-      <yloc>288</yloc>
+      <xloc>1024</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

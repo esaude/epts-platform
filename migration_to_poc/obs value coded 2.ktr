@@ -708,11 +708,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>patient</from>
-      <to>last value coded values</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Blocking step 2 3 2 3</from>
       <to>last concept obs 2 2</to>
       <enabled>Y</enabled>
@@ -843,11 +838,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>patient 2</from>
-      <to>last value coded values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>section obs id lookup 2</from>
       <to>Blocking step 2 3 2 2 2</to>
       <enabled>Y</enabled>
@@ -860,6 +850,56 @@
     <hop>
       <from>value coded 2</from>
       <to>Sort rows 4 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Join rows (cartesian product) 2</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>epts uuid 2</from>
+      <to>get epts concept name 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>patient 2</from>
+      <to>Join rows (cartesian product) 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>last value coded values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Join rows (cartesian product) 2 2</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>epts uuid 2 2</from>
+      <to>get epts concept name 3 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>last value coded values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>patient</from>
+      <to>Join rows (cartesian product) 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get epts concept name 3 2</from>
+      <to>Join rows (cartesian product) 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get epts concept name 3</from>
+      <to>Join rows (cartesian product) 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -918,7 +958,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1872</xloc>
+      <xloc>1840</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -948,7 +988,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1920</xloc>
+      <xloc>1888</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -978,7 +1018,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>1296</xloc>
       <yloc>864</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1038,8 +1078,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>112</yloc>
+      <xloc>432</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1068,8 +1108,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>656</yloc>
+      <xloc>336</xloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1099,7 +1139,81 @@
     </remotesteps>
     <GUI>
       <xloc>400</xloc>
-      <yloc>880</yloc>
+      <yloc>848</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Join rows (cartesian product) 2</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <cache_size>500</cache_size>
+    <main/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue/>
+        <function>=</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>672</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Join rows (cartesian product) 2 2</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <cache_size>500</cache_size>
+    <main/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue/>
+        <function>=</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1200,7 +1314,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1632</xloc>
+      <xloc>1600</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1234,7 +1348,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1680</xloc>
+      <xloc>1648</xloc>
       <yloc>784</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1302,7 +1416,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
+      <xloc>1040</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1336,7 +1450,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1104</xloc>
+      <xloc>1088</xloc>
       <yloc>800</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1372,6 +1486,80 @@
     <GUI>
       <xloc>752</xloc>
       <yloc>992</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>name</name>
+      </remove>
+      <remove>
+        <name>concept_id</name>
+      </remove>
+      <remove>
+        <name>uuid</name>
+      </remove>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>192</xloc>
+      <yloc>576</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <remove>
+        <name>name</name>
+      </remove>
+      <remove>
+        <name>concept_id</name>
+      </remove>
+      <remove>
+        <name>uuid</name>
+      </remove>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1412,7 +1600,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
+      <xloc>544</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1454,7 +1642,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>592</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1496,8 +1684,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>256</yloc>
+      <xloc>544</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1538,8 +1726,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>800</yloc>
+      <xloc>496</xloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1580,7 +1768,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1456</xloc>
+      <xloc>1424</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1622,7 +1810,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
+      <xloc>1472</xloc>
       <yloc>736</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1664,7 +1852,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>880</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1706,7 +1894,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
+      <xloc>928</xloc>
       <yloc>800</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1748,7 +1936,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1632</xloc>
+      <xloc>1600</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1790,7 +1978,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1680</xloc>
+      <xloc>1648</xloc>
       <yloc>656</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1874,7 +2062,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1056</xloc>
+      <xloc>1040</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1916,7 +2104,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1104</xloc>
+      <xloc>1088</xloc>
       <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2021,7 +2209,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1920</xloc>
+      <xloc>1888</xloc>
       <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2084,7 +2272,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1968</xloc>
+      <xloc>1936</xloc>
       <yloc>1040</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2191,7 +2379,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
+      <xloc>896</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2298,7 +2486,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>960</xloc>
+      <xloc>944</xloc>
       <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2460,7 +2648,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
+      <xloc>1472</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2622,7 +2810,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1552</xloc>
+      <xloc>1520</xloc>
       <yloc>656</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2670,7 +2858,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
+      <xloc>1120</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2718,7 +2906,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
+      <xloc>1168</xloc>
       <yloc>720</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2766,7 +2954,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>880</xloc>
       <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2814,8 +3002,156 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
+      <xloc>928</xloc>
       <yloc>992</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>epts uuid 2</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/epts regime input.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>name</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>6</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>concept_id</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>uuid</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>864</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>epts uuid 2 2</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>/home/amos/Documents/projects/bahmni/epts-platform/migration_to_poc/epts regime input.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>"</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <format>mixed</format>
+    <encoding/>
+    <fields>
+      <field>
+        <name>name</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>6</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>concept_id</name>
+        <type>Integer</type>
+        <format>#</format>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>uuid</name>
+        <type>String</type>
+        <format/>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>36</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2862,7 +3198,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1584</xloc>
+      <xloc>1552</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2910,7 +3246,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1632</xloc>
+      <xloc>1600</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2958,7 +3294,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1456</xloc>
+      <xloc>1424</xloc>
       <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3006,7 +3342,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1504</xloc>
+      <xloc>1472</xloc>
       <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3144,7 +3480,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
+      <xloc>1120</xloc>
       <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3282,8 +3618,104 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
+      <xloc>1168</xloc>
       <yloc>896</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get epts concept name 3</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>concept</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>concept_id</name>
+        <rename>epts_concept_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>768</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>get epts concept name 3 2</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>epts</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>concept</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>uuid</name>
+        <field>uuid</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>concept_id</name>
+        <rename>epts_concept_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3442,7 +3874,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>1296</xloc>
       <yloc>1072</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3459,21 +3891,8 @@
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>select distinct last_encounter.patient_id, -- last_encounter.obs_datetime,
+    <sql>select distinct last_encounter.patient_id, 
 9998
--- case 
--- when last_encounter.concept_id =1087 then 
--- (select case 
--- when ob.value_coded=1256 then 9998 
--- when ob.value_coded=1259 then 9999
--- end as value_coded
--- from obs ob inner join encounter ep on ob.person_id = ob.person_id and ob.encounter_id = ep.encounter_id
--- where ob.person_id = last_encounter.patient_id 
--- and ep.encounter_id = last_encounter.encounter_id
--- and ob.concept_id = 1255 
--- and (ob.value_coded=1256 or ob.value_coded=1259)  order by ep.encounter_datetime desc limit 1)
--- else last_encounter.concept_id 
--- end 
 as concept_id
 , last_encounter.value_coded
 , uuid() as obs_uuid
@@ -3481,7 +3900,6 @@ as concept_id
 FROM 
 
 (SELECT p.patient_id,o.concept_id,o.value_coded,e.encounter_id,
--- o.obs_datetime,
 e.encounter_datetime as last_datetime
         FROM patient p
           INNER JOIN encounter e ON e.patient_id = p.patient_id 
@@ -3493,18 +3911,16 @@ AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
           and p.patient_id = ?
- and o.concept_id = 1087
+ and o.concept_id = ?
 and o.value_coded is not null
           AND p.voided = 0  
--- group by p.patient_id,o.concept_id,o.value_coded,e.encounter_id
 ) last_encounter  
--- group by last_encounter.patient_id
 
 order by last_encounter.last_datetime asc limit 1
 
   </sql>
     <limit>0</limit>
-    <lookup>patient</lookup>
+    <lookup>Select values 2</lookup>
     <execute_each_row>Y</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
@@ -3517,8 +3933,8 @@ order by last_encounter.last_datetime asc limit 1
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>128</yloc>
+      <xloc>256</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3534,21 +3950,8 @@ order by last_encounter.last_datetime asc limit 1
       <schema_name/>
     </partitioning>
     <connection>epts</connection>
-    <sql>select distinct last_encounter.patient_id, -- last_encounter.obs_datetime,
+    <sql>select distinct last_encounter.patient_id,
 9999
--- case 
--- when last_encounter.concept_id =1087 then 
--- (select case 
--- when ob.value_coded=1256 then 9998 
--- when ob.value_coded=1259 then 9999
--- end as value_coded
--- from obs ob inner join encounter ep on ob.person_id = ob.person_id and ob.encounter_id = ep.encounter_id
--- where ob.person_id = last_encounter.patient_id 
--- and ep.encounter_id = last_encounter.encounter_id
--- and ob.concept_id = 1255 
--- and (ob.value_coded=1256 or ob.value_coded=1259)  order by ep.encounter_datetime desc limit 1)
--- else last_encounter.concept_id 
--- end 
 as concept_id
 , last_encounter.value_coded
 , uuid() as obs_uuid
@@ -3556,7 +3959,7 @@ as concept_id
 FROM 
 
 (SELECT p.patient_id,o.concept_id,o.value_coded,e.encounter_id,
--- o.obs_datetime,
+
 e.encounter_datetime as last_datetime
         FROM patient p
           INNER JOIN encounter e ON e.patient_id = p.patient_id 
@@ -3568,16 +3971,16 @@ AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
           and p.patient_id = ?
- and o.concept_id = 1087
+ and o.concept_id = ?
 and o.value_coded is not null
       AND p.voided = 0  
--- group by p.patient_id,o.concept_id,o.value_coded,e.encounter_id,
+
 ) last_encounter  
--- group by last_encounter.patient_id
+
 order by last_encounter.last_datetime desc limit 1
   </sql>
     <limit>0</limit>
-    <lookup>patient 2</lookup>
+    <lookup>Select values</lookup>
     <execute_each_row>Y</execute_each_row>
     <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
@@ -3590,8 +3993,8 @@ order by last_encounter.last_datetime desc limit 1
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>672</yloc>
+      <xloc>336</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3638,7 +4041,7 @@ order by last_encounter.last_datetime desc limit 1
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2032</xloc>
+      <xloc>2000</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3686,7 +4089,7 @@ order by last_encounter.last_datetime desc limit 1
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2080</xloc>
+      <xloc>2048</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3804,7 +4207,7 @@ order by patient_id asc</sql>
     </remotesteps>
     <GUI>
       <xloc>64</xloc>
-      <yloc>368</yloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3822,7 +4225,7 @@ order by patient_id asc</sql>
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
--- and patient_id between 27500 and 28500
+ and patient_id between 27500 and 28500
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
@@ -3838,8 +4241,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>512</yloc>
+      <xloc>32</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -3898,7 +4301,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1760</xloc>
+      <xloc>1728</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -3958,7 +4361,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1808</xloc>
+      <xloc>1776</xloc>
       <yloc>928</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4039,7 +4442,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2032</xloc>
+      <xloc>2000</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4120,7 +4523,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2080</xloc>
+      <xloc>2048</xloc>
       <yloc>800</yloc>
       <draw>Y</draw>
     </GUI>

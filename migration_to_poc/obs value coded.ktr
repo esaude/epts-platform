@@ -763,7 +763,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
+      <xloc>1488</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -793,8 +793,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2304</xloc>
-      <yloc>384</yloc>
+      <xloc>2096</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -890,8 +890,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>240</yloc>
+      <xloc>128</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -958,7 +958,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1904</xloc>
+      <xloc>1808</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -992,7 +992,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>896</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1026,7 +1026,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>1200</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1073,7 +1073,7 @@
     </remotesteps>
     <GUI>
       <xloc>320</xloc>
-      <yloc>256</yloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1114,7 +1114,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>720</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1156,7 +1156,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
+      <xloc>1072</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1240,7 +1240,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1728</xloc>
+      <xloc>1632</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1282,7 +1282,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1904</xloc>
+      <xloc>1808</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1324,7 +1324,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>896</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1366,7 +1366,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>1200</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1409,8 +1409,8 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>368</yloc>
+      <xloc>128</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1472,8 +1472,8 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2320</xloc>
-      <yloc>624</yloc>
+      <xloc>2112</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1579,7 +1579,7 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
+      <xloc>1072</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1741,7 +1741,7 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1776</xloc>
+      <xloc>1680</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1789,7 +1789,7 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1424</xloc>
+      <xloc>1312</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1837,7 +1837,7 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
+      <xloc>1072</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1944,8 +1944,8 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>512</yloc>
+      <xloc>128</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1992,7 +1992,7 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2016</xloc>
+      <xloc>1920</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2040,7 +2040,7 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1728</xloc>
+      <xloc>1632</xloc>
       <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2178,7 +2178,7 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1424</xloc>
+      <xloc>1312</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2226,8 +2226,8 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>432</yloc>
+      <xloc>128</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2306,7 +2306,7 @@ concept_id in (1740,1611,1271,856,730,5497,21,654,653,887,1190,9998,1982,
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1600</xloc>
+      <xloc>1488</xloc>
       <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2374,7 +2374,7 @@ order by last_encounter.last_datetime desc limit 1
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>256</yloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2421,8 +2421,8 @@ order by last_encounter.last_datetime desc limit 1
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2432</xloc>
-      <yloc>512</yloc>
+      <xloc>2224</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2498,8 +2498,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
-      <yloc>224</yloc>
+      <xloc>48</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2558,8 +2558,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2192</xloc>
-      <yloc>384</yloc>
+      <xloc>1984</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2639,8 +2639,8 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>2432</xloc>
-      <yloc>384</yloc>
+      <xloc>2224</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2746,7 +2746,7 @@ order by patient_id asc</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>896</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>

@@ -1587,8 +1587,8 @@ order by patient_id asc
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1184</xloc>
-      <yloc>48</yloc>
+      <xloc>1280</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
