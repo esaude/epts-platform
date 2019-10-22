@@ -705,7 +705,7 @@
     <hop>
       <from> last encounter concepts </from>
       <to>avoid second last dup temp table</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Execute SQL script</from>
@@ -2335,7 +2335,7 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
--- and patient_id between 27500 and 28500
+ and patient_id between 27500 and 28500
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
