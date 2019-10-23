@@ -108,6 +108,38 @@ group by   p.patient_id) as next_tarv) as pat_next_arv,
 
 
 (select concat(count(*),' EPTS')  from (
+SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+-- and p.patient_id between 27500 and 28500
+          and o.concept_id = 856
+          AND p.voided = 0
+group by   p.patient_id) as carga_viral) as pat_carga_viral,
+
+(select concat(count(*),' EPTS')  from (
+SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+-- and p.patient_id between 27500 and 28500
+          and o.concept_id = 6128
+          AND p.voided = 0
+group by   p.patient_id) as inh) as pat_inh,
+
+(select concat(count(*),' EPTS')  from (
 select
 distinct p.patient_id, program.program_id,max(program.state_id)
 from patient p

@@ -69,6 +69,11 @@ where concept_id = 8333
 ) as pat_next_arv,
 
 
+(select concat(count(*), ' POC') from openmrs.obs where concept_id = 8274) as pat_carga_viral,
+
+(select concat(count(*), ' POC') from openmrs.obs where concept_id = 8664) as pat_inh,
+
+
 (select concat(count(*), ' POC')from openmrs.patient_status_state
 where patient_state = 'INACTIVE_DEATH'
 -- and patient_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
