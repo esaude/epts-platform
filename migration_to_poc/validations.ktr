@@ -1666,20 +1666,20 @@
 select concat(count(*),' EPTS') from
 (select pp.patient_id, pp.program_id,max(pp.patient_program_id) 
 from patient_program pp
-where pp.program_id = 2 and pp.voided=0  and pp.patient_id between 27500 and 28500
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+where pp.program_id = 2 and pp.voided=0   and pp.patient_id between 27500 and 28500
+ and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id) tarv ) as tarv_count,
 
 (select concat(count(*),' EPTS') from
 (select pp.patient_id, pp.program_id,max(pp.patient_program_id)
 from patient_program pp
-where pp.program_id = 1 and pp.voided=0  and pp.patient_id between 27500 and 28500
+where pp.program_id = 1 and pp.voided=0   and pp.patient_id between 27500 and 28500
 and pp.patient_id  not in (select pp.patient_id
 from patient_program pp 
-where pp.program_id = 2 and pp.voided=0  and pp.patient_id between 27500 and 28500
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+where pp.program_id = 2 and pp.voided=0   and pp.patient_id between 27500 and 28500
+ and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id)
-and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
+ and pp.patient_id in (select distinct patient_id from patient where voided =0 and patient_id between 27500 and 28500)
 group by pp.patient_id) pre_tarv
 ) as pre_tarv_count
 
@@ -1774,24 +1774,32 @@ from dual</sql>
 concat(count(*),' EPTS') from (
 SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
           WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-          and p.patient_id between 27500 and 28500
-          and o.concept_id in (1611)
+           and p.patient_id between 27500 and 28500
+          and o.concept_id =1611
           AND p.voided = 0
           group by   p.patient_id) as confident_number) as confident_number,
 
 (select concat(count(*),' EPTS') from
 (SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
           WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
-          and p.patient_id between 27500 and 28500
-          and o.concept_id in (1740)
+          - and p.patient_id between 27500 and 28500
+          and o.concept_id = 1740
           AND p.voided = 0
           group by   p.patient_id) as confident_name) as confident_name
 
@@ -2004,6 +2012,39 @@ and p.patient_id between 27500 and 28500
           and o.concept_id = 5096
           AND p.voided = 0
 group by   p.patient_id) as next_tarv) as pat_next_arv,
+
+
+(select concat(count(*),' EPTS')  from (
+SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+ and p.patient_id between 27500 and 28500
+          and o.concept_id = 856
+          AND p.voided = 0
+group by   p.patient_id) as carga_viral) as pat_carga_viral,
+
+(select concat(count(*),' EPTS')  from (
+SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+ and p.patient_id between 27500 and 28500
+          and o.concept_id = 6128
+          AND p.voided = 0
+group by   p.patient_id) as inh) as pat_inh,
 
 
 (select concat(count(*),' EPTS')  from (
@@ -2239,6 +2280,38 @@ AND o.voided = 0
           AND p.voided = 0
 group by   p.patient_id) as next_tarv) as pat_next_arv,
 
+(select concat(count(*),' EPTS')  from (
+SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+-- and p.patient_id between 27500 and 28500
+          and o.concept_id = 856
+          AND p.voided = 0
+group by   p.patient_id) as carga_viral) as pat_carga_viral,
+
+(select concat(count(*),' EPTS')  from (
+SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+-- and p.patient_id between 27500 and 28500
+          and o.concept_id = 6128
+          AND p.voided = 0
+group by   p.patient_id) as inh) as pat_inh,
+
 
 (select concat(count(*),' EPTS')  from (
 select
@@ -2379,7 +2452,7 @@ INNER JOIN encounter e ON o.encounter_id = e.encounter_id
 INNER JOIN patient p ON o.person_id = p.patient_id
 WHERE (o.value_coded IN (1204,1205,1206,1207))
     AND (o.voided = 0)
-   AND (o.person_id between 27500 and 28500)
+    AND (o.person_id between 27500 and 28500)
    -- AND (o.location_id = 208)
    AND (e.encounter_type IN (1,6,13,35,34,5,18,3,7,9))
    -- AND (e.location_id = 208)
@@ -2529,14 +2602,31 @@ concat(count(pat_regime.patient_id),' EPTS')
 from (
 SELECT p.patient_id,o.concept_id,max(e.encounter_datetime) as last_datetime
         FROM patient p
-          INNER JOIN encounter e ON e.patient_id = p.patient_id AND e.location_id=208 AND e.voided = 0
-          INNER JOIN obs o ON o.encounter_id = e.encounter_id  AND o.location_id=208 AND o.voided = 0
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
         WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
           AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
 -- and p.patient_id between 27500 and 28500
-          and o.concept_id = 1255 and o.value_coded=1259
-and e.encounter_id in (select distinct encounter_id from obs where person_id = o.person_id 
-and concept_id = 1087 and value_coded is not null)
+        and o.concept_id = 1087 and o.person_id in
+ (
+SELECT p.patient_id
+        FROM patient p
+          INNER JOIN encounter e ON e.patient_id = p.patient_id 
+-- AND e.location_id=208 
+AND e.voided = 0
+          INNER JOIN obs o ON o.encounter_id = e.encounter_id  
+-- AND o.location_id=208 
+AND o.voided = 0
+        WHERE p.voided = 0 AND e.voided = 0 AND o.voided=0
+          AND e.encounter_type IN (1,6,13,35,34,5,18,3,7,9)
+ and o.concept_id = 1087
+and o.value_coded is not null
+          group by p.patient_id having count(o.concept_id) > 1)
+
           AND p.voided = 0
 group by   p.patient_id) as pat_regime
 </sql>
@@ -2674,12 +2764,14 @@ from dual
 (select concat(count(*),' POC')
 from openmrs.obs 
 where concept_id = 8673
-and person_id in (select person_id from person_attribute where person_attribute_type_id = 999 and value between 27500 and 28500)) as confident_number,
+ and person_id in (select person_id from person_attribute where person_attribute_type_id = 999 and value between 27500 and 28500)
+) as confident_number,
 
 (select concat(count(*),' POC')
 from openmrs.obs 
 where concept_id = 8672
-and person_id in (select person_id from person_attribute where person_attribute_type_id = 999 and value between 27500 and 28500)) as confident_name
+ and person_id in (select person_id from person_attribute where person_attribute_type_id = 999 and value between 27500 and 28500)
+) as confident_name
 
 from dual
 </sql>
@@ -2827,6 +2919,10 @@ and person_id in (select distinct pa.person_id from person_attribute pa where pa
 ) as pat_next_arv,
 
 
+(select concat(count(*), ' POC') from openmrs.obs where concept_id = 8274) as pat_carga_viral,
+
+(select concat(count(*), ' POC') from openmrs.obs where concept_id = 8664) as pat_inh,
+
 (select concat(count(*), ' POC')from openmrs.patient_status_state
 where patient_state = 'INACTIVE_DEATH' and id in 
 (select max(id) from openmrs.patient_status_state group by patient_id)
@@ -2952,6 +3048,10 @@ where concept_id = 8333
 -- and person_id in (select distinct pa.person_id from person_attribute pa where pa.person_attribute_type_id = 999 and pa.value between 27500 and 28500)
 ) as pat_next_arv,
 
+(select concat(count(*), ' POC') from openmrs.obs where concept_id = 8274) as pat_carga_viral,
+
+(select concat(count(*), ' POC') from openmrs.obs where concept_id = 8664) as pat_inh,
+
 
 (select concat(count(*), ' POC')from openmrs.patient_status_state
 where patient_state = 'INACTIVE_DEATH'
@@ -3011,10 +3111,10 @@ where patient_state = 'INACTIVE_SUSPENDED'
     </partitioning>
     <connection>poc</connection>
     <sql>select case
-when estadio.concept_id=8308 then 'estadio 1'
-when estadio.concept_id=8309 then 'estadio 2'
-when estadio.concept_id=8310 then 'estadio 3'
-when estadio.concept_id=8311 then 'estadio 4'
+when estadio.concept_id=8308 then 'estadio 1 poc'
+when estadio.concept_id=8309 then 'estadio 2 poc'
+when estadio.concept_id=8310 then 'estadio 3 poc'
+when estadio.concept_id=8311 then 'estadio 4 poc'
 else 'estadio xx'
 end as concept_id, count(*)
 from (
@@ -3024,7 +3124,7 @@ openmrs.person p
 inner join openmrs.patient pp on p.person_id =  pp.patient_id
 inner join openmrs.obs ob on p.person_id = ob.person_id
 where ob.concept_id in (8308,8309,8310,8311)
--- and p.person_id in (select person_id from person_attribute where value between 27500 and 28500 and attribute_type = 999)
+ and p.person_id in (select person_id from person_attribute where value between 27500 and 28500 and attribute_type = 999)
 group by p.person_id) as estadio
 group by estadio.concept_id;</sql>
     <limit>0</limit>

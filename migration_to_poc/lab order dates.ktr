@@ -925,7 +925,7 @@
     </remotesteps>
     <GUI>
       <xloc>368</xloc>
-      <yloc>80</yloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1833,7 +1833,7 @@
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>35</length>
+        <length>37</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1877,7 +1877,7 @@
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>35</length>
+        <length>38</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2445,7 +2445,7 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
--- and patient_id between 27500 and 28500
+ and patient_id between 27500 and 28500
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>

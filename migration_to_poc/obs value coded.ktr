@@ -2482,7 +2482,7 @@ order by person_id asc
     <connection>epts</connection>
     <sql>select distinct patient_id
 from patient where voided=0
--- and patient_id between 27500 and 28500
+ and patient_id between 27500 and 28500
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
