@@ -1,0 +1,83 @@
+Categoria (Category) – Portuguese,Category – English,Linha (Line) – Portuguese,Tipo de Paciente,Treatment Line – English,Medicamento (Drug Name) – Portuguese,Medicamento (Drug Name) – English,LINE Concept ID,LINE Concept UUID,Category Concept ID,Category Concept UUID
+ARV,ARV,3a Linha,Adultos,3rd Line,3TC+RAL+DRV/r,,8487,ccdcb04c-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,3a Linha,Adultos,3rd Line,ABC+3TC++RAL+DRV/r,,8487,ccdcb04c-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Adultos,2nd Line ,ABC+3TC+ATV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,ABC+3TC+ATV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha ,Adultos,2nd Line ,ABC+3TC+ATV/r+RAL,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Adultos,1st Line,ABC+3TC+DTG,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Pediatrico,1st Line,ABC+3TC+DTG,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,ABC+3TC+DTG,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Adultos,1st Line,ABC+3TC+EFV,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Pediatrico,1st Line,ABC+3TC+EFV,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,ABC+3TC+EFV,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Pediatrico,1st Line,ABC+3TC+LPV/r,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Adultos,2nd Line ,ABC+3TC+LPV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,ABC+3TC+LPV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Pediatrico,1st Line,ABC+3TC+NVP,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,3a Linha,Pediatrico,3rd Line,ABC+3TC+RAL+DRV/r,,8487,ccdcb04c-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ITS,STI,-,-,-,Aciclovir,Acyclovir,,,8495,8b6bff84-8415-41ba-8199-6ff5e73b92ac
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Ácido P-aminosalicílico (PAS),Amino salicylic acid (PAS),8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Amikacina,Amikacin,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Amoxilina-ác. Clavilânico,Amoxicillin -  Clavulanic Acid,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+ITS,STI,-,-,-,Azitromicina,Azithromycin,,,8495,8b6bff84-8415-41ba-8199-6ff5e73b92ac
+ARV,ARV,1a Linha,Pediatrico,1st Line,AZT+3TC+ABC,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Adultos,2nd Line ,AZT+3TC+ATV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,AZT+3TC+ATV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,AZT+3TC+DRV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,AZT+3TC+DTG,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Adultos,1st Line,AZT+3TC+EFV,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Pediatrico,1st Line,AZT+3TC+EFV,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Adultos,1st Line,AZT+3TC+LPV/r,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Pediatrico,1st Line,AZT+3TC+LPV/r,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Adultos,2nd Line ,AZT+3TC+LPV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,AZT+3TC+LPV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Adultos,1st Line,AZT+3TC+NVP,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Pediatrico,1st Line,AZT+3TC+NVP,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,AZT+3TC+RAL,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,3a Linha,Pediatrico,3rd Line,AZT+3TC+RAL+DRV/r,,8487,ccdcb04c-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Bedaquilina,Bedaquiline,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Capreomicina,Capreomycin,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Cicloserina/Terizidona,Cycloserine /Terizidone,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Clofazimina,Clofazimine,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+ITS,STI,-,-,-,Coprofloxacina,Ciprofloxacin,,,8495,8b6bff84-8415-41ba-8199-6ff5e73b92ac
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Delamanida,Delamanid,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+ITS,STI,-,-,-,Doxicilina,Doxycycline,,,8495,8b6bff84-8415-41ba-8199-6ff5e73b92ac
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Estreptomicina,Streptomycin,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Resistente,-,Tuberculosis Resistant,Estreptomicina,Streptomycin,8488,ccdcb182-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Etambutol,Ethambutol,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Etionamida/Protionamida,Ethionamide / Protionamide ,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Gatifloxacina,Gatifloxacin,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Imipenem-Cilastatina,Imipenem – Cilastatin,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Isoniazida/Pirazinamida (2DFC),Isoniazid /Pyrazinamide (2DFC),8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Resistente,-,Tuberculosis Resistant,Isoniazida/Pirazinamida (2DFC),Isoniazid/ Pyrazinamide (2DFC),8488,ccdcb182-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Isoniazida/Rifampicina/Pirazinamida (3DFC),Isoniazid/Rifampicin /Pyrazinamide (3DFC),8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Resistente,-,Tuberculosis Resistant,Isoniazida/Rifampicina/Pirazinamida (3DFC),Isoniazid/ Rifampicin (USA-Rifampin)/ Pyrazinamide (3DFC),8488,ccdcb182-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Isoniazida/Rifampicina/Pirazinamida/Etambutol (4DFC),Isoniazid/Rifampicin /Pyrazinamide/Ethambutol (4DFC),8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Resistente,-,Tuberculosis Resistant,Isoniazida/Rifampicina/Pirazinamida/Etambutol (4DFC),Isoniazid/Rifampicin/Pyrazinamide/ Ethambutol (4DFC),8488,ccdcb182-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+ITS,STI,-,-,-,Kanamicina,Kanamycin,,,8495,8b6bff84-8415-41ba-8199-6ff5e73b92ac
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Kanamicina,kanamycin,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Levofloxacina,Levofloxacin,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Linezolide,Linezolid,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Meropenem,Meropenem,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+ITS,STI,-,-,-,Metronidazol,Metronidazole,,,8495,8b6bff84-8415-41ba-8199-6ff5e73b92ac
+ITS,STI,-,-,-,Metroniodazol,Metronidazole,,,8495,8b6bff84-8415-41ba-8199-6ff5e73b92ac
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Moxifloxacina,Moxifloxacin,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+ITS,STI,-,-,-,Penicilina Bezantínica,Benzathine Benzylpenicillin,,,8495,8b6bff84-8415-41ba-8199-6ff5e73b92ac
+ARV,ARV,2a Linha,Adultos,2nd Line ,TDF+3TC+ATV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,TDF+3TC+ATV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha ,Adultos,2nd Line ,TDF+3TC+ATV/r+RAL,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Adultos,1st Line,TDF+3TC+DTG,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Pediatrico,1st Line,TDF+3TC+DTG,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,TDF+3TC+DTG,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Adultos,1st Line,TDF+3TC+DTG2,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Adultos,1st Line,TDF+3TC+EFV,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Pediatrico,1st Line,TDF+3TC+EFV,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Adultos,2nd Line ,TDF+3TC+LPV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Pediatrico,2nd Line ,TDF+3TC+LPV/r,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,2a Linha,Adultos,2nd Line ,TDF+3TC+LPV/r+RTV,,8486,ccdcaef8-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,1a Linha,Adultos,1st Line,TDF+3TC+NVP,,8485,ccdcacaa-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,3a Linha,Adultos,3rd Line,TDF+3TC+RAL+DRV/r,,8487,ccdcb04c-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+ARV,ARV,3a Linha,Pediatrico,3rd Line,TDF+3TC+RAL+DRV/r,,8487,ccdcb04c-a703-11e9-a2a3-2a2ae2dbcce4,8493,a738c87d-3f38-4113-8819-faf92f10a69d
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Terizidiona,Terizidone ,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+TB,TB,Tuberculose Sensível,-,Tuberculosis Sensitive,Tiacetazona,Thioacetazone,8489,ccdcb466-a703-11e9-a2a3-2a2ae2dbcce4,8496,82a72e9f-8a3f-4738-b854-bd94d8da8fd0
+,,,,,,,8488,ccdcb182-a703-11e9-a2a3-2a2ae2dbcce4,,

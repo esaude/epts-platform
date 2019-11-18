@@ -1,0 +1,53 @@
+EPTS_person_attribute_type_id,EPTS_name,EPTS_uuid,EPTS_description,POC_person_attribute_type_id,POC_name,POC_description,POC_Format,Conept_id,POC_uuid
+2,Local de Nascimento,8d8718c2-c2cc-11de-8d13-0010c6dffd0f,Location of persons birth,,,,,,
+3,Nacionalidade,8d871afc-c2cc-11de-8d13-0010c6dffd0f,Country of which this person is a member,71,NATIONALITY,REGISTRATION_LABEL_NATIONALITY,org.openmrs.Concept,8030,d3f6f41c-b094-4840-b99c-f4c10e25efac
+4,Nome da Mae,8d871d18-c2cc-11de-8d13-0010c6dffd0f,First or last name of this person's mother,37,MOTHER_NAME,NULL,java.lang.String,NULL,2d308bae-7e2c-11e9-8f9e-2a86e4085a59
+5,Estado Civil,8d871f2a-c2cc-11de-8d13-0010c6dffd0f,Marriage status of this person,43,MARITAL_STATUS,Estado Civil,org.openmrs.Concept,7902,3fa3c7b2-1105-4eec-8fcd-7f76c6a81516
+6,Health District,8d872150-c2cc-11de-8d13-0010c6dffd0f,District/region in which this patient' home health center resides,30,HEALTH_FACILITY_DISTRICT,NULL,java.lang.String,NULL,e11bf075-ed53-49d2-a80b-ae531cff6903
+7,Health Center,8d87236c-c2cc-11de-8d13-0010c6dffd0f,Specific Location of this person's home health center.,29,HEALTH_FACILITY_NAME,NULL,java.lang.String,NULL,a467629f-8800-4535-a962-91ef7fddc047
+8,District,e2e3fc10-1d5f-11e0-b929-000c29ad1d07,,,,,,,
+9,Numero de Telefone,e2e3fd64-1d5f-11e0-b929-000c29ad1d07,Telefone de contacto do paciente,58,PRIMARY_CONTACT_NUMBER_1,Contacto Principal,java.lang.String,NULL,5d157528-14ae-4e71-9d48-f4122c7b12f7
+10,Organização,e2e3feae-1d5f-11e0-b929-000c29ad1d07,"affiliation, used for providers, social assistants",,,,,,
+11,Local de Trabalho,e2e3fff8-1d5f-11e0-b929-000c29ad1d07,Lugar onde a pessoa trabalha,,,,,,
+12,Número de Cartão,e2e40142-1d5f-11e0-b929-000c29ad1d07,Número do cartão do paciente no serviço TARV ou outro serviço crónico,,,,,,
+13,Pessoa de referencia,4d9d4863-6637-4aba-a907-f2e60f5be9c0,,,,,,,
+,,,,26,DATE_OF_DEATH,NULL,org.openmrs.util.AttributableDate,NULL,56ea7988-b5ec-42ec-9309-d135bd84a1eb
+,,,,27,CAUSE_OF_DEATH,NULL,org.openmrs.Concept,7757,89dab784-4250-4834-ab05-d4ca9a0fc147
+,,,,28,DEATH_OBSERVATIONS,NULL,java.lang.String,NULL,3f68f40d-3213-4ea0-8b14-339986ebc145
+,,,,31,HEALTH_FACILITY_PROVINCE,NULL,java.lang.String,NULL,7858d007-97f1-4255-9d8f-e83e78de97ad
+,,,,32,DateofHIVDiagnosis,Data do Teste,org.openmrs.util.AttributableDate,NULL,6720e0c4-66eb-4905-bf11-323cbf4fdd99
+,,,,33,Typeoftest,Tipo Teste,org.openmrs.Concept,7897,1bd4f44c-4382-4555-8569-101e717ddf79
+,,,,34,SECTOR_SELECT,NULL,org.openmrs.Concept,7979,890e537e-573b-4458-8dc8-3411e6519036
+,,,,35,ATIP_SELECT,NULL,org.openmrs.Concept,7974,8644d5fa-87ce-4737-992f-dedaeb8641e8
+,,,,36,FATHER_NAME,NULL,java.lang.String,NULL,2d308582-7e2c-11e9-8f9e-2a86e4085a59
+,,,,38,PATIENT_OCCUPATION,Profissão/Ocupação,org.openmrs.Concept,7893,60cd0349-1960-4cd0-aca1-85b5409cfde7
+,,,,39,PATIENT_STATUS,Estado do Paciente,org.openmrs.Concept,7982,93878173-112d-4079-a373-c7b38110a8dc
+,,,,40,PATIENT_STATE_CHANGE,NULL,org.openmrs.Concept,7901,f3c7882f-8d27-46e9-bc0e-18da4feef4a3
+,,,,41,PATIENT_STATE,NULL,java.lang.String,NULL,e0ebd48d-14a9-40e4-be89-d825f0479a46
+,,,,42,PATIENT_ACTIVE_STATE,NULL,java.lang.String,NULL,493e87e7-a5e9-479b-93df-03db4837e0ba
+,,,,44,Is_Transferred_Out,NULL,java.lang.Boolean,NULL,20c68872-8d14-11e9-bc42-526af7764f64
+,,,,45,Transfer_Date,NULL,org.openmrs.util.AttributableDate,NULL,20c68cfa-8d14-11e9-bc42-526af7764f64
+,,,,46,Observations,NULL,java.lang.String,NULL,20c68e62-8d14-11e9-bc42-526af7764f64
+,,,,47,TRANSFER_OUT_NAME,NULL,java.lang.String,NULL,f76ac970-b3bd-4c9b-883e-6b8e1d6853c4
+,,,,48,TRANSFER_OUT_PROVINCE,NULL,java.lang.String,NULL,5620cf6e-bc1c-4617-818c-2ff0fae4ddd9
+,,,,49,TRANSFER_OUT_DISTRICT,NULL,java.lang.String,NULL,9c7f5a1a-460d-44bd-92eb-3f84260a2f73
+,,,,50,NICK_NAME,Nick Name,java.lang.String,NULL,b2e31956-3752-43eb-8e96-38b7e5a5ab75
+,,,,51,TYPE_OF_REGISTRATION,NULL,org.openmrs.Concept,8028,7c5a0903-3592-4a9a-913e-3501e60bc21e
+,,,,52,TRANSFERENCE_HF_NAME,NULL,java.lang.String,NULL,f6308923-40a8-4e35-b5ff-60676668b9cd
+,,,,53,TRANSFERENCE_HF_DISTRICT,NULL,java.lang.String,NULL,21f40b4e-2e4f-4a5d-8a44-a37d738d9e64
+,,,,54,TRANSFERENCE_HF_PROVINCE,NULL,java.lang.String,NULL,5b981b6f-8d67-4ce7-a7d2-00c85b2fcff2
+,,,,55,Date_of_transference,Data Transferência,org.openmrs.util.AttributableDate,NULL,1ad725bc-f9a1-48e9-a509-30c4cae70f03
+,,,,56,US_REG_DATE,REGISTRATION_LABEL_US_REG_DATE,org.openmrs.util.AttributableDate,NULL,40906d86-c3be-4b74-8ed2-d270a49128d0
+,,,,57,PATIENT_EDUCATION,Escolaridade,org.openmrs.Concept,7958,049e5aa0-5889-4e8b-972d-da3a035da704
+,,,,59,ALTERNATIVE_CONTACT_NUMBER_1,Contactos Alternativos 1,java.lang.String,NULL,b246d160-d588-42dc-b05f-246dad7df454
+,,,,60,ALTERNATIVE_CONTACT_NUMBER_2,Contactos Alternativos 2,java.lang.String,NULL,5a1023cc-6fd3-472c-a941-f21bb33adaa7
+,,,,61,DATE_OF_SUSPENSION,NULL,org.openmrs.util.AttributableDate,NULL,852983a9-6a6b-4c84-99db-25cfca8b5b93
+,,,,62,SUSPENSION_OBSERVATIONS,NULL,java.lang.String,NULL,762f273f-8d81-4f4c-abc0-d190c77e35c7
+,,,,63,REGISTRATION_OPTION_NONE,REGISTRATION_OPTION_NONE,java.lang.String,NULL,60c54000-43b9-4b7b-b99d-74c0d53769d9
+,,,,64,BI,BI,java.lang.String,NULL,60c54000-43b9-4b5b-b99d-74c0d53769d9
+,,,,65,NUIT,NUIT,java.lang.String,NULL,264bdacc-d777-4fb1-a4ad-d0e0d86f4c26
+,,,,66,NUIC,NUIC,java.lang.String,NULL,907aae88-7cc6-473a-b3ec-ef038e1616bd
+,,,,67,CEDULA_DE_NASCIMENTO,Cedula de Nascimento,java.lang.String,NULL,4bf07790-e2f6-4ba9-8788-2ce940cf82c2
+,,,,68,CARTAO_DE_ELEITOR,Cartao de Eleitor,java.lang.String,NULL,dd8df1e9-7517-4c34-88d5-a0a1624988eb
+,,,,69,DIRE,DIRE,java.lang.String,NULL,94bf9b31-ff16-45af-bb32-fdaaa1da1cd8
+,,,,70,PASSAPORTE_ESTRANGEIRO,REGISTRATION_LABEL_PASSPORT_FOR,java.lang.String,NULL,631156a9-d8f0-40d0-a218-02feb29369f1
