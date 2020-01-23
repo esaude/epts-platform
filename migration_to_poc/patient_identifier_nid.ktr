@@ -828,7 +828,7 @@ when voided_by is not null then 4 end as voided_by
 , date_changed
 , case 
 when changed_by is not null then 4 end as changed_by
-FROM patient_identifier where identifier_type = '2'
+FROM patient_identifier where identifier_type = '2' and voided = 0
 order by patient_id asc</sql>
     <limit>0</limit>
     <lookup/>
